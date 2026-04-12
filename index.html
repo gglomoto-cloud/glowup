@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Glowup Guide — Mat</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#141210;--bg-card:rgba(255,255,255,0.06);--bg-elevated:rgba(255,255,255,0.07);
+--bg-card-hover:rgba(255,255,255,0.09);--bg-nav:rgba(20,18,16,0.45);
+--card-border:rgba(255,255,255,0.08);--border-subtle:rgba(255,255,255,0.06);
+--text:#f0ece8;--text-dim:#a8a29e;--text-muted:#6b6560;
+--skin:#5bbeb7;--fit:#d4a853;--nutr:#8ecfb0;--groom:#d4736c;--gold:#c89b4a;
+--cat-food:#1a5c3a;--cat-sport:#c4652a;--cat-care:#4fa89a;--cat-rest:#a68b3c;--cat-other:rgba(255,255,255,0.12);
+--radius:16px;--nav-h:64px;--header-h:80px;
+--shadow-card:0 4px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.08),inset 0 -1px 0 rgba(0,0,0,0.2);
+--shadow-nav:0 -4px 20px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.06);
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.5;overflow:hidden;-webkit-tap-highlight-color:transparent}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
+.app{display:flex;flex-direction:column;height:100%;max-width:520px;margin:0 auto;position:relative}
+.app::before{content:'';position:fixed;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:450px;background:radial-gradient(ellipse,rgba(200,155,74,0.18) 0%,transparent 70%);pointer-events:none;z-index:0}
+.app::after{content:'';position:fixed;bottom:-120px;left:-80px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(180,120,60,0.10) 0%,transparent 70%);pointer-events:none;z-index:0}
+/* Header */
+.header{min-height:var(--header-h);display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:linear-gradient(180deg,rgba(24,21,18,1) 0%,var(--bg) 100%);border-bottom:1px solid var(--card-border);flex-shrink:0;z-index:10;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");pointer-events:none}
+.header-left{display:flex;flex-direction:column;gap:1px;position:relative;z-index:1}
+.header-greeting{font-family:'Playfair Display',serif;font-size:27px;font-weight:400;color:var(--text);line-height:1.2}
+.header-day{font-size:13px;color:var(--text-dim);letter-spacing:.3px;margin-top:3px}
+.header-type{font-size:11px;font-weight:500;padding:4px 12px;border-radius:12px;display:inline-flex;align-items:center;gap:5px;position:relative;z-index:1;white-space:nowrap}
+.header-type .ht-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+/* Screens */
+.screens{flex:1;overflow-y:auto;overflow-x:hidden;padding:16px 20px calc(var(--nav-h) + 24px + env(safe-area-inset-bottom,0px));scroll-behavior:smooth;-webkit-overflow-scrolling:touch;background-image:radial-gradient(rgba(255,255,255,0.015) 1px,transparent 1px);background-size:20px 20px}
+.screen{display:none}.screen.active{display:block;animation:screenIn .2s ease}
+@keyframes screenIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+/* Nav */
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;height:var(--nav-h);background:var(--bg-nav);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:space-around;z-index:20;padding-bottom:env(safe-area-inset-bottom);box-shadow:var(--shadow-nav)}
+.nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--text-muted);cursor:pointer;padding:6px 10px;transition:color .2s;font-family:'DM Sans',sans-serif}
+.nav-btn .nav-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.nav-btn .nav-icon svg{width:22px;height:22px}
+.nav-btn .nav-label{font-size:10px;letter-spacing:.3px;color:var(--text-muted)}
+.nav-btn .nav-dot{width:4px;height:4px;border-radius:50%;background:transparent;transition:background .2s}
+.nav-btn.active{color:var(--skin)}
+.nav-btn.active .nav-label{color:var(--text-dim)}
+.nav-btn.active .nav-icon{transform:scale(1.1)}
+.nav-btn.active .nav-dot{background:var(--skin);box-shadow:0 0 6px var(--skin)}
+.nav-btn:active{transform:scale(0.97)}
+/* Cards — glass morphism */
+.card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:var(--radius);padding:16px 18px;margin-bottom:16px;transition:all .2s;box-shadow:var(--shadow-card)}
+.card:active{background:var(--bg-card-hover);transform:scale(0.97)}
+.card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;margin-bottom:4px}
+.card-sub{font-size:13px;color:var(--text-dim)}
+/* Toggles */
+.toggle-row{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow-card)}
+.toggle-icon{color:var(--text-dim);display:flex;align-items:center}
+.toggle-icon svg{width:16px;height:16px}
+.toggle-label{flex:1;font-size:14px;font-weight:500}
+.toggle{position:relative;width:48px;height:26px;background:rgba(255,255,255,0.1);border-radius:13px;cursor:pointer;transition:background .3s;flex-shrink:0}
+.toggle.on{background:var(--skin)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform .3s}
+.toggle.on::after{transform:translateX(22px)}
+/* Timeline */
+.timeline{position:relative;padding-left:16px}
+.timeline::before{content:'';position:absolute;left:4px;top:8px;bottom:8px;width:1.5px;background:var(--border-subtle);border-radius:1px}
+.tl-item{position:relative;margin-bottom:6px;cursor:pointer}
+.tl-item::before{content:'';position:absolute;left:-13px;top:15px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.1);z-index:1}
+.tl-item.now::before{background:var(--cat-care);box-shadow:0 0 8px var(--cat-care)}
+.tl-item.now.food::before{background:var(--cat-food);box-shadow:0 0 8px var(--cat-food)}
+.tl-item.now.sport::before{background:var(--cat-sport);box-shadow:0 0 8px var(--cat-sport)}
+.tl-item.now.rest::before{background:var(--cat-rest);box-shadow:0 0 8px var(--cat-rest)}
+.tl-item.no-expand{cursor:default}
+.tl-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tl-icon svg{width:16px;height:16px}
+.tl-item.now .tl-icon{filter:brightness(1.3) drop-shadow(0 0 5px rgba(255,255,255,0.15))}
+.tl-card{background:var(--bg-card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--card-border);border-left:3px solid var(--cat-other);border-radius:var(--radius);padding:10px 14px;transition:all .25s;box-shadow:var(--shadow-card)}
+.tl-card:active{background:var(--bg-card-hover)}
+.tl-item.now .tl-card{background:var(--bg-card-hover);box-shadow:0 4px 20px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.06)}
+.tl-item.food .tl-card{border-left-color:var(--cat-food)}
+.tl-item.sport .tl-card{border-left-color:var(--cat-sport)}
+.tl-item.care .tl-card{border-left-color:var(--cat-care)}
+.tl-item.rest .tl-card{border-left-color:var(--cat-rest)}
+.tl-item.now.food .tl-card,.tl-item.now.sport .tl-card,.tl-item.now.care .tl-card,.tl-item.now.rest .tl-card{border-left-width:4px}
+.tl-head{display:flex;align-items:center;gap:8px}
+.tl-time{font-size:12px;color:var(--text-muted);font-weight:400;min-width:38px;font-variant-numeric:tabular-nums}
+.tl-name{font-size:13px;font-weight:500;flex:1}
+.tl-arrow{color:var(--text-muted);font-size:12px;transition:transform .25s;flex-shrink:0}
+.tl-item.expanded .tl-arrow{transform:rotate(90deg)}
+.tl-details{max-height:0;overflow:hidden;transition:max-height .25s ease-out,padding .25s ease-out;padding:0}
+.tl-item.expanded .tl-details{max-height:1500px;padding:10px 0 0}
+.tl-detail-content{font-size:12.5px;color:var(--text-dim);line-height:1.6}
+.tl-detail-content strong{color:var(--text);font-weight:500}
+.tl-detail-content .step{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.tl-detail-content .step:last-child{border-bottom:none}
+.step-num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.05);color:var(--skin);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-body{flex:1;min-width:0}
+.tl-detail-content .pro-tip{background:rgba(255,255,255,0.03);border-left:3px solid var(--skin);padding:6px 10px;border-radius:0 6px 6px 0;margin:6px 0 2px;font-size:11.5px;color:var(--text-dim)}
+.tl-detail-content .product{color:var(--skin);font-weight:500}
+.tl-detail-content .duration{display:inline-block;background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:8px;font-size:11px;color:var(--text-dim);margin-left:6px}
+/* Tappable keywords */
+.tap-kw{text-decoration:underline;text-decoration-style:dotted;text-decoration-color:var(--text-muted);text-underline-offset:2px;cursor:pointer;transition:color .2s}
+.tap-kw:hover,.tap-kw.active{text-decoration-color:var(--skin);color:var(--text)}
+.tap-popup{background:rgba(255,255,255,0.04);border-left:2px solid var(--skin);padding:6px 10px;margin:4px 0;border-radius:0 6px 6px 0;font-size:11px;color:var(--text-dim);line-height:1.5;animation:fadeSlide .2s ease}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+/* Section titles */
+.section-title{font-family:'Playfair Display',serif;font-size:24px;margin:20px 0 12px;font-weight:600}
+.section-title:first-child{margin-top:4px}
+.section-sub{font-size:12px;color:var(--text-muted);margin:-8px 0 12px}
+.sub-section-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin:20px 0 12px}
+/* Water */
+.water-wrap{display:flex;flex-direction:column;align-items:center;padding:20px 0}
+.water-ring{position:relative;width:200px;height:200px;margin-bottom:20px}
+.water-ring svg{width:200px;height:200px;transform:rotate(-90deg)}
+.water-ring circle{fill:none;stroke-width:12;stroke-linecap:round}
+.water-ring .bg{stroke:rgba(255,255,255,0.06)}
+.water-ring .fill{transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)}
+.water-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.water-amount{font-family:'Playfair Display',serif;font-size:36px;font-weight:700}
+.water-target{font-size:13px;color:var(--text-dim)}
+.water-unit-toggle{display:flex;background:rgba(255,255,255,0.05);border-radius:8px;margin-bottom:16px;overflow:hidden}
+.water-unit-btn{background:none;border:none;color:var(--text-dim);font-size:13px;font-weight:500;padding:6px 18px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.water-unit-btn.active{background:var(--skin);color:#111}
+.water-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;width:100%;max-width:300px}
+.water-btn{background:var(--bg-card);border:1px solid var(--card-border);border-radius:10px;padding:10px 8px;color:var(--text);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;text-align:center}
+.water-btn:active{background:var(--skin);color:#111;border-color:var(--skin);transform:scale(0.97)}
+.water-btn .wb-sub{font-size:9px;color:var(--text-muted);display:block;margin-top:1px}
+.water-custom{display:flex;gap:8px;margin-bottom:16px;align-items:center;justify-content:center}
+.water-custom input{width:80px;background:var(--bg-card);border:1px solid var(--card-border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif}
+.water-custom input::placeholder{color:var(--text-muted)}
+.water-log{width:100%;max-height:200px;overflow-y:auto}
+.water-log-item{display:flex;justify-content:space-between;padding:6px 16px;font-size:12px;color:var(--text-dim);border-bottom:1px solid rgba(255,255,255,0.03)}
+.water-log-item .wl-time{font-size:11px;color:var(--text-muted);font-variant-numeric:tabular-nums}
+/* Day type selector */
+.day-type-selector{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;justify-content:center}
+.day-type-btn{background:var(--bg-card);border:1px solid var(--card-border);border-radius:10px;padding:8px 14px;color:var(--text-dim);font-size:12px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.day-type-btn.active{border-color:var(--skin);color:var(--skin)}
+.day-type-btn:active{transform:scale(0.97)}
+/* Meals */
+.breakfast-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.bf-card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:all .25s;box-shadow:var(--shadow-card)}
+.bf-card:active{transform:scale(0.97)}
+.bf-card.selected{border-color:var(--skin);box-shadow:0 0 12px rgba(91,190,183,.15)}
+.bf-card.blend-pick{border-color:var(--skin);border-style:dashed;box-shadow:0 0 12px rgba(91,190,183,.1)}
+.bf-init{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--nutr);margin-bottom:6px}
+.bf-name{font-size:13px;font-weight:600;margin-bottom:4px}
+.bf-macros{font-size:11px;color:var(--text-dim);font-variant-numeric:tabular-nums}
+.bf-detail{background:var(--bg-card);border:1px solid var(--card-border);border-radius:var(--radius);margin-bottom:12px;max-height:0;overflow:hidden;transition:max-height .25s ease-out,padding .25s ease-out,border-color .25s;padding:0 16px}
+.bf-detail.open{max-height:800px;padding:14px 16px;border-color:rgba(255,255,255,0.1)}
+.bf-detail h4{font-family:'Playfair Display',serif;font-size:14px;margin-bottom:8px}
+.bf-ing{font-size:12px;color:var(--text-dim);padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;gap:8px}
+.bf-ing:last-child{border-bottom:none}
+.bf-ing strong{color:var(--text);font-weight:500}
+.bf-ing em{color:var(--text-muted);font-size:11px}
+.bf-prep-step{font-size:12px;color:var(--text-dim);padding:3px 0;padding-left:16px;position:relative}
+.bf-prep-step::before{content:'';position:absolute;left:4px;top:10px;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.1)}
+.bf-time-label{font-size:11px;color:var(--text-dim);margin-top:6px;font-weight:500}
+.bf-tip-text{font-size:11px;color:var(--text-muted);font-style:italic;margin-top:4px}
+.blend-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.blend-btn{background:var(--bg-card);border:1px solid var(--card-border);border-radius:8px;padding:6px 14px;color:var(--text-dim);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.blend-btn.active{border-color:var(--skin);color:var(--skin)}
+.blend-ratio-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:4px 10px;font-size:11px;color:var(--text-dim);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.blend-ratio-btn.active{background:var(--skin);color:#111;border-color:var(--skin)}
+.blend-result{background:rgba(255,255,255,0.03);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;animation:screenIn .25s ease}
+.blend-result h4{font-family:'Playfair Display',serif;font-size:14px;margin-bottom:6px}
+.blend-macros{font-size:13px;color:var(--skin);font-weight:600;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.blend-ing-item{font-size:12px;color:var(--text-dim);padding:2px 0}
+.macro-bar{height:6px;background:var(--border-subtle);border-radius:3px;overflow:hidden;margin-top:4px}
+.macro-bar-fill{height:100%;border-radius:3px;transition:width .5s}
+.meal-entry{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s;box-shadow:var(--shadow-card)}
+.meal-entry.selected{border-color:var(--skin);border-left:2px solid var(--skin)}
+.meal-entry:active{background:var(--bg-card-hover);transform:scale(0.97)}
+.meal-info{flex:1}.meal-name{font-size:13px;font-weight:500}
+.meal-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--nutr);margin-right:6px;vertical-align:middle}
+.meal-kcal{font-size:11px;color:var(--text-dim);font-variant-numeric:tabular-nums}
+.portion-btns{display:flex;gap:4px}
+.portion-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:3px 8px;font-size:10px;color:var(--text-dim);cursor:pointer;font-family:'DM Sans',sans-serif}
+.portion-btn.active{background:var(--skin);color:#111;border-color:var(--skin)}
+.daily-summary{background:var(--bg-elevated);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--card-border);border-left:2px solid var(--nutr);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;position:sticky;top:-16px;z-index:5;box-shadow:var(--shadow-card)}
+.summary-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.summary-label{font-size:12px;color:var(--text-dim)}.summary-value{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.snack-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.snack-chip{background:var(--bg-card);border:1px solid var(--card-border);border-radius:20px;padding:6px 14px;font-size:12px;cursor:pointer;transition:all .2s}
+.snack-chip.selected{border-color:var(--skin);color:var(--text)}
+.snack-chip:active{transform:scale(0.95)}
+/* Training */
+.workout-block{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:2px solid var(--fit);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+.workout-block .ex-name{font-size:14px;font-weight:500;margin-bottom:2px}
+.workout-block .ex-detail{font-size:12px;color:var(--text-dim)}
+.set-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.set-check{width:22px;height:22px;border:2px solid rgba(255,255,255,0.15);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;font-size:12px}
+.set-check.done{background:var(--skin);border-color:var(--skin);color:#111}
+.rest-timer-btn{background:var(--bg-card);border:1px solid var(--skin);border-radius:8px;padding:6px 14px;color:var(--skin);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;transition:all .2s}
+.rest-timer-btn:active{background:var(--skin);color:#111;transform:scale(0.97)}
+.timer-display{font-family:'Playfair Display',serif;font-size:48px;text-align:center;color:var(--fit);margin:20px 0}
+/* Superset block */
+.superset-block{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:2px solid var(--fit);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+.superset-block.optional{border-style:dashed;border-left-style:dashed;opacity:0.85}
+.ss-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ss-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;background:rgba(212,168,83,0.15);color:var(--fit);letter-spacing:.5px}
+.ss-badge.optional{background:rgba(212,168,83,0.08);color:var(--text-dim)}
+.ss-pair{display:flex;flex-direction:column;gap:4px;margin-bottom:8px;padding-left:10px;border-left:2px solid rgba(212,168,83,0.25);margin-left:4px}
+.ss-exercise{display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,0.03);border-radius:8px}
+.ss-letter{font-size:11px;font-weight:600;color:var(--fit);width:16px}
+.ss-ex-name{font-size:13px;font-weight:500;flex:1}
+.ss-reps{font-size:12px;color:var(--text-dim);font-variant-numeric:tabular-nums}
+.ss-meta{font-size:11px;color:var(--text-muted);margin-bottom:6px}
+.ss-detail-toggle{font-size:11px;color:var(--skin);cursor:pointer;margin-top:6px;display:flex;align-items:center;gap:4px;transition:color .2s}
+.ss-detail-toggle:active{color:var(--text)}
+.ss-detail-content{max-height:0;overflow:hidden;transition:max-height .25s ease-out}
+.ss-detail-content.open{max-height:600px}
+.arm-detail-card{background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;margin-top:6px;margin-bottom:4px}
+.arm-detail-card h5{font-size:12px;font-weight:600;color:var(--fit);margin-bottom:4px;font-family:'DM Sans',sans-serif}
+.arm-detail-card .ad-row{font-size:11.5px;color:var(--text-dim);padding:2px 0}
+.arm-detail-card .ad-label{color:var(--text-muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.4px}
+.arm-detail-card .ad-form{padding-left:12px;position:relative}
+.arm-detail-card .ad-form::before{content:'';position:absolute;left:4px;top:7px;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.1)}
+/* Volume summary */
+.volume-card{background:var(--bg-elevated);border:1px solid var(--card-border);border-left:2px solid var(--fit);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+.volume-card h4{font-size:14px;margin-bottom:8px}
+.vol-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0}
+.vol-label{font-size:12px;color:var(--text-dim)}
+.vol-value{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.vol-note{font-size:11px;color:var(--text-dim);margin-top:6px;padding:6px 8px;background:rgba(255,255,255,0.03);border-left:2px solid var(--groom);border-radius:0 6px 6px 0}
+/* Progression */
+.prog-card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:2px solid var(--fit);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+.prog-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.prog-skill{font-size:15px;font-weight:600}.prog-level{font-size:12px;color:var(--fit);font-weight:500}
+.prog-desc{font-size:12px;color:var(--text-dim);margin-bottom:6px}
+.prog-bench{font-size:11px;color:var(--text-muted);font-style:italic}
+.prog-btns{display:flex;gap:6px;margin-top:8px}
+.prog-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:4px 10px;font-size:11px;color:var(--text-dim);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.prog-btn:active{background:var(--skin);color:#111}
+/* GTG */
+.gtg-counter{display:flex;align-items:center;gap:12px;justify-content:center;margin:16px 0}
+.gtg-count{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--fit)}
+.gtg-btn{width:44px;height:44px;border-radius:50%;background:var(--skin);border:none;color:#111;font-size:22px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;transition:transform .15s}
+.gtg-btn:active{transform:scale(0.9)}
+/* Arm measurements */
+.arm-measure-card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:2px solid var(--skin);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+.arm-measure-btn{background:rgba(91,190,183,0.1);border:1px solid rgba(91,190,183,0.2);border-radius:8px;padding:8px 14px;color:var(--skin);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;text-align:center;transition:all .2s}
+.arm-measure-btn:active{background:var(--skin);color:#111}
+.arm-form{max-height:0;overflow:hidden;transition:max-height .25s ease-out;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.arm-form.open{max-height:300px;margin-top:10px;padding-bottom:4px}
+.arm-input-group{display:flex;flex-direction:column;gap:3px}
+.arm-input-group label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px}
+.arm-input-group input{background:rgba(255,255,255,0.05);border:1px solid var(--card-border);border-radius:6px;padding:8px 10px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;width:100%}
+.arm-save-btn{grid-column:1/-1;background:var(--skin);border:none;border-radius:8px;padding:8px;color:#111;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px}
+.arm-log{margin-top:8px}
+.arm-log-entry{font-size:11px;color:var(--text-dim);padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between}
+.arm-log-date{font-size:10.5px;color:var(--text-muted);font-variant-numeric:tabular-nums}
+/* Extras */
+.tip-card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-card)}
+.tip-card:active{background:var(--bg-card-hover);transform:scale(0.97)}
+.tip-card:hover{border-color:rgba(255,255,255,0.12)}
+.tip-header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.tip-title{font-size:14px;font-weight:600;flex:1}
+.tip-badge{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:500;white-space:nowrap}
+.tip-badge.strong{background:rgba(91,190,183,0.12);color:var(--skin)}
+.tip-badge.moderate{background:rgba(212,168,83,0.12);color:var(--fit)}
+.tip-badge.weak{background:rgba(212,115,108,0.12);color:var(--groom)}
+.tip-badge.myth{background:rgba(180,80,70,0.12);color:#c45050}
+.tip-body{font-size:12.5px;color:var(--text-dim);margin-top:8px;line-height:1.6;max-height:0;overflow:hidden;transition:max-height .25s ease-out}
+.tip-card.expanded .tip-body{max-height:500px}
+.tip-product{display:flex;align-items:center;gap:6px;padding:6px 10px;margin-top:6px;background:rgba(255,255,255,0.03);border:1px solid var(--card-border);border-radius:8px;font-size:11.5px}
+.tip-product-name{color:var(--skin);font-weight:500}
+.tip-product-where{color:var(--text-muted);font-size:10.5px}
+.tip-product-price{color:var(--text-dim);font-weight:500;margin-left:auto;white-space:nowrap}
+/* Shopping */
+.shop-tabs{display:flex;gap:4px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px}
+.shop-tab{background:var(--bg-card);border:1px solid var(--card-border);border-radius:10px;padding:8px 14px;font-size:12px;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;color:var(--text-dim);transition:all .2s;display:flex;align-items:center;gap:6px}
+.shop-tab .tab-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.shop-tab.active{border-color:var(--skin);color:var(--skin)}
+.shop-tab:active{transform:scale(0.97)}
+.shop-item{background:var(--bg-card);border:1px solid var(--card-border);border-radius:var(--radius);padding:10px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;box-shadow:var(--shadow-card)}
+.shop-status{font-weight:700;flex-shrink:0;margin-top:2px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:13px;border-radius:4px}
+.shop-check{width:20px;height:20px;border:2px solid rgba(255,255,255,0.15);border-radius:5px;cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s}
+.shop-check.done{background:var(--skin);border-color:var(--skin);color:#111}
+.shop-info{flex:1}.shop-name{font-size:13px;font-weight:500}
+.shop-reason{font-size:11px;color:var(--text-dim);margin-top:2px}
+.shop-meta{font-size:11px;color:var(--text-muted);margin-top:2px}
+.pill{display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:500}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text-muted);font-size:14px}
+/* Scrollbar */
+.screens::-webkit-scrollbar{width:4px}.screens::-webkit-scrollbar-track{background:transparent}.screens::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
+/* Responsive */
+@media(min-width:521px){.app{border-left:1px solid var(--card-border);border-right:1px solid var(--card-border)}}
+@media(max-width:374px){.screens{padding-left:16px;padding-right:16px}.header{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+<div class="header-left">
+<div class="header-greeting" id="headerGreeting"></div>
+<div class="header-day" id="headerDay"></div>
+</div>
+<div class="header-type" id="headerType"></div>
+</header>
+<main class="screens" id="screens">
+<div class="screen active" id="screen-dashboard">
+<div class="toggle-row" id="shaveToggle">
+<div class="toggle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="3" width="8" height="11" rx="1.5"/><path d="M8 8h8M12 14v7"/></svg></div>
+<div class="toggle-label">Shave today?</div>
+<div class="toggle" id="shaveBtn"></div>
+</div>
+<div class="section-title">Today's Timeline</div>
+<div class="timeline" id="timeline"></div>
+</div>
+<div class="screen" id="screen-water">
+<div class="section-title">Water Tracker</div>
+<div class="day-type-selector" id="dayTypeSelector"></div>
+<div class="water-wrap">
+<div class="water-ring">
+<svg viewBox="0 0 200 200"><defs><linearGradient id="wg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5bbeb7"/><stop offset="100%" stop-color="#8ecfb0"/></linearGradient></defs><circle class="bg" cx="100" cy="100" r="88"/><circle class="fill" id="waterCircle" cx="100" cy="100" r="88" stroke="url(#wg)"/></svg>
+<div class="water-center"><div class="water-amount" id="waterAmount">0</div><div class="water-target" id="waterTargetLabel">/ 2.5 L</div></div>
+</div>
+<div class="water-btns" id="waterBtns"></div>
+<div class="water-custom" id="waterCustomArea"></div>
+</div>
+<div class="sub-section-title">Today's Log</div>
+<div class="water-log" id="waterLog"></div>
+</div>
+<div class="screen" id="screen-meals">
+<div class="daily-summary" id="dailySummary"></div>
+<div class="section-title">Breakfast</div>
+<div class="section-sub">Pick one — tap to see prep details</div>
+<div class="breakfast-grid" id="breakfastGrid"></div>
+<div id="breakfastDetail" class="bf-detail"></div>
+<div class="blend-row" id="blendRow"></div>
+<div id="blendResult"></div>
+<div class="section-title">Lunch / Dinner</div>
+<div class="section-sub">Tap a meal to log it — adjust portion size</div>
+<div id="mealList"></div>
+<div class="sub-section-title">Snacks</div>
+<div class="snack-grid" id="snackGrid"></div>
+</div>
+<div class="screen" id="screen-training">
+<div class="section-title" id="trainingTitle">Training</div>
+<div class="section-sub" id="trainingSub"></div>
+<div id="workoutArea"></div>
+<div id="volumeArea"></div>
+<div class="section-title" style="margin-top:24px">Progression Tracker</div>
+<div id="progressionArea"></div>
+<div class="section-title" style="margin-top:24px">Arm Measurements</div>
+<div class="section-sub">Measure every 4 weeks — morning, not post-workout</div>
+<div id="armMeasureArea"></div>
+<div class="section-title" style="margin-top:24px" id="gtgTitle">GTG Practice</div>
+<div id="gtgArea"></div>
+</div>
+<div class="screen" id="screen-extras">
+<div class="section-title">Glowup Extras</div>
+<div class="section-sub">Tips filtered for evidence — tap to expand</div>
+<div id="extrasArea"></div>
+<div class="section-title" style="margin-top:24px">Skip These (Debunked)</div>
+<div id="mythsArea"></div>
+</div>
+<div class="screen" id="screen-shopping">
+<div class="section-title">Shopping List</div>
+<div class="shop-tabs" id="shopTabs"></div>
+<div id="shopArea"></div>
+</div>
+</main>
+<nav class="nav" id="mainNav"></nav>
+</div>
+<script>
+/* ===== TIMELINE ICONS ===== */
+const TL_ICONS={
+sunrise:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><line x1="7" y1="5" x2="7" y2="2.5"/><line x1="3.5" y1="7.5" x2="2.5" y2="6.5"/><line x1="10.5" y1="7.5" x2="11.5" y2="6.5"/><line x1="2" y1="11" x2="12" y2="11"/><path d="M4 11a3 3 0 016 0"/></svg>`,
+moon:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3"><path d="M10.5 7.5A3.5 3.5 0 015.5 4 3.5 3.5 0 1010.5 7.5z"/></svg>`,
+razor:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="2" width="5" height="5.5" rx="1"/><line x1="4.5" y1="5" x2="9.5" y2="5"/><line x1="7" y1="7.5" x2="7" y2="12"/></svg>`,
+bottle:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><rect x="4" y="4.5" width="6" height="7.5" rx="1.5"/><path d="M6 4.5V3a1 1 0 012 0v1.5"/><line x1="5.5" y1="7.5" x2="8.5" y2="7.5"/></svg>`,
+bowl:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><path d="M2.5 7h9c0 3-2 4.5-4.5 4.5S2.5 10 2.5 7z"/><path d="M5.5 5.5c0-.8.3-1.5.5-2.3"/><path d="M8.5 5c0-.8.3-1.5.5-2.3"/></svg>`,
+plate:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3"><circle cx="7" cy="7.5" r="5"/><circle cx="7" cy="7.5" r="2.5"/></svg>`,
+laptop:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="10" height="6.5" rx="1"/><line x1="4.5" y1="11.5" x2="9.5" y2="11.5"/><line x1="7" y1="9.5" x2="7" y2="11.5"/></svg>`,
+arrow:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><line x1="2.5" y1="7" x2="10.5" y2="7"/><polyline points="8,4.5 10.5,7 8,9.5"/></svg>`,
+dumbbell:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><rect x="1.5" y="5" width="2.5" height="4" rx=".5"/><rect x="10" y="5" width="2.5" height="4" rx=".5"/><line x1="4" y1="7" x2="10" y2="7"/></svg>`,
+kick:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="2.5" r="1.2"/><path d="M5 3.7v3.3"/><path d="M3.5 5.5l1.5 1 1.5-1"/><path d="M5 7l-1.5 4"/><path d="M5 7l3.5 1.5 2-1"/></svg>`,
+book:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8.5"/><path d="M7 3c-1-.5-3-.8-4.5-.5v8c1.5-.3 3.5 0 4.5.5"/><path d="M7 3c1-.5 3-.8 4.5-.5v8c-1.5-.3-3.5 0-4.5.5"/></svg>`,
+music:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3"><path d="M5.5 10.5V3.5l5-1.5v7"/><ellipse cx="4.2" cy="10.5" rx="1.8" ry="1.3"/><ellipse cx="9.2" cy="9" rx="1.8" ry="1.3"/></svg>`,
+shower:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><path d="M4 2h3.5a2 2 0 012 2v1H4"/><line x1="5" y1="7" x2="5" y2="8.5"/><line x1="7" y1="6.5" x2="7" y2="8.5"/><line x1="9" y1="7" x2="9" y2="8.5"/><circle cx="5" cy="10" r=".5" fill="${c}" stroke="none"/><circle cx="7" cy="10.5" r=".5" fill="${c}" stroke="none"/><circle cx="9" cy="10" r=".5" fill="${c}" stroke="none"/></svg>`,
+candle:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><rect x="5" y="7" width="4" height="5" rx=".5"/><line x1="7" y1="7" x2="7" y2="5.5"/><path d="M7 3c-.6.4-.8 1.2-.5 2 .3-.8 1.3-.8 1 0 .3-.8-.1-1.6-.5-2z"/></svg>`,
+coffee:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><path d="M3 6.5h6.5v4c0 1-1.5 1.5-3.25 1.5S3 11.5 3 10.5z"/><path d="M9.5 8h.8a1.2 1.2 0 010 2.4h-.8"/><path d="M5.5 5c0-.8.4-1.5.5-2"/><path d="M7.5 4.5c0-.8.4-1.5.5-2"/></svg>`,
+snack:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3"><circle cx="7" cy="7.5" r="3.5"/><path d="M7 4V2.5" stroke-linecap="round"/><path d="M8 3c.8-.3 1.2.2 1 .8" stroke-linecap="round"/></svg>`,
+clock:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M7 4.5v3l1.8 1.3"/></svg>`,
+laundry:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2" width="9" height="10" rx="1"/><circle cx="7" cy="8" r="2.5"/><circle cx="4.5" cy="4" r=".5" fill="${c}" stroke="none"/></svg>`,
+cooking:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><path d="M3 6.5h8v4.5a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><line x1="5.5" y1="4.5" x2="5.5" y2="6.5"/><line x1="8.5" y1="4" x2="8.5" y2="6.5"/></svg>`,
+stretch:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3" stroke-linecap="round"><circle cx="7" cy="3" r="1.3"/><path d="M7 4.3v4"/><path d="M4.5 6l2.5 1 2.5-1"/><path d="M5 12l2-3.7 2 3.7"/></svg>`,
+hydrate:c=>`<svg viewBox="0 0 14 14" fill="none" stroke="${c}" stroke-width="1.3"><path d="M7 2.5c0 0-3.5 4-3.5 6.3a3.5 3.5 0 007 0c0-2.3-3.5-6.3-3.5-6.3z"/></svg>`
+};
+function getTlIcon(name,cat){
+const n=name.toLowerCase(),c=cat==='food'?'var(--cat-food)':cat==='sport'?'var(--cat-sport)':cat==='care'?'var(--cat-care)':cat==='rest'?'var(--cat-rest)':'var(--cat-other)';
+if(n.includes('wake'))return TL_ICONS.sunrise(c);
+if(n.includes('sleep'))return TL_ICONS.moon(c);
+if(n.includes('skincare')&&n.includes('shave'))return TL_ICONS.razor(c);
+if(n.includes('skincare')&&!n.includes('shower'))return TL_ICONS.bottle(c);
+if(n.includes('shower')&&n.includes('skincare'))return TL_ICONS.shower(c);
+if(n.includes('shower'))return TL_ICONS.shower(c);
+if(n.includes('breakfast')||n.includes('big breakfast'))return TL_ICONS.bowl(c);
+if(n.includes('lunch'))return TL_ICONS.plate(c);
+if(n.includes('dinner'))return TL_ICONS.plate(c);
+if(n.includes('snack')||n.includes('pre-workout')||n.includes('pre-tkd'))return TL_ICONS.snack(c);
+if(n.includes('meal prep'))return TL_ICONS.cooking(c);
+if(n.includes('calisthenics')||n.includes('session'))return TL_ICONS.dumbbell(c);
+if(n.includes('tkd')||n.includes('coach'))return TL_ICONS.kick(c);
+if(n.includes('cool down'))return TL_ICONS.hydrate(c);
+if(n.includes('work')&&!n.includes('workout')&&!n.includes('pre-work'))return TL_ICONS.laptop(c);
+if(n.includes('english')||n.includes('teaching'))return TL_ICONS.book(c);
+if(n.includes('music')||n.includes('drum'))return TL_ICONS.music(c);
+if(n.includes('transit')||n.includes('bus')||n.includes('car'))return TL_ICONS.arrow(c);
+if(n.includes('get ready'))return TL_ICONS.arrow(c);
+if(n.includes('wind')||n.includes('posture'))return TL_ICONS.candle(c);
+if(n.includes('free')||n.includes('rest /'))return TL_ICONS.clock(c);
+if(n.includes('laundry'))return TL_ICONS.laundry(c);
+if(n.includes('coffee')||n.includes('nap'))return TL_ICONS.coffee(c);
+if(n.includes('transition'))return TL_ICONS.arrow(c);
+if(n.includes('hydrate'))return TL_ICONS.hydrate(c);
+if(n.includes('stretch'))return TL_ICONS.stretch(c);
+return TL_ICONS.clock(c);
+}
+
+/* ===== NAV ICONS ===== */
+const NAV_ICO={
+dashboard:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-8 9 8M5 10v8a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-8"/></svg>`,
+water:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c0 0-6 7.5-6 12a6 6 0 0012 0c0-4.5-6-12-6-12z"/></svg>`,
+meals:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 13h18c0 4.5-4 7-9 7s-9-2.5-9-7z"/><path d="M8 10c0-1 .5-2.5 1-4"/><path d="M12 9.5c0-1 .5-2.5 1-4"/><path d="M16 10c0-1 .5-2.5 1-4"/></svg>`,
+training:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="4" height="8" rx="1"/><rect x="18" y="8" width="4" height="8" rx="1"/><line x1="6" y1="12" x2="18" y2="12"/></svg>`,
+extras:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2l2.5 7.5H22l-6 4.5 2.5 7.5-7-5-7 5 2.5-7.5-6-4.5h7.5z"/></svg>`,
+shopping:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.5 12h-9z"/><path d="M9 7V5a3 3 0 016 0v2"/></svg>`
+};
+
+/* ===== DATA ===== */
+const DAYS={0:{name:'Sunday',type:'Rest Day',tc:'#a68b3c',tb:'rgba(166,139,60,0.12)'},1:{name:'Monday',type:'TKD Day',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},2:{name:'Tuesday',type:'Calisthenics Day',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},3:{name:'Wednesday',type:'TKD Day',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},4:{name:'Thursday',type:'Calisthenics Day',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},5:{name:'Friday',type:'TKD \u2014 Hard Sparring',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},6:{name:'Saturday',type:'Calisthenics + Recovery',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'}};
+const WATER_TARGETS={normal:2500,calisthenics:3000,tkd:3500};
+const AUTO_DAY_TYPE={0:'normal',1:'tkd',2:'calisthenics',3:'tkd',4:'calisthenics',5:'tkd',6:'calisthenics'};
+
+/* SKINCARE */
+const SKIN_AM_NOSHAVE=[
+{n:1,s:'Cleanse',p:"M\u00eame L'Huile Lavante Visage et Corps",dur:'45 sec',d:'Splash cool water on face. 1 pump onto wet fingertips. Massage 20-30 sec (forehead, nose, cheeks, jawline). Rinse lukewarm.',tip:'"Running late" shortcut: just splash water and pat dry. Dermatologist-accepted for dry skin.'},
+{n:2,s:'Moisturize',p:"M\u00eame La Cr\u00e8me pour le Visage",dur:'45 sec',d:'Pea-sized amount. Warm between fingertips. Apply to damp skin. Generous on cheeks, thinner on T-zone.',tip:null},
+{n:3,s:'Wait for absorption',p:'',dur:'~2 min',d:'Let moisturizer absorb before SPF.',tip:null},
+{n:4,s:'Apply SPF',p:'Beauty of Joseon Daily Tinted Fluid SPF40 PA+++',dur:'1 min',d:'2 finger-lengths. Dot on forehead, cheeks, nose, chin. Spread in downward strokes. Let set 1-2 min.',tip:null},
+{n:5,s:'Lips (optional)',p:'',dur:'5 sec',d:'Dab M\u00eame Cr\u00e8me on lips or use SPF lip balm.',tip:null}
+];
+const SKIN_AM_SHAVE=[
+{n:1,s:'Warm water rinse',p:'',dur:'30 sec',d:'Softens stubble, reduces blade drag.',tip:null},
+{n:2,s:'Apply oil for glide',p:"M\u00eame L'Huile Lavante",dur:'15 sec',d:'Thin layer on areas to be shaved.',tip:null},
+{n:3,s:'Shave \u2014 with the grain',p:'Philips OneBlade or Braun Series 3',dur:'3-4 min',d:'Electric razor. Single pass per zone. NEVER against the grain.',tip:null},
+{n:4,s:'Cool water rinse',p:'',dur:'30 sec',d:'Reduces flush, soothes skin.',tip:null},
+{n:5,s:'Pat dry gently',p:'',dur:'10 sec',d:'Do not rub.',tip:null},
+{n:6,s:'Cicalfate+ on nicks',p:'Av\u00e8ne Cicalfate+',dur:'15 sec',d:'Dab directly on each nick. Leave in place under moisturizer.',tip:null},
+{n:7,s:'Moisturize generously',p:"M\u00eame La Cr\u00e8me pour le Visage",dur:'45 sec',d:'Extra generous on jawline and neck. Apply to damp skin.',tip:null},
+{n:8,s:'Wait then SPF',p:'Beauty of Joseon SPF40',dur:'~2 min wait + 1 min',d:'Shaved skin is more UV-sensitive for ~24h. SPF is not optional.',tip:null},
+{n:9,s:'No CeraVe actives today',p:'',dur:'',d:'Freshly shaved skin + chemical exfoliants = burn risk.',tip:'If an active was scheduled tonight (Tue/Thu), it may be OK if skin feels normal after 14 hours. If tight or red, skip.'}
+];
+const SHOWER_INFO={
+1:{hair:'Shampoo + conditioner (shampoo day)',body:'Hands + Tahiti Vanille gel (no Salux \u2014 TKD day)',note:'Post-TKD. Quick face rinse with water only in shower.'},
+2:{hair:'Skip or co-wash (day after Mon shampoo)',body:'Salux cloth + Cadum gel (body exfoliation day)',note:'Body exfoliation: focus on upper back, shoulders, chest, arms, knees, elbows.'},
+3:{hair:'Water rinse + conditioner mid-lengths',body:'Hands + Tahiti Vanille gel (no Salux \u2014 TKD day)',note:'Scrub scalp with fingertips under water to dislodge sweat. No shampoo.'},
+4:{hair:'Skip (no wash needed)',body:'Hands + Cadum gel (no exfoliation)',note:'Rest day hair. No Salux.'},
+5:{hair:'Shampoo + conditioner (shampoo day)',body:'Hands + Tahiti Vanille gel (no Salux \u2014 TKD day)',note:'Post-TKD heavy sweat. Full mousse after towel-drying.'},
+6:{hair:'Co-wash if heavy, otherwise skip',body:'Salux cloth + Cadum gel (body exfoliation day)',note:'Body exfoliation day. Moisturize within 5 min after.'},
+0:{hair:'Skip',body:'Cadum gel or skip',note:'Rest day.'}
+};
+function buildPMSkin(d,withShower){
+const isTKD=[1,3,5].includes(d);const si=SHOWER_INFO[d];let steps=[],n=1;
+if(withShower&&si){steps.push({n:n++,s:'In-Shower Routine',p:'',dur:'5-8 min',d:'<strong>Hair:</strong> '+si.hair+'<br><strong>Body:</strong> '+si.body+'<br><em>'+si.note+'</em>',tip:isTKD?'Quick face rinse (15 sec) with hands + water only in the shower. Real face cleanse happens at the sink after.':null});}
+if(isTKD){
+steps.push({n:n++,s:'Face cleanse at sink',p:"M\u00eame L'Huile Lavante Visage et Corps",dur:'1 min',d:'1 pump onto fingertips. Massage over face 20-30 sec (forehead, nose, cheeks, jawline). Rinse lukewarm water. Pat dry with clean face towel.',tip:'NO CeraVe actives post-TKD. Skin barrier is stressed from sweat, heat, and friction.'});
+steps.push({n:n++,s:'Hydrating mist (optional)',p:'Hada Labo / Av\u00e8ne spray',dur:'15 sec',d:'Spritz 2-3 pumps onto damp skin. Pat in gently \u2014 do not rub.',tip:null});
+steps.push({n:n++,s:'Moisturize face',p:"M\u00eame La Cr\u00e8me pour le Visage",dur:'30 sec',d:'Pea-sized amount on damp skin. Generous on cheeks, thinner film on forehead and nose.',tip:null});
+steps.push({n:n++,s:'Face oil on cheeks (optional)',p:"M\u00eame L'Huile de Soin",dur:'15 sec',d:'2 drops, warm between palms, press onto cheeks only. Skip T-zone.',tip:null});
+steps.push({n:n++,s:'Spot treatment if needed',p:'Av\u00e8ne Cicalfate+',dur:'10 sec',d:'Dot on any nicks, mat rash, or raw spots from sparring. Leave on overnight.',tip:null});
+if(d===3){steps.push({n:n++,s:'Guasha (Wednesday only)',p:'Guasha stone',dur:'5 min',d:'Cool from fridge. Use face oil as slip. Neck \u2192 jawline \u2192 cheekbones \u2192 under-eye \u2192 forehead \u2192 temples. 3-5 passes per zone, light pressure.',tip:'Skip Mon/Fri \u2014 too late, too tired. Wed has an earlier bedtime.'});}
+}else{
+steps.push({n:n++,s:'Double cleanse \u2014 oil first',p:"M\u00eame L'Huile Lavante Visage et Corps",dur:'1-2 min',d:'Apply to dry or barely-damp skin. Massage 30 sec across forehead, nose, cheeks, jawline. Emulsify with water (turns milky). Rinse thoroughly lukewarm.',tip:'Double cleansing removes sunscreen and daily grime that water alone cannot dissolve.'});
+if(d===2){steps.push({n:n++,s:'Active: CeraVe Blemish Control Cleanser',p:'CeraVe Blemish Control Cleanser (salicylic + PHA)',dur:'45 sec',d:'T-zone only. Wet face, work small amount into forehead, nose, chin for 20 sec. Rinse lukewarm. Avoid cheeks.',tip:'Skip if you shaved this morning AND skin feels tight. A 14-hour gap is usually OK, but listen to your skin.'});}
+else if(d===4){steps.push({n:n++,s:'Active: CeraVe Blemish Control Gel',p:'CeraVe Blemish Control Gel (triple-acid leave-on)',dur:'45 sec + 5 min wait',d:'After oil cleanse, pat face dry. Apply a THIN layer to forehead, nose, chin only. Wait 5 min before moisturizer.',tip:'If you shaved today and skin is irritated, skip the gel. Actives on compromised skin = burn risk.'});}
+else{steps.push({n:n++,s:'No actives \u2014 rest night',p:'',dur:'',d:(d===6?'Saturday':'Sunday')+' is a skin rest day. No chemical exfoliants.',tip:null});}
+steps.push({n:n++,s:'Hydrating mist (optional)',p:'Hada Labo / Av\u00e8ne spray',dur:'15 sec',d:'Spritz onto damp skin. Pat in gently.',tip:null});
+steps.push({n:n++,s:'Moisturize',p:"M\u00eame La Cr\u00e8me pour le Visage",dur:'45 sec',d:'Apply to damp skin. Generous on cheeks, lighter on T-zone.'+(d===4?' After CeraVe gel: extra-generous on T-zone to buffer the acids.':''),tip:null});
+steps.push({n:n++,s:'Face oil on cheeks (optional)',p:"M\u00eame L'Huile de Soin",dur:'20 sec',d:'2 drops. Warm between palms. Press onto cheeks only. Best on dry/cold nights. 2-3 times per week.',tip:null});
+steps.push({n:n++,s:'Guasha (optional, 2-3x/week)',p:'Guasha stone + face oil as slip',dur:'5 min',d:'Cool from fridge. Neck \u2192 jawline \u2192 cheekbones \u2192 under-eye \u2192 forehead \u2192 temples. 3-5 passes per zone, light pressure.',tip:'Skip if face is bruised from sparring.'});
+steps.push({n:n++,s:'Spot treatment if needed',p:'Av\u00e8ne Cicalfate+',dur:'10 sec',d:'Dot on inflamed, bleeding, or raw spots. Leave on overnight.',tip:null});
+}
+return steps;
+}
+function getSkinSteps(type,isShave){
+if(type==='SKIN_AM')return isShave?SKIN_AM_SHAVE:SKIN_AM_NOSHAVE;
+if(type==='SKIN_PM')return buildPMSkin(dow,true);
+if(type==='SKIN_PM_ONLY')return buildPMSkin(dow,false);
+if(type==='SKIN_SHOWER'){const si=SHOWER_INFO[dow];if(!si)return[];return[{n:1,s:'Hair: '+si.hair,p:'',dur:'',d:'',tip:null},{n:2,s:'Body: '+si.body,p:'',dur:'',d:si.note,tip:null},{n:3,s:'Face: done at the sink after shower',p:'',dur:'',d:'',tip:null}];}
+return[];
+}
+function renderSteps(steps){
+return steps.map(st=>{
+let h='<div class="step"><div class="step-num">'+st.n+'</div><div class="step-body"><strong>'+st.s+'</strong>';
+if(st.dur)h+='<span class="duration">'+st.dur+'</span>';
+if(st.p)h+='<br><span class="product">'+st.p+'</span>';
+if(st.d)h+='<br>'+st.d;
+if(st.tip)h+='<div class="pro-tip">'+st.tip+'</div>';
+h+='</div></div>';return h;
+}).join('');
+}
+
+/* TAPPABLE KEYWORDS */
+const TAP={
+"M\u00eame L'Huile Lavante":"Gentle oil-based cleanser for face and body. Lifts sebum, SPF, and daily grime without stripping. 1 pump, massage 20-30 sec, rinse lukewarm.",
+"M\u00eame Cr\u00e8me":"Daily moisturizer (AM + PM). Pea-sized on damp skin. Generous on cheeks, lighter on T-zone.",
+"Beauty of Joseon SPF40":"Tinted fluid sunscreen, SPF40 PA+++. 2 finger-lengths, dot and spread in downward strokes. Wait 1-2 min to set.",
+"CeraVe Blemish Control":"Active ingredient product (salicylic + PHA cleanser or triple-acid gel). T-zone only, 2-4x/week. Never on TKD nights or shave days with irritation.",
+"Av\u00e8ne Cicalfate":"Multi-purpose healing cream. Dot on nicks, pimples, mat rash, or raw spots. Leave on overnight.",
+"Guasha":"Facial massage stone. Cool from fridge, use oil as slip. Neck > jawline > cheekbones > under-eye > forehead. 3-5 passes per zone, light pressure.",
+"Salux":"Japanese nylon body washcloth. Medium pressure, long strokes. Focus: back, shoulders, chest, arms, knees. 2x/week on rest days only.",
+"wall angels":"Stand back against wall, arms in goal-post position. Slide up and down keeping contact with wall. 2 sets of 10.",
+"scap pulls":"Dead hang from bar, squeeze shoulder blades together and down. 2 sets of 10.",
+"coffee nap":"Drink coffee quickly, immediately nap 15-20 min. Wake as caffeine kicks in. Evidence: Horne & Reyner 1996.",
+"GTG":"Greasing the Groove \u2014 micro-sets of skill work spread throughout the day. Sub-maximal reps, high frequency.",
+"Tahiti Vanille":"Scented shower oil for post-TKD nights (Mon/Wed/Fri). Stronger fragrance survives better on post-sweat skin.",
+"Cadum":"Dermo-Respect body wash for non-TKD days. Gentle, minimal fragrance."
+};
+function tapify(txt){
+if(!txt)return txt;let r=txt;
+for(const[kw,det]of Object.entries(TAP)){const esc=kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');r=r.replace(new RegExp('('+esc+'[\\w]*)','gi'),'<span class="tap-kw" data-tap="'+kw+'">$1</span>');}
+return r;
+}
+
+/* SCHEDULES */
+function getSchedule(d,shave){
+const sk=shave?'AM Skincare \u2014 Shave Day':'AM Skincare \u2014 Non-Shave';
+const skCat='care';
+const schedules={
+1:[
+{t:'07:00',n:'Wake Up',c:'rest',detail:'Open curtains for sunlight exposure. Get moving.'},
+{t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:15',n:'Breakfast',c:'food',detail:'Oats + skyr + banana + almonds + honey. ~650 kcal, ~35g protein.'},
+{t:'07:40',n:'Get Ready + Transit',c:'',detail:''},
+{t:'08:00',n:'Work',c:'',detail:'Stay hydrated \u2014 aim for 500ml by 10:00.'},
+{t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Chicken/jambon + whole-grain pasta + veg + olive oil. ~700 kcal, ~40g protein. Coffee after eating. Optional: coffee nap (drink fast, 15-20 min nap).'},
+{t:'13:30',n:'Work',c:'',detail:'Afternoon block. Drink 500ml water.'},
+{t:'18:00',n:'Transition + Pre-TKD Snack',c:'food',detail:'Banana + tartine with peanut butter + skyr. Water 500ml. Change for TKD.'},
+{t:'18:30',n:'Bus to TKD',c:'',detail:'Light stretch on arrival.'},
+{t:'19:00',n:'TKD \u2014 Technique + Combat (2.5h)',c:'sport',detail:'1h technique + 1.5h combat. Sip 150-250ml water every 15-20 min. Electrolytes if >60 min.'},
+{t:'21:30',n:'Car Home',c:'',detail:''},
+{t:'21:55',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
+{t:'22:13',n:'Post-TKD Dinner',c:'food',detail:'Pre-prepped: salmon/chicken + rice + veg + olive oil. ~800 kcal, ~45g protein. Optional: 200g skyr + almonds after.'},
+{t:'22:50',n:'Wind-Down + Posture',c:'care',detail:'Wall angels (2x10) + scap pulls (2x10) + thoracic extension (2x10) + chin tucks (2x10) + chest stretch (30s/side). No screens.'},
+{t:'23:00',n:'Sleep Target',c:'rest',detail:'8h sleep. Dark, cool room.'}
+],
+2:[
+{t:'07:00',n:'Wake Up',c:'rest',detail:''},
+{t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:15',n:'Breakfast',c:'food',detail:'Oats + yogurt + fruit + nuts + eggs. ~700 kcal, ~40g protein.'},
+{t:'07:45',n:'Transit to Work',c:'',detail:''},
+{t:'08:00',n:'Work',c:'',detail:''},
+{t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Chicken + rice + veg + olive oil. ~750 kcal, ~45g protein. Coffee + optional coffee nap.'},
+{t:'13:30',n:'Work',c:'',detail:'Calisthenics option: split over lunch or after work.'},
+{t:'18:00',n:'Calisthenics (if not done at lunch)',c:'sport',detail:'Session A: Muscle-Up Skill + Upper Push + Arms. 40 min. See Training tab for full workout.'},
+{t:'19:00',n:'English Teaching',c:'',detail:'Paid gig. Quick refresh: wipe, deodorant, change shirt if sweaty.'},
+{t:'20:30',n:'Transit Home',c:'',detail:''},
+{t:'21:00',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
+{t:'21:45',n:'Dinner',c:'food',detail:'Eggs + whole-grain pasta + veg OR turkey + potatoes + veg. ~750 kcal, ~40g protein.'},
+{t:'22:15',n:'Wind-Down + Posture (5 min)',c:'care',detail:'Posture exercises. No screens.'},
+{t:'22:30',n:'Sleep Target',c:'rest',detail:'7.5h \u2014 tight. Push wake to 07:30 if possible.'}
+],
+3:[
+{t:'07:15',n:'Wake Up',c:'rest',detail:'Slightly later \u2014 earlier bedtime compensates.'},
+{t:'07:20',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:30',n:'Breakfast',c:'food',detail:'Oats + skyr + fruit + nuts. ~650 kcal, ~35g protein.'},
+{t:'08:00',n:'Work',c:'',detail:''},
+{t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Lentils + rice + eggs + veg OR tuna pasta salad. ~700 kcal, ~40g protein.'},
+{t:'13:30',n:'Work (shortened)',c:'',detail:'Work ends at 16:00 today.'},
+{t:'16:00',n:'Transition + Pre-TKD Snack',c:'food',detail:'Banana + tartine + skyr. Water 500ml. Deodorant refresh.'},
+{t:'17:00',n:'Music Practice (drums, 30 min)',c:'',detail:''},
+{t:'17:30',n:'Car to TKD',c:'',detail:'Change into dobok in the car.'},
+{t:'18:00',n:"Coach Kids' TKD",c:'sport',detail:'Moderate physical load. Teaching session.'},
+{t:'19:05',n:'TKD Combat (1h 10min)',c:'sport',detail:"Mat's own combat session. Electrolytes mandatory."},
+{t:'20:15',n:'Car Home',c:'',detail:''},
+{t:'20:35',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
+{t:'20:55',n:'Dinner',c:'food',detail:'Full post-training meal. Protein + carbs + veg. ~800 kcal, ~45g protein.'},
+{t:'21:40',n:'Wind-Down',c:'care',detail:'Optional: pre-bed skyr. Posture exercises.'},
+{t:'22:00',n:'Sleep Target',c:'rest',detail:'8h45 sleep \u2014 good catch-up from Monday.'}
+],
+4:[
+{t:'07:15',n:'Wake Up',c:'rest',detail:''},
+{t:'07:20',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:30',n:'Big Breakfast',c:'food',detail:"Oats + skyr + eggs + fruit + nuts + PB tartine. ~800 kcal, ~45g protein. Extra fuel for tonight's big session."},
+{t:'08:00',n:'Work',c:'',detail:''},
+{t:'12:00',n:'Big Lunch + Coffee',c:'food',detail:'Chicken + rice + veg + olive oil + yogurt. ~900 kcal, ~50g protein (extra \u2014 training ahead).'},
+{t:'13:30',n:'Work',c:'',detail:''},
+{t:'18:00',n:'Pre-Workout Banana + Water',c:'food',detail:''},
+{t:'18:30',n:'Calisthenics \u2014 Long Session (2h)',c:'sport',detail:'Session B: Muscle-Up Skill + Pull Volume + Arms. Handstand, pull-ups, planche work. See Training tab.'},
+{t:'20:30',n:'Cool Down + Hydrate',c:'',detail:'Electrolytes.'},
+{t:'20:45',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
+{t:'21:15',n:'Dinner',c:'food',detail:'Eggs + pasta + veg OR fish + potatoes + veg. ~750 kcal, ~40g protein.'},
+{t:'21:45',n:'Wind-Down + Posture',c:'care',detail:'Optional pre-bed skyr. Posture exercises.'},
+{t:'22:00',n:'Sleep Target',c:'rest',detail:'8h45 \u2014 good recovery.'}
+],
+5:[
+{t:'07:00',n:'Wake Up',c:'rest',detail:''},
+{t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:15',n:'Breakfast',c:'food',detail:'Oats + skyr + fruit + almonds. ~650 kcal, ~35g protein.'},
+{t:'07:45',n:'Transit to Work',c:'',detail:''},
+{t:'08:00',n:'Work',c:'',detail:''},
+{t:'12:00',n:'Lunch (extra carbs!) + Coffee',c:'food',detail:'Chicken + pasta + olive oil + veg. ~800 kcal, ~45g protein. Friday TKD is the hardest \u2014 fuel up.'},
+{t:'13:30',n:'Work',c:'',detail:''},
+{t:'18:00',n:'Transition + Pre-TKD Snack',c:'food',detail:'Banana + tartine + skyr. Water 500ml.'},
+{t:'18:30',n:'Bus to TKD',c:'',detail:''},
+{t:'19:00',n:'TKD \u2014 Hard Sparring (2.5h)',c:'sport',detail:'1h technique + 1.5h HARD sparring. Very sweaty. Electrolytes mandatory. Sip every 15-20 min.'},
+{t:'21:30',n:'Car Home',c:'',detail:''},
+{t:'21:55',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
+{t:'22:13',n:'Dinner',c:'food',detail:'Pre-prepped protein + carbs + veg. ~800 kcal, ~45g protein. Eat sitting down.'},
+{t:'22:50',n:'Quick Wind-Down',c:'care',detail:'Skip posture exercises \u2014 too tired. Saturday catches up.'},
+{t:'23:00',n:'Sleep Target',c:'rest',detail:'8h floor. Saturday sleep-in compensates.'}
+],
+6:[
+{t:'08:00',n:'Wake Up \u2014 Sleep In!',c:'rest',detail:'Target 9+ hours of sleep.'},
+{t:'08:30',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'08:40',n:'Breakfast',c:'food',detail:'Oats + eggs + skyr + fruit. ~750 kcal, ~40g protein.'},
+{t:'09:20',n:'Free Time',c:'rest',detail:'Reading, music, errands.'},
+{t:'10:30',n:'Calisthenics Session (~60 min)',c:'sport',detail:'Session C: HSPU + Planche + Skill Volume + Core. See Training tab for full workout.'},
+{t:'12:00',n:'Cool Down + Hydrate',c:'',detail:''},
+{t:'12:30',n:'Shower',c:'care',detail:'SKIN_SHOWER',expand:true},
+{t:'13:00',n:'Lunch',c:'food',detail:'Chicken + rice + veg + olive oil. ~800 kcal, ~45g protein. Coffee.'},
+{t:'14:00',n:'Free Afternoon',c:'rest',detail:'Social, errands, drum practice, rest.'},
+{t:'17:00',n:'Snack',c:'food',detail:'Protein yogurt + fruit.'},
+{t:'19:30',n:'Dinner',c:'food',detail:'Fish or eggs + pasta + veg. ~750 kcal, ~40g protein.'},
+{t:'22:00',n:'PM Skincare + Posture',c:'care',detail:'SKIN_PM_ONLY',expand:true},
+{t:'22:45',n:'Sleep Target',c:'rest',detail:'9h15+ recovery sleep.'}
+],
+0:[
+{t:'08:00',n:'Wake Up \u2014 Sleep In!',c:'rest',detail:''},
+{t:'08:30',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'08:40',n:'Breakfast',c:'food',detail:'Eggs + tartines + fruit. ~650 kcal, ~35g protein.'},
+{t:'09:20',n:'Laundry',c:'care',detail:'Change pillowcase (#1 of week). Wash pillowcases + face towels + gym gear at 60\u00b0C. Sheets + bath towels at 40\u00b0C. Start early so sheets dry by evening.'},
+{t:'10:00',n:'Free Morning',c:'rest',detail:'Social, reading, music, family. Light walk or cycling fine.'},
+{t:'12:00',n:'Lunch',c:'food',detail:'Sunday family meal. ~700 kcal, ~40g protein.'},
+{t:'13:00',n:'Rest / Drum Practice',c:'rest',detail:'Great drum slot \u2014 no training to worry about.'},
+{t:'17:00',n:'Snack',c:'food',detail:'Yogurt + fruit.'},
+{t:'17:30',n:'Meal Prep for the Week',c:'food',detail:'Batch-cook chicken, rice, veg. Portion into Tupperware for Mon/Wed/Fri post-TKD dinners.'},
+{t:'20:00',n:'Dinner',c:'food',detail:'~700 kcal, ~35g protein.'},
+{t:'20:45',n:'Wind-Down + Posture',c:'care',detail:'Posture exercises 5 min.'},
+{t:'21:15',n:'PM Skincare',c:'care',detail:'SKIN_PM_ONLY',expand:true},
+{t:'22:00',n:'Sleep Target',c:'rest',detail:'10h full recovery. Earlier bedtime to reset for Monday.'}
+]};
+return schedules[d]||schedules[0];
+}
+
+/* BREAKFASTS */
+const BREAKFASTS=[
+{id:'A',name:'Power Oats',desc:'Oats + skyr + banana + almonds + flaxseed + honey',kcal:700,p:40,c:85,f:22},
+{id:'B',name:'Egg Breakfast',desc:'3 eggs + bread + avocado + tomato + skyr',kcal:680,p:38,c:55,f:30},
+{id:'C',name:'Yogurt Bowl',desc:'Fromage blanc + oats + walnuts + berries + chia',kcal:650,p:40,c:65,f:25},
+{id:'D',name:'Protein Oats',desc:'Oats + 2 bananas + whey (pre-training fuel)',kcal:720,p:45,c:105,f:12}
+];
+const BF_DETAILS=[
+{ingredients:[{item:"Rolled oats (flocons d'avoine)",amt:'80 g',why:'Complex carbs, beta-glucan'},{item:'Skyr or fromage blanc 0%',amt:'200 g',why:'~22g protein, calcium'},{item:'Banana',amt:'1',why:'Potassium, pre-training carbs'},{item:'Almonds, crushed',amt:'25 g',why:'Vitamin E, magnesium, healthy fats'},{item:'Ground flaxseed',amt:'1 tbsp',why:'ALA omega-3, fiber'},{item:'Honey or maple syrup',amt:'1 tsp',why:'Flavor, glycogen'},{item:'Cinnamon',amt:'pinch',why:'Optional, glucose regulation'},{item:'Whey scoop (optional)',amt:'15 g',why:'Bumps protein to ~45g'}],steps:['Measure oats into microwave-safe bowl','Add milk or water to cover','Microwave 2 min (or soak overnight)','Top with skyr, sliced banana, almonds, flaxseed','Drizzle honey and cinnamon'],time:'3 min',tips:['Prep night before for overnight oats \u2014 zero morning effort','Swap banana for berries on rest days for more antioxidants']},
+{ingredients:[{item:'Whole eggs (Label Rouge)',amt:'3',why:'~18g protein, choline, vitamin A'},{item:'Whole-grain bread',amt:'2 slices',why:'Complex carbs'},{item:'Avocado',amt:'1/2',why:'Monounsaturated fat, potassium'},{item:'Tomato or red pepper',amt:'1',why:'Vitamin C, lycopene'},{item:'Olive oil',amt:'1 tsp',why:'Flavor, vitamin E'},{item:'Fruit (orange or kiwi)',amt:'1',why:'Vitamin C'},{item:'Skyr on the side',amt:'100 g',why:'Top-up protein (+11g)'}],steps:['Heat pan with olive oil on medium','Scramble or fry 3 eggs','Toast bread','Slice avocado and tomato','Plate: eggs + toast + avocado + tomato + fruit + skyr'],time:'5-6 min',tips:['Scrambled is faster; fried gives more texture','Add salt and pepper to eggs']},
+{ingredients:[{item:'Fromage blanc 0% or Greek yogurt',amt:'300 g',why:'~30g protein'},{item:'Oats (raw, as granola)',amt:'50 g',why:'Carbs'},{item:'Walnuts, broken',amt:'30 g',why:'Omega-3 ALA \u2014 key skin nutrient'},{item:'Blueberries or mixed berries',amt:'100 g',why:'Polyphenols, vitamin C'},{item:'Chia seeds',amt:'1 tbsp',why:'Omega-3, fiber'},{item:'Honey',amt:'1 tsp',why:'Flavor'},{item:'Whey scoop (optional)',amt:'15 g',why:'Bumps to ~45g protein'}],steps:['Spoon yogurt into bowl','Top with oats, walnuts, berries, chia','Drizzle honey','Mix or eat layered'],time:'2 min',tips:['Zero cooking \u2014 fastest option','Frozen berries work fine and are cheaper']},
+{ingredients:[{item:'Rolled oats',amt:'110 g',why:'Extra carbs for pre-training fuel'},{item:'Skyr or fromage blanc 0%',amt:'200 g',why:'~22g protein, calcium'},{item:'Bananas',amt:'2',why:'Double potassium, fast carbs'},{item:'Whey scoop',amt:'30 g',why:'Keeps protein at ~45g'},{item:'Honey',amt:'1 tsp',why:'Flavor'},{item:'Cinnamon',amt:'pinch',why:'Optional'}],steps:['Measure oats into bowl, add milk/water','Microwave 2 min','Mix in whey (add to warm, not hot oats)','Top with sliced bananas, skyr, honey'],time:'3 min',tips:['Best for Saturday morning before calisthenics','No almonds \u2014 fat slows digestion pre-training']}
+];
+
+/* MEALS */
+const MEALS=[
+{name:'Poulet r\u00f4ti + riz',kcal:650,p:45,c:55,f:20},{name:'Steak hach\u00e9 + pur\u00e9e',kcal:700,p:35,c:50,f:35},{name:'Poisson + l\u00e9gumes',kcal:450,p:40,c:25,f:18},{name:'P\u00e2tes bolognaise',kcal:700,p:30,c:80,f:22},{name:'Quiche lorraine + salade',kcal:550,p:22,c:35,f:35},{name:'Soupe + pain',kcal:400,p:15,c:55,f:12},{name:'Couscous + merguez',kcal:750,p:35,c:75,f:30},{name:'Gratin dauphinois',kcal:500,p:18,c:40,f:30},{name:'Ratatouille + riz',kcal:500,p:12,c:65,f:18},{name:'Omelette + salade',kcal:450,p:28,c:15,f:30},{name:'Croque-monsieur',kcal:450,p:22,c:35,f:25},{name:'Blanquette de veau',kcal:600,p:35,c:30,f:35},{name:'Hachis parmentier',kcal:650,p:30,c:50,f:35},{name:'Saumon + riz + l\u00e9gumes',kcal:650,p:40,c:55,f:25},{name:'Poulet basquaise',kcal:550,p:38,c:30,f:25},{name:'Boeuf bourguignon',kcal:600,p:40,c:25,f:35},{name:'Tomates farcies + riz',kcal:600,p:28,c:55,f:25},{name:'Endives au jambon',kcal:450,p:28,c:20,f:28},{name:'Tartiflette',kcal:750,p:30,c:45,f:45},{name:'Pot-au-feu',kcal:500,p:35,c:35,f:20},{name:'Cassoulet',kcal:800,p:40,c:50,f:40},{name:'Salade ni\u00e7oise',kcal:400,p:25,c:20,f:25},{name:'Galette compl\u00e8te',kcal:450,p:22,c:40,f:22},{name:'Po\u00eal\u00e9e poulet + l\u00e9gumes',kcal:500,p:38,c:35,f:18},{name:'Riz cantonais',kcal:550,p:22,c:60,f:22}
+];
+const SNACKS=[
+{name:'Banana + rice cakes + PB',kcal:280,p:8},{name:'Skyr 200g + honey + berries',kcal:250,p:22},{name:'Protein bar (HiPro)',kcal:180,p:18},{name:'Dates (4) + almonds',kcal:220,p:5},{name:'Tuna on bread',kcal:350,p:28},{name:'Cottage cheese + walnuts',kcal:320,p:25},{name:'2 boiled eggs + oatcake',kcal:250,p:15},{name:'Pumpkin seeds + apple',kcal:250,p:9},{name:'Pre-bed skyr + almonds',kcal:250,p:25}
+];
+
+/* ARM EXERCISE DETAILS */
+const ARM_EX={
+'Cable Curl':{target:'Balanced long + short head',equip:'HGX200 low pulley, straight bar or rope',tempo:'2-0-2-1',form:['Stand facing machine, feet shoulder-width','Elbows pinned to sides throughout','Full extension at bottom, squeeze at top','If torso sways, weight is too heavy'],weight:'~15-20 kg',muscle:'Biceps brachii (both heads)'},
+'Cable Pushdown':{target:'Lateral head (horseshoe)',equip:'HGX200 high pulley, rope or straight bar',tempo:'1-1-2-0',form:['Stand tall, slight forward lean','Elbows glued to sides','Full extension, squeeze at bottom','With rope: split ends apart at bottom'],weight:'~20-25 kg',muscle:'Triceps \u2014 lateral head'},
+'Preacher Curl':{target:'Short head (arm width)',equip:'HGX200 preacher pad + dumbbell',tempo:'2-1-2-0',form:['Upper arm flat on pad, armpit snug','Do not hyperextend elbow at bottom','Curl to full contraction, squeeze 1 sec','Use less weight than standing curls'],weight:'~7-10 kg/arm',muscle:'Biceps \u2014 short head (stretch position)'},
+'Overhead DB Extension':{target:'Long head (50% of tricep mass)',equip:'1 dumbbell, two-hand grip',tempo:'2-0-2-1',form:['Seated or standing, elbows point forward','Hold behind head with both hands','Lower until deep tricep stretch','Press up to full extension, elbows to ceiling'],weight:'~10-12 kg two-hand',muscle:'Triceps \u2014 long head (stretch-mediated growth)'},
+'Hammer Curl':{target:'Brachialis + long head + forearms',equip:'Dumbbells (neutral/thumbs-up grip)',tempo:'2-0-2-0',form:['Thumbs-up grip throughout','Elbows pinned to sides','Curl to ~120 degrees (just past 90)','Brachialis works hardest in mid-range'],weight:'~10-12 kg/arm',muscle:'Brachialis (thickness) + bicep long head + brachioradialis'},
+'Spider Curl':{target:'Short head (peak contraction)',equip:'HGX200 preacher pad angled + dumbbells',tempo:'2-2-2-0',form:['Chest against angled pad, arms hanging','Curl up, squeeze HARD at top 2 seconds','Upper arms perpendicular to floor','Go lighter than expected \u2014 strict by design'],weight:'~5-7 kg/arm',muscle:'Biceps \u2014 short head (hardest at TOP)'}
+};
+
+/* WORKOUTS — v3 with arm supersets */
+const WORKOUTS={
+2:{title:'Session A \u2014 Muscle-Up Skill + Upper Push + Arms',sub:'~40 min | Arms: cable curl / pushdown superset',exercises:[
+{name:'Warm-up',sets:'10 min',rest:'',notes:'Wrist circles, band dislocates, band pull-aparts, scap pull-ups, scap push-ups, arm circles, cat-cow, ramp-up set.'},
+{name:'Wall Handstand Hold (chest-to-wall)',sets:'3 \u00d7 max hold (\u226420 sec)',rest:'45 sec',notes:'Skill preservation. Keep hollow body.'},
+{name:'Jumping Muscle-Up + Slow Negative (3-5 sec)',sets:'4 \u00d7 3 reps',rest:'2 min',notes:'Jump to top, control the negative through the transition.'},
+{name:'Straight-Bar Dips',sets:'4 \u00d7 5-8 reps',rest:'2 min',notes:'Full ROM. Alternate with parallel dips.'},
+{name:'ARM SUPERSET',type:'superset',exA:'Cable Curl',exB:'Cable Pushdown',repsA:'10-12',repsB:'10-12',rounds:3,rest:'60 sec between rounds',notes:'HGX200 cable station. Zero transition between exercises.'},
+{name:'IF TIME \u2014 ARM SUPERSET',type:'superset-optional',exA:'Hammer Curl',exB:'Overhead DB Extension',repsA:'10-12',repsB:'10-12',rounds:2,rest:'60 sec between rounds',notes:'45-min variant only. Skip if short on time or elbow soreness.'},
+{name:'Cool-Down: Chest + Lat Stretch',sets:'2 min',rest:'',notes:''}
+]},
+4:{title:'Session B \u2014 Muscle-Up Skill + Pull Volume + Arms',sub:'~40 min | Arms: preacher curl / overhead ext superset',exercises:[
+{name:'Warm-up',sets:'10 min',rest:'',notes:'Full warm-up protocol including wrist prep.'},
+{name:'Wall Handstand + Kick-up Practice',sets:'2-3 sets',rest:'30 sec',notes:''},
+{name:'Pseudo Planche Lean / Tuck Planche',sets:'4 \u00d7 max hold (5-15 sec)',rest:'60 sec',notes:'Measure lean distance weekly.'},
+{name:'Band-Assisted MU or Half MU',sets:'4 \u00d7 3-5 reps',rest:'2 min',notes:'Half MU = pull to waist, no dip.'},
+{name:'Weighted Pull-Up (or strict BW)',sets:'3 \u00d7 3-5 reps',rest:'2 min',notes:'3-6 rep range, progressive overload. (Reduced from 4 sets to fit arm work.)'},
+{name:'ARM SUPERSET',type:'superset',exA:'Preacher Curl',exB:'Overhead DB Extension',repsA:'10-12',repsB:'10-12',rounds:3,rest:'60 sec between rounds',notes:'HGX200 preacher + dumbbells. Two steps apart.'},
+{name:'IF TIME \u2014 ARM SUPERSET',type:'superset-optional',exA:'Spider Curl',exB:'Cable Pushdown',repsA:'12-15',repsB:'10-12',rounds:2,rest:'60 sec between rounds',notes:'45-min variant only. Recovery must be good.'},
+{name:'Cool-Down: Lat + Chest Stretch',sets:'2 min',rest:'',notes:''}
+]},
+6:{title:'Session C \u2014 HSPU + Planche + Skill Volume + Core',sub:'~60 min | Core block relocated from Tue/Thu',exercises:[
+{name:'Full Warm-up',sets:'10 min',rest:'',notes:'Including jump rope, full rotator cuff, dislocates.'},
+{name:'Chest-to-Wall Handstand Hold',sets:'6-8 \u00d7 5-15 sec',rest:'30 sec',notes:'High volume handstand practice.'},
+{name:'Elevated Pike Push-up / Wall HSPU',sets:'4 \u00d7 5-8',rest:'2 min',notes:'W1-4: pike. W5-8: back-to-wall. W9-12: chest-to-wall.'},
+{name:'Shoulder Stand or Wall HSPU Eccentric (5-sec)',sets:'3 \u00d7 3',rest:'90 sec',notes:'Bottom-phase strength.'},
+{name:'Pseudo Planche Lean / Tuck Planche',sets:'5 \u00d7 max hold (5-15 sec)',rest:'90 sec',notes:'Primary planche work lives on Saturday.'},
+{name:'Half MU or MU Negative',sets:'3 \u00d7 3-5',rest:'90 sec',notes:'Light maintenance.'},
+{name:'Core Block: Ab Wheel or Hanging Knee Raise',sets:'3 \u00d7 8-12',rest:'45 sec',notes:'Relocated from Tue/Thu. Full ab work lives here now.'},
+{name:'Leg Curl or RDL (dumbbells)',sets:'2 \u00d7 10',rest:'60 sec',notes:'Hamstring balance.'},
+{name:'Mobility: Hip flexor + pigeon + thoracic rotation + shoulder ext.',sets:'5 min',rest:'',notes:'Focus on the 4 essential stretches.'},
+{name:'Cool-Down + Notes',sets:'2 min',rest:'',notes:'Log sets, reps, perceived effort, pain.'}
+]}};
+
+const PROGRESSIONS=[
+{skill:'Muscle-Up',color:'var(--fit)',levels:[
+{name:'Base Building',goal:'10 strict pull-ups + 5 straight bar dips',bench:'Hit both in a single set'},
+{name:'Power Phase',goal:'3 clean chest-to-bar pull-ups',bench:'Pull bar to upper chest for 3 reps'},
+{name:'Assisted & Eccentrics',goal:'Feel full ROM on bar',bench:'5 strict negatives (3-5 sec) + 3 band-assisted MU'},
+{name:'First Rep',goal:'1 strict unassisted muscle-up',bench:'Clean bar MU, no chicken wing'},
+{name:'Rep Building',goal:'5 strict muscle-ups in a row',bench:'5 clean reps without form breakdown'},
+{name:'Weighted / High Rep',goal:'+10% BW weighted MU or 10 strict BW',bench:'5 strict reps cleanly'}
+]},
+{skill:'Planche',color:'var(--fit)',levels:[
+{name:'Frog Stand & Lean',goal:'30 sec frog stand or planche lean at waist',bench:'Frog stand 30 sec OR lean wrists at waist 5 sec'},
+{name:'Advanced Frog Stand',goal:'Straight arms, knees off elbows',bench:'Advanced frog 15 sec with straight arms'},
+{name:'Tuck Planche',goal:'Horizontal, knees tucked, hips at shoulder height',bench:'30 sec tuck planche hold'},
+{name:'Advanced Tuck',goal:'Knees lift off chest, thighs extending',bench:'15-30 sec advanced tuck'},
+{name:'Straddle Planche',goal:'Legs straight, wide, parallel to ground',bench:'15-30 sec straddle'},
+{name:'Full Planche',goal:'Legs together, parallel',bench:'5 sec full hold (2-3+ years)'}
+]},
+{skill:'HSPU',color:'var(--fit)',levels:[
+{name:'Pike Push-ups',goal:'Full ROM pike push-up',bench:'8-10 strict reps with 3-0-1-0 tempo'},
+{name:'Elevated Pike',goal:'Feet elevated, head below hands',bench:'8-10 reps controlled'},
+{name:'Wall HSPU',goal:'Full wall HSPU',bench:'5-8 reps full ROM'},
+{name:'Deficit Wall HSPU',goal:'Hands on parallettes, deeper ROM',bench:'5 reps with 10-15 cm deficit'},
+{name:'Eccentric Freestanding',goal:'5 sec controlled negative',bench:'3-5 controlled negatives'},
+{name:'Assisted Concentric',goal:'Bent arm press',bench:'3 clean bent-arm presses'},
+{name:'Freestanding HSPU',goal:'1 strict freestanding rep',bench:'Clean rep without wall'}
+]}];
+
+/* GTG — v3 with hollow holds on non-training days */
+const GTG_DAILY={
+1:{exercises:'3 \u00d7 false grip hang (10-15 sec) + 2 \u00d7 20 sec hollow hold',note:'AM: false grip hang | PM: hollow hold'},
+2:{exercises:'3 \u00d7 wall handstand hold (10 sec each)',note:'After training, afternoon or evening'},
+3:{exercises:'3 \u00d7 scap pull-ups (5 each) + 2 \u00d7 20 sec hollow hold',note:'AM: scap pulls + hollow hold'},
+4:{exercises:'3 \u00d7 false grip hang (10-15 sec each)',note:'After training'},
+5:{exercises:'3 \u00d7 wall handstand hold (10 sec) + 2 \u00d7 20 sec hollow hold',note:'AM: handstand + hollow hold'},
+6:{exercises:'3 \u00d7 scap pull-ups (5 each)',note:'After training'},
+0:{exercises:'2 \u00d7 hollow hold (20 sec) + 2 \u00d7 wall handstand (10 sec)',note:'Rest day \u2014 only if feeling fresh'}};
+
+/* EXTRAS */
+const TIPS=[
+{title:'Ice roller on puffy mornings',cat:'face',ev:'moderate',body:'Roll an ice cube (wrapped in cloth) over face 1-3 min before AM skincare. Causes temporary vasoconstriction \u2014 reduces puffiness for 30-60 min. Best after late TKD dinner or poor sleep.'},
+{title:'Tongue scraper every morning',cat:'face',ev:'strong',body:'Stainless steel U-shaped scraper. 3-5 passes from back to front before brushing. 15 seconds. Reduces volatile sulfur compounds (bad breath). Cochrane-backed.',products:[{name:'Stainless steel tongue scraper',where:'Amazon.fr, pharmacie',price:'~\u20ac4\u20138'}]},
+{title:'Lip exfoliation + sealing (weekly)',cat:'face',ev:'moderate',body:'After brushing teeth, use a soft toothbrush on lips gently. Apply M\u00eame Cr\u00e8me or lip balm, then seal with Vaseline/Aquaphor at night. 1-2x/week in winter.',products:[{name:'Vaseline Original',where:'Supermarket',price:'~\u20ac3\u20134'},{name:'Aquaphor Lip Repair',where:'Amazon.fr, pharmacie',price:'~\u20ac4\u20136'}]},
+{title:'Low-sodium day before events',cat:'face',ev:'strong',body:'24h before a photo/date/interview: skip charcuterie, salty snacks, soy sauce. Drink more water. Measurably reduces facial puffiness.'},
+{title:'Morning sunlight 3-5 min',cat:'habits',ev:'strong',body:'Get outdoor sunlight within 30 min of waking. No sunglasses. Sets circadian rhythm, boosts alertness, vitamin D. Outside = 10,000+ lux vs 100-500 indoors.'},
+{title:'"String from skull" posture cue',cat:'body',ev:'strong',body:'Imagine a string pulling you up from the top of your head. Head up, chest out, shoulders back AND down. Reset every time you catch yourself slouching.'},
+{title:'Speak 10-15% slower',cat:'habits',ev:'moderate',body:'Let your voice drop to comfortable low range. Allow natural pauses. Especially useful for English teaching. Record yourself reading aloud, notice rushing patterns.'},
+{title:'Progressive social reps',cat:'habits',ev:'strong',body:'Start: say hi to barista. Progress: 1-min small talk. Then: 5-min conversations. This is exposure therapy \u2014 a validated clinical approach.'},
+{title:'White-card test for skin undertone',cat:'style',ev:'moderate',body:'Hold white paper next to face in daylight. Warm (golden) = olive, rust, camel, warm brown. Cool (pink) = navy, charcoal, jewel tones. Best colors for olive/neutral: navy, olive, cream, rust, forest green.'},
+{title:'Pinterest for outfit inspiration',cat:'style',ev:'moderate',body:"Create a board, save 100+ looks you like. After 2-3 weeks your taste becomes visible. Search: \"French minimalist men's style 2026.\""},
+{title:'Dental floss or interdental brush 1x/day',cat:'face',ev:'strong',body:'Brushing alone misses 35% of tooth surface. Floss before bed. Huge dental ROI.',products:[{name:'TePe interdental brushes',where:'Pharmacie, Amazon.fr',price:'~\u20ac4\u20136'},{name:'Oral-B dental floss',where:'Supermarket',price:'~\u20ac3'}]},
+{title:'Trim nose hairs every 2 weeks',cat:'face',ev:'moderate',body:'Philips Norelco nose/ear trimmer. Quick, easy, visible difference.',products:[{name:'Philips Norelco 3000 trimmer',where:'Fnac, Boulanger, Amazon.fr',price:'~\u20ac15\u201325'}]},
+{title:'Carry a lip balm in pocket',cat:'face',ev:'moderate',body:'Cracked lips in winter = the biggest "instant upgrade" fix. Labello, LRP Cicaplast l\u00e8vres, or Av\u00e8ne Cold Cream l\u00e8vres. Always pocket.',products:[{name:'La Roche-Posay Cicaplast L\u00e8vres',where:'Pharmacie',price:'~\u20ac4\u20136'},{name:'Labello Classic',where:'Supermarket',price:'~\u20ac2\u20133'}]},
+{title:'Blue light limit before sleep',cat:'habits',ev:'strong',body:'No phone past 22:00 on TKD nights, 22:30 on normal nights. Evening blue light suppresses melatonin.'},
+{title:'Consistent scent signature',cat:'style',ev:'moderate',body:'Use YSL Y EDP consistently so friends associate the scent with you. Apply to pulse points (wrists, neck).',products:[{name:'YSL Y Eau de Parfum 60mL',where:'Sephora.fr, Marionnaud, Nocib\u00e9',price:'~\u20ac85\u2013100'}]},
+{title:'Sleep on your back if possible',cat:'habits',ev:'moderate',body:"Reduces face-pillow acne marks and morning puffiness. Try a flatter pillow. Don't force it \u2014 just keep pillowcase clean."}
+];
+const MYTHS=[
+{title:'Mewing to reshape jaw (adult bones)',body:'Dr. John Mew was struck off the UK dental register. Zero peer-reviewed evidence. "Before/after" photos show weight loss, posture changes, or camera angles.'},
+{title:'Hard gum for jawline growth',body:'No RCTs support visible jaw changes. Associated with TMJ dysfunction, jaw clicking, and tooth wear.'},
+{title:'Fluoride-free toothpaste',body:'"Fluoride lowers testosterone" is based on one 1997 post-mortem study. Dental-dose fluoride has no testosterone effect. Skipping fluoride causes cavities.'},
+{title:'Beta-carotene megadose for "tan"',body:'Causes orange skin (carotenemia), not a tan. Linked to increased lung cancer risk at high doses.'},
+{title:'Toothpaste on pimples',body:'Contains fluoride, SLS, menthol, abrasives that irritate skin. Use Av\u00e8ne Cicalfate+ instead.'},
+{title:'Charcoal masks / charcoal anything',body:'Activated charcoal is inert on intact skin. "Detox" framing has no mechanism.'},
+{title:'Silk pillowcases for acne',body:'Evidence is weak. Washing a regular cotton pillowcase 2x/week is more effective and cheaper.'},
+{title:'Collagen supplements at 18',body:'Meta-analysis shows small hydration/elasticity gains. Not a priority at 18. Spend on omega-3 and creatine first.'}
+];
+
+/* SHOPPING */
+const SHOP_STOP=[
+{name:'Rituals "Ritual of Namaste" Face Exfoliator',reason:'Bamboo scrub + fragrance allergens. Risk of micro-tears on dehydrated skin.'},
+{name:'WOW Factory Charcoal Face Toner',reason:'Denatured alcohol + methylparaben + 4 fragrance allergens.'},
+{name:'WOW Factory Charcoal Face Cream',reason:'Mineral oil + fragrance cocktail + zero actives.'},
+{name:'LPG Endermologie Eye Cream',reason:'Anti-aging peptides for 30+ skin. Age-inappropriate at 18.'},
+{name:'Schwarzkopf Mousse Volume Expert',reason:'Alcohol denat. is 2nd ingredient. Too drying for thin wavy hair.'},
+{name:'Le Petit Marseillais Cerisier',reason:'SLES-dominant. Too stripping for combination-dry body skin.'}
+];
+const SHOP_KEEP=[
+{name:'CeraVe Blemish Control Cleanser',reason:'3-4x/week, T-zone only, 20-30 sec.'},
+{name:'CeraVe Blemish Control Gel',reason:'PM only, 2x/week max, thin layer on T-zone.'},
+{name:'Av\u00e8ne Cicalfate+',reason:'Spot treatment only \u2014 nicks, pimples, mat rash.'},
+{name:"M\u00eame L'Huile Lavante",reason:'Daily body cleanser + AM face cleanser.'},
+{name:'M\u00eame La Cr\u00e8me pour le Visage',reason:'Main moisturizer, AM + PM, every day.'},
+{name:"M\u00eame L'Huile de Soin",reason:'PM cheek-occlusive only, 2 drops, 2-3 nights/week.'},
+{name:'Guasha tool',reason:'2-3x/week PM, 5 min, cool from fridge.'},
+{name:'Franck Provost Nutri-Frizz Shampoo',reason:'2-3 washes/week. Sulfate-free, curl-friendly.'},
+{name:'Franck Provost Boucles Mousse (300mL Pro)',reason:'Clean formula. Shampoo days, scrunch into soaking-wet hair.'},
+{name:'Cadum Dermo-Respect gel douche',reason:'Daily shower gel on non-TKD days.'},
+{name:'Tahiti Vanille Huile de Douche',reason:'Post-TKD shower gel (Mon/Wed/Fri).'},
+{name:'Beauty of Joseon SPF40',reason:'Daily face SPF. 2 finger-lengths on moisturized skin.'}
+];
+const SHOP_BUY=[
+{name:'Beauty of Joseon SPF40 PA+++',reason:'Face SPF \u2014 single biggest skin quality lever.',where:'YesStyle, Amazon.fr',price:'~\u20ac9-13'},
+{name:'Franck Provost Conditioner or Klorane Mangue',reason:'Needed for conditioner + co-wash days.',where:'Carrefour, pharmacie',price:'~\u20ac5-7'},
+{name:'Lightweight curl cream (Garnier / Boucl\u00e8me)',reason:'Replaces dropped Schwarzkopf volume mousse.',where:'Carrefour, Sephora',price:'~\u20ac6-15'},
+{name:'Aluminum antiperspirant (Etiaxil / Nivea)',reason:'Sanex bamboo underpowered for TKD sweat.',where:'Pharmacie / supermarket',price:'~\u20ac4-10'},
+{name:'Oral-B Pro 3 electric toothbrush',reason:'Cochrane evidence: powered > manual for plaque.',where:'Carrefour, Amazon.fr',price:'~\u20ac50-70'},
+{name:'Slanted eyebrow tweezers',reason:'Basic stray-hair maintenance.',where:'Pharmacie, Monoprix',price:'~\u20ac3-8'},
+{name:'Salux nylon wash cloth',reason:'Body exfoliation 2x/week (Tue + Sat).',where:'Amazon.fr, saluxshop.eu',price:'~\u20ac5-10'},
+{name:'3 small dedicated face towels',reason:'Separate from body towel. Wash daily.',where:'IKEA, Carrefour',price:'~\u20ac5-10'},
+{name:'4 extra cotton pillowcases',reason:'Swap 2x/week. Directly drives forehead breakouts.',where:'Carrefour, Amazon.fr',price:'~\u20ac10-25'},
+{name:'Creatine monohydrate (Creapure)',reason:'Most effective legal ergogenic aid. 3-5g/day.',where:'Myprotein.fr, Decathlon',price:'~\u20ac15-20'},
+{name:'Vitamin D3 1500-2000 IU (Oct-Mar)',reason:'Essential for athletes in French winter.',where:'Pharmacie',price:'~\u20ac5-10'},
+{name:'YSL Y Eau de Parfum',reason:'Fresh-aromatic-woody. Versatile, modern.',where:'Sephora.fr',price:'~\u20ac85-100/60mL'}
+];
+
+/* ===== STATE ===== */
+const today=new Date().toDateString();
+const dow=new Date().getDay();
+function lsGet(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function dailyKey(k){return k+'_'+today}
+
+let state={
+shave:lsGet(dailyKey('shave'),false),
+water:lsGet(dailyKey('water'),{total:0,log:[]}),
+dayType:lsGet(dailyKey('dayType'),AUTO_DAY_TYPE[dow]),
+waterUnit:lsGet('waterUnit','ml'),
+breakfast:lsGet(dailyKey('breakfast'),null),
+blendMode:false,
+blendPicks:lsGet(dailyKey('blendPicks'),[]),
+blendRatio:lsGet(dailyKey('blendRatio'),[50,50]),
+loggedMeals:lsGet(dailyKey('meals'),[]),
+loggedSnacks:lsGet(dailyKey('snacks'),[]),
+progLevels:lsGet('progLevels',{0:0,1:0,2:0}),
+gtgSets:lsGet(dailyKey('gtg'),0),
+shopChecked:lsGet('shopChecked',{}),
+setsDone:lsGet(dailyKey('setsDone'),{}),
+armMeasurements:lsGet('armMeasurements',[]),
+armFormOpen:false,
+activeScreen:'dashboard',
+restTimer:null,restRemaining:0
+};
+function save(){
+lsSet(dailyKey('shave'),state.shave);lsSet(dailyKey('water'),state.water);
+lsSet(dailyKey('dayType'),state.dayType);lsSet('waterUnit',state.waterUnit);
+lsSet(dailyKey('breakfast'),state.breakfast);
+lsSet(dailyKey('blendPicks'),state.blendPicks);lsSet(dailyKey('blendRatio'),state.blendRatio);
+lsSet(dailyKey('meals'),state.loggedMeals);lsSet(dailyKey('snacks'),state.loggedSnacks);
+lsSet('progLevels',state.progLevels);lsSet(dailyKey('gtg'),state.gtgSets);
+lsSet('shopChecked',state.shopChecked);lsSet(dailyKey('setsDone'),state.setsDone);
+lsSet('armMeasurements',state.armMeasurements);
+}
+
+/* ===== RENDER ===== */
+function getGreeting(){const h=new Date().getHours();if(h<12)return'Good morning, Mat';if(h<18)return'Good afternoon, Mat';return'Good evening, Mat';}
+function renderHeader(){
+const d=new Date();const opts={weekday:'long',month:'long',day:'numeric'};
+document.getElementById('headerGreeting').textContent=getGreeting();
+document.getElementById('headerDay').textContent=d.toLocaleDateString('en-GB',opts);
+const di=DAYS[dow];const el=document.getElementById('headerType');
+el.innerHTML='<span class="ht-dot" style="background:'+di.tc+'"></span> '+di.type;
+el.style.background=di.tb;el.style.color=di.tc;
+}
+function renderShaveToggle(){
+const btn=document.getElementById('shaveBtn');
+btn.className='toggle'+(state.shave?' on':'');
+btn.onclick=()=>{state.shave=!state.shave;save();renderShaveToggle();renderTimeline()};
+}
+
+function renderTimeline(){
+const sched=getSchedule(dow,state.shave);
+const container=document.getElementById('timeline');
+const nowH=new Date().getHours(),nowM=new Date().getMinutes(),nowTotal=nowH*60+nowM;
+container.innerHTML=sched.map((item,i)=>{
+const[h,m]=item.t.split(':').map(Number);const itemTotal=h*60+m;
+const next=sched[i+1];const nextTotal=next?parseInt(next.t.split(':')[0])*60+parseInt(next.t.split(':')[1]):1440;
+const isCurrent=nowTotal>=itemTotal&&nowTotal<nextTotal;
+const catClass=item.c?' '+item.c:'';
+const nowClass=isCurrent?' now':'';
+let detailHtml='';
+if(item.expand&&item.detail){
+const steps=getSkinSteps(item.detail,state.shave);
+if(steps.length){
+const totalDur=item.detail==='SKIN_AM'?(state.shave?'~8-10 min':'~4 min'):'~8-10 min';
+detailHtml='<div class="duration" style="margin-bottom:8px">Total: '+totalDur+'</div>';
+detailHtml+=renderSteps(steps);
+}
+}else if(item.detail&&!item.expand){
+detailHtml='<div style="font-size:12.5px;color:var(--text-dim);line-height:1.5">'+tapify(item.detail)+'</div>';
+}
+const hasDetail=detailHtml.length>0;
+const icon=getTlIcon(item.n,item.c);
+return`<div class="tl-item${catClass}${nowClass}${hasDetail?'':' no-expand'}" ${hasDetail?'onclick="toggleTl(this)"':''}>
+<div class="tl-card">
+<div class="tl-head">
+<div class="tl-icon">${icon}</div>
+<span class="tl-time">${item.t}</span>
+<span class="tl-name">${item.n}</span>
+${hasDetail?'<span class="tl-arrow">\u25b8</span>':''}
+</div>
+<div class="tl-details"><div class="tl-detail-content">${detailHtml}</div></div>
+</div>
+</div>`;
+}).join('');
+}
+function toggleTl(el){el.classList.toggle('expanded')}
+
+/* WATER */
+function wConv(ml){return state.waterUnit==='cl'?Math.round(ml/10):ml;}
+function renderWater(){
+const types=[{id:'normal',label:'Normal',target:2500},{id:'calisthenics',label:'Calisthenics',target:3000},{id:'tkd',label:'TKD',target:3500}];
+document.getElementById('dayTypeSelector').innerHTML=types.map(t=>
+`<button class="day-type-btn${state.dayType===t.id?' active':''}" onclick="setDayType('${t.id}')">${t.label} (${(t.target/1000).toFixed(1)}L)</button>`
+).join('');
+const btns=[{ml:150,label:'small glass'},{ml:250,label:'standard'},{ml:300,label:"Mat's 30cl"},{ml:350,label:"Mat's 35cl"},{ml:500,label:'bottle'}];
+document.getElementById('waterBtns').innerHTML=btns.map(b=>
+`<button class="water-btn" onclick="addWater(${b.ml})">+${wConv(b.ml)}${state.waterUnit==='cl'?'cl':'ml'}<span class="wb-sub">${b.label}</span></button>`
+).join('');
+document.getElementById('waterCustomArea').innerHTML=
+`<div class="water-unit-toggle">${['ml','cl'].map(u=>`<button class="water-unit-btn${state.waterUnit===u?' active':''}" onclick="setWaterUnit('${u}')">${u}</button>`).join('')}</div>`+
+`<input type="number" id="customWater" placeholder="${state.waterUnit}">`+
+`<button class="water-btn" onclick="addCustomWater()" style="min-width:auto;padding:10px 16px">Add</button>`;
+const target=WATER_TARGETS[state.dayType];
+const pct=Math.min(state.water.total/target,1);
+const circ=document.getElementById('waterCircle');
+const circumference=2*Math.PI*88;
+circ.style.strokeDasharray=circumference;
+circ.style.strokeDashoffset=circumference*(1-pct);
+if(state.waterUnit==='cl'){
+document.getElementById('waterAmount').textContent=Math.round(state.water.total/10)+'cl';
+document.getElementById('waterTargetLabel').textContent='/ '+Math.round(target/10)+' cl'+(pct>=1?' \u2713':'');
+}else{
+document.getElementById('waterAmount').textContent=(state.water.total/1000).toFixed(1)+'L';
+document.getElementById('waterTargetLabel').textContent='/ '+(target/1000).toFixed(1)+' L'+(pct>=1?' \u2713':'');
+}
+document.getElementById('waterLog').innerHTML=state.water.log.slice().reverse().map(l=>
+`<div class="water-log-item"><span class="wl-time">${l.time}</span><span>+${state.waterUnit==='cl'?Math.round(l.amount/10)+'cl':l.amount+'ml'}</span></div>`
+).join('')||'<div class="empty-state">No water logged yet today</div>';
+}
+function addWater(ml){
+const now=new Date();state.water.total+=ml;
+state.water.log.push({amount:ml,time:now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0')});
+save();renderWater();
+}
+function addCustomWater(){
+const el=document.getElementById('customWater');let v=parseInt(el.value);
+if(state.waterUnit==='cl')v=v*10;
+if(v>0&&v<10000){addWater(v);el.value=''}
+}
+function setDayType(t){state.dayType=t;save();renderWater()}
+function setWaterUnit(u){state.waterUnit=u;save();renderWater()}
+
+/* MEALS */
+function getTotalMacros(){
+let kcal=0,p=0,c=0,f=0;
+if(state.blendMode&&state.blendPicks.length===2){
+const r=state.blendRatio;
+const a=BREAKFASTS[state.blendPicks[0]],b=BREAKFASTS[state.blendPicks[1]];
+kcal+=Math.round(a.kcal*r[0]/100+b.kcal*r[1]/100);p+=Math.round(a.p*r[0]/100+b.p*r[1]/100);
+c+=Math.round(a.c*r[0]/100+b.c*r[1]/100);f+=Math.round(a.f*r[0]/100+b.f*r[1]/100);
+}else if(state.breakfast!==null){
+const bf=BREAKFASTS[state.breakfast];kcal+=bf.kcal;p+=bf.p;c+=bf.c;f+=bf.f;
+}
+state.loggedMeals.forEach(m=>{const mult=m.portion==='small'?.7:m.portion==='large'?1.3:1;const meal=MEALS[m.idx];kcal+=Math.round(meal.kcal*mult);p+=Math.round(meal.p*mult);c+=Math.round(meal.c*mult);f+=Math.round(meal.f*mult)});
+state.loggedSnacks.forEach(i=>{const s=SNACKS[i];kcal+=s.kcal;p+=s.p});
+return{kcal,p,c,f};
+}
+function renderMeals(){
+const target={kcal:3100,p:135};const m=getTotalMacros();
+document.getElementById('dailySummary').innerHTML=`
+<div class="summary-row"><span class="summary-label">Calories</span><span class="summary-value">${m.kcal} / ${target.kcal} kcal</span></div>
+<div class="macro-bar"><div class="macro-bar-fill" style="width:${Math.min(m.kcal/target.kcal*100,100)}%;background:linear-gradient(90deg,var(--nutr),#b5dfc8)"></div></div>
+<div class="summary-row" style="margin-top:8px"><span class="summary-label">Protein</span><span class="summary-value">${m.p} / ${target.p} g</span></div>
+<div class="macro-bar"><div class="macro-bar-fill" style="width:${Math.min(m.p/target.p*100,100)}%;background:linear-gradient(90deg,var(--skin),#8fd8d0)"></div></div>
+<div style="font-size:11px;color:var(--text-muted);margin-top:6px">Remaining: ${Math.max(target.kcal-m.kcal,0)} kcal \u00b7 ${Math.max(target.p-m.p,0)}g protein</div>`;
+document.getElementById('breakfastGrid').innerHTML=BREAKFASTS.map((bf,i)=>{
+let cls='bf-card';
+if(state.blendMode){if(state.blendPicks.includes(i))cls+=' blend-pick';}
+else{if(state.breakfast===i)cls+=' selected';}
+return`<div class="${cls}" onclick="${state.blendMode?'pickBlend('+i+')':'pickBreakfast('+i+')'}">
+<div class="bf-init">${bf.id}</div>
+<div class="bf-name">${bf.name}</div>
+<div class="bf-macros">${bf.kcal} kcal \u00b7 ${bf.p}g P \u00b7 ${bf.c}g C \u00b7 ${bf.f}g F</div>
+</div>`;}).join('');
+const detEl=document.getElementById('breakfastDetail');
+const sel=state.blendMode?null:state.breakfast;
+if(sel!==null){
+const bf=BREAKFASTS[sel],dt=BF_DETAILS[sel];
+let h='<h4>'+bf.name+' \u2014 Ingredients</h4>';
+h+=dt.ingredients.map(ig=>`<div class="bf-ing"><div><strong>${ig.amt}</strong> ${ig.item}</div><em>${ig.why}</em></div>`).join('');
+h+='<h4 style="margin-top:12px">Preparation</h4>';
+h+=dt.steps.map(s=>`<div class="bf-prep-step">${s}</div>`).join('');
+h+='<div class="bf-time-label">Prep time: '+dt.time+'</div>';
+h+=dt.tips.map(t=>`<div class="bf-tip-text">${t}</div>`).join('');
+detEl.innerHTML=h;detEl.classList.add('open');
+}else{detEl.innerHTML='';detEl.classList.remove('open');}
+const ratios=[[50,50],[75,25],[25,75]];
+let blendHtml='<button class="blend-btn'+(state.blendMode?' active':'')+'" onclick="toggleBlend()">Blend</button>';
+if(state.blendMode){
+blendHtml+='<span style="font-size:11px;color:var(--text-dim);margin-left:4px">Pick 2 breakfasts</span>';
+blendHtml+=ratios.map(r=>`<button class="blend-ratio-btn${state.blendRatio[0]===r[0]&&state.blendRatio[1]===r[1]?' active':''}" onclick="setBlendRatio(${r[0]},${r[1]})">${r[0]}/${r[1]}</button>`).join('');
+}
+document.getElementById('blendRow').innerHTML=blendHtml;
+const brEl=document.getElementById('blendResult');
+if(state.blendMode&&state.blendPicks.length===2){
+const a=BREAKFASTS[state.blendPicks[0]],b=BREAKFASTS[state.blendPicks[1]];
+const r=state.blendRatio;
+const bk=Math.round(a.kcal*r[0]/100+b.kcal*r[1]/100),bp=Math.round(a.p*r[0]/100+b.p*r[1]/100),bc=Math.round(a.c*r[0]/100+b.c*r[1]/100),bf=Math.round(a.f*r[0]/100+b.f*r[1]/100);
+const adtl=BF_DETAILS[state.blendPicks[0]],bdtl=BF_DETAILS[state.blendPicks[1]];
+let h=`<div class="blend-result"><h4>${r[0]}% ${a.name} + ${r[1]}% ${b.name}</h4>`;
+h+=`<div class="blend-macros">${bk} kcal \u00b7 ${bp}g P \u00b7 ${bc}g C \u00b7 ${bf}g F</div>`;
+h+='<div style="font-size:12px;color:var(--text-dim)"><strong>Combined ingredients:</strong></div>';
+const addIngs=(dtl,pct,label)=>{h+=`<div style="font-size:11px;color:var(--text-muted);margin-top:4px">${label} (${pct}%):</div>`;dtl.ingredients.forEach(ig=>{const calc=calcBlendAmt(ig.amt,pct);h+=`<div class="blend-ing-item">${ig.item}: <strong>${calc}</strong></div>`;});};
+addIngs(adtl,r[0],a.name);addIngs(bdtl,r[1],b.name);
+h+='</div>';brEl.innerHTML=h;
+}else{brEl.innerHTML='';}
+document.getElementById('mealList').innerHTML=MEALS.map((ml,i)=>{
+const logged=state.loggedMeals.find(m=>m.idx===i);const portion=logged?logged.portion:'normal';
+const mult=portion==='small'?.7:portion==='large'?1.3:1;
+return`<div class="meal-entry${logged?' selected':''}">
+<div class="meal-info" onclick="toggleMeal(${i})">
+<div class="meal-name"><span class="meal-dot"></span>${ml.name}</div>
+<div class="meal-kcal">\u2248${Math.round(ml.kcal*mult)} kcal \u00b7 ${Math.round(ml.p*mult)}g P \u00b7 ${Math.round(ml.c*mult)}g C \u00b7 ${Math.round(ml.f*mult)}g F</div>
+</div>
+${logged?`<div class="portion-btns">
+<button class="portion-btn${portion==='small'?' active':''}" onclick="setPortion(${i},'small')">S</button>
+<button class="portion-btn${portion==='normal'?' active':''}" onclick="setPortion(${i},'normal')">M</button>
+<button class="portion-btn${portion==='large'?' active':''}" onclick="setPortion(${i},'large')">L</button>
+</div>`:''}
+</div>`;}).join('');
+document.getElementById('snackGrid').innerHTML=SNACKS.map((s,i)=>
+`<div class="snack-chip${state.loggedSnacks.includes(i)?' selected':''}" onclick="toggleSnack(${i})">${s.name} (${s.kcal})</div>`
+).join('');
+}
+function pickBreakfast(i){if(state.blendMode)return;state.breakfast=state.breakfast===i?null:i;save();renderMeals();}
+function calcBlendAmt(amt,pct){
+if(!amt||amt==='pinch')return amt;
+const m=amt.match(/^([\d.\/]+)\s*(.*)/);if(!m)return amt;
+let num=m[1].includes('/')?m[1].split('/').reduce((a,b)=>parseFloat(a)/parseFloat(b)):parseFloat(m[1]);
+const unit=m[2].trim();num=num*pct/100;
+if(unit.toLowerCase()==='g'){num=Math.round(num/5)*5;return num+' g';}
+if(unit.toLowerCase()==='ml'){num=Math.round(num/5)*5;return num+' mL';}
+if(unit==='tsp'||unit==='tbsp'){num=Math.round(num*4)/4;return num<0.25?'a dash':num+' '+unit;}
+num=Math.round(num*2)/2;
+return(num%1===0?num:num)+(unit?' '+unit:'');
+}
+function toggleBlend(){state.blendMode=!state.blendMode;if(!state.blendMode)state.blendPicks=[];save();renderMeals();}
+function pickBlend(i){if(!state.blendMode)return;const idx=state.blendPicks.indexOf(i);if(idx>=0)state.blendPicks.splice(idx,1);else if(state.blendPicks.length<2)state.blendPicks.push(i);else state.blendPicks=[state.blendPicks[1],i];save();renderMeals();}
+function setBlendRatio(a,b){state.blendRatio=[a,b];save();renderMeals();}
+function toggleMeal(i){const idx=state.loggedMeals.findIndex(m=>m.idx===i);if(idx>=0)state.loggedMeals.splice(idx,1);else state.loggedMeals.push({idx:i,portion:'normal'});save();renderMeals();}
+function setPortion(i,size){const m=state.loggedMeals.find(m=>m.idx===i);if(m)m.portion=size;save();renderMeals();}
+function toggleSnack(i){const idx=state.loggedSnacks.indexOf(i);if(idx>=0)state.loggedSnacks.splice(idx,1);else state.loggedSnacks.push(i);save();renderMeals();}
+
+/* TRAINING */
+function renderArmDetail(exName){
+const ex=ARM_EX[exName];if(!ex)return'';
+return`<div class="arm-detail-card"><h5>${exName}</h5>
+<div class="ad-row"><span class="ad-label">Target:</span> ${ex.target}</div>
+<div class="ad-row"><span class="ad-label">Muscle:</span> ${ex.muscle}</div>
+<div class="ad-row"><span class="ad-label">Equipment:</span> ${ex.equip}</div>
+<div class="ad-row"><span class="ad-label">Tempo:</span> ${ex.tempo}</div>
+<div class="ad-row"><span class="ad-label">Starting weight:</span> ${ex.weight}</div>
+<div class="ad-row"><span class="ad-label">Form cues:</span></div>
+${ex.form.map(f=>`<div class="ad-row ad-form">${f}</div>`).join('')}
+</div>`;
+}
+
+function renderTraining(){
+const w=WORKOUTS[dow];const titleEl=document.getElementById('trainingTitle');
+const subEl=document.getElementById('trainingSub');const area=document.getElementById('workoutArea');
+const volArea=document.getElementById('volumeArea');
+if(w){
+titleEl.textContent=w.title;subEl.textContent=w.sub;
+area.innerHTML=w.exercises.map((ex,i)=>{
+if(ex.type==='superset'||ex.type==='superset-optional'){
+const isOpt=ex.type==='superset-optional';
+const ssKey=dow+'_ss_'+i;
+let setsHtml=Array.from({length:ex.rounds},(_,si)=>{
+const key=ssKey+'_'+si;const done=state.setsDone[key];
+return`<div class="set-row"><div class="set-check${done?' done':''}" onclick="toggleSet('${key}',this)">${done?'\u2713':''}</div><span style="font-size:12px;color:var(--text-dim)">Round ${si+1}</span></div>`;
+}).join('');
+setsHtml+=`<button class="rest-timer-btn" onclick="startRest(60)">Rest 60 sec</button>`;
+const detailId='ssDetail_'+i;
+return`<div class="superset-block${isOpt?' optional':''}">
+<div class="ss-header"><span class="ss-badge${isOpt?' optional':''}">${isOpt?'IF TIME \u2014 SUPERSET':'SUPERSET'}</span><span style="font-size:11px;color:var(--text-dim)">${ex.rounds} rounds</span></div>
+<div class="ss-pair">
+<div class="ss-exercise"><span class="ss-letter">A</span><span class="ss-ex-name">${ex.exA}</span><span class="ss-reps">${ex.repsA}</span></div>
+<div class="ss-exercise"><span class="ss-letter">B</span><span class="ss-ex-name">${ex.exB}</span><span class="ss-reps">${ex.repsB}</span></div>
+</div>
+<div class="ss-meta">${ex.rest} \u00b7 ${ex.notes}</div>
+${setsHtml}
+<div class="ss-detail-toggle" onclick="toggleSsDetail('${detailId}')"><span class="tl-arrow" style="font-size:10px">\u25b8</span> Exercise details</div>
+<div class="ss-detail-content" id="${detailId}">
+${renderArmDetail(ex.exA)}
+${renderArmDetail(ex.exB)}
+</div>
+</div>`;
+}
+const setCount=ex.sets.match(/(\d+)\s*[\u00d7x]/);const numSets=setCount?parseInt(setCount[1]):0;
+let setsHtml='';
+if(numSets>0){
+setsHtml=Array.from({length:numSets},(_,si)=>{
+const key=dow+'_'+i+'_'+si;const done=state.setsDone[key];
+return`<div class="set-row"><div class="set-check${done?' done':''}" onclick="toggleSet('${key}',this)">${done?'\u2713':''}</div><span style="font-size:12px;color:var(--text-dim)">Set ${si+1}</span></div>`;
+}).join('');
+if(ex.rest){setsHtml+=`<button class="rest-timer-btn" onclick="startRest(${parseInt(ex.rest)||120})">Rest ${ex.rest}</button>`;}
+}
+return`<div class="workout-block">
+<div class="ex-name">${ex.name}</div>
+<div class="ex-detail">${ex.sets}${ex.rest?' \u00b7 Rest: '+ex.rest:''}${ex.notes?' \u00b7 '+ex.notes:''}</div>
+${setsHtml}</div>`;}).join('');
+// Volume summary for Tue/Thu
+if(dow===2||dow===4){
+volArea.innerHTML=`<div class="volume-card"><h4>Weekly Arm Volume</h4>
+<div class="vol-row"><span class="vol-label">Biceps (direct isolation)</span><span class="vol-value">6 sets/wk core <span style="color:var(--text-muted);font-weight:400">/ 10 with extras</span></span></div>
+<div class="vol-row"><span class="vol-label">+ indirect from pulls</span><span class="vol-value" style="color:var(--text-dim)">~6 effective sets</span></div>
+<div class="vol-row" style="margin-top:4px"><span class="vol-label">Triceps (direct total)</span><span class="vol-value">17 sets/wk core <span style="color:var(--text-muted);font-weight:400">/ 21 with extras</span></span></div>
+<div class="vol-note">Triceps near MRV (~18) with 45-min variants. If persistent elbow soreness: drop "if time" tricep sets first.</div>
+</div>`;
+}else{volArea.innerHTML='';}
+}else if([1,3,5].includes(dow)){
+titleEl.textContent='TKD Day \u2014 No Calisthenics';
+subEl.textContent='GTG micro-practice during work breaks. See below.';
+area.innerHTML='<div class="empty-state">Focus on TKD tonight. Recovery from yesterday\'s session.</div>';
+volArea.innerHTML='';
+}else{
+titleEl.textContent='Rest Day';subEl.textContent='Stretch and recover. Optional light mobility.';
+area.innerHTML='<div class="empty-state">Full rest. No training. Enjoy the day.</div>';
+volArea.innerHTML='';
+}
+area.innerHTML+='<div class="timer-display" id="timerDisplay" style="display:none"></div>';
+document.getElementById('progressionArea').innerHTML=PROGRESSIONS.map((prog,pi)=>{
+const lv=state.progLevels[pi]||0;const cur=prog.levels[lv];const next=prog.levels[lv+1];
+return`<div class="prog-card">
+<div class="prog-header"><span class="prog-skill">${prog.skill}</span><span class="prog-level">Level ${lv}: ${cur.name}</span></div>
+<div class="prog-desc">Goal: ${cur.goal}</div>
+<div class="prog-bench">Advance when: ${cur.bench}</div>
+${next?`<div style="font-size:11px;color:var(--text-muted);margin-top:4px">Next: Level ${lv+1} \u2014 ${next.name}</div>`:'<div style="font-size:11px;color:var(--fit);margin-top:4px">MAX LEVEL</div>'}
+<div class="prog-btns">
+${lv>0?`<button class="prog-btn" onclick="setProgLevel(${pi},${lv-1})">\u2190 Back</button>`:''}
+${lv<prog.levels.length-1?`<button class="prog-btn" onclick="setProgLevel(${pi},${lv+1})">Advance \u2192</button>`:''}
+</div></div>`;}).join('');
+
+// Arm measurements
+const amArea=document.getElementById('armMeasureArea');
+let amHtml=`<div class="arm-measure-card">
+<button class="arm-measure-btn" onclick="toggleArmForm()">Record Measurement</button>
+<div class="arm-form${state.armFormOpen?' open':''}" id="armForm">
+<div class="arm-input-group"><label>Left flexed (cm)</label><input type="number" step="0.1" id="armLF" placeholder="cm"></div>
+<div class="arm-input-group"><label>Right flexed (cm)</label><input type="number" step="0.1" id="armRF" placeholder="cm"></div>
+<div class="arm-input-group"><label>Left relaxed (cm)</label><input type="number" step="0.1" id="armLR" placeholder="cm"></div>
+<div class="arm-input-group"><label>Right relaxed (cm)</label><input type="number" step="0.1" id="armRR" placeholder="cm"></div>
+<button class="arm-save-btn" onclick="saveArmMeasure()">Save Measurement</button>
+</div>`;
+if(state.armMeasurements.length>0){
+amHtml+='<div class="arm-log">';
+state.armMeasurements.slice().reverse().forEach(m=>{
+amHtml+=`<div class="arm-log-entry"><span class="arm-log-date">${m.date}</span><span>L: ${m.lf}/${m.lr} cm | R: ${m.rf}/${m.rr} cm</span></div>`;
+});
+amHtml+='</div>';
+}
+amHtml+='</div>';
+amArea.innerHTML=amHtml;
+
+const gtg=GTG_DAILY[dow];
+document.getElementById('gtgTitle').textContent='GTG Practice \u2014 '+DAYS[dow].name;
+document.getElementById('gtgArea').innerHTML=`
+<div class="card"><div class="card-sub">${gtg.exercises}</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px">${gtg.note}</div></div>
+<div class="gtg-counter">
+<button class="gtg-btn" onclick="gtgMinus()">\u2212</button>
+<div><div class="gtg-count">${state.gtgSets}</div><div style="font-size:11px;color:var(--text-dim);text-align:center">sets today</div></div>
+<button class="gtg-btn" onclick="gtgPlus()">+</button>
+</div>`;
+}
+function toggleSet(key,el){state.setsDone[key]=!state.setsDone[key];el.classList.toggle('done');el.textContent=state.setsDone[key]?'\u2713':'';save();}
+function toggleSsDetail(id){document.getElementById(id).classList.toggle('open');}
+function toggleArmForm(){state.armFormOpen=!state.armFormOpen;document.getElementById('armForm').classList.toggle('open');}
+function saveArmMeasure(){
+const lf=parseFloat(document.getElementById('armLF').value);
+const rf=parseFloat(document.getElementById('armRF').value);
+const lr=parseFloat(document.getElementById('armLR').value);
+const rr=parseFloat(document.getElementById('armRR').value);
+if(!lf||!rf||!lr||!rr)return;
+const d=new Date();const dateStr=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+state.armMeasurements.push({date:dateStr,lf,rf,lr,rr});
+state.armFormOpen=false;save();renderTraining();
+}
+function startRest(sec){
+if(state.restTimer)clearInterval(state.restTimer);
+state.restRemaining=sec;const display=document.getElementById('timerDisplay');
+display.style.display='block';display.textContent=formatTime(sec);
+display.scrollIntoView({behavior:'smooth',block:'center'});
+state.restTimer=setInterval(()=>{
+state.restRemaining--;
+if(state.restRemaining<=0){clearInterval(state.restTimer);display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
+else{display.textContent=formatTime(state.restRemaining);}
+},1000);
+}
+function formatTime(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+function setProgLevel(pi,lv){state.progLevels[pi]=lv;save();renderTraining()}
+function gtgPlus(){state.gtgSets++;save();renderTraining()}
+function gtgMinus(){if(state.gtgSets>0)state.gtgSets--;save();renderTraining()}
+
+/* EXTRAS */
+function renderExtras(){
+document.getElementById('extrasArea').innerHTML=TIPS.map(t=>{
+const bClass={strong:'strong',moderate:'moderate',weak:'weak'}[t.ev]||'moderate';
+let prodHtml='';
+if(t.products&&t.products.length){prodHtml=t.products.map(p=>`<div class="tip-product"><span class="tip-product-name">${p.name}</span><span class="tip-product-where">${p.where}</span><span class="tip-product-price">${p.price}</span></div>`).join('');}
+return`<div class="tip-card" onclick="this.classList.toggle('expanded')">
+<div class="tip-header"><span class="tip-title">${t.title}</span><span class="tip-badge ${bClass}">${t.ev}</span></div>
+<div class="tip-body">${t.body}${prodHtml}</div></div>`;}).join('');
+document.getElementById('mythsArea').innerHTML=MYTHS.map(m=>
+`<div class="tip-card" onclick="this.classList.toggle('expanded')">
+<div class="tip-header"><span class="tip-title">${m.title}</span><span class="tip-badge myth">debunked</span></div>
+<div class="tip-body">${m.body}</div></div>`).join('');
+}
+
+/* SHOPPING */
+function renderShopping(){
+const tabs=[{id:'stop',label:'Stop Using',color:'var(--groom)'},{id:'keep',label:'Keep',color:'var(--nutr)'},{id:'buy',label:'Buy',color:'var(--fit)'}];
+let activeTab=lsGet('shopTab','buy');
+document.getElementById('shopTabs').innerHTML=tabs.map(t=>
+`<button class="shop-tab${activeTab===t.id?' active':''}" onclick="setShopTab('${t.id}')"><span class="tab-dot" style="background:${t.color}"></span>${t.label}</button>`
+).join('');
+const area=document.getElementById('shopArea');
+if(activeTab==='stop'){
+area.innerHTML=SHOP_STOP.map(s=>`<div class="shop-item"><div class="shop-status" style="color:var(--groom)">\u2717</div><div class="shop-info"><div class="shop-name">${s.name}</div><div class="shop-reason">${s.reason}</div></div></div>`).join('');
+}else if(activeTab==='keep'){
+area.innerHTML=SHOP_KEEP.map(s=>`<div class="shop-item"><div class="shop-status" style="color:var(--nutr)">\u2713</div><div class="shop-info"><div class="shop-name">${s.name}</div><div class="shop-reason">${s.reason}</div></div></div>`).join('');
+}else{
+area.innerHTML=SHOP_BUY.map((s,i)=>{
+const key='buy_'+i;const done=state.shopChecked[key];
+return`<div class="shop-item">
+<div class="shop-check${done?' done':''}" onclick="toggleShop('${key}',this)">${done?'\u2713':''}</div>
+<div class="shop-info"><div class="shop-name">${s.name}</div><div class="shop-reason">${s.reason}</div><div class="shop-meta">${s.where} \u00b7 ${s.price}</div></div></div>`;}).join('');
+}
+}
+function setShopTab(t){lsSet('shopTab',t);renderShopping()}
+function toggleShop(key,el){state.shopChecked[key]=!state.shopChecked[key];el.classList.toggle('done');el.textContent=state.shopChecked[key]?'\u2713':'';save();}
+
+/* NAV */
+function buildNav(){
+const items=[
+{screen:'dashboard',label:'Today',icon:NAV_ICO.dashboard},
+{screen:'water',label:'Water',icon:NAV_ICO.water},
+{screen:'meals',label:'Meals',icon:NAV_ICO.meals},
+{screen:'training',label:'Train',icon:NAV_ICO.training},
+{screen:'extras',label:'Extras',icon:NAV_ICO.extras},
+{screen:'shopping',label:'Shop',icon:NAV_ICO.shopping}
+];
+document.getElementById('mainNav').innerHTML=items.map((it,i)=>
+`<button class="nav-btn${i===0?' active':''}" data-screen="${it.screen}">
+<span class="nav-icon">${it.icon}</span>
+<span class="nav-label">${it.label}</span>
+<span class="nav-dot"></span>
+</button>`).join('');
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+btn.addEventListener('click',()=>{
+document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+const screen=btn.dataset.screen;
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('screen-'+screen).classList.add('active');
+document.getElementById('screens').scrollTop=0;
+state.activeScreen=screen;
+if(screen==='water')renderWater();
+if(screen==='meals')renderMeals();
+if(screen==='training')renderTraining();
+if(screen==='extras')renderExtras();
+if(screen==='shopping')renderShopping();
+});
+});
+}
+
+/* TAP KEYWORD HANDLER */
+document.addEventListener('click',function(e){
+const kw=e.target.closest('.tap-kw');
+document.querySelectorAll('.tap-popup').forEach(el=>el.remove());
+document.querySelectorAll('.tap-kw.active').forEach(el=>el.classList.remove('active'));
+if(!kw)return;
+const key=kw.dataset.tap;const detail=TAP[key];
+if(!detail)return;
+kw.classList.add('active');
+const popup=document.createElement('div');popup.className='tap-popup';popup.textContent=detail;
+kw.parentElement.insertBefore(popup,kw.nextSibling);
+e.stopPropagation();
+});
+
+/* INIT */
+buildNav();renderHeader();renderShaveToggle();renderTimeline();
+renderWater();renderMeals();renderTraining();renderExtras();renderShopping();
+</script>
+</body>
+</html>
