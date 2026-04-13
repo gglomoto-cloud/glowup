@@ -421,14 +421,14 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 /* V21: Exercise timers */
 .ex-timer-btn{display:inline-flex;align-items:center;gap:3px;background:none;border:1.5px solid var(--fit);border-radius:16px;padding:3px 9px;font-size:11px;color:var(--fit);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .2s;margin-left:6px;vertical-align:middle;white-space:nowrap}
 .ex-timer-btn:active{background:var(--fit);color:#111;transform:scale(0.95)}
-.ex-timer-btn.running{background:var(--fit);color:#111;animation:timerPulse 1s ease infinite}
-.ex-timer-btn.done{background:rgba(142,207,176,0.2);border-color:var(--nutr);color:var(--nutr);animation:none}
+.ex-timer-btn.running{background:var(--fit);color:#111;animation:timerPulse 1s ease infinite;font-size:36px;padding:12px 24px;border-radius:14px;display:block;margin:8px auto 0;width:fit-content}
+.ex-timer-btn.done{background:rgba(142,207,176,0.2);border-color:var(--nutr);color:var(--nutr);animation:none;font-size:16px;padding:8px 18px;display:block;margin:8px auto 0;width:fit-content}
 @keyframes timerPulse{0%,100%{opacity:1}50%{opacity:.7}}
 /* V21: HIIT interval timer */
 .hiit-timer-card{background:var(--bg-card);border:1px solid var(--card-border);border-left:3px solid var(--fit);border-radius:var(--radius);padding:16px;margin:16px 0;box-shadow:var(--shadow-card);text-align:center}
-.hiit-timer-display{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--fit);margin:8px 0}
+.hiit-timer-display{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;color:var(--fit);margin:8px 0}
 .hiit-timer-display.resting{color:var(--skin)}
-.hiit-timer-phase{font-size:14px;font-weight:600;margin-bottom:4px}
+.hiit-timer-phase{font-size:20px;font-weight:600;margin-bottom:4px}
 .hiit-timer-phase.work{color:var(--fit)}
 .hiit-timer-phase.rest-phase{color:var(--skin)}
 .hiit-timer-round{font-size:12px;color:var(--text-dim);margin-bottom:6px}
@@ -438,6 +438,10 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .hiit-timer-btn.hiit-reset{border-color:var(--groom);color:var(--groom)}
 .hiit-timer-btn.hiit-reset:active{background:var(--groom);color:#111}
 .hiit-timer-done{font-size:16px;font-weight:700;color:var(--nutr);margin:12px 0}
+.hiit-ready-btn{background:var(--fit);border:none;border-radius:12px;padding:16px 40px;color:#111;font-size:18px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin:12px auto 0;display:block;width:100%;max-width:280px}
+.hiit-ready-btn:active{transform:scale(0.95);opacity:0.9}
+.hiit-ready-exercise{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin:8px 0 4px}
+.hiit-ready-label{font-size:14px;color:var(--text-dim);margin-bottom:2px}
 </style>
 </head>
 <body>
@@ -952,7 +956,8 @@ const MEALS=[
 {name:"Po\u00eal\u00e9e poulet + l\u00e9gumes",kcal100:100,p100:10.0,c100:5.5,f100:3.5,gS:300,gM:400,gL:500,gXL:600},
 {name:"Riz cantonais",kcal100:157,p100:5.5,c100:22.0,f100:5.0,gS:250,gM:350,gL:450,gXL:550},
 {name:"P\u00e2tes \u00e0 la Carbonara (+ jaune d'oeuf)",kcal100:170,p100:7.0,c100:17.0,f100:8.5,gS:250,gM:350,gL:450,gXL:550},
-{name:"Chicken Wraps (x2)",kcal100:180,p100:12.2,c100:10.4,f100:9.9,gS:400,gM:800,gL:850,gXL:900}
+{name:"Chicken Wraps (x2)",kcal100:180,p100:12.2,c100:10.4,f100:9.9,gS:400,gM:800,gL:850,gXL:900},
+{name:"P\u00e2tes au Saumon (cr\u00e8me & Boursin)",kcal100:216,p100:7.3,c100:18.2,f100:12.2,gS:150,gM:200,gL:250,gXL:350}
 ];
 const SNACKS=[
 {name:'Banana + rice cakes + PB',kcal:280,p:8,c:38,f:10},{name:'Skyr 200g + honey + berries',kcal:250,p:22,c:30,f:2},{name:'Protein bar (HiPro)',kcal:180,p:18,c:15,f:6},{name:'Dates (4) + almonds',kcal:220,p:5,c:35,f:8},{name:'Tuna on bread',kcal:350,p:28,c:30,f:12},{name:'Cottage cheese + walnuts',kcal:320,p:25,c:8,f:20},{name:'2 boiled eggs + oatcake',kcal:250,p:15,c:18,f:13},{name:'Pumpkin seeds + apple',kcal:250,p:9,c:25,f:14},{name:'Pre-bed skyr + almonds',kcal:250,p:25,c:12,f:10},
@@ -1027,6 +1032,12 @@ h+='<div class="snack-ytag">'+s.tag+'</div></div>';
 return h;
 }
 
+/* V22: AUDIO BEEP */
+function playBeep(){
+try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const osc=ctx.createOscillator();const gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=880;gain.gain.value=0.3;osc.start();osc.stop(ctx.currentTime+0.15);}catch(e){}
+}
+function playDoubleBeep(){playBeep();setTimeout(playBeep,200);}
+
 /* V21: EXERCISE TIMER FUNCTIONS */
 const HIIT_STATIONS=[{name:'Jump rope fast',sec:60},{name:'Burpees',sec:30},{name:'HGX200 stepper fast',sec:60},{name:'Mountain climbers',sec:30},{name:'Jump rope fast',sec:60}];
 function parseTimerSeconds(sets){
@@ -1053,7 +1064,7 @@ state.exTimerBtnId=btn.id;state.exTimerTarget=targetSec;state.exTimerRemaining=t
 btn.classList.add('running');btn.textContent=targetSec;
 state.exTimer=setInterval(()=>{
 state.exTimerRemaining--;
-if(state.exTimerRemaining<=0){clearInterval(state.exTimer);state.exTimer=null;
+if(state.exTimerRemaining<=0){clearInterval(state.exTimer);state.exTimer=null;playBeep();
 btn.classList.remove('running');btn.classList.add('done');btn.textContent='\u2713 Done';
 setTimeout(()=>{if(btn){btn.classList.remove('done');btn.textContent='\u23f1 '+fmtTimerLabel(targetSec);state.exTimerBtnId=null;}},2500);
 }else{btn.textContent=state.exTimerRemaining;}
@@ -1066,10 +1077,11 @@ if(btn){btn.classList.remove('running','done');btn.textContent='\u23f1 '+fmtTime
 state.exTimerBtnId=null;}
 }
 
-/* V21: HIIT ROUND TIMER */
+/* V22: HIIT ROUND TIMER — manual start per work phase */
 function startHiit(totalRounds){
 if(state.hiitTimer&&state.hiitState){clearInterval(state.hiitTimer);state.hiitTimer=null;renderHiitTimer(totalRounds);return;}
-if(!state.hiitState){state.hiitState={round:1,station:0,phase:'work',remaining:HIIT_STATIONS[0].sec,totalRounds};}
+if(!state.hiitState){state.hiitState={round:1,station:0,phase:'ready',remaining:0,totalRounds};}
+if(state.hiitState.phase==='ready'){renderHiitTimer(totalRounds);return;}
 state.hiitTimer=setInterval(()=>{
 state.hiitState.remaining--;
 if(state.hiitState.remaining<=0)advanceHiit();
@@ -1077,13 +1089,37 @@ renderHiitTimer(state.hiitState.totalRounds);
 },1000);
 renderHiitTimer(totalRounds);
 }
+function hiitReady(){
+const hs=state.hiitState;if(!hs||hs.phase!=='ready')return;
+hs.phase='work';hs.remaining=HIIT_STATIONS[hs.station].sec;
+state.hiitTimer=setInterval(()=>{
+hs.remaining--;
+if(hs.remaining<=0)advanceHiit();
+renderHiitTimer(hs.totalRounds);
+},1000);
+renderHiitTimer(hs.totalRounds);
+}
 function advanceHiit(){
 const hs=state.hiitState;if(!hs)return;
 if(hs.phase==='work'){
-if(hs.station<HIIT_STATIONS.length-1){hs.station++;hs.remaining=HIIT_STATIONS[hs.station].sec;}
-else if(hs.round<hs.totalRounds){hs.phase='rest';hs.remaining=90;}
-else{clearInterval(state.hiitTimer);state.hiitTimer=null;state.hiitState=null;renderHiitTimer(hs.totalRounds);return;}
-}else{hs.phase='work';hs.round++;hs.station=0;hs.remaining=HIIT_STATIONS[0].sec;}
+clearInterval(state.hiitTimer);state.hiitTimer=null;
+playDoubleBeep();
+if(hs.station<HIIT_STATIONS.length-1){
+hs.station++;hs.phase='ready';hs.remaining=0;
+}else if(hs.round<hs.totalRounds){
+hs.phase='rest';hs.remaining=90;
+state.hiitTimer=setInterval(()=>{
+hs.remaining--;
+if(hs.remaining<=0)advanceHiit();
+renderHiitTimer(hs.totalRounds);
+},1000);
+}else{state.hiitState=null;renderHiitTimer(hs.totalRounds);return;}
+}else{
+clearInterval(state.hiitTimer);state.hiitTimer=null;
+playBeep();
+hs.phase='ready';hs.round++;hs.station=0;hs.remaining=0;
+}
+renderHiitTimer(hs.totalRounds);
 }
 function resetHiit(totalRounds){
 if(state.hiitTimer){clearInterval(state.hiitTimer);state.hiitTimer=null;}
@@ -1097,6 +1133,17 @@ el.innerHTML='<div class="hiit-timer-phase">HIIT Circuit Timer</div><div class="
 return;
 }
 if(!hs){el.innerHTML='<div class="hiit-timer-done">\u2713 Circuit Complete!</div><div class="hiit-timer-btns"><button class="hiit-timer-btn" onclick="startHiit('+totalRounds+')">\u25b6 Restart</button></div>';return;}
+if(hs.phase==='ready'){
+const exName=HIIT_STATIONS[hs.station].name;
+const exSec=HIIT_STATIONS[hs.station].sec;
+el.innerHTML='<div class="hiit-timer-round">Round '+hs.round+'/'+hs.totalRounds+'</div>'+
+'<div class="hiit-ready-label">Next exercise:</div>'+
+'<div class="hiit-ready-exercise">'+exName+'</div>'+
+'<div class="hiit-timer-round">'+exSec+' seconds</div>'+
+'<button class="hiit-ready-btn" onclick="hiitReady()">Ready \u25b6</button>'+
+'<div class="hiit-timer-btns" style="margin-top:8px"><button class="hiit-timer-btn hiit-reset" onclick="resetHiit('+hs.totalRounds+')">Reset</button></div>';
+return;
+}
 const isRunning=!!state.hiitTimer;
 const phaseLabel=hs.phase==='work'?'WORK \u2014 '+HIIT_STATIONS[hs.station].name:'REST';
 const pCls=hs.phase==='work'?'work':'rest-phase';
@@ -1202,8 +1249,8 @@ const REPL_BLOCKS_FULL=[
 {name:'Dynamic high kicks',sets:'30 sec/leg',form:'Controlled front kick to chest height or higher.'}
 ]},
 {name:'Block 1 \u2014 Explosive / Plyometric',dur:'15 min',exercises:[
-{name:'Jump squats',sets:'3 \u00d7 8 | Rest 75s',form:'Squat to parallel, explode upward. Land softly \u2014 bend knees, absorb through whole foot. Cue: sit back, then launch.'},
-{name:'Clap push-ups',sets:'3 \u00d7 6 | Rest 60s',form:'Push explosively, hands leave floor, clap at top. On parallettes for extra height. Cue: push the floor away.'},
+{name:'Jump squats',sets:'3 \u00d7 10 | Rest 75s',form:'Squat to parallel, explode upward. Land softly \u2014 bend knees, absorb through whole foot. Cue: sit back, then launch.'},
+{name:'Clap push-ups',sets:'3 \u00d7 8 | Rest 60s',form:'Push explosively, hands leave floor, clap at top. On parallettes for extra height. Cue: push the floor away.'},
 {name:'Split squat jumps',sets:'3 \u00d7 6/leg | Rest 75s',form:'Lunge position, jump and switch legs mid-air. Land softly. Cue: springy, light feet.'},
 {name:'Tuck jumps',sets:'3 \u00d7 6 | Rest 75s',form:'Jump max height, pull knees to chest. Land softly, reset between reps. Cue: knees to chest, soft landing.'}
 ]},
@@ -1216,9 +1263,9 @@ const REPL_BLOCKS_FULL=[
 {name:'Station 5: Jump rope fast',sets:'60 sec',form:'Same as station 1.'}
 ]},
 {name:'Block 3 \u2014 Rotational Core',dur:'10 min',exercises:[
-{name:'Cable woodchops \u2014 high to low',sets:'3 \u00d7 10/side | Rest 45s',form:'HGX200 high pulley. Rotate through hips and thoracic spine, NOT lower back. Arms stay mostly straight. Start ~10\u201315 kg. Cue: chop like a roundhouse kick.'},
+{name:'Dumbbell Russian Twist',sets:'3 \u00d7 12 each side | Rest 45s',form:'Sit on floor, lean back 45\u00b0, feet elevated off ground. Hold one dumbbell with both hands, rotate side to side, touch dumbbell to floor each side. Exhale on rotation. Start 7\u201310 kg dumbbell.'},
 {name:'Pallof press (anti-rotation)',sets:'3 \u00d7 10s hold/side | Rest 30s',form:'HGX200 cable mid-height or resistance band. Press handle out, resist rotation. Start ~5\u201310 kg. Cue: press out, stay square.'},
-{name:'Bicycle crunches',sets:'3 \u00d7 15/side | Rest 30s',form:'Hands behind head (don\'t pull neck). Elbow to opposite knee, controlled tempo. Cue: shoulder toward opposite knee.'}
+{name:'Weighted Dead Bugs',sets:'3 \u00d7 8 each side | Rest 30s',form:'Lie on back, hold one dumbbell overhead with both hands, arms extended. Alternate extending opposite arm (with dumbbell) and opposite leg slowly (3 sec per rep). Lower back pressed into floor at ALL times. Breathe out as you extend. If lower back lifts, you\'re going too far. Start 5\u20137 kg dumbbell.'}
 ]},
 {name:'Block 4 \u2014 Lower Body Power',dur:'15 min',exercises:[
 {name:'Goblet squats',sets:'3 \u00d7 10\u201312 | Rest 60s',form:'Dumbbell 10\u201315 kg at chest. Feet shoulder-width, squat deep. Drive through heels. Cue: chest up, hips back.'},
@@ -1244,8 +1291,8 @@ const REPL_BLOCKS_SHORT=[
 {name:'High knees + dynamic high kicks',sets:'30 sec each',form:'Fast tempo.'}
 ]},
 {name:'Block 1 \u2014 Explosive / Plyometric',dur:'10 min',exercises:[
-{name:'Jump squats',sets:'2 \u00d7 8 | Rest 75s',form:'Same form as FULL. 2 sets keeps volume at ~64 foot contacts.'},
-{name:'Clap push-ups',sets:'2 \u00d7 6 | Rest 60s',form:'Explosive push, clap at top.'},
+{name:'Jump squats',sets:'2 \u00d7 10 | Rest 75s',form:'Same form as FULL. 2 sets keeps volume manageable.'},
+{name:'Clap push-ups',sets:'2 \u00d7 8 | Rest 60s',form:'Explosive push, clap at top.'},
 {name:'Split squat jumps',sets:'2 \u00d7 6/leg | Rest 75s',form:'Springy, light feet.'},
 {name:'Tuck jumps',sets:'2 \u00d7 6 | Rest 75s',form:'Knees to chest, soft landing.'}
 ]},
@@ -1254,9 +1301,9 @@ const REPL_BLOCKS_SHORT=[
 {name:'Rope 60s \u2192 Burpees 30s \u2192 Stepper 60s \u2192 Mountain climbers 30s \u2192 Rope 60s',sets:'Per round',form:'Push to 80\u201390% max HR.'}
 ]},
 {name:'Block 3 \u2014 Rotational Core',dur:'8 min',exercises:[
-{name:'Cable woodchops',sets:'2 \u00d7 10/side | Rest 45s',form:'Same form, 2 sets.'},
+{name:'Dumbbell Russian Twist',sets:'2 \u00d7 12 each side | Rest 45s',form:'Same form as FULL. Lean back 45\u00b0, feet elevated, touch dumbbell to floor each side. 7\u201310 kg.'},
 {name:'Pallof press',sets:'2 \u00d7 10s/side | Rest 30s',form:'Anti-rotation hold.'},
-{name:'Bicycle crunches',sets:'2 \u00d7 15/side | Rest 30s',form:'Controlled tempo.'}
+{name:'Weighted Dead Bugs',sets:'2 \u00d7 8 each side | Rest 30s',form:'Same form as FULL. Dumbbell overhead, slow tempo (3 sec/rep). Lower back stays flat. 5\u20137 kg.'}
 ]},
 {name:'Block 4 \u2014 Lower Body',dur:'8 min',exercises:[
 {name:'Goblet squats',sets:'2 \u00d7 12 | Rest 60s',form:'10\u201315 kg dumbbell.'},
@@ -1899,7 +1946,7 @@ if(cancelBtn)cancelBtn.style.display='flex';
 display.scrollIntoView({behavior:'smooth',block:'center'});
 state.restTimer=setInterval(()=>{
 state.restRemaining--;
-if(state.restRemaining<=0){clearInterval(state.restTimer);state.restTimer=null;if(cancelBtn)cancelBtn.style.display='none';display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
+if(state.restRemaining<=0){clearInterval(state.restTimer);state.restTimer=null;playBeep();if(cancelBtn)cancelBtn.style.display='none';display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
 else{display.textContent=formatTime(state.restRemaining);}
 },1000);
 }
