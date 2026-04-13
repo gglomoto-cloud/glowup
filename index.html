@@ -201,6 +201,8 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .set-check.done{background:var(--skin);border-color:var(--skin);color:#111}
 .rest-timer-btn{background:var(--bg-card);border:1px solid var(--skin);border-radius:8px;padding:6px 14px;color:var(--skin);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;transition:all .2s}
 .rest-timer-btn:active{background:var(--skin);color:#111;transform:scale(0.97)}
+.rest-timer-cancel{display:none;align-items:center;justify-content:center;margin:8px auto;background:rgba(212,115,108,0.15);border:1px solid rgba(212,115,108,0.3);border-radius:8px;padding:6px 18px;color:#d4736c;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.rest-timer-cancel:active{background:rgba(212,115,108,0.3);transform:scale(0.97)}
 .timer-display{font-family:'Playfair Display',serif;font-size:48px;text-align:center;color:var(--fit);margin:20px 0}
 /* Superset block */
 .superset-block{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:2px solid var(--fit);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
@@ -374,16 +376,16 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 /* V18: Notes */
 .notes-add-btn{width:28px;height:28px;border-radius:50%;background:var(--skin);border:none;color:#111;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s;flex-shrink:0;font-family:'DM Sans',sans-serif}
 .notes-add-btn:active{transform:scale(0.9)}
-.notes-card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-top:2px solid rgba(196,155,74,0.4);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card);animation:noteCardIn .25s ease}
+.notes-card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-top:2px solid rgba(196,155,74,0.4);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card);animation:noteCardIn .25s ease;overflow:visible}
 @keyframes noteCardIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 .notes-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .notes-card-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:600}
 .notes-form{max-height:0;overflow:hidden;transition:max-height .25s ease-out}
-.notes-form.open{max-height:220px}
-.notes-form-inner{padding:8px 0;border-top:1px solid rgba(255,255,255,0.04)}
+.notes-form.open{max-height:250px;overflow:visible}
+.notes-form-inner{padding:10px 8px;border-top:1px solid rgba(255,255,255,0.04)}
 .notes-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--card-border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;margin-bottom:8px}
 .notes-input::placeholder{color:var(--text-muted)}
-.notes-cat-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.notes-cat-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;padding-left:4px}
 .notes-cat-dot{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .2s,transform .15s,box-shadow .2s}
 .notes-cat-dot.selected{border-color:rgba(255,255,255,0.8);transform:scale(1.15);box-shadow:0 0 6px rgba(255,255,255,0.15)}
 .notes-cat-dot:active{transform:scale(0.9)}
@@ -859,13 +861,13 @@ return schedules[d]||schedules[0];
 const BREAKFASTS=[
 {id:'A',name:'Power Oats',desc:'Oats + skyr + banana + almonds + flaxseed + honey',kcal:700,p:40,c:85,f:22},
 {id:'B',name:'Egg Breakfast',desc:'3 eggs + bread + avocado + tomato + skyr',kcal:680,p:38,c:55,f:30},
-{id:'C',name:'Yogurt Bowl',desc:'Fromage blanc + oats + walnuts + berries + chia',kcal:650,p:40,c:65,f:25},
+{id:'C',name:'Yogurt Bowl',desc:'2 yaourts grecs + 1 yaourt myrtille HP + oats + walnuts + berries + chia',kcal:740,p:32,c:70,f:38},
 {id:'D',name:'Protein Oats',desc:'Oats + 2 bananas + whey (pre-training fuel)',kcal:720,p:45,c:105,f:12}
 ];
 const BF_DETAILS=[
 {ingredients:[{item:"Rolled oats (flocons d'avoine)",amt:'80 g',why:'Complex carbs, beta-glucan'},{item:'Skyr or fromage blanc 0%',amt:'200 g',why:'~22g protein, calcium'},{item:'Banana',amt:'1',why:'Potassium, pre-training carbs'},{item:'Almonds, crushed',amt:'25 g',why:'Vitamin E, magnesium, healthy fats'},{item:'Ground flaxseed',amt:'1 tbsp',why:'ALA omega-3, fiber'},{item:'Honey or maple syrup',amt:'1 tsp',why:'Flavor, glycogen'},{item:'Cinnamon',amt:'pinch',why:'Optional, glucose regulation'},{item:'Whey scoop (optional)',amt:'15 g',why:'Bumps protein to ~45g'}],steps:['Measure oats into microwave-safe bowl','Add milk or water to cover','Microwave 2 min (or soak overnight)','Top with skyr, sliced banana, almonds, flaxseed','Drizzle honey and cinnamon'],time:'3 min',tips:['Prep night before for overnight oats \u2014 zero morning effort','Swap banana for berries on rest days for more antioxidants']},
 {ingredients:[{item:'Whole eggs (Label Rouge)',amt:'3',why:'~18g protein, choline, vitamin A'},{item:'Whole-grain bread',amt:'2 slices',why:'Complex carbs'},{item:'Avocado',amt:'1/2',why:'Monounsaturated fat, potassium'},{item:'Tomato or red pepper',amt:'1',why:'Vitamin C, lycopene'},{item:'Olive oil',amt:'1 tsp',why:'Flavor, vitamin E'},{item:'Fruit (orange or kiwi)',amt:'1',why:'Vitamin C'},{item:'Skyr on the side',amt:'100 g',why:'Top-up protein (+11g)'}],steps:['Heat pan with olive oil on medium','Scramble or fry 3 eggs','Toast bread','Slice avocado and tomato','Plate: eggs + toast + avocado + tomato + fruit + skyr'],time:'5-6 min',tips:['Scrambled is faster; fried gives more texture','Add salt and pepper to eggs']},
-{ingredients:[{item:'Fromage blanc 0% or protein yogurt',amt:'300 g',why:'~24-33g protein (see tip below)'},{item:'Oats (raw, as granola)',amt:'50 g',why:'Carbs'},{item:'Walnuts, broken',amt:'30 g',why:'Omega-3 ALA \u2014 key skin nutrient'},{item:'Blueberries or mixed berries',amt:'100 g',why:'Polyphenols, vitamin C'},{item:'Chia seeds',amt:'1 tbsp',why:'Omega-3, fiber'},{item:'Honey',amt:'1 tsp',why:'Flavor'},{item:'Whey scoop (optional)',amt:'15 g',why:'Bumps to ~45g protein'}],steps:['Spoon yogurt into bowl','Top with oats, walnuts, berries, chia','Drizzle honey','Mix or eat layered'],time:'2 min',tips:['Zero cooking \u2014 fastest option','Frozen berries work fine and are cheaper','Protein tip: standard yaourt grec only has ~3g P/100g (=9g in 300g). Swap for fromage blanc 0% (~8g P/100g = 24g) or protein yogurt (~11g P/100g = 33g) to gain +15-24g protein per serving.']},
+{ingredients:[{item:'Yaourt grec nature (120g pots)',amt:'2 pots (240 g)',why:'Base \u2014 7.4g protein, calcium'},{item:'Yaourt myrtille HP (120g pot)',amt:'1 pot (120 g)',why:'11g protein \u2014 boosts the bowl'},{item:'Oats (raw, as granola)',amt:'50 g',why:'Carbs'},{item:'Walnuts, broken',amt:'30 g',why:'Omega-3 ALA \u2014 key skin nutrient'},{item:'Blueberries or mixed berries',amt:'100 g',why:'Polyphenols, vitamin C'},{item:'Chia seeds',amt:'1 tbsp',why:'Omega-3, fiber'},{item:'Honey',amt:'1 tsp',why:'Flavor'},{item:'Whey scoop (optional)',amt:'15 g',why:'Bumps to ~44g protein'}],steps:['Open 2 pots yaourt grec + 1 pot yaourt myrtille HP into bowl','Top with oats, walnuts, berries, chia','Drizzle honey','Mix or eat layered'],time:'2 min',tips:['Zero cooking \u2014 fastest option','Frozen berries work fine and are cheaper','This recipe uses 2 pots yaourt grec + 1 pot yaourt myrtille HP. To boost protein further, swap one more Greek yogurt for a second yaourt myrtille HP (+7g protein per swap).']},
 {ingredients:[{item:'Rolled oats',amt:'110 g',why:'Extra carbs for pre-training fuel'},{item:'Skyr or fromage blanc 0%',amt:'200 g',why:'~22g protein, calcium'},{item:'Bananas',amt:'2',why:'Double potassium, fast carbs'},{item:'Whey scoop',amt:'30 g',why:'Keeps protein at ~45g'},{item:'Honey',amt:'1 tsp',why:'Flavor'},{item:'Cinnamon',amt:'pinch',why:'Optional'}],steps:['Measure oats into bowl, add milk/water','Microwave 2 min','Mix in whey (add to warm, not hot oats)','Top with sliced bananas, skyr, honey'],time:'3 min',tips:['Best for Saturday morning before calisthenics','No almonds \u2014 fat slows digestion pre-training']}
 ];
 
@@ -908,7 +910,6 @@ const SNACKS=[
 {name:'Yaourt myrtille HP (skyr-type)',kcal:65,p:11,c:4,f:1,tag:'Best daily choice \u2014 11g protein per pot'},
 {name:'Dessert lact\u00e9 chocolat (Lidl)',kcal:142,p:3,c:17,f:7,tag:'Treat \u2014 high sugar (15g). 1-2x per week max'},
 {name:'Yaourt grec nature',kcal:80,p:3,c:5,f:5,tag:'Standard French yaourt grec \u2014 3.1g protein/100g, 120g pot. Low protein.'},
-{name:'Yaourt prot\u00e9in\u00e9 (11g P/100g)',kcal:66,p:13,c:4,f:1,tag:'High protein \u2014 swap into Yogurt Bowl for +12g P per serving',coming:true},
 {name:'Raisins secs',kcal:150,p:2,c:40,f:0,portioned:true,defaultPortion:'M',
 portions:{S:{g:30,kcal:90,p:1,c:24,f:0},M:{g:50,kcal:150,p:2,c:40,f:0},L:{g:75,kcal:224,p:2,c:59,f:0},XL:{g:100,kcal:299,p:3,c:79,f:1}},
 tag:'Quick energy \u2014 high glycemic. Best pre/post workout.'},
@@ -1092,6 +1093,7 @@ h+=blocks.map((b,bi)=>`<div class="repl-block" onclick="this.classList.toggle('e
 ${ex.form?'<div class="repl-ex-form">'+ex.form+'</div>':''}
 </div>`).join('')}</div></div>`).join('');
 h+='<div class="timer-display" id="replTimer" style="display:none"></div>';
+h+='<button class="rest-timer-cancel" id="replTimerCancel" onclick="cancelRest()">Stop Timer</button>';
 h+='<button class="rest-timer-btn" style="width:100%;margin-top:8px" onclick="startRest(90)">Rest Timer (90s)</button>';
 h+='<button class="rest-timer-btn" style="width:100%;margin-top:4px" onclick="startRest(75)">Rest Timer (75s)</button>';
 h+='<button class="rest-timer-btn" style="width:100%;margin-top:4px" onclick="startRest(60)">Rest Timer (60s)</button>';
@@ -1603,6 +1605,7 @@ area.innerHTML='<div class="empty-state">Full rest. No training. Enjoy the day.<
 volArea.innerHTML='';
 }
 area.innerHTML+='<div class="timer-display" id="timerDisplay" style="display:none"></div>';
+area.innerHTML+='<button class="rest-timer-cancel" id="timerCancel" onclick="cancelRest()">Stop Timer</button>';
 document.getElementById('progressionArea').innerHTML=PROGRESSIONS.map((prog,pi)=>{
 const lv=state.progLevels[pi]||0;const cur=prog.levels[lv];const next=prog.levels[lv+1];
 return`<div class="prog-card">
@@ -1662,13 +1665,22 @@ state.armFormOpen=false;save();renderTraining();
 function startRest(sec){
 if(state.restTimer)clearInterval(state.restTimer);
 state.restRemaining=sec;const display=document.getElementById('timerDisplay')||document.getElementById('replTimer');
+const cancelBtn=document.getElementById('timerCancel')||document.getElementById('replTimerCancel');
 display.style.display='block';display.textContent=formatTime(sec);
+if(cancelBtn)cancelBtn.style.display='flex';
 display.scrollIntoView({behavior:'smooth',block:'center'});
 state.restTimer=setInterval(()=>{
 state.restRemaining--;
-if(state.restRemaining<=0){clearInterval(state.restTimer);display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
+if(state.restRemaining<=0){clearInterval(state.restTimer);state.restTimer=null;if(cancelBtn)cancelBtn.style.display='none';display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
 else{display.textContent=formatTime(state.restRemaining);}
 },1000);
+}
+function cancelRest(){
+if(state.restTimer){clearInterval(state.restTimer);state.restTimer=null;}
+const display=document.getElementById('timerDisplay')||document.getElementById('replTimer');
+const cancelBtn=document.getElementById('timerCancel')||document.getElementById('replTimerCancel');
+if(display){display.style.display='none';display.style.color='var(--fit)';}
+if(cancelBtn)cancelBtn.style.display='none';
 }
 function formatTime(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
 function setProgLevel(pi,lv){state.progLevels[pi]=lv;save();renderTraining()}
