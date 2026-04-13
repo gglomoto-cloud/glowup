@@ -185,6 +185,13 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .snack-chip{background:var(--bg-card);border:1px solid var(--card-border);border-radius:20px;padding:6px 14px;font-size:12px;cursor:pointer;transition:all .2s}
 .snack-chip.selected{border-color:var(--skin);color:var(--text)}
 .snack-chip:active{transform:scale(0.95)}
+.snack-chip.yogurt{border-radius:var(--radius);padding:10px 14px;width:100%;text-align:left}
+.snack-chip.yogurt.selected{background:rgba(91,190,183,0.08)}
+.snack-chip.coming{border-style:dashed;opacity:0.75}
+.snack-yname{font-size:13px;font-weight:500}
+.snack-ymacros{font-size:11px;color:var(--text-dim);margin-top:2px;font-variant-numeric:tabular-nums}
+.snack-ytag{font-size:10px;color:var(--text-muted);margin-top:4px;font-style:italic}
+.coming-badge{font-size:9px;background:rgba(212,167,83,0.15);color:var(--fit);padding:1px 6px;border-radius:8px;font-weight:500;font-style:normal;margin-left:6px}
 /* Training */
 .workout-block{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:2px solid var(--fit);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
 .workout-block .ex-name{font-size:14px;font-weight:500;margin-bottom:2px}
@@ -288,6 +295,67 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 /* Responsive */
 @media(min-width:521px){.app{border-left:1px solid var(--card-border);border-right:1px solid var(--card-border)}}
 @media(max-width:374px){.screens{padding-left:16px;padding-right:16px}.header{padding-left:16px;padding-right:16px}}
+/* V16: Day/Week Toggle */
+.view-toggle{display:flex;gap:4px;background:rgba(255,255,255,0.05);border-radius:10px;padding:3px;margin-bottom:14px;width:fit-content}
+.view-toggle-btn{background:none;border:none;color:var(--text-muted);font-size:13px;font-weight:500;padding:6px 18px;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.view-toggle-btn.active{background:rgba(255,255,255,0.1);color:var(--text)}
+.view-toggle-btn:active{transform:scale(0.97)}
+/* V16: TKD Toggle */
+.tkd-toggle-row{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow-card)}
+.tkd-toggle-label{flex:1;font-size:14px;font-weight:500}
+.tkd-toggle-opts{display:flex;gap:4px;background:rgba(255,255,255,0.05);border-radius:8px;padding:2px}
+.tkd-opt{background:none;border:none;color:var(--text-muted);font-size:12px;font-weight:500;padding:5px 14px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.tkd-opt.yes.active{background:var(--cat-sport);color:#111}
+.tkd-opt.no.active{background:rgba(255,255,255,0.12);color:var(--text)}
+.tkd-opt:active{transform:scale(0.97)}
+/* V16: Weekly View */
+.weekly-view{display:none}
+.weekly-view.active{display:block;animation:screenIn .2s ease}
+.daily-view.hidden{display:none}
+.week-summary{background:var(--bg-elevated);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;text-align:center;box-shadow:var(--shadow-card)}
+.week-summary-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;margin-bottom:4px}
+.week-summary-stats{font-size:12px;color:var(--text-dim)}
+.week-cards{display:flex;flex-direction:column;gap:10px}
+.week-card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-card);position:relative}
+.week-card:active{background:var(--bg-card-hover);transform:scale(0.97)}
+.week-card.current{background:var(--bg-card-hover);border-left:3px solid var(--skin);box-shadow:0 4px 20px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.06),0 0 12px rgba(91,190,183,0.08)}
+.week-card.past{opacity:0.85}
+.week-card-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.week-card-day{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;min-width:55px}
+.week-card-pill{font-size:10px;font-weight:500;padding:3px 10px;border-radius:10px;white-space:nowrap}
+.week-card-pill.tkd{background:rgba(196,101,42,0.15);color:#c4652a}
+.week-card-pill.calisthenics{background:rgba(200,155,74,0.15);color:var(--fit)}
+.week-card-pill.rest{background:rgba(255,255,255,0.06);color:var(--text-muted)}
+.week-card-pill.replacement{background:transparent;border:1px solid rgba(196,101,42,0.4);color:#c4652a}
+.week-card-pill.full-session{background:rgba(196,101,42,0.12);color:#c4652a}
+.week-card-chevron{margin-left:auto;color:var(--text-muted);font-size:14px}
+.week-card-summary{font-size:12px;color:var(--text-dim);line-height:1.4}
+.week-card-indicators{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:11px;color:var(--text-muted)}
+.week-card-shampoo{color:var(--skin)}
+.week-card-toggle{display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.04)}
+.week-card-toggle-label{font-size:11px;color:var(--text-dim)}
+.week-mini-toggle{display:flex;gap:3px;background:rgba(255,255,255,0.04);border-radius:6px;padding:2px}
+.week-mini-opt{background:none;border:none;color:var(--text-muted);font-size:10px;font-weight:500;padding:3px 10px;border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.week-mini-opt.yes.active{background:var(--cat-sport);color:#111}
+.week-mini-opt.no.active{background:rgba(255,255,255,0.1);color:var(--text)}
+/* V16: Replacement Workout Blocks */
+.repl-block{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:2px solid var(--cat-sport);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow-card);cursor:pointer;transition:all .2s}
+.repl-block:active{background:var(--bg-card-hover)}
+.repl-block-head{display:flex;justify-content:space-between;align-items:center}
+.repl-block-name{font-size:14px;font-weight:600}
+.repl-block-dur{font-size:11px;color:var(--text-dim)}
+.repl-block-arrow{color:var(--text-muted);font-size:12px;transition:transform .25s}
+.repl-block.expanded .repl-block-arrow{transform:rotate(90deg)}
+.repl-block-body{max-height:0;overflow:hidden;transition:max-height .3s ease-out}
+.repl-block.expanded .repl-block-body{max-height:2000px}
+.repl-ex{padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12.5px;color:var(--text-dim)}
+.repl-ex:last-child{border-bottom:none}
+.repl-ex-name{font-weight:500;color:var(--text)}
+.repl-ex-sets{font-size:11.5px;color:var(--text-dim);margin-top:2px}
+.repl-ex-form{font-size:11px;color:var(--text-muted);margin-top:3px;padding-left:10px;border-left:2px solid rgba(196,101,42,0.2)}
+.repl-variant-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;background:rgba(196,101,42,0.15);color:var(--cat-sport);letter-spacing:.5px;margin-bottom:10px;display:inline-block}
+@keyframes weekCardsIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.week-card-anim{animation:weekCardsIn .2s ease both}
 </style>
 </head>
 <body>
@@ -301,13 +369,28 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 </header>
 <main class="screens" id="screens">
 <div class="screen active" id="screen-dashboard">
+<div class="view-toggle" id="viewToggle">
+<button class="view-toggle-btn active" data-view="day" onclick="setViewMode('day')">Day</button>
+<button class="view-toggle-btn" data-view="week" onclick="setViewMode('week')">Week</button>
+</div>
+<div class="daily-view" id="dailyView">
 <div class="toggle-row" id="shaveToggle">
 <div class="toggle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="3" width="8" height="11" rx="1.5"/><path d="M8 8h8M12 14v7"/></svg></div>
 <div class="toggle-label">Shave today?</div>
 <div class="toggle" id="shaveBtn"></div>
 </div>
-<div class="section-title">Today's Timeline</div>
+<div class="tkd-toggle-row" id="tkdToggle" style="display:none">
+<div class="toggle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="4" r="2"/><path d="M8 6v5"/><path d="M5 8.5l3 1.5 3-1.5"/><path d="M8 11l-3 7"/><path d="M8 11l5 3 3-2"/></svg></div>
+<div class="tkd-toggle-label">Going to TKD today?</div>
+<div class="tkd-toggle-opts" id="tkdOpts"></div>
+</div>
+<div class="section-title" id="timelineTitle">Today's Timeline</div>
 <div class="timeline" id="timeline"></div>
+</div>
+<div class="weekly-view" id="weeklyView">
+<div class="week-summary" id="weekSummary"></div>
+<div class="week-cards" id="weekCards"></div>
+</div>
 </div>
 <div class="screen" id="screen-water">
 <div class="section-title">Water Tracker</div>
@@ -403,13 +486,13 @@ if(n.includes('lunch'))return TL_ICONS.plate(c);
 if(n.includes('dinner'))return TL_ICONS.plate(c);
 if(n.includes('snack')||n.includes('pre-workout')||n.includes('pre-tkd'))return TL_ICONS.snack(c);
 if(n.includes('meal prep'))return TL_ICONS.cooking(c);
-if(n.includes('calisthenics')||n.includes('session'))return TL_ICONS.dumbbell(c);
+if(n.includes('calisthenics')||n.includes('session')||n.includes('replacement'))return TL_ICONS.dumbbell(c);
 if(n.includes('tkd')||n.includes('coach'))return TL_ICONS.kick(c);
 if(n.includes('cool down'))return TL_ICONS.hydrate(c);
 if(n.includes('work')&&!n.includes('workout')&&!n.includes('pre-work'))return TL_ICONS.laptop(c);
 if(n.includes('english')||n.includes('teaching'))return TL_ICONS.book(c);
 if(n.includes('music')||n.includes('drum'))return TL_ICONS.music(c);
-if(n.includes('transit')||n.includes('bus')||n.includes('car'))return TL_ICONS.arrow(c);
+if(n.includes('transit')||n.includes('bus')||n.includes('car')||n.includes('drive'))return TL_ICONS.arrow(c);
 if(n.includes('get ready'))return TL_ICONS.arrow(c);
 if(n.includes('wind')||n.includes('posture'))return TL_ICONS.candle(c);
 if(n.includes('free')||n.includes('rest /'))return TL_ICONS.clock(c);
@@ -464,8 +547,8 @@ const SHOWER_INFO={
 6:{hair:'Co-wash if heavy, otherwise skip',body:'Salux cloth + Cadum gel (body exfoliation day)',note:'Body exfoliation day. Moisturize within 5 min after.'},
 0:{hair:'Skip',body:'Cadum gel or skip',note:'Rest day.'}
 };
-function buildPMSkin(d,withShower){
-const isTKD=[1,3,5].includes(d);const si=SHOWER_INFO[d];let steps=[],n=1;
+function buildPMSkin(d,withShower,tkdOverride){
+const isTKD=[1,3,5].includes(d);const si=getShowerInfo(d,tkdOverride!==undefined?tkdOverride:true);let steps=[],n=1;
 if(withShower&&si){steps.push({n:n++,s:'In-Shower Routine',p:'',dur:'5-8 min',d:'<strong>Hair:</strong> '+si.hair+'<br><strong>Body:</strong> '+si.body+'<br><em>'+si.note+'</em>',tip:isTKD?'Quick face rinse (15 sec) with hands + water only in the shower. Real face cleanse happens at the sink after.':null});}
 if(isTKD){
 steps.push({n:n++,s:'Face cleanse at sink',p:"M\u00eame L'Huile Lavante Visage et Corps",dur:'1 min',d:'1 pump onto fingertips. Massage over face 20-30 sec (forehead, nose, cheeks, jawline). Rinse lukewarm water. Pat dry with clean face towel.',tip:'NO CeraVe actives post-TKD. Skin barrier is stressed from sweat, heat, and friction.'});
@@ -487,11 +570,13 @@ steps.push({n:n++,s:'Spot treatment if needed',p:'Av\u00e8ne Cicalfate+',dur:'10
 }
 return steps;
 }
-function getSkinSteps(type,isShave){
+function getSkinSteps(type,isShave,dayNum,tkd){
+const d=dayNum!==undefined?dayNum:getActiveDow();
+const tkdVal=tkd!==undefined?tkd:getActiveTkd();
 if(type==='SKIN_AM')return isShave?SKIN_AM_SHAVE:SKIN_AM_NOSHAVE;
-if(type==='SKIN_PM')return buildPMSkin(dow,true);
-if(type==='SKIN_PM_ONLY')return buildPMSkin(dow,false);
-if(type==='SKIN_SHOWER'){const si=SHOWER_INFO[dow];if(!si)return[];return[{n:1,s:'Hair: '+si.hair,p:'',dur:'',d:'',tip:null},{n:2,s:'Body: '+si.body,p:'',dur:'',d:si.note,tip:null},{n:3,s:'Face: done at the sink after shower',p:'',dur:'',d:'',tip:null}];}
+if(type==='SKIN_PM')return buildPMSkin(d,true,tkdVal);
+if(type==='SKIN_PM_ONLY')return buildPMSkin(d,false,tkdVal);
+if(type==='SKIN_SHOWER'){const si=getShowerInfo(d,tkdVal);if(!si)return[];return[{n:1,s:'Hair: '+si.hair,p:'',dur:'',d:'',tip:null},{n:2,s:'Body: '+si.body,p:'',dur:'',d:si.note,tip:null},{n:3,s:'Face: done at the sink after shower',p:'',dur:'',d:'',tip:null}];}
 return[];
 }
 function renderSteps(steps){
@@ -527,10 +612,87 @@ for(const[kw,det]of Object.entries(TAP)){const esc=kw.replace(/[.*+?^${}()|[\]\\
 return r;
 }
 
+/* V16: ACTIVE DAY HELPERS */
+function getActiveDow(){return state.viewingDate?state.viewingDate.getDay():dow;}
+function getActiveDateStr(){return state.viewingDate?state.viewingDate.toDateString():today;}
+function getActiveShave(){return state.viewingDate?lsGet('shave_'+state.viewingDate.toDateString(),false):state.shave;}
+function getActiveTkd(){
+const d=getActiveDow();
+if(![1,3,5].includes(d))return true;
+return state.viewingDate?lsGet('tkd_'+state.viewingDate.toDateString(),true):state.tkdToday;
+}
+function getTkdForDate(dateStr){return lsGet('tkd_'+dateStr,true);}
+function setTkdForDate(dateStr,val){lsSet('tkd_'+dateStr,val);if(dateStr===today){state.tkdToday=val;save();}}
+
+/* V16: SHOWER INFO OVERRIDE FOR NO-TKD */
+function getShowerInfo(d,tkd){
+const si=Object.assign({},SHOWER_INFO[d]);
+if(d===3&&!tkd){
+si.hair='Shampoo + conditioner (replacement session causes sweating)';
+si.note='Post-workout. Replacement HIIT causes scalp sweat — shampoo needed.';
+}
+return si;
+}
+
 /* SCHEDULES */
-function getSchedule(d,shave){
+function getSchedule(d,shave,tkd){
+if(tkd===undefined)tkd=true;
 const sk=shave?'AM Skincare \u2014 Shave Day':'AM Skincare \u2014 Non-Shave';
 const skCat='care';
+/* V16: No-TKD schedule variants */
+if(!tkd&&d===1){return[
+{t:'07:00',n:'Wake Up',c:'rest',detail:'Open curtains for sunlight exposure. Get moving.'},
+{t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:15',n:'Breakfast',c:'food',detail:'Oats + skyr + banana + almonds + honey. ~650 kcal, ~35g protein.'},
+{t:'07:40',n:'Get Ready + Transit',c:'',detail:''},
+{t:'08:00',n:'Work',c:'',detail:'Stay hydrated \u2014 aim for 500ml by 10:00.'},
+{t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Chicken/jambon + whole-grain pasta + veg + olive oil. ~700 kcal, ~40g protein. Coffee after eating. Optional: coffee nap.'},
+{t:'13:30',n:'Work',c:'',detail:'Afternoon block. Drink 500ml water.'},
+{t:'18:00',n:'Home \u2014 Change for Workout',c:'',detail:'No bus ride needed. Quick snack: banana or almonds + water 500 mL.'},
+{t:'18:10',n:'Replacement Session \u2014 FULL (75 min)',c:'sport',detail:'Warm-up \u2192 Plyometrics \u2192 HIIT Circuit \u2192 Rotational Core \u2192 Lower Body \u2192 Flexibility. See Training tab for full workout.'},
+{t:'19:25',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
+{t:'19:45',n:'Dinner',c:'food',detail:'Salmon/chicken + rice + veg + olive oil. ~800 kcal, ~45g protein. 2 hours earlier than TKD nights.'},
+{t:'20:15',n:'Optional: Pre-bed Skyr + Almonds',c:'food',detail:'200g skyr + almonds for pre-sleep protein.'},
+{t:'20:30',n:'Free Time',c:'rest',detail:'Drums, reading, studying, socializing, screen time, meal prep. This block does not exist on TKD Mondays.'},
+{t:'21:30',n:'Wind-Down + Posture',c:'care',detail:'Wall angels (2x10) + scap pulls (2x10) + chest stretch (30s/side). No screens.'},
+{t:'22:00',n:'Sleep Target',c:'rest',detail:'9h sleep \u2014 1 hour more than TKD nights.'}
+];}
+if(!tkd&&d===3){return[
+{t:'07:15',n:'Wake Up',c:'rest',detail:''},
+{t:'07:20',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:30',n:'Breakfast',c:'food',detail:'Oats + skyr + fruit + nuts. ~650 kcal, ~35g protein.'},
+{t:'08:00',n:'Work',c:'',detail:''},
+{t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Lentils + rice + eggs + veg OR tuna pasta salad. ~700 kcal, ~40g protein.'},
+{t:'13:30',n:'Work (shortened)',c:'',detail:'Work ends at 16:00 today.'},
+{t:'16:00',n:'Transition + Snack',c:'food',detail:'Banana + tartine + skyr. Water 500ml. Deodorant refresh.'},
+{t:'17:00',n:'Music Practice (drums, 30 min)',c:'',detail:''},
+{t:'17:30',n:'Drive Home',c:'',detail:'On TKD days, Mat drives to the gym. Today, straight home.'},
+{t:'18:15',n:'Home \u2014 Change for Workout',c:'',detail:'Quick transition: workout clothes, water bottle, equipment setup.'},
+{t:'18:30',n:'Replacement Session \u2014 SHORT (60 min)',c:'sport',detail:'Warm-up \u2192 Plyometrics (2 sets) \u2192 HIIT (2 rounds) \u2192 Core \u2192 Lower Body \u2192 Quick Flexibility. See Training tab.'},
+{t:'19:30',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
+{t:'19:50',n:'Dinner',c:'food',detail:'Protein + carbs + veg. ~800 kcal, ~45g protein.'},
+{t:'20:20',n:'Optional: Pre-bed Snack',c:'food',detail:'Skyr or casein shake.'},
+{t:'20:40',n:'Free Time',c:'rest',detail:'Bonus free hour \u2014 does not exist on TKD Wednesdays.'},
+{t:'21:30',n:'Wind-Down + Posture',c:'care',detail:'Posture exercises (5 min). No screens.'},
+{t:'22:00',n:'Sleep Target',c:'rest',detail:'8h45 sleep.'}
+];}
+if(!tkd&&d===5){return[
+{t:'07:00',n:'Wake Up',c:'rest',detail:''},
+{t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:15',n:'Breakfast',c:'food',detail:'Oats + skyr + fruit + almonds. ~650 kcal, ~35g protein.'},
+{t:'07:45',n:'Transit to Work',c:'',detail:''},
+{t:'08:00',n:'Work',c:'',detail:''},
+{t:'12:00',n:'Lunch (extra carbs!) + Coffee',c:'food',detail:'Chicken + pasta + olive oil + veg. ~800 kcal, ~45g protein. Replacement session is also demanding \u2014 fuel up.'},
+{t:'13:30',n:'Work',c:'',detail:''},
+{t:'18:00',n:'Home \u2014 Change for Workout',c:'',detail:'Quick snack: banana + water 500 mL.'},
+{t:'18:10',n:'Replacement Session \u2014 FULL (75 min)',c:'sport',detail:'Warm-up \u2192 Plyometrics \u2192 HIIT Circuit \u2192 Rotational Core \u2192 Lower Body \u2192 Flexibility. See Training tab for full workout.'},
+{t:'19:25',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
+{t:'19:45',n:'Dinner',c:'food',detail:'Pre-prepped protein + carbs + veg. ~800 kcal, ~45g protein.'},
+{t:'20:15',n:'Optional: Pre-bed Skyr + Almonds',c:'food',detail:''},
+{t:'20:30',n:'Free Time',c:'rest',detail:'Friday evening \u2014 drums, reading, relaxing. No time pressure.'},
+{t:'21:30',n:'Wind-Down + Posture',c:'care',detail:'Wall angels + chest stretch (5 min). No screens.'},
+{t:'22:00',n:'Sleep Target',c:'rest',detail:'9h sleep \u2014 1 hour more than TKD Fridays.'}
+];}
 const schedules={
 1:[
 {t:'07:00',n:'Wake Up',c:'rest',detail:'Open curtains for sunlight exposure. Get moving.'},
@@ -664,10 +826,14 @@ const BF_DETAILS=[
 
 /* MEALS */
 const MEALS=[
-{name:"Poulet rôti + riz",kcal100:162,p100:11.2,c100:13.8,f100:5,gS:300,gM:400,gL:500},{name:"Steak haché + purée",kcal100:175,p100:8.8,c100:12.5,f100:8.8,gS:300,gM:400,gL:500},{name:"Poisson + légumes",kcal100:129,p100:11.4,c100:7.1,f100:5.1,gS:250,gM:350,gL:450},{name:"Pâtes bolognaise",kcal100:200,p100:8.6,c100:22.9,f100:6.3,gS:250,gM:350,gL:450},{name:"Quiche lorraine + salade",kcal100:183,p100:7.3,c100:11.7,f100:11.7,gS:200,gM:300,gL:400},{name:"Soupe + pain",kcal100:114,p100:4.3,c100:15.7,f100:3.4,gS:250,gM:350,gL:450},{name:"Couscous + merguez",kcal100:188,p100:8.8,c100:18.8,f100:7.5,gS:300,gM:400,gL:500},{name:"Gratin dauphinois",kcal100:143,p100:5.1,c100:11.4,f100:8.6,gS:250,gM:350,gL:450},{name:"Ratatouille + riz",kcal100:125,p100:3,c100:16.3,f100:4.5,gS:300,gM:400,gL:500},{name:"Omelette + salade",kcal100:150,p100:9.3,c100:5,f100:10,gS:200,gM:300,gL:400},{name:"Croque-monsieur",kcal100:180,p100:8.8,c100:14,f100:10,gS:180,gM:250,gL:320},{name:"Blanquette de veau",kcal100:150,p100:8.8,c100:7.5,f100:8.8,gS:300,gM:400,gL:500},{name:"Hachis parmentier",kcal100:163,p100:7.5,c100:12.5,f100:8.8,gS:300,gM:400,gL:500},{name:"Saumon + riz + légumes",kcal100:163,p100:10,c100:13.8,f100:6.3,gS:300,gM:400,gL:500},{name:"Poulet basquaise",kcal100:138,p100:9.5,c100:7.5,f100:6.3,gS:300,gM:400,gL:500},{name:"Boeuf bourguignon",kcal100:150,p100:10,c100:6.3,f100:8.8,gS:300,gM:400,gL:500},{name:"Tomates farcies + riz",kcal100:150,p100:7,c100:13.8,f100:6.3,gS:300,gM:400,gL:500},{name:"Endives au jambon",kcal100:129,p100:8,c100:5.7,f100:8,gS:250,gM:350,gL:450},{name:"Tartiflette",kcal100:214,p100:8.6,c100:12.9,f100:12.9,gS:250,gM:350,gL:450},{name:"Pot-au-feu",kcal100:111,p100:7.8,c100:7.8,f100:4.4,gS:350,gM:450,gL:550},{name:"Cassoulet",kcal100:200,p100:10,c100:12.5,f100:10,gS:300,gM:400,gL:500},{name:"Salade niçoise",kcal100:133,p100:8.3,c100:6.7,f100:8.3,gS:200,gM:300,gL:400},{name:"Galette complète",kcal100:180,p100:8.8,c100:16,f100:8.8,gS:180,gM:250,gL:320},{name:"Poêlée poulet + légumes",kcal100:125,p100:9.5,c100:8.8,f100:4.5,gS:300,gM:400,gL:500},{name:"Riz cantonais",kcal100:157,p100:6.3,c100:17.1,f100:6.3,gS:250,gM:350,gL:450},{name:"Pâtes à la Carbonara (+ jaune d'oeuf)",kcal100:190,p100:8.0,c100:18.0,f100:10.0,gS:250,gM:350,gL:450}
+{name:"Poulet rôti + riz",kcal100:162,p100:11.2,c100:13.8,f100:5,gS:300,gM:400,gL:500},{name:"Steak haché + purée",kcal100:175,p100:8.8,c100:12.5,f100:8.8,gS:300,gM:400,gL:500},{name:"Poisson + légumes",kcal100:129,p100:11.4,c100:7.1,f100:5.1,gS:250,gM:350,gL:450},{name:"Pâtes bolognaise",kcal100:200,p100:8.6,c100:22.9,f100:6.3,gS:250,gM:350,gL:450},{name:"Quiche lorraine + salade",kcal100:183,p100:7.3,c100:11.7,f100:11.7,gS:200,gM:300,gL:400},{name:"Soupe + pain",kcal100:114,p100:4.3,c100:15.7,f100:3.4,gS:250,gM:350,gL:450},{name:"Couscous + merguez",kcal100:188,p100:8.8,c100:18.8,f100:7.5,gS:300,gM:400,gL:500},{name:"Gratin dauphinois",kcal100:143,p100:5.1,c100:11.4,f100:8.6,gS:250,gM:350,gL:450},{name:"Ratatouille + riz",kcal100:125,p100:3,c100:16.3,f100:4.5,gS:300,gM:400,gL:500},{name:"Omelette + salade",kcal100:150,p100:9.3,c100:5,f100:10,gS:200,gM:300,gL:400},{name:"Croque-monsieur",kcal100:180,p100:8.8,c100:14,f100:10,gS:180,gM:250,gL:320},{name:"Blanquette de veau",kcal100:150,p100:8.8,c100:7.5,f100:8.8,gS:300,gM:400,gL:500},{name:"Hachis parmentier",kcal100:163,p100:7.5,c100:12.5,f100:8.8,gS:300,gM:400,gL:500},{name:"Saumon + riz + légumes",kcal100:163,p100:10,c100:13.8,f100:6.3,gS:300,gM:400,gL:500},{name:"Poulet basquaise",kcal100:138,p100:9.5,c100:7.5,f100:6.3,gS:300,gM:400,gL:500},{name:"Boeuf bourguignon",kcal100:150,p100:10,c100:6.3,f100:8.8,gS:300,gM:400,gL:500},{name:"Tomates farcies + riz",kcal100:150,p100:7,c100:13.8,f100:6.3,gS:300,gM:400,gL:500},{name:"Endives au jambon",kcal100:129,p100:8,c100:5.7,f100:8,gS:250,gM:350,gL:450},{name:"Tartiflette",kcal100:214,p100:8.6,c100:12.9,f100:12.9,gS:250,gM:350,gL:450},{name:"Pot-au-feu",kcal100:111,p100:7.8,c100:7.8,f100:4.4,gS:350,gM:450,gL:550},{name:"Cassoulet",kcal100:200,p100:10,c100:12.5,f100:10,gS:300,gM:400,gL:500},{name:"Salade niçoise",kcal100:133,p100:8.3,c100:6.7,f100:8.3,gS:200,gM:300,gL:400},{name:"Galette complète",kcal100:180,p100:8.8,c100:16,f100:8.8,gS:180,gM:250,gL:320},{name:"Poêlée poulet + légumes",kcal100:125,p100:9.5,c100:8.8,f100:4.5,gS:300,gM:400,gL:500},{name:"Riz cantonais",kcal100:157,p100:6.3,c100:17.1,f100:6.3,gS:250,gM:350,gL:450},{name:"Pâtes à la Carbonara (+ jaune d'oeuf)",kcal100:190,p100:8.0,c100:18.0,f100:10.0,gS:250,gM:350,gL:450},{name:"Chicken Wraps (x2)",kcal100:180,p100:12.2,c100:10.4,f100:9.9,gS:400,gM:800,gL:850}
 ];
 const SNACKS=[
-{name:'Banana + rice cakes + PB',kcal:280,p:8},{name:'Skyr 200g + honey + berries',kcal:250,p:22},{name:'Protein bar (HiPro)',kcal:180,p:18},{name:'Dates (4) + almonds',kcal:220,p:5},{name:'Tuna on bread',kcal:350,p:28},{name:'Cottage cheese + walnuts',kcal:320,p:25},{name:'2 boiled eggs + oatcake',kcal:250,p:15},{name:'Pumpkin seeds + apple',kcal:250,p:9},{name:'Pre-bed skyr + almonds',kcal:250,p:25}
+{name:'Banana + rice cakes + PB',kcal:280,p:8},{name:'Skyr 200g + honey + berries',kcal:250,p:22},{name:'Protein bar (HiPro)',kcal:180,p:18},{name:'Dates (4) + almonds',kcal:220,p:5},{name:'Tuna on bread',kcal:350,p:28},{name:'Cottage cheese + walnuts',kcal:320,p:25},{name:'2 boiled eggs + oatcake',kcal:250,p:15},{name:'Pumpkin seeds + apple',kcal:250,p:9},{name:'Pre-bed skyr + almonds',kcal:250,p:25},
+{name:'Yaourt v\u00e9g\u00e9tal coco (Andros)',kcal:75,p:1,c:7,f:5,tag:'Low protein \u2014 occasional dessert, not a protein source'},
+{name:'Yaourt myrtille HP (skyr-type)',kcal:65,p:11,c:4,f:1,tag:'Best daily choice \u2014 11g protein per pot'},
+{name:'Dessert lact\u00e9 chocolat (Lidl)',kcal:142,p:3,c:17,f:7,tag:'Treat \u2014 high sugar (15g). 1-2x per week max'},
+{name:'Yaourt grec nature (\u00e0 acheter)',kcal:146,p:14,c:5,f:8,tag:'On shopping list \u2014 best protein-to-calorie ratio',coming:true}
 ];
 
 /* ARM EXERCISE DETAILS */
@@ -751,6 +917,106 @@ const GTG_DAILY={
 6:{exercises:'3 \u00d7 scap pull-ups (5 each)',note:'After training'},
 0:{exercises:'2 \u00d7 hollow hold (20 sec) + 2 \u00d7 wall handstand (10 sec)',note:'Rest day \u2014 only if feeling fresh'}};
 
+/* V16: REPLACEMENT WORKOUT DATA */
+const REPL_BLOCKS_FULL=[
+{name:'Block 0 \u2014 Warm-Up',dur:'10 min',exercises:[
+{name:'Jump rope \u2014 easy pace',sets:'3 min',form:'Steady rhythm, single bounces. Raise heart rate to zone 2, warm up calves and ankles.'},
+{name:'Arm circles (forward then backward)',sets:'30 sec each direction',form:'Large circles, progressively bigger.'},
+{name:'Torso rotations',sets:'30 sec',form:'Feet planted, rotate trunk left-right. Warms obliques.'},
+{name:'Leg swings \u2014 front-to-back',sets:'30 sec/leg',form:'Hold wall or door frame. Full ROM.'},
+{name:'Leg swings \u2014 side-to-side',sets:'30 sec/leg',form:'Adductors and abductors.'},
+{name:'Hip circles',sets:'30 sec/leg',form:'Large circles, both directions. Opens hip joint.'},
+{name:'High knees',sets:'30 sec',form:'Fast tempo. Bridges warm-up and plyometric intensity.'},
+{name:'Dynamic high kicks',sets:'30 sec/leg',form:'Controlled front kick to chest height or higher.'}
+]},
+{name:'Block 1 \u2014 Explosive / Plyometric',dur:'15 min',exercises:[
+{name:'Jump squats',sets:'3 \u00d7 8 | Rest 75s',form:'Squat to parallel, explode upward. Land softly \u2014 bend knees, absorb through whole foot. Cue: sit back, then launch.'},
+{name:'Clap push-ups',sets:'3 \u00d7 6 | Rest 60s',form:'Push explosively, hands leave floor, clap at top. On parallettes for extra height. Cue: push the floor away.'},
+{name:'Split squat jumps',sets:'3 \u00d7 6/leg | Rest 75s',form:'Lunge position, jump and switch legs mid-air. Land softly. Cue: springy, light feet.'},
+{name:'Tuck jumps',sets:'3 \u00d7 6 | Rest 75s',form:'Jump max height, pull knees to chest. Land softly, reset between reps. Cue: knees to chest, soft landing.'}
+]},
+{name:'Block 2 \u2014 Cardio HIIT Circuit',dur:'18 min',exercises:[
+{name:'3 rounds of the circuit below',sets:'4 min work + 90s rest per round',form:''},
+{name:'Station 1: Jump rope fast',sets:'60 sec',form:'Max sustainable speed. Stay on balls of feet, small bounces.'},
+{name:'Station 2: Burpees',sets:'30 sec',form:'Full: squat thrust + jump. Target 8\u201312 reps. Cue: flow, don\'t stop.'},
+{name:'Station 3: HGX200 stepper fast',sets:'60 sec',form:'Fast rhythm, alternate legs. Active recovery station.'},
+{name:'Station 4: Mountain climbers',sets:'30 sec',form:'Plank position, drive knees to chest fast. Keep hips level. Cue: flat back, fast feet.'},
+{name:'Station 5: Jump rope fast',sets:'60 sec',form:'Same as station 1.'}
+]},
+{name:'Block 3 \u2014 Rotational Core',dur:'10 min',exercises:[
+{name:'Cable woodchops \u2014 high to low',sets:'3 \u00d7 10/side | Rest 45s',form:'HGX200 high pulley. Rotate through hips and thoracic spine, NOT lower back. Arms stay mostly straight. Start ~10\u201315 kg. Cue: chop like a roundhouse kick.'},
+{name:'Pallof press (anti-rotation)',sets:'3 \u00d7 10s hold/side | Rest 30s',form:'HGX200 cable mid-height or resistance band. Press handle out, resist rotation. Start ~5\u201310 kg. Cue: press out, stay square.'},
+{name:'Bicycle crunches',sets:'3 \u00d7 15/side | Rest 30s',form:'Hands behind head (don\'t pull neck). Elbow to opposite knee, controlled tempo. Cue: shoulder toward opposite knee.'}
+]},
+{name:'Block 4 \u2014 Lower Body Power',dur:'15 min',exercises:[
+{name:'Goblet squats',sets:'3 \u00d7 10\u201312 | Rest 60s',form:'Dumbbell 10\u201315 kg at chest. Feet shoulder-width, squat deep. Drive through heels. Cue: chest up, hips back.'},
+{name:'Bulgarian split squats',sets:'3 \u00d7 8/leg | Rest 60s',form:'Rear foot on bench. 8\u201312 kg/hand. Front knee tracks over toes, stay upright. Single-leg strength for kicking.'},
+{name:'Dumbbell walking lunges',sets:'2 \u00d7 10/leg | Rest 60s',form:'8\u201312 kg/hand. Big steps, upright torso. Or reverse lunges if space is limited.'},
+{name:'Standing calf raises',sets:'3 \u00d7 15 | Rest 30s',form:'On step edge, full ROM. All the way up, all the way down. Feel stretch at bottom.'}
+]},
+{name:'Block 5 \u2014 Flexibility / Cool-Down',dur:'12 min',exercises:[
+{name:'Hip flexor stretch',sets:'60 sec/side',form:'Low lunge, rear knee on floor. Push hips forward gently.'},
+{name:'Hamstring stretch',sets:'60 sec/side',form:'Standing, foot on bench. Lean forward.'},
+{name:'Side splits hold',sets:'2 \u00d7 45 sec',form:'Progressive \u2014 go to comfortable max range. Maintenance, not pushing limits.'},
+{name:'Front splits hold',sets:'45 sec/side',form:'Each leg forward. Foundational TKD flexibility position.'},
+{name:'Pigeon pose',sets:'60 sec/side',form:'Front leg bent 90\u00b0, back leg straight. Opens external hip rotation for kicks.'},
+{name:'Butterfly stretch',sets:'60 sec',form:'Seated, soles together, lean forward.'},
+{name:'Deep breathing',sets:'2 min',form:'Lie on back, eyes closed. 4-count inhale, 6-count exhale.'}
+]}
+];
+const REPL_BLOCKS_SHORT=[
+{name:'Block 0 \u2014 Warm-Up',dur:'8 min',exercises:[
+{name:'Jump rope \u2014 easy pace',sets:'2 min',form:'Steady rhythm.'},
+{name:'Leg swings (front-back + side-side)',sets:'30 sec/leg \u00d7 2 directions',form:'Full ROM.'},
+{name:'Hip circles',sets:'30 sec/leg',form:'Both directions.'},
+{name:'High knees + dynamic high kicks',sets:'30 sec each',form:'Fast tempo.'}
+]},
+{name:'Block 1 \u2014 Explosive / Plyometric',dur:'10 min',exercises:[
+{name:'Jump squats',sets:'2 \u00d7 8 | Rest 75s',form:'Same form as FULL. 2 sets keeps volume at ~64 foot contacts.'},
+{name:'Clap push-ups',sets:'2 \u00d7 6 | Rest 60s',form:'Explosive push, clap at top.'},
+{name:'Split squat jumps',sets:'2 \u00d7 6/leg | Rest 75s',form:'Springy, light feet.'},
+{name:'Tuck jumps',sets:'2 \u00d7 6 | Rest 75s',form:'Knees to chest, soft landing.'}
+]},
+{name:'Block 2 \u2014 Cardio HIIT Circuit',dur:'12 min',exercises:[
+{name:'2 rounds of the circuit',sets:'4 min work + 90s rest per round',form:'Same 5 stations as FULL variant.'},
+{name:'Rope 60s \u2192 Burpees 30s \u2192 Stepper 60s \u2192 Mountain climbers 30s \u2192 Rope 60s',sets:'Per round',form:'Push to 80\u201390% max HR.'}
+]},
+{name:'Block 3 \u2014 Rotational Core',dur:'8 min',exercises:[
+{name:'Cable woodchops',sets:'2 \u00d7 10/side | Rest 45s',form:'Same form, 2 sets.'},
+{name:'Pallof press',sets:'2 \u00d7 10s/side | Rest 30s',form:'Anti-rotation hold.'},
+{name:'Bicycle crunches',sets:'2 \u00d7 15/side | Rest 30s',form:'Controlled tempo.'}
+]},
+{name:'Block 4 \u2014 Lower Body',dur:'8 min',exercises:[
+{name:'Goblet squats',sets:'2 \u00d7 12 | Rest 60s',form:'10\u201315 kg dumbbell.'},
+{name:'Bulgarian split squats',sets:'2 \u00d7 8/leg | Rest 60s',form:'8\u201312 kg/hand.'}
+]},
+{name:'Block 5 \u2014 Flexibility',dur:'8 min',exercises:[
+{name:'Hip flexor stretch',sets:'45 sec/side',form:''},
+{name:'Hamstring stretch',sets:'45 sec/side',form:''},
+{name:'Side splits hold',sets:'1 \u00d7 45 sec',form:''},
+{name:'Butterfly stretch',sets:'45 sec',form:''},
+{name:'Deep breathing',sets:'1 min',form:''}
+]}
+];
+
+function renderReplacementWorkout(isShort){
+const blocks=isShort?REPL_BLOCKS_SHORT:REPL_BLOCKS_FULL;
+const variant=isShort?'SHORT':'FULL';
+let h='<div class="repl-variant-badge">'+variant+' VARIANT'+(isShort?' \u2014 60 min':' \u2014 ~80 min')+'</div>';
+h+=blocks.map((b,bi)=>`<div class="repl-block" onclick="this.classList.toggle('expanded')">
+<div class="repl-block-head"><span class="repl-block-name">${b.name}</span><span class="repl-block-dur">${b.dur}</span><span class="repl-block-arrow">\u25b8</span></div>
+<div class="repl-block-body" style="padding-top:8px">${b.exercises.map(ex=>`<div class="repl-ex">
+<div class="repl-ex-name">${ex.name}</div>
+<div class="repl-ex-sets">${ex.sets}</div>
+${ex.form?'<div class="repl-ex-form">'+ex.form+'</div>':''}
+</div>`).join('')}</div></div>`).join('');
+h+='<div class="timer-display" id="replTimer" style="display:none"></div>';
+h+='<button class="rest-timer-btn" style="width:100%;margin-top:8px" onclick="startRest(90)">Rest Timer (90s)</button>';
+h+='<button class="rest-timer-btn" style="width:100%;margin-top:4px" onclick="startRest(75)">Rest Timer (75s)</button>';
+h+='<button class="rest-timer-btn" style="width:100%;margin-top:4px" onclick="startRest(60)">Rest Timer (60s)</button>';
+return h;
+}
+
 /* EXTRAS */
 const TIPS=[
 {title:'Ice roller on puffy mornings',cat:'face',ev:'moderate',body:'Roll an ice cube (wrapped in cloth) over face 1-3 min before AM skincare. Causes temporary vasoconstriction \u2014 reduces puffiness for 30-60 min. Best after late TKD dinner or poor sleep.'},
@@ -807,7 +1073,6 @@ const SHOP_KEEP=[
 const SHOP_BUY=[
 {name:'Beauty of Joseon SPF40 PA+++',reason:'Face SPF \u2014 single biggest skin quality lever.',where:'YesStyle, Amazon.fr',price:'~\u20ac9-13'},
 {name:'Franck Provost Conditioner or Klorane Mangue',reason:'Needed for conditioner + co-wash days.',where:'Carrefour, pharmacie',price:'~\u20ac5-7'},
-{name:'Lightweight curl cream (Garnier / Boucl\u00e8me)',reason:'Replaces dropped Schwarzkopf volume mousse.',where:'Carrefour, Sephora',price:'~\u20ac6-15'},
 {name:'Aluminum antiperspirant (Etiaxil / Nivea)',reason:'Sanex bamboo underpowered for TKD sweat.',where:'Pharmacie / supermarket',price:'~\u20ac4-10'},
 {name:'Oral-B Pro 3 electric toothbrush',reason:'Cochrane evidence: powered > manual for plaque.',where:'Carrefour, Amazon.fr',price:'~\u20ac50-70'},
 {name:'Slanted eyebrow tweezers',reason:'Basic stray-hair maintenance.',where:'Pharmacie, Monoprix',price:'~\u20ac3-8'},
@@ -816,7 +1081,7 @@ const SHOP_BUY=[
 {name:'4 extra cotton pillowcases',reason:'Swap 2x/week. Directly drives forehead breakouts.',where:'Carrefour, Amazon.fr',price:'~\u20ac10-25'},
 {name:'Creatine monohydrate (Creapure)',reason:'Most effective legal ergogenic aid. 3-5g/day.',where:'Myprotein.fr, Decathlon',price:'~\u20ac15-20'},
 {name:'Vitamin D3 1500-2000 IU (Oct-Mar)',reason:'Essential for athletes in French winter.',where:'Pharmacie',price:'~\u20ac5-10'},
-{name:'YSL Y Eau de Parfum',reason:'Fresh-aromatic-woody. Versatile, modern.',where:'Sephora.fr',price:'~\u20ac85-100/60mL'}
+{name:'Lattafa Musamam Black Intense EDP (100mL)',reason:'Woody-spicy: patchouli, cedarwood, tonka bean, lavender, nutmeg. Givaudan ingredients by Jordi Fern\u00e1ndez. 12-14h longevity, no synthetic feel. Highly rated in fragrance communities.',where:'Amazon.fr, Notino.fr, parfumsmoinschers.com',price:'~\u20ac17-25'}
 ];
 
 /* ===== STATE ===== */
@@ -828,8 +1093,9 @@ function dailyKey(k){return k+'_'+today}
 
 let state={
 shave:lsGet(dailyKey('shave'),false),
+tkdToday:lsGet(dailyKey('tkd'),true),
 water:lsGet(dailyKey('water'),{total:0,log:[]}),
-dayType:lsGet(dailyKey('dayType'),AUTO_DAY_TYPE[dow]),
+dayType:lsGet(dailyKey('dayType'),AUTO_DAY_TYPE[dow]==='tkd'&&!lsGet(dailyKey('tkd'),true)?'calisthenics':AUTO_DAY_TYPE[dow]),
 waterUnit:lsGet('waterUnit','ml'),
 breakfast:lsGet(dailyKey('breakfast'),null),
 blendMode:false,
@@ -844,10 +1110,13 @@ setsDone:lsGet(dailyKey('setsDone'),{}),
 armMeasurements:lsGet('armMeasurements',[]),
 armFormOpen:false,
 activeScreen:'dashboard',
-restTimer:null,restRemaining:0
+restTimer:null,restRemaining:0,
+viewMode:'day',
+viewingDate:null
 };
 function save(){
-lsSet(dailyKey('shave'),state.shave);lsSet(dailyKey('water'),state.water);
+lsSet(dailyKey('shave'),state.shave);lsSet(dailyKey('tkd'),state.tkdToday);
+lsSet(dailyKey('water'),state.water);
 lsSet(dailyKey('dayType'),state.dayType);lsSet('waterUnit',state.waterUnit);
 lsSet(dailyKey('breakfast'),state.breakfast);
 lsSet(dailyKey('blendPicks'),state.blendPicks);lsSet(dailyKey('blendRatio'),state.blendRatio);
@@ -860,23 +1129,65 @@ lsSet('armMeasurements',state.armMeasurements);
 /* ===== RENDER ===== */
 function getGreeting(){const h=new Date().getHours();if(h<12)return'Good morning, Mat';if(h<18)return'Good afternoon, Mat';return'Good evening, Mat';}
 function renderHeader(){
-const d=new Date();const opts={weekday:'long',month:'long',day:'numeric'};
-document.getElementById('headerGreeting').textContent=getGreeting();
-document.getElementById('headerDay').textContent=d.toLocaleDateString('en-GB',opts);
-const di=DAYS[dow];const el=document.getElementById('headerType');
-el.innerHTML='<span class="ht-dot" style="background:'+di.tc+'"></span> '+di.type;
-el.style.background=di.tb;el.style.color=di.tc;
+const viewDate=state.viewingDate||new Date();const opts={weekday:'long',month:'long',day:'numeric'};
+const isViewing=state.viewingDate&&state.viewingDate.toDateString()!==today;
+document.getElementById('headerGreeting').textContent=isViewing?DAYS[viewDate.getDay()].name:getGreeting();
+document.getElementById('headerDay').textContent=viewDate.toLocaleDateString('en-GB',opts);
+const activeDow=getActiveDow();const tkd=getActiveTkd();
+let di=DAYS[activeDow];
+let typeLabel=di.type,tc=di.tc,tb=di.tb;
+if([1,3,5].includes(activeDow)&&!tkd){typeLabel='Replacement Day';tc='#c4652a';tb='rgba(196,101,42,0.12)';}
+const el=document.getElementById('headerType');
+el.innerHTML='<span class="ht-dot" style="background:'+tc+'"></span> '+typeLabel;
+el.style.background=tb;el.style.color=tc;
 }
 function renderShaveToggle(){
 const btn=document.getElementById('shaveBtn');
-btn.className='toggle'+(state.shave?' on':'');
-btn.onclick=()=>{state.shave=!state.shave;save();renderShaveToggle();renderTimeline()};
+const sh=getActiveShave();
+btn.className='toggle'+(sh?' on':'');
+btn.onclick=()=>{
+if(state.viewingDate){
+const ds=state.viewingDate.toDateString();
+const cur=lsGet('shave_'+ds,false);
+lsSet('shave_'+ds,!cur);
+}else{
+state.shave=!state.shave;save();
+}
+renderShaveToggle();renderTimeline();
+};
+}
+/* V16: TKD Toggle */
+function renderTkdToggle(){
+const el=document.getElementById('tkdToggle');
+const d=getActiveDow();
+if(![1,3,5].includes(d)){el.style.display='none';return;}
+el.style.display='flex';
+const tkd=getActiveTkd();
+const dateStr=getActiveDateStr();
+document.getElementById('tkdOpts').innerHTML=
+'<button class="tkd-opt yes'+(tkd?' active':'')+'" onclick="toggleTkd(true,\''+dateStr+'\')">Yes</button>'+
+'<button class="tkd-opt no'+(!tkd?' active':'')+'" onclick="toggleTkd(false,\''+dateStr+'\')">No</button>';
+}
+function toggleTkd(val,dateStr){
+setTkdForDate(dateStr,val);
+if(dateStr===today){
+state.tkdToday=val;
+if(!val&&state.dayType==='tkd'){state.dayType='calisthenics';save();}
+else if(val&&state.dayType==='calisthenics'&&AUTO_DAY_TYPE[dow]==='tkd'){state.dayType='tkd';save();}
+}
+renderTkdToggle();renderTimeline();renderHeader();
+if(state.activeScreen==='water')renderWater();
+if(state.activeScreen==='training')renderTraining();
 }
 
 function renderTimeline(){
-const sched=getSchedule(dow,state.shave);
+const d=getActiveDow();
+const sh=getActiveShave();
+const tkd=getActiveTkd();
+const sched=getSchedule(d,sh,tkd);
 const container=document.getElementById('timeline');
-const nowH=new Date().getHours(),nowM=new Date().getMinutes(),nowTotal=nowH*60+nowM;
+const isToday=!state.viewingDate||state.viewingDate.toDateString()===today;
+const nowH=new Date().getHours(),nowM=new Date().getMinutes(),nowTotal=isToday?nowH*60+nowM:-1;
 container.innerHTML=sched.map((item,i)=>{
 const[h,m]=item.t.split(':').map(Number);const itemTotal=h*60+m;
 const next=sched[i+1];const nextTotal=next?parseInt(next.t.split(':')[0])*60+parseInt(next.t.split(':')[1]):1440;
@@ -885,9 +1196,9 @@ const catClass=item.c?' '+item.c:'';
 const nowClass=isCurrent?' now':'';
 let detailHtml='';
 if(item.expand&&item.detail){
-const steps=getSkinSteps(item.detail,state.shave);
+const steps=getSkinSteps(item.detail,sh,d,tkd);
 if(steps.length){
-const totalDur=item.detail==='SKIN_AM'?(state.shave?'~8-10 min':'~4 min'):'~8-10 min';
+const totalDur=item.detail==='SKIN_AM'?(sh?'~8-10 min':'~4 min'):'~8-10 min';
 detailHtml='<div class="duration" style="margin-bottom:8px">Total: '+totalDur+'</div>';
 detailHtml+=renderSteps(steps);
 }
@@ -983,7 +1294,7 @@ c+=Math.round(a.c*r[0]/100+b.c*r[1]/100);f+=Math.round(a.f*r[0]/100+b.f*r[1]/100
 const bf=BREAKFASTS[state.breakfast];kcal+=bf.kcal;p+=bf.p;c+=bf.c;f+=bf.f;
 }
 state.loggedMeals.forEach(m=>{const meal=MEALS[m.idx];const g=m.portion==='small'?meal.gS:m.portion==='large'?meal.gL:meal.gM;kcal+=Math.round(meal.kcal100*g/100);p+=Math.round(meal.p100*g/100);c+=Math.round(meal.c100*g/100);f+=Math.round(meal.f100*g/100)});
-state.loggedSnacks.forEach(i=>{const s=SNACKS[i];kcal+=s.kcal;p+=s.p});
+state.loggedSnacks.forEach(i=>{const s=SNACKS[i];kcal+=s.kcal;p+=s.p;if(s.c)c+=s.c;if(s.f)f+=s.f});
 return{kcal,p,c,f};
 }
 function renderMeals(){
@@ -1049,9 +1360,16 @@ ${logged?`<div class="portion-btns">
 <button class="portion-btn${portion==='large'?' active':''}" onclick="setPortion(${i},'large')">L</button>
 </div>`:''}
 </div>`;}).join('');
-document.getElementById('snackGrid').innerHTML=SNACKS.map((s,i)=>
-`<div class="snack-chip${state.loggedSnacks.includes(i)?' selected':''}" onclick="toggleSnack(${i})">${s.name} (${s.kcal})</div>`
-).join('');
+document.getElementById('snackGrid').innerHTML=SNACKS.map((s,i)=>{
+const sel=state.loggedSnacks.includes(i)?' selected':'';
+if(s.tag){
+const cls='snack-chip yogurt'+(s.coming?' coming':'')+sel;
+return`<div class="${cls}" onclick="toggleSnack(${i})">
+<div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}</div>
+<div class="snack-ymacros">${s.kcal} kcal \u00b7 ${s.p}g P \u00b7 ${s.c}g C \u00b7 ${s.f}g F</div>
+<div class="snack-ytag">${s.tag}</div></div>`;}
+return`<div class="snack-chip${sel}" onclick="toggleSnack(${i})">${s.name} (${s.kcal})</div>`;
+}).join('');
 }
 function pickBreakfast(i){if(state.blendMode)return;state.breakfast=state.breakfast===i?null:i;save();renderMeals();}
 function calcBlendAmt(amt,pct){
@@ -1140,9 +1458,18 @@ volArea.innerHTML=`<div class="volume-card"><h4>Weekly Arm Volume</h4>
 </div>`;
 }else{volArea.innerHTML='';}
 }else if([1,3,5].includes(dow)){
+if(state.tkdToday){
 titleEl.textContent='TKD Day \u2014 No Calisthenics';
 subEl.textContent='GTG micro-practice during work breaks. See below.';
 area.innerHTML='<div class="empty-state">Focus on TKD tonight. Recovery from yesterday\'s session.</div>';
+}else{
+const isShort=dow===3;
+const variant=isShort?'SHORT':'FULL';
+const dur=isShort?'60 min':'~80 min';
+titleEl.textContent='Replacement Session \u2014 '+variant;
+subEl.textContent=dur+' | Cardio + Explosive + Core + Lower Body + Flexibility';
+area.innerHTML=renderReplacementWorkout(isShort);
+}
 volArea.innerHTML='';
 }else{
 titleEl.textContent='Rest Day';subEl.textContent='Stretch and recover. Optional light mobility.';
@@ -1208,7 +1535,7 @@ state.armFormOpen=false;save();renderTraining();
 }
 function startRest(sec){
 if(state.restTimer)clearInterval(state.restTimer);
-state.restRemaining=sec;const display=document.getElementById('timerDisplay');
+state.restRemaining=sec;const display=document.getElementById('timerDisplay')||document.getElementById('replTimer');
 display.style.display='block';display.textContent=formatTime(sec);
 display.scrollIntoView({behavior:'smooth',block:'center'});
 state.restTimer=setInterval(()=>{
@@ -1285,6 +1612,12 @@ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 document.getElementById('screen-'+screen).classList.add('active');
 document.getElementById('screens').scrollTop=0;
 state.activeScreen=screen;
+if(screen==='dashboard'){state.viewingDate=null;state.viewMode='day';
+document.querySelectorAll('.view-toggle-btn').forEach(b=>{b.classList.toggle('active',b.dataset.view==='day');});
+document.getElementById('dailyView').classList.remove('hidden');
+document.getElementById('weeklyView').classList.remove('active');
+renderHeader();renderShaveToggle();renderTkdToggle();renderTimeline();
+document.getElementById('timelineTitle').textContent="Today's Timeline";}
 if(screen==='water')renderWater();
 if(screen==='meals')renderMeals();
 if(screen==='training')renderTraining();
@@ -1308,8 +1641,144 @@ kw.parentElement.insertBefore(popup,kw.nextSibling);
 e.stopPropagation();
 });
 
+/* V16: VIEW MODE + WEEKLY VIEW */
+function setViewMode(mode,targetDate){
+state.viewMode=mode;
+const daily=document.getElementById('dailyView');
+const weekly=document.getElementById('weeklyView');
+document.querySelectorAll('.view-toggle-btn').forEach(b=>{b.classList.toggle('active',b.dataset.view===mode);});
+if(mode==='week'){
+state.viewingDate=null;
+daily.classList.add('hidden');
+weekly.classList.add('active');
+renderWeeklyView();
+renderHeader();
+}else{
+weekly.classList.remove('active');
+daily.classList.remove('hidden');
+if(targetDate){
+state.viewingDate=targetDate;
+}else{
+state.viewingDate=null;
+}
+renderHeader();renderTkdToggle();renderShaveToggle();renderTimeline();
+const titleEl=document.getElementById('timelineTitle');
+if(state.viewingDate&&state.viewingDate.toDateString()!==today){
+const opts2={weekday:'long',month:'long',day:'numeric'};
+titleEl.textContent=state.viewingDate.toLocaleDateString('en-GB',opts2);
+}else{
+titleEl.textContent="Today's Timeline";
+}
+}
+}
+function viewDay(dateStr){
+const d=new Date(dateStr);
+setViewMode('day',d);
+document.getElementById('screens').scrollTop=0;
+}
+function getWeekDates(){
+const now=new Date();
+const day=now.getDay();
+const diff=day===0?-6:1-day;
+const monday=new Date(now);
+monday.setDate(now.getDate()+diff);
+monday.setHours(0,0,0,0);
+const dates=[];
+for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);dates.push(d);}
+return dates;
+}
+const WEEK_DAY_NAMES=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+const WEEK_SUMMARIES={
+1:{tkd:'Work 8\u201318h \u2192 TKD 19\u201321h30 \u2192 Late dinner',noTkd:'Work 8\u201318h \u2192 Replacement 18h10 \u2192 Dinner 19h45'},
+2:{tkd:'Work 8\u201318h \u2192 Calisthenics \u2192 English 19h'},
+3:{tkd:'Work 8\u201316h \u2192 Music \u2192 Coach kids \u2192 TKD 19h05',noTkd:'Work 8\u201316h \u2192 Music \u2192 Replacement 18h30'},
+4:{tkd:'Work 8\u201318h \u2192 Calisthenics 18h30 (2h)'},
+5:{tkd:'Work 8\u201318h \u2192 TKD 19\u201321h30 \u2192 Late dinner',noTkd:'Work 8\u201318h \u2192 Replacement 18h10 \u2192 Dinner 19h45'},
+6:{tkd:'Calisthenics 10h30 \u2192 Free afternoon'},
+0:{tkd:'Rest day \u2192 Meal prep 17h30'}
+};
+function getDayPill(dayNum,tkd){
+if(dayNum===0)return{label:'Rest Day',cls:'rest'};
+if(dayNum===6)return{label:'Calisthenics + Recovery',cls:'full-session'};
+if([2,4].includes(dayNum))return{label:'Calisthenics Day',cls:'calisthenics'};
+if([1,3,5].includes(dayNum)){
+if(tkd)return{label:dayNum===5?'TKD \u2014 Hard Sparring':'TKD Day',cls:'tkd'};
+return{label:'Replacement Day',cls:'replacement'};
+}
+return{label:'',cls:''};
+}
+function isShampooDay(dayNum,tkd){
+if(dayNum===1||dayNum===5)return true;
+if(dayNum===3&&!tkd)return true;
+if(dayNum===3&&tkd)return false;
+return false;
+}
+function renderWeeklyView(){
+const dates=getWeekDates();
+const todayStr=new Date().toDateString();
+let counts={tkd:0,replacement:0,calisthenics:0,fullSession:0,rest:0};
+const cardData=dates.map(d=>{
+const dn=d.getDay();
+const dateStr=d.toDateString();
+const isTkdDay=[1,3,5].includes(dn);
+const tkd=isTkdDay?getTkdForDate(dateStr):true;
+const pill=getDayPill(dn,tkd);
+const shampoo=isShampooDay(dn,tkd);
+const summary=WEEK_SUMMARIES[dn];
+const summaryText=summary?(isTkdDay&&!tkd&&summary.noTkd?summary.noTkd:summary.tkd):'';
+const isCurrent=dateStr===todayStr;
+const isPast=d<new Date(todayStr);
+if(dn===0)counts.rest++;
+else if(dn===6)counts.fullSession++;
+else if([2,4].includes(dn))counts.calisthenics++;
+else if(isTkdDay&&tkd)counts.tkd++;
+else if(isTkdDay&&!tkd)counts.replacement++;
+return{date:d,dn,dateStr,tkd,pill,shampoo,summaryText,isCurrent,isPast,isTkdDay};
+});
+const sumParts=[];
+if(counts.tkd)sumParts.push(counts.tkd+' TKD');
+if(counts.replacement)sumParts.push(counts.replacement+' Replacement');
+if(counts.calisthenics)sumParts.push(counts.calisthenics+' Calisthenics');
+if(counts.fullSession)sumParts.push(counts.fullSession+' Full Session');
+if(counts.rest)sumParts.push(counts.rest+' Rest');
+const monDate=dates[0];const sunDate=dates[6];
+const fmtShort={month:'long',day:'numeric'};
+document.getElementById('weekSummary').innerHTML=
+'<div class="week-summary-title">Week of '+monDate.toLocaleDateString('en-GB',fmtShort)+' \u2013 '+sunDate.toLocaleDateString('en-GB',fmtShort)+'</div>'+
+'<div class="week-summary-stats">'+sumParts.join(' \u00b7 ')+'</div>';
+document.getElementById('weekCards').innerHTML=cardData.map((cd,ci)=>{
+let cls='week-card week-card-anim';
+if(cd.isCurrent)cls+=' current';
+if(cd.isPast&&!cd.isCurrent)cls+=' past';
+const dayLabel=WEEK_DAY_NAMES[cd.dn]+' '+cd.date.getDate();
+let toggleHtml='';
+if(cd.isTkdDay){
+toggleHtml=`<div class="week-card-toggle" onclick="event.stopPropagation()">
+<span class="week-card-toggle-label">Going to TKD?</span>
+<div class="week-mini-toggle">
+<button class="week-mini-opt yes${cd.tkd?' active':''}" onclick="event.stopPropagation();toggleWeekTkd('${cd.dateStr}',true)">Yes</button>
+<button class="week-mini-opt no${!cd.tkd?' active':''}" onclick="event.stopPropagation();toggleWeekTkd('${cd.dateStr}',false)">No</button>
+</div></div>`;
+}
+return`<div class="${cls}" style="animation-delay:${ci*50}ms" onclick="viewDay('${cd.dateStr}')">
+<div class="week-card-head">
+<span class="week-card-day">${dayLabel}</span>
+<span class="week-card-pill ${cd.pill.cls}">${cd.pill.label}</span>
+<span class="week-card-chevron">\u203a</span>
+</div>
+<div class="week-card-summary">${cd.summaryText}</div>
+${cd.shampoo?'<div class="week-card-indicators"><span class="week-card-shampoo">Shampoo day</span></div>':''}
+${toggleHtml}
+</div>`;
+}).join('');
+}
+function toggleWeekTkd(dateStr,val){
+setTkdForDate(dateStr,val);
+renderWeeklyView();
+}
+
 /* INIT */
-buildNav();renderHeader();renderShaveToggle();renderTimeline();
+buildNav();renderHeader();renderShaveToggle();renderTkdToggle();renderTimeline();
 renderWater();renderMeals();renderTraining();renderExtras();renderShopping();
 </script>
 </body>
