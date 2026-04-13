@@ -356,6 +356,50 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .repl-variant-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;background:rgba(196,101,42,0.15);color:var(--cat-sport);letter-spacing:.5px;margin-bottom:10px;display:inline-block}
 @keyframes weekCardsIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .week-card-anim{animation:weekCardsIn .2s ease both}
+/* V17: Meal counter + remove */
+.meal-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border-radius:10px;background:var(--skin);color:#111;font-size:10px;font-weight:700;padding:0 5px;margin-left:6px;flex-shrink:0}
+.meal-remove{width:22px;height:22px;border-radius:6px;background:rgba(212,115,108,0.15);border:1px solid rgba(212,115,108,0.25);color:var(--groom);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-family:'DM Sans',sans-serif}
+.meal-remove:active{background:var(--groom);color:#111;transform:scale(0.9)}
+.meal-add-btn{width:22px;height:22px;border-radius:6px;background:rgba(91,190,183,0.15);border:1px solid rgba(91,190,183,0.25);color:var(--skin);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-family:'DM Sans',sans-serif}
+.meal-add-btn:active{background:var(--skin);color:#111;transform:scale(0.9)}
+.meal-actions{display:flex;gap:4px;align-items:center}
+/* V17: Snack counter */
+.snack-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:9px;background:var(--skin);color:#111;font-size:9px;font-weight:700;padding:0 4px;margin-left:4px}
+.snack-actions{display:flex;gap:4px;margin-top:6px;align-items:center}
+.snack-actions button{width:24px;height:24px;border-radius:6px;border:1px solid var(--card-border);background:var(--bg-card);color:var(--text-dim);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;transition:all .15s}
+.snack-actions button:active{transform:scale(0.9)}
+.snack-portion-btns{display:flex;gap:3px;margin-top:6px}
+.snack-portion-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:5px;padding:2px 7px;font-size:10px;color:var(--text-dim);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.snack-portion-btn.active{background:var(--skin);color:#111;border-color:var(--skin)}
+/* V18: Notes */
+.notes-add-btn{width:28px;height:28px;border-radius:50%;background:var(--skin);border:none;color:#111;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s;flex-shrink:0;font-family:'DM Sans',sans-serif}
+.notes-add-btn:active{transform:scale(0.9)}
+.notes-card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-top:2px solid rgba(196,155,74,0.4);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card);animation:noteCardIn .25s ease}
+@keyframes noteCardIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.notes-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.notes-card-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:600}
+.notes-form{max-height:0;overflow:hidden;transition:max-height .25s ease-out}
+.notes-form.open{max-height:220px}
+.notes-form-inner{padding:8px 0;border-top:1px solid rgba(255,255,255,0.04)}
+.notes-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--card-border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;margin-bottom:8px}
+.notes-input::placeholder{color:var(--text-muted)}
+.notes-cat-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.notes-cat-dot{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .2s,transform .15s,box-shadow .2s}
+.notes-cat-dot.selected{border-color:rgba(255,255,255,0.8);transform:scale(1.15);box-shadow:0 0 6px rgba(255,255,255,0.15)}
+.notes-cat-dot:active{transform:scale(0.9)}
+.notes-form-actions{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.notes-date-input{background:rgba(255,255,255,0.05);border:1px solid var(--card-border);border-radius:6px;padding:5px 8px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;color-scheme:dark}
+.notes-save-btn{background:var(--skin);border:none;border-radius:8px;padding:7px 18px;color:#111;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform .15s}
+.notes-save-btn:active{transform:scale(0.95)}
+.note-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);animation:noteItemIn .2s ease}
+.note-item:last-child{border-bottom:none}
+@keyframes noteItemIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.note-item-bar{width:3px;min-height:20px;border-radius:2px;flex-shrink:0;align-self:stretch}
+.note-item-text{flex:1;font-size:13px;line-height:1.4;transition:opacity .2s,text-decoration .2s}
+.note-item.done .note-item-text{text-decoration:line-through;opacity:0.5}
+.note-item-check{width:20px;height:20px;border:2px solid rgba(255,255,255,0.15);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:11px}
+.note-item-check.done{background:var(--skin);border-color:var(--skin);color:#111}
+.week-card-note-dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -384,6 +428,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 <div class="tkd-toggle-label">Going to TKD today?</div>
 <div class="tkd-toggle-opts" id="tkdOpts"></div>
 </div>
+<div id="notesCard"></div>
 <div class="section-title" id="timelineTitle">Today's Timeline</div>
 <div class="timeline" id="timeline"></div>
 </div>
@@ -820,20 +865,56 @@ const BREAKFASTS=[
 const BF_DETAILS=[
 {ingredients:[{item:"Rolled oats (flocons d'avoine)",amt:'80 g',why:'Complex carbs, beta-glucan'},{item:'Skyr or fromage blanc 0%',amt:'200 g',why:'~22g protein, calcium'},{item:'Banana',amt:'1',why:'Potassium, pre-training carbs'},{item:'Almonds, crushed',amt:'25 g',why:'Vitamin E, magnesium, healthy fats'},{item:'Ground flaxseed',amt:'1 tbsp',why:'ALA omega-3, fiber'},{item:'Honey or maple syrup',amt:'1 tsp',why:'Flavor, glycogen'},{item:'Cinnamon',amt:'pinch',why:'Optional, glucose regulation'},{item:'Whey scoop (optional)',amt:'15 g',why:'Bumps protein to ~45g'}],steps:['Measure oats into microwave-safe bowl','Add milk or water to cover','Microwave 2 min (or soak overnight)','Top with skyr, sliced banana, almonds, flaxseed','Drizzle honey and cinnamon'],time:'3 min',tips:['Prep night before for overnight oats \u2014 zero morning effort','Swap banana for berries on rest days for more antioxidants']},
 {ingredients:[{item:'Whole eggs (Label Rouge)',amt:'3',why:'~18g protein, choline, vitamin A'},{item:'Whole-grain bread',amt:'2 slices',why:'Complex carbs'},{item:'Avocado',amt:'1/2',why:'Monounsaturated fat, potassium'},{item:'Tomato or red pepper',amt:'1',why:'Vitamin C, lycopene'},{item:'Olive oil',amt:'1 tsp',why:'Flavor, vitamin E'},{item:'Fruit (orange or kiwi)',amt:'1',why:'Vitamin C'},{item:'Skyr on the side',amt:'100 g',why:'Top-up protein (+11g)'}],steps:['Heat pan with olive oil on medium','Scramble or fry 3 eggs','Toast bread','Slice avocado and tomato','Plate: eggs + toast + avocado + tomato + fruit + skyr'],time:'5-6 min',tips:['Scrambled is faster; fried gives more texture','Add salt and pepper to eggs']},
-{ingredients:[{item:'Fromage blanc 0% or Greek yogurt',amt:'300 g',why:'~30g protein'},{item:'Oats (raw, as granola)',amt:'50 g',why:'Carbs'},{item:'Walnuts, broken',amt:'30 g',why:'Omega-3 ALA \u2014 key skin nutrient'},{item:'Blueberries or mixed berries',amt:'100 g',why:'Polyphenols, vitamin C'},{item:'Chia seeds',amt:'1 tbsp',why:'Omega-3, fiber'},{item:'Honey',amt:'1 tsp',why:'Flavor'},{item:'Whey scoop (optional)',amt:'15 g',why:'Bumps to ~45g protein'}],steps:['Spoon yogurt into bowl','Top with oats, walnuts, berries, chia','Drizzle honey','Mix or eat layered'],time:'2 min',tips:['Zero cooking \u2014 fastest option','Frozen berries work fine and are cheaper']},
+{ingredients:[{item:'Fromage blanc 0% or protein yogurt',amt:'300 g',why:'~24-33g protein (see tip below)'},{item:'Oats (raw, as granola)',amt:'50 g',why:'Carbs'},{item:'Walnuts, broken',amt:'30 g',why:'Omega-3 ALA \u2014 key skin nutrient'},{item:'Blueberries or mixed berries',amt:'100 g',why:'Polyphenols, vitamin C'},{item:'Chia seeds',amt:'1 tbsp',why:'Omega-3, fiber'},{item:'Honey',amt:'1 tsp',why:'Flavor'},{item:'Whey scoop (optional)',amt:'15 g',why:'Bumps to ~45g protein'}],steps:['Spoon yogurt into bowl','Top with oats, walnuts, berries, chia','Drizzle honey','Mix or eat layered'],time:'2 min',tips:['Zero cooking \u2014 fastest option','Frozen berries work fine and are cheaper','Protein tip: standard yaourt grec only has ~3g P/100g (=9g in 300g). Swap for fromage blanc 0% (~8g P/100g = 24g) or protein yogurt (~11g P/100g = 33g) to gain +15-24g protein per serving.']},
 {ingredients:[{item:'Rolled oats',amt:'110 g',why:'Extra carbs for pre-training fuel'},{item:'Skyr or fromage blanc 0%',amt:'200 g',why:'~22g protein, calcium'},{item:'Bananas',amt:'2',why:'Double potassium, fast carbs'},{item:'Whey scoop',amt:'30 g',why:'Keeps protein at ~45g'},{item:'Honey',amt:'1 tsp',why:'Flavor'},{item:'Cinnamon',amt:'pinch',why:'Optional'}],steps:['Measure oats into bowl, add milk/water','Microwave 2 min','Mix in whey (add to warm, not hot oats)','Top with sliced bananas, skyr, honey'],time:'3 min',tips:['Best for Saturday morning before calisthenics','No almonds \u2014 fat slows digestion pre-training']}
 ];
 
-/* MEALS */
+/* MEALS — Macro audit 2026-04-13. Per-100g values verified against CIQUAL/ANSES, Open Food Facts, FatSecret France.
+   Corrections applied: pates bolognaise, poisson, soupe, couscous, ratatouille, omelette, croque-monsieur,
+   blanquette, saumon, poulet basquaise, boeuf bourg, tomates farcies, endives, tartiflette, pot-au-feu,
+   cassoulet, salade nicoise, galette, poelee, riz cantonais, carbonara, steak hache. */
 const MEALS=[
-{name:"Poulet rôti + riz",kcal100:162,p100:11.2,c100:13.8,f100:5,gS:300,gM:400,gL:500},{name:"Steak haché + purée",kcal100:175,p100:8.8,c100:12.5,f100:8.8,gS:300,gM:400,gL:500},{name:"Poisson + légumes",kcal100:129,p100:11.4,c100:7.1,f100:5.1,gS:250,gM:350,gL:450},{name:"Pâtes bolognaise",kcal100:200,p100:8.6,c100:22.9,f100:6.3,gS:250,gM:350,gL:450},{name:"Quiche lorraine + salade",kcal100:183,p100:7.3,c100:11.7,f100:11.7,gS:200,gM:300,gL:400},{name:"Soupe + pain",kcal100:114,p100:4.3,c100:15.7,f100:3.4,gS:250,gM:350,gL:450},{name:"Couscous + merguez",kcal100:188,p100:8.8,c100:18.8,f100:7.5,gS:300,gM:400,gL:500},{name:"Gratin dauphinois",kcal100:143,p100:5.1,c100:11.4,f100:8.6,gS:250,gM:350,gL:450},{name:"Ratatouille + riz",kcal100:125,p100:3,c100:16.3,f100:4.5,gS:300,gM:400,gL:500},{name:"Omelette + salade",kcal100:150,p100:9.3,c100:5,f100:10,gS:200,gM:300,gL:400},{name:"Croque-monsieur",kcal100:180,p100:8.8,c100:14,f100:10,gS:180,gM:250,gL:320},{name:"Blanquette de veau",kcal100:150,p100:8.8,c100:7.5,f100:8.8,gS:300,gM:400,gL:500},{name:"Hachis parmentier",kcal100:163,p100:7.5,c100:12.5,f100:8.8,gS:300,gM:400,gL:500},{name:"Saumon + riz + légumes",kcal100:163,p100:10,c100:13.8,f100:6.3,gS:300,gM:400,gL:500},{name:"Poulet basquaise",kcal100:138,p100:9.5,c100:7.5,f100:6.3,gS:300,gM:400,gL:500},{name:"Boeuf bourguignon",kcal100:150,p100:10,c100:6.3,f100:8.8,gS:300,gM:400,gL:500},{name:"Tomates farcies + riz",kcal100:150,p100:7,c100:13.8,f100:6.3,gS:300,gM:400,gL:500},{name:"Endives au jambon",kcal100:129,p100:8,c100:5.7,f100:8,gS:250,gM:350,gL:450},{name:"Tartiflette",kcal100:214,p100:8.6,c100:12.9,f100:12.9,gS:250,gM:350,gL:450},{name:"Pot-au-feu",kcal100:111,p100:7.8,c100:7.8,f100:4.4,gS:350,gM:450,gL:550},{name:"Cassoulet",kcal100:200,p100:10,c100:12.5,f100:10,gS:300,gM:400,gL:500},{name:"Salade niçoise",kcal100:133,p100:8.3,c100:6.7,f100:8.3,gS:200,gM:300,gL:400},{name:"Galette complète",kcal100:180,p100:8.8,c100:16,f100:8.8,gS:180,gM:250,gL:320},{name:"Poêlée poulet + légumes",kcal100:125,p100:9.5,c100:8.8,f100:4.5,gS:300,gM:400,gL:500},{name:"Riz cantonais",kcal100:157,p100:6.3,c100:17.1,f100:6.3,gS:250,gM:350,gL:450},{name:"Pâtes à la Carbonara (+ jaune d'oeuf)",kcal100:190,p100:8.0,c100:18.0,f100:10.0,gS:250,gM:350,gL:450},{name:"Chicken Wraps (x2)",kcal100:180,p100:12.2,c100:10.4,f100:9.9,gS:400,gM:800,gL:850}
+{name:"Poulet r\u00f4ti + riz",kcal100:155,p100:11.0,c100:16.0,f100:4.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Steak hach\u00e9 + pur\u00e9e",kcal100:150,p100:8.5,c100:12.0,f100:7.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Poisson + l\u00e9gumes",kcal100:90,p100:10.0,c100:5.5,f100:2.5,gS:250,gM:350,gL:450,gXL:550},
+{name:"P\u00e2tes bolognaise",kcal100:140,p100:7.0,c100:16.0,f100:5.0,gS:250,gM:350,gL:450,gXL:550},
+{name:"Quiche lorraine + salade",kcal100:185,p100:7.5,c100:12.0,f100:12.0,gS:200,gM:300,gL:400,gXL:500},
+{name:"Soupe + pain",kcal100:90,p100:3.5,c100:13.0,f100:2.0,gS:250,gM:350,gL:450,gXL:550},
+{name:"Couscous + merguez",kcal100:165,p100:8.0,c100:17.0,f100:6.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Gratin dauphinois",kcal100:135,p100:4.0,c100:13.0,f100:7.0,gS:250,gM:350,gL:450,gXL:550},
+{name:"Ratatouille + riz",kcal100:95,p100:2.5,c100:13.0,f100:3.0,gS:300,gM:400,gL:500,gXL:600},
+{name:"Omelette + salade",kcal100:130,p100:8.5,c100:4.0,f100:8.5,gS:200,gM:300,gL:400,gXL:500},
+{name:"Croque-monsieur",kcal100:275,p100:13.0,c100:20.0,f100:15.0,gS:180,gM:250,gL:320,gXL:400},
+{name:"Blanquette de veau",kcal100:120,p100:10.0,c100:4.0,f100:6.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Hachis parmentier",kcal100:145,p100:6.5,c100:11.0,f100:8.0,gS:300,gM:400,gL:500,gXL:600},
+{name:"Saumon + riz + l\u00e9gumes",kcal100:150,p100:10.0,c100:14.0,f100:6.0,gS:300,gM:400,gL:500,gXL:600},
+{name:"Poulet basquaise",kcal100:108,p100:9.5,c100:5.0,f100:5.0,gS:300,gM:400,gL:500,gXL:600},
+{name:"Boeuf bourguignon",kcal100:110,p100:9.0,c100:4.0,f100:5.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Tomates farcies + riz",kcal100:120,p100:5.5,c100:11.0,f100:5.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Endives au jambon",kcal100:105,p100:6.5,c100:4.0,f100:6.5,gS:250,gM:350,gL:450,gXL:550},
+{name:"Tartiflette",kcal100:160,p100:6.0,c100:10.0,f100:10.0,gS:250,gM:350,gL:450,gXL:550},
+{name:"Pot-au-feu",kcal100:85,p100:7.0,c100:5.5,f100:3.5,gS:350,gM:450,gL:550,gXL:650},
+{name:"Cassoulet",kcal100:170,p100:10.5,c100:10.0,f100:9.0,gS:300,gM:400,gL:500,gXL:600},
+{name:"Salade ni\u00e7oise",kcal100:105,p100:6.0,c100:7.0,f100:6.0,gS:200,gM:300,gL:400,gXL:500},
+{name:"Galette compl\u00e8te",kcal100:190,p100:10.0,c100:14.0,f100:10.0,gS:180,gM:250,gL:320,gXL:400},
+{name:"Po\u00eal\u00e9e poulet + l\u00e9gumes",kcal100:100,p100:10.0,c100:5.5,f100:3.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Riz cantonais",kcal100:157,p100:5.5,c100:22.0,f100:5.0,gS:250,gM:350,gL:450,gXL:550},
+{name:"P\u00e2tes \u00e0 la Carbonara (+ jaune d'oeuf)",kcal100:170,p100:7.0,c100:17.0,f100:8.5,gS:250,gM:350,gL:450,gXL:550},
+{name:"Chicken Wraps (x2)",kcal100:180,p100:12.2,c100:10.4,f100:9.9,gS:400,gM:800,gL:850,gXL:900}
 ];
 const SNACKS=[
-{name:'Banana + rice cakes + PB',kcal:280,p:8},{name:'Skyr 200g + honey + berries',kcal:250,p:22},{name:'Protein bar (HiPro)',kcal:180,p:18},{name:'Dates (4) + almonds',kcal:220,p:5},{name:'Tuna on bread',kcal:350,p:28},{name:'Cottage cheese + walnuts',kcal:320,p:25},{name:'2 boiled eggs + oatcake',kcal:250,p:15},{name:'Pumpkin seeds + apple',kcal:250,p:9},{name:'Pre-bed skyr + almonds',kcal:250,p:25},
+{name:'Banana + rice cakes + PB',kcal:280,p:8,c:38,f:10},{name:'Skyr 200g + honey + berries',kcal:250,p:22,c:30,f:2},{name:'Protein bar (HiPro)',kcal:180,p:18,c:15,f:6},{name:'Dates (4) + almonds',kcal:220,p:5,c:35,f:8},{name:'Tuna on bread',kcal:350,p:28,c:30,f:12},{name:'Cottage cheese + walnuts',kcal:320,p:25,c:8,f:20},{name:'2 boiled eggs + oatcake',kcal:250,p:15,c:18,f:13},{name:'Pumpkin seeds + apple',kcal:250,p:9,c:25,f:14},{name:'Pre-bed skyr + almonds',kcal:250,p:25,c:12,f:10},
 {name:'Yaourt v\u00e9g\u00e9tal coco (Andros)',kcal:75,p:1,c:7,f:5,tag:'Low protein \u2014 occasional dessert, not a protein source'},
 {name:'Yaourt myrtille HP (skyr-type)',kcal:65,p:11,c:4,f:1,tag:'Best daily choice \u2014 11g protein per pot'},
 {name:'Dessert lact\u00e9 chocolat (Lidl)',kcal:142,p:3,c:17,f:7,tag:'Treat \u2014 high sugar (15g). 1-2x per week max'},
-{name:'Yaourt grec nature (\u00e0 acheter)',kcal:146,p:14,c:5,f:8,tag:'On shopping list \u2014 best protein-to-calorie ratio',coming:true}
+{name:'Yaourt grec nature',kcal:80,p:3,c:5,f:5,tag:'Standard French yaourt grec \u2014 3.1g protein/100g, 120g pot. Low protein.'},
+{name:'Yaourt prot\u00e9in\u00e9 (11g P/100g)',kcal:66,p:13,c:4,f:1,tag:'High protein \u2014 swap into Yogurt Bowl for +12g P per serving',coming:true},
+{name:'Raisins secs',kcal:150,p:2,c:40,f:0,portioned:true,defaultPortion:'M',
+portions:{S:{g:30,kcal:90,p:1,c:24,f:0},M:{g:50,kcal:150,p:2,c:40,f:0},L:{g:75,kcal:224,p:2,c:59,f:0},XL:{g:100,kcal:299,p:3,c:79,f:1}},
+tag:'Quick energy \u2014 high glycemic. Best pre/post workout.'},
+{name:'Hot Coco + Tartines Beurr\u00e9es',kcal:560,p:12,c:68,f:25,portioned:true,defaultPortion:'M',
+portions:{S:{g:null,kcal:490,p:11,c:61,f:21,desc:'50g baguette + 15g beurre + coco'},M:{g:null,kcal:560,p:12,c:68,f:25,desc:'62g baguette + 20g beurre + coco'},L:{g:null,kcal:630,p:13,c:75,f:29,desc:'75g baguette + 25g beurre + coco'},XL:{g:null,kcal:740,p:15,c:89,f:33,desc:'100g baguette + 30g beurre + coco'}},
+tag:'15cl lait entier + 15cl lait avoine + 20g Nesquik + Pr\u00e9sident beurre doux'}
 ];
 
 /* ARM EXERCISE DETAILS */
@@ -1084,6 +1165,17 @@ const SHOP_BUY=[
 {name:'Lattafa Musamam Black Intense EDP (100mL)',reason:'Woody-spicy: patchouli, cedarwood, tonka bean, lavender, nutmeg. Givaudan ingredients by Jordi Fern\u00e1ndez. 12-14h longevity, no synthetic feel. Highly rated in fragrance communities.',where:'Amazon.fr, Notino.fr, parfumsmoinschers.com',price:'~\u20ac17-25'}
 ];
 
+/* V18: NOTE CATEGORIES */
+const NOTE_CATS=[
+{id:'food',hex:'#1a5c3a'},
+{id:'sport',hex:'#c4652a'},
+{id:'care',hex:'#4fa89a'},
+{id:'rest',hex:'#a68b3c'},
+{id:'other',hex:'#6b6560'}
+];
+let noteFormOpen=false;
+let noteSelectedCat='other';
+
 /* ===== STATE ===== */
 const today=new Date().toDateString();
 const dow=new Date().getDay();
@@ -1101,8 +1193,8 @@ breakfast:lsGet(dailyKey('breakfast'),null),
 blendMode:false,
 blendPicks:lsGet(dailyKey('blendPicks'),[]),
 blendRatio:lsGet(dailyKey('blendRatio'),[50,50]),
-loggedMeals:lsGet(dailyKey('meals'),[]),
-loggedSnacks:lsGet(dailyKey('snacks'),[]),
+loggedMeals:lsGet(dailyKey('meals17'),[]),
+loggedSnacks:lsGet(dailyKey('snacks17'),[]),
 progLevels:lsGet('progLevels',{0:0,1:0,2:0}),
 gtgSets:lsGet(dailyKey('gtg'),0),
 shopChecked:lsGet('shopChecked',{}),
@@ -1120,7 +1212,7 @@ lsSet(dailyKey('water'),state.water);
 lsSet(dailyKey('dayType'),state.dayType);lsSet('waterUnit',state.waterUnit);
 lsSet(dailyKey('breakfast'),state.breakfast);
 lsSet(dailyKey('blendPicks'),state.blendPicks);lsSet(dailyKey('blendRatio'),state.blendRatio);
-lsSet(dailyKey('meals'),state.loggedMeals);lsSet(dailyKey('snacks'),state.loggedSnacks);
+lsSet(dailyKey('meals17'),state.loggedMeals);lsSet(dailyKey('snacks17'),state.loggedSnacks);
 lsSet('progLevels',state.progLevels);lsSet(dailyKey('gtg'),state.gtgSets);
 lsSet('shopChecked',state.shopChecked);lsSet(dailyKey('setsDone'),state.setsDone);
 lsSet('armMeasurements',state.armMeasurements);
@@ -1283,6 +1375,17 @@ function setDayType(t){state.dayType=t;save();renderWater()}
 function setWaterUnit(u){state.waterUnit=u;save();renderWater()}
 
 /* MEALS */
+function getMealGrams(meal,portion){
+if(portion==='small')return meal.gS;if(portion==='large')return meal.gL;if(portion==='xl')return meal.gXL;return meal.gM;
+}
+function getSnackMacros(entry){
+const s=SNACKS[entry.idx!==undefined?entry.idx:entry];
+if(s.portioned&&entry.portion){
+const p=s.portions[entry.portion];
+return{kcal:p.kcal,p:p.p,c:p.c||0,f:p.f||0};
+}
+return{kcal:s.kcal,p:s.p,c:s.c||0,f:s.f||0};
+}
 function getTotalMacros(){
 let kcal=0,p=0,c=0,f=0;
 if(state.blendMode&&state.blendPicks.length===2){
@@ -1293,8 +1396,8 @@ c+=Math.round(a.c*r[0]/100+b.c*r[1]/100);f+=Math.round(a.f*r[0]/100+b.f*r[1]/100
 }else if(state.breakfast!==null){
 const bf=BREAKFASTS[state.breakfast];kcal+=bf.kcal;p+=bf.p;c+=bf.c;f+=bf.f;
 }
-state.loggedMeals.forEach(m=>{const meal=MEALS[m.idx];const g=m.portion==='small'?meal.gS:m.portion==='large'?meal.gL:meal.gM;kcal+=Math.round(meal.kcal100*g/100);p+=Math.round(meal.p100*g/100);c+=Math.round(meal.c100*g/100);f+=Math.round(meal.f100*g/100)});
-state.loggedSnacks.forEach(i=>{const s=SNACKS[i];kcal+=s.kcal;p+=s.p;if(s.c)c+=s.c;if(s.f)f+=s.f});
+state.loggedMeals.forEach(m=>{const meal=MEALS[m.idx];const g=getMealGrams(meal,m.portion);kcal+=Math.round(meal.kcal100*g/100);p+=Math.round(meal.p100*g/100);c+=Math.round(meal.c100*g/100);f+=Math.round(meal.f100*g/100)});
+state.loggedSnacks.forEach(entry=>{const sm=getSnackMacros(entry);kcal+=sm.kcal;p+=sm.p;c+=sm.c;f+=sm.f});
 return{kcal,p,c,f};
 }
 function renderMeals(){
@@ -1347,28 +1450,47 @@ addIngs(adtl,r[0],a.name);addIngs(bdtl,r[1],b.name);
 h+='</div>';brEl.innerHTML=h;
 }else{brEl.innerHTML='';}
 document.getElementById('mealList').innerHTML=MEALS.map((ml,i)=>{
-const logged=state.loggedMeals.find(m=>m.idx===i);const portion=logged?logged.portion:'normal';
-const g=portion==='small'?ml.gS:portion==='large'?ml.gL:ml.gM;
-return`<div class="meal-entry${logged?' selected':''}">
-<div class="meal-info" onclick="toggleMeal(${i})">
-<div class="meal-name"><span class="meal-dot"></span>${ml.name} <span class="meal-grams">\u00b7 ${g}g</span></div>
-<div class="meal-kcal">${Math.round(ml.kcal100*g/100)} kcal \u00b7 ${Math.round(ml.p100*g/100)}g P \u00b7 ${Math.round(ml.c100*g/100)}g C \u00b7 ${Math.round(ml.f100*g/100)}g F</div>
+const entries=state.loggedMeals.filter(m=>m.idx===i);const count=entries.length;
+const lastEntry=entries[entries.length-1];const portion=lastEntry?lastEntry.portion:'normal';
+const g=getMealGrams(ml,portion);
+return`<div class="meal-entry${count>0?' selected':''}">
+<div class="meal-info" onclick="addMeal(${i})">
+<div class="meal-name"><span class="meal-dot"></span>${ml.name} <span class="meal-grams">\u00b7 ${g}g</span>${count>1?'<span class="meal-count">\u00d7'+count+'</span>':''}</div>
+<div class="meal-kcal">${Math.round(ml.kcal100*g/100)} kcal \u00b7 ${Math.round(ml.p100*g/100)}g P \u00b7 ${Math.round(ml.c100*g/100)}g C \u00b7 ${Math.round(ml.f100*g/100)}g F${count>1?' (each)':''}</div>
 </div>
-${logged?`<div class="portion-btns">
-<button class="portion-btn${portion==='small'?' active':''}" onclick="setPortion(${i},'small')">S</button>
-<button class="portion-btn${portion==='normal'?' active':''}" onclick="setPortion(${i},'normal')">M</button>
-<button class="portion-btn${portion==='large'?' active':''}" onclick="setPortion(${i},'large')">L</button>
+${count>0?`<div class="meal-actions">
+<div class="portion-btns">
+<button class="portion-btn${portion==='small'?' active':''}" onclick="setMealPortion(${i},'small')">S</button>
+<button class="portion-btn${portion==='normal'?' active':''}" onclick="setMealPortion(${i},'normal')">M</button>
+<button class="portion-btn${portion==='large'?' active':''}" onclick="setMealPortion(${i},'large')">L</button>
+<button class="portion-btn${portion==='xl'?' active':''}" onclick="setMealPortion(${i},'xl')">XL</button>
+</div>
+<button class="meal-remove" onclick="removeMeal(${i})" title="Remove one">\u2212</button>
 </div>`:''}
 </div>`;}).join('');
 document.getElementById('snackGrid').innerHTML=SNACKS.map((s,i)=>{
-const sel=state.loggedSnacks.includes(i)?' selected':'';
+const cnt=getSnackCount(i);const sel=cnt>0?' selected':'';
+const lastEntry=state.loggedSnacks.filter(e=>e.idx===i).pop();
+if(s.portioned){
+const curPortion=lastEntry?lastEntry.portion:(s.defaultPortion||'M');
+const pm=s.portions[curPortion];
+const cls='snack-chip yogurt'+(s.coming?' coming':'')+sel;
+return`<div class="${cls}" onclick="addSnack(${i})">
+<div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}${cnt>0?'<span class="snack-count">\u00d7'+cnt+'</span>':''}</div>
+<div class="snack-ymacros">${pm.kcal} kcal \u00b7 ${pm.p}g P \u00b7 ${pm.c}g C \u00b7 ${pm.f}g F${pm.desc?' \u00b7 '+pm.desc:''}</div>
+<div class="snack-ytag">${s.tag}</div>
+${cnt>0?'<div class="snack-portion-btns">'+['S','M','L','XL'].map(sz=>'<button class="snack-portion-btn'+(curPortion===sz?' active':'')+'" onclick="event.stopPropagation();setSnackPortion('+i+',\''+sz+'\')">'+sz+(s.portions[sz].g?' ('+s.portions[sz].g+'g)':'')+'</button>').join('')+'<button class="meal-remove" style="margin-left:4px" onclick="event.stopPropagation();removeSnack('+i+')">\u2212</button></div>':''}
+</div>`;
+}
 if(s.tag){
 const cls='snack-chip yogurt'+(s.coming?' coming':'')+sel;
-return`<div class="${cls}" onclick="toggleSnack(${i})">
-<div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}</div>
-<div class="snack-ymacros">${s.kcal} kcal \u00b7 ${s.p}g P \u00b7 ${s.c}g C \u00b7 ${s.f}g F</div>
-<div class="snack-ytag">${s.tag}</div></div>`;}
-return`<div class="snack-chip${sel}" onclick="toggleSnack(${i})">${s.name} (${s.kcal})</div>`;
+return`<div class="${cls}" onclick="addSnack(${i})">
+<div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}${cnt>0?'<span class="snack-count">\u00d7'+cnt+'</span>':''}</div>
+<div class="snack-ymacros">${s.kcal} kcal \u00b7 ${s.p}g P \u00b7 ${s.c||0}g C \u00b7 ${s.f||0}g F</div>
+<div class="snack-ytag">${s.tag}</div>
+${cnt>0?'<div class="snack-actions"><button onclick="event.stopPropagation();removeSnack('+i+')">\u2212</button></div>':''}
+</div>`;}
+return`<div class="snack-chip${sel}" onclick="addSnack(${i})">${s.name} (${s.kcal})${cnt>1?' <span class="snack-count">\u00d7'+cnt+'</span>':''}${cnt>0?'<button class="meal-remove" style="margin-left:6px;display:inline-flex;width:18px;height:18px;font-size:12px" onclick="event.stopPropagation();removeSnack('+i+')">\u2212</button>':''}</div>`;
 }).join('');
 }
 function pickBreakfast(i){if(state.blendMode)return;state.breakfast=state.breakfast===i?null:i;save();renderMeals();}
@@ -1386,9 +1508,13 @@ return(num%1===0?num:num)+(unit?' '+unit:'');
 function toggleBlend(){state.blendMode=!state.blendMode;if(!state.blendMode)state.blendPicks=[];save();renderMeals();}
 function pickBlend(i){if(!state.blendMode)return;const idx=state.blendPicks.indexOf(i);if(idx>=0)state.blendPicks.splice(idx,1);else if(state.blendPicks.length<2)state.blendPicks.push(i);else state.blendPicks=[state.blendPicks[1],i];save();renderMeals();}
 function setBlendRatio(a,b){state.blendRatio=[a,b];save();renderMeals();}
-function toggleMeal(i){const idx=state.loggedMeals.findIndex(m=>m.idx===i);if(idx>=0)state.loggedMeals.splice(idx,1);else state.loggedMeals.push({idx:i,portion:'normal'});save();renderMeals();}
-function setPortion(i,size){const m=state.loggedMeals.find(m=>m.idx===i);if(m)m.portion=size;save();renderMeals();}
-function toggleSnack(i){const idx=state.loggedSnacks.indexOf(i);if(idx>=0)state.loggedSnacks.splice(idx,1);else state.loggedSnacks.push(i);save();renderMeals();}
+function addMeal(i){state.loggedMeals.push({idx:i,portion:'normal'});save();renderMeals();}
+function removeMeal(i){const idx=state.loggedMeals.findLastIndex(m=>m.idx===i);if(idx>=0)state.loggedMeals.splice(idx,1);save();renderMeals();}
+function setMealPortion(i,size){state.loggedMeals.filter(m=>m.idx===i).forEach(m=>m.portion=size);save();renderMeals();}
+function addSnack(i,portion){const entry={idx:i};if(portion)entry.portion=portion;else if(SNACKS[i].portioned)entry.portion=SNACKS[i].defaultPortion||'M';state.loggedSnacks.push(entry);save();renderMeals();}
+function removeSnack(i){const idx=state.loggedSnacks.findLastIndex(e=>e.idx===i);if(idx>=0)state.loggedSnacks.splice(idx,1);save();renderMeals();}
+function setSnackPortion(i,size){state.loggedSnacks.filter(e=>e.idx===i).forEach(e=>e.portion=size);save();renderMeals();}
+function getSnackCount(i){return state.loggedSnacks.filter(e=>e.idx===i).length;}
 
 /* TRAINING */
 function renderArmDetail(exName){
@@ -1616,7 +1742,7 @@ if(screen==='dashboard'){state.viewingDate=null;state.viewMode='day';
 document.querySelectorAll('.view-toggle-btn').forEach(b=>{b.classList.toggle('active',b.dataset.view==='day');});
 document.getElementById('dailyView').classList.remove('hidden');
 document.getElementById('weeklyView').classList.remove('active');
-renderHeader();renderShaveToggle();renderTkdToggle();renderTimeline();
+noteFormOpen=false;renderHeader();renderShaveToggle();renderTkdToggle();renderNotesCard();renderTimeline();
 document.getElementById('timelineTitle').textContent="Today's Timeline";}
 if(screen==='water')renderWater();
 if(screen==='meals')renderMeals();
@@ -1643,7 +1769,7 @@ e.stopPropagation();
 
 /* V16: VIEW MODE + WEEKLY VIEW */
 function setViewMode(mode,targetDate){
-state.viewMode=mode;
+noteFormOpen=false;state.viewMode=mode;
 const daily=document.getElementById('dailyView');
 const weekly=document.getElementById('weeklyView');
 document.querySelectorAll('.view-toggle-btn').forEach(b=>{b.classList.toggle('active',b.dataset.view===mode);});
@@ -1661,7 +1787,7 @@ state.viewingDate=targetDate;
 }else{
 state.viewingDate=null;
 }
-renderHeader();renderTkdToggle();renderShaveToggle();renderTimeline();
+renderHeader();renderTkdToggle();renderShaveToggle();renderNotesCard();renderTimeline();
 const titleEl=document.getElementById('timelineTitle');
 if(state.viewingDate&&state.viewingDate.toDateString()!==today){
 const opts2={weekday:'long',month:'long',day:'numeric'};
@@ -1733,7 +1859,8 @@ else if(dn===6)counts.fullSession++;
 else if([2,4].includes(dn))counts.calisthenics++;
 else if(isTkdDay&&tkd)counts.tkd++;
 else if(isTkdDay&&!tkd)counts.replacement++;
-return{date:d,dn,dateStr,tkd,pill,shampoo,summaryText,isCurrent,isPast,isTkdDay};
+const noteDot=getNoteDotForDate(dateStr);
+return{date:d,dn,dateStr,tkd,pill,shampoo,summaryText,isCurrent,isPast,isTkdDay,noteDot};
 });
 const sumParts=[];
 if(counts.tkd)sumParts.push(counts.tkd+' TKD');
@@ -1767,7 +1894,7 @@ return`<div class="${cls}" style="animation-delay:${ci*50}ms" onclick="viewDay('
 <span class="week-card-chevron">\u203a</span>
 </div>
 <div class="week-card-summary">${cd.summaryText}</div>
-${cd.shampoo?'<div class="week-card-indicators"><span class="week-card-shampoo">Shampoo day</span></div>':''}
+${cd.shampoo||cd.noteDot?'<div class="week-card-indicators">'+(cd.shampoo?'<span class="week-card-shampoo">Shampoo day</span>':'')+(cd.noteDot?'<span class="week-card-note-dot" style="background:'+cd.noteDot+'"></span>':'')+'</div>':''}
 ${toggleHtml}
 </div>`;
 }).join('');
@@ -1777,8 +1904,94 @@ setTkdForDate(dateStr,val);
 renderWeeklyView();
 }
 
+/* V18: NOTES */
+function getNotesForDate(dateStr){return lsGet('notes_'+dateStr,[]);}
+function saveNotesForDate(dateStr,notes){lsSet('notes_'+dateStr,notes);}
+function dateToInputVal(d){const dt=typeof d==='string'?new Date(d):d;return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');}
+function escNoteHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function clearCompletedPastNotes(){
+const keys=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('notes_'))keys.push(k);}
+keys.forEach(k=>{
+const dateStr=k.replace('notes_','');if(dateStr===today)return;
+const d=new Date(dateStr);const now=new Date(today);d.setHours(0,0,0,0);now.setHours(0,0,0,0);
+if(d>=now)return;
+const notes=lsGet(k,[]);const remaining=notes.filter(n=>!n.done);
+if(remaining.length===0)localStorage.removeItem(k);else lsSet(k,remaining);
+});
+}
+function renderNotesCard(){
+const container=document.getElementById('notesCard');
+if(!container)return;
+const viewDateStr=getActiveDateStr();
+const notes=getNotesForDate(viewDateStr);
+const isToday=!state.viewingDate||state.viewingDate.toDateString()===today;
+const title=isToday?"Today's Notes":'Notes';
+if(notes.length===0&&!noteFormOpen){
+container.innerHTML='<div style="display:flex;justify-content:flex-end;margin-bottom:4px"><button class="notes-add-btn" onclick="toggleNoteForm()" title="Add a note">+</button></div>';
+return;
+}
+const viewDate=state.viewingDate||new Date();
+const defaultDate=dateToInputVal(viewDate);
+let h='<div class="notes-card">';
+h+='<div class="notes-card-header"><span class="notes-card-title">'+title+'</span><button class="notes-add-btn" onclick="toggleNoteForm()">+</button></div>';
+h+='<div class="notes-form'+(noteFormOpen?' open':'')+'">';
+h+='<div class="notes-form-inner">';
+h+='<input type="text" class="notes-input" id="noteInput" placeholder="Add a note..." onkeydown="if(event.key===\'Enter\')saveNote()">';
+h+='<div class="notes-cat-row">';
+NOTE_CATS.forEach(c=>{h+='<div class="notes-cat-dot'+(noteSelectedCat===c.id?' selected':'')+'" style="background:'+c.hex+'" onclick="selectNoteCat(\''+c.id+'\')" title="'+c.id.charAt(0).toUpperCase()+c.id.slice(1)+'"></div>';});
+h+='<span style="font-size:11px;color:var(--text-muted);margin-left:2px">'+noteSelectedCat.charAt(0).toUpperCase()+noteSelectedCat.slice(1)+'</span>';
+h+='</div>';
+h+='<div class="notes-form-actions">';
+h+='<input type="date" class="notes-date-input" id="noteDateInput" value="'+defaultDate+'">';
+h+='<button class="notes-save-btn" onclick="saveNote()">Save</button>';
+h+='</div></div></div>';
+notes.forEach(note=>{
+const cat=NOTE_CATS.find(c=>c.id===note.category)||NOTE_CATS[4];
+h+='<div class="note-item'+(note.done?' done':'')+'">';
+h+='<div class="note-item-bar" style="background:'+cat.hex+'"></div>';
+h+='<span class="note-item-text">'+escNoteHtml(note.text)+'</span>';
+h+='<div class="note-item-check'+(note.done?' done':'')+'" onclick="toggleNoteDone(\''+note.id+'\')">'+(note.done?'\u2713':'')+'</div>';
+h+='</div>';
+});
+h+='</div>';
+container.innerHTML=h;
+}
+function toggleNoteForm(){
+noteFormOpen=!noteFormOpen;
+renderNotesCard();
+if(noteFormOpen){setTimeout(()=>{const inp=document.getElementById('noteInput');if(inp)inp.focus();},50);}
+}
+function selectNoteCat(catId){noteSelectedCat=catId;renderNotesCard();if(noteFormOpen){setTimeout(()=>{const inp=document.getElementById('noteInput');if(inp)inp.focus();},20);}}
+function saveNote(){
+const inp=document.getElementById('noteInput');const dateInp=document.getElementById('noteDateInput');
+if(!inp||!inp.value.trim())return;
+const text=inp.value.trim();
+const dateStr=dateInp?dateInp.value:dateToInputVal(new Date());
+const targetDate=new Date(dateStr+'T00:00:00');
+const targetDateStr=targetDate.toDateString();
+const notes=getNotesForDate(targetDateStr);
+notes.push({id:Date.now().toString(36)+Math.random().toString(36).substr(2,4),text:text,category:noteSelectedCat,done:false});
+saveNotesForDate(targetDateStr,notes);
+noteFormOpen=false;noteSelectedCat='other';
+renderNotesCard();
+if(state.viewMode==='week')renderWeeklyView();
+}
+function toggleNoteDone(noteId){
+const viewDateStr=getActiveDateStr();
+const notes=getNotesForDate(viewDateStr);
+const note=notes.find(n=>n.id===noteId);
+if(note){note.done=!note.done;saveNotesForDate(viewDateStr,notes);renderNotesCard();}
+}
+function getNoteDotForDate(dateStr){
+const notes=getNotesForDate(dateStr);
+if(notes.length===0)return null;
+const cats=[...new Set(notes.map(n=>n.category))];
+if(cats.length===1){const c=NOTE_CATS.find(x=>x.id===cats[0]);return c?c.hex:'#6b6560';}
+return '#6b6560';
+}
+
 /* INIT */
-buildNav();renderHeader();renderShaveToggle();renderTkdToggle();renderTimeline();
+clearCompletedPastNotes();buildNav();renderHeader();renderShaveToggle();renderTkdToggle();renderNotesCard();renderTimeline();
 renderWater();renderMeals();renderTraining();renderExtras();renderShopping();
 </script>
 </body>
