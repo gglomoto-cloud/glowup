@@ -1787,8 +1787,7 @@ const today=new Date().toDateString();
 const dow=new Date().getDay();
 function lsGet(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function dailyKey(k){return k+'_'+(state&&state.selectedDate?state.selectedDate:today)}
-function selectedDailyKey(k){return k+'_'+(state.selectedDate||today)}
+function dailyKey(k){try{return k+'_'+(state.selectedDate||today)}catch(e){return k+'_'+today}}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).substr(2,5)}
 /* V24: Migrate old entries without IDs */
 function migrateEntries(arr){return arr.map(e=>{if(!e.id)e.id=uid();return e;});}
