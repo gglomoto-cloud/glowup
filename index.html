@@ -147,7 +147,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .bf-name{font-size:13px;font-weight:600;margin-bottom:4px}
 .bf-macros{font-size:11px;color:var(--text-dim);font-variant-numeric:tabular-nums}
 .bf-detail{background:var(--bg-card);border:1px solid var(--card-border);border-radius:var(--radius);margin-bottom:12px;max-height:0;overflow:hidden;transition:max-height .25s ease-out,padding .25s ease-out,border-color .25s;padding:0 16px}
-.bf-detail.open{max-height:800px;padding:14px 16px;border-color:rgba(255,255,255,0.1)}
+.bf-detail.open{max-height:2000px;padding:14px 16px;border-color:rgba(255,255,255,0.1)}
 .bf-detail h4{font-family:'Playfair Display',serif;font-size:14px;margin-bottom:8px}
 .bf-ing{font-size:12px;color:var(--text-dim);padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;gap:8px}
 .bf-ing:last-child{border-bottom:none}
@@ -401,8 +401,9 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .note-item.done .note-item-text{text-decoration:line-through;opacity:0.5}
 .note-item-check{width:20px;height:20px;border:2px solid rgba(255,255,255,0.15);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:11px}
 .note-item-check.done{background:var(--skin);border-color:var(--skin);color:#111}
-.note-item-del{width:20px;height:20px;border:none;background:none;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-size:13px;padding:0;opacity:0.4;font-family:'DM Sans',sans-serif}
-.note-item-del:active{color:#d4736c;opacity:1;transform:scale(0.9)}
+.note-item-del{width:32px;height:32px;border:none;background:rgba(212,115,108,0.1);border-radius:8px;color:var(--groom);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-size:18px;padding:0;opacity:0.7;font-family:'DM Sans',sans-serif}
+.note-item-del:hover{opacity:1;background:rgba(212,115,108,0.2)}
+.note-item-del:active{background:rgba(212,115,108,0.3);opacity:1;transform:scale(0.9)}
 .week-card-note-dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
 /* V21: Yogurt ratio selector */
 .yogurt-ratio-selector{display:flex;gap:6px;margin-bottom:10px}
@@ -442,6 +443,46 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .hiit-ready-btn:active{transform:scale(0.95);opacity:0.9}
 .hiit-ready-exercise{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin:8px 0 4px}
 .hiit-ready-label{font-size:14px;color:var(--text-dim);margin-bottom:2px}
+/* V23: Structured Warmup */
+.warmup-block{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:2px solid var(--fit);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+.warmup-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.warmup-title{font-size:15px;font-weight:600}
+.warmup-dur{font-size:12px;color:var(--text-dim)}
+.warmup-section{margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.warmup-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.warmup-section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;cursor:pointer}
+.warmup-section-name{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--fit)}
+.warmup-section-dur{font-size:11px;color:var(--text-muted)}
+.warmup-ex{display:flex;align-items:center;gap:8px;padding:5px 8px;margin-bottom:3px;background:rgba(255,255,255,0.02);border-radius:6px}
+.warmup-ex-name{font-size:12.5px;font-weight:500;flex:1}
+.warmup-ex-cue{font-size:11px;color:var(--text-muted);padding:2px 8px 4px;margin-bottom:2px}
+/* V23: Auto-reminders */
+.note-auto-label{font-size:9px;font-weight:600;padding:1px 6px;border-radius:4px;background:rgba(200,155,74,0.15);color:var(--gold);margin-left:6px;vertical-align:middle;letter-spacing:.3px}
+.shower-counter-row{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--card-border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow-card)}
+.shower-counter-btn{background:rgba(91,190,183,0.15);border:1px solid rgba(91,190,183,0.25);border-radius:8px;padding:6px 14px;color:var(--skin);font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.shower-counter-btn:active{background:var(--skin);color:#111;transform:scale(0.97)}
+.shower-counter-info{flex:1;font-size:12px;color:var(--text-dim)}
+.shower-counter-count{font-weight:700;color:var(--skin)}
+/* V24: Breakfast ingredient customization */
+.bf-custom-section{margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)}
+.bf-custom-title{font-size:12px;font-weight:600;color:var(--text-dim);margin-bottom:8px;letter-spacing:.3px;text-transform:uppercase}
+.bf-stepper-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.bf-stepper-row:last-child{border-bottom:none}
+.bf-stepper-label{flex:1;font-size:12px;color:var(--text-dim);min-width:0}
+.bf-stepper-controls{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.bf-stepper-controls .stepper-btn{width:28px;height:28px;font-size:14px}
+.bf-stepper-controls .stepper-value{font-size:13px;min-width:45px}
+.bf-ing-toggle{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.bf-ing-toggle:last-child{border-bottom:none}
+.bf-ing-toggle-btn{width:20px;height:20px;border:2px solid rgba(255,255,255,0.15);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:11px;background:none;color:transparent;padding:0}
+.bf-ing-toggle-btn.on{background:var(--skin);border-color:var(--skin);color:#111}
+.bf-ing-label{font-size:12px;color:var(--text-dim);flex:1}
+.bf-ing-macro{font-size:10px;color:var(--text-muted);flex-shrink:0}
+.bf-custom-macros{font-size:13px;font-weight:600;color:var(--skin);text-align:center;margin-top:10px;padding:8px 12px;background:rgba(91,190,183,0.08);border-radius:8px;font-variant-numeric:tabular-nums}
+/* V24: Date viewing bar */
+.date-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 20px;background:rgba(196,101,42,0.1);border-bottom:1px solid rgba(196,101,42,0.2);font-size:12px;color:#c4652a;flex-shrink:0;z-index:10;position:relative}
+.date-bar-btn{background:rgba(91,190,183,0.15);border:1px solid rgba(91,190,183,0.25);border-radius:8px;padding:4px 12px;color:var(--skin);font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.date-bar-btn:active{background:var(--skin);color:#111;transform:scale(0.97)}
 </style>
 </head>
 <body>
@@ -453,6 +494,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 </div>
 <div class="header-type" id="headerType"></div>
 </header>
+<div class="date-bar" id="dateBar" style="display:none"><span id="dateBarText"></span><button class="date-bar-btn" onclick="switchToToday()">Back to today</button></div>
 <main class="screens" id="screens">
 <div class="screen active" id="screen-dashboard">
 <div class="view-toggle" id="viewToggle">
@@ -490,7 +532,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 <div class="water-btns" id="waterBtns"></div>
 <div class="water-custom" id="waterCustomArea"></div>
 </div>
-<div class="sub-section-title">Today's Log</div>
+<div class="sub-section-title" id="waterLogTitle">Today's Log</div>
 <div class="water-log" id="waterLog"></div>
 </div>
 <div class="screen" id="screen-meals">
@@ -601,6 +643,12 @@ extras:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=
 shopping:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.5 12h-9z"/><path d="M9 7V5a3 3 0 016 0v2"/></svg>`
 };
 
+/* ===== SVG ICON CONSTANTS (no emojis in the design system) ===== */
+const ICON_TIMER='<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-1px;margin-right:2px"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M10 2h4"/></svg>';
+const ICON_TRASH='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
+const ICON_PAUSE='<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="vertical-align:-1px;margin-right:2px"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>';
+const ICON_PLAY='<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="vertical-align:-1px;margin-right:2px"><polygon points="5,3 19,12 5,21"/></svg>';
+
 /* ===== DATA ===== */
 const DAYS={0:{name:'Sunday',type:'Rest Day',tc:'#a68b3c',tb:'rgba(166,139,60,0.12)'},1:{name:'Monday',type:'TKD Day',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},2:{name:'Tuesday',type:'Calisthenics Day',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},3:{name:'Wednesday',type:'TKD Day',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},4:{name:'Thursday',type:'Calisthenics Day',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},5:{name:'Friday',type:'TKD \u2014 Hard Sparring',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'},6:{name:'Saturday',type:'Calisthenics + Recovery',tc:'#c4652a',tb:'rgba(196,101,42,0.12)'}};
 const WATER_TARGETS={normal:2500,calisthenics:3000,tkd:3500};
@@ -608,14 +656,14 @@ const AUTO_DAY_TYPE={0:'normal',1:'tkd',2:'calisthenics',3:'tkd',4:'calisthenics
 
 /* SKINCARE */
 const SKIN_AM_NOSHAVE=[
-{n:1,s:'Cleanse',p:"M\u00eame L'Huile Lavante Visage et Corps",dur:'45 sec',d:'Splash cool water on face. 1 pump onto wet fingertips. Massage 20-30 sec (forehead, nose, cheeks, jawline). Rinse lukewarm.',tip:'"Running late" shortcut: just splash water and pat dry. Dermatologist-accepted for dry skin.'},
+{n:1,s:'Cleanse',p:"M\u00eame L'Huile Lavante Visage et Corps",dur:'45 sec',d:'Splash cool water on face. 1 pump onto wet fingertips. Massage 20-30 sec (forehead, nose, cheeks, jawline). Rinse lukewarm. <strong>Swap face towel</strong> \u2014 use a fresh one daily.',tip:'"Running late" shortcut: just splash water and pat dry. Dermatologist-accepted for dry skin.'},
 {n:2,s:'Moisturize',p:"M\u00eame La Cr\u00e8me pour le Visage",dur:'45 sec',d:'Pea-sized amount. Warm between fingertips. Apply to damp skin. Generous on cheeks, thinner on T-zone.',tip:null},
 {n:3,s:'Wait for absorption',p:'',dur:'~2 min',d:'Let moisturizer absorb before SPF.',tip:null},
 {n:4,s:'Apply SPF',p:'Beauty of Joseon Daily Tinted Fluid SPF40 PA+++',dur:'1 min',d:'2 finger-lengths. Dot on forehead, cheeks, nose, chin. Spread in downward strokes. Let set 1-2 min.',tip:null},
 {n:5,s:'Lips (optional)',p:'',dur:'5 sec',d:'Dab M\u00eame Cr\u00e8me on lips or use SPF lip balm.',tip:null}
 ];
 const SKIN_AM_SHAVE=[
-{n:1,s:'Warm water rinse',p:'',dur:'30 sec',d:'Softens stubble, reduces blade drag.',tip:null},
+{n:1,s:'Warm water rinse',p:'',dur:'30 sec',d:'Softens stubble, reduces blade drag. <strong>Swap face towel</strong> \u2014 use a fresh one daily.',tip:null},
 {n:2,s:'Apply oil for glide',p:"M\u00eame L'Huile Lavante",dur:'15 sec',d:'Thin layer on areas to be shaved.',tip:null},
 {n:3,s:'Shave \u2014 with the grain',p:'Philips OneBlade or Braun Series 3',dur:'3-4 min',d:'Electric razor. Single pass per zone. NEVER against the grain.',tip:null},
 {n:4,s:'Cool water rinse',p:'',dur:'30 sec',d:'Reduces flush, soothes skin.',tip:null},
@@ -957,7 +1005,8 @@ const MEALS=[
 {name:"Riz cantonais",kcal100:157,p100:5.5,c100:22.0,f100:5.0,gS:250,gM:350,gL:450,gXL:550},
 {name:"P\u00e2tes \u00e0 la Carbonara (+ jaune d'oeuf)",kcal100:170,p100:7.0,c100:17.0,f100:8.5,gS:250,gM:350,gL:450,gXL:550},
 {name:"Chicken Wraps (x2)",kcal100:180,p100:12.2,c100:10.4,f100:9.9,gS:400,gM:800,gL:850,gXL:900},
-{name:"P\u00e2tes au Saumon (cr\u00e8me & Boursin)",kcal100:216,p100:7.3,c100:18.2,f100:12.2,gS:150,gM:200,gL:250,gXL:350}
+{name:"P\u00e2tes au Saumon (cr\u00e8me & Boursin)",kcal100:216,p100:7.3,c100:18.2,f100:12.2,gS:150,gM:200,gL:250,gXL:350},
+{name:"Burger Maison",kcal100:200,p100:12.7,c100:9.6,f100:11.5,gS:355,gM:430,gL:710,gXL:860}
 ];
 const SNACKS=[
 {name:'Banana + rice cakes + PB',kcal:280,p:8,c:38,f:10},{name:'Skyr 200g + honey + berries',kcal:250,p:22,c:30,f:2},{name:'Protein bar (HiPro)',kcal:180,p:18,c:15,f:6},{name:'Dates (4) + almonds',kcal:220,p:5,c:35,f:8},{name:'Tuna on bread',kcal:350,p:28,c:30,f:12},{name:'Cottage cheese + walnuts',kcal:320,p:25,c:8,f:20},{name:'2 boiled eggs + oatcake',kcal:250,p:15,c:18,f:13},{name:'Pumpkin seeds + apple',kcal:250,p:9,c:25,f:14},{name:'Pre-bed skyr + almonds',kcal:250,p:25,c:12,f:10},
@@ -990,6 +1039,181 @@ return{kcal:Math.round(BFC_BASE.kcal+yK),p:Math.round(BFC_BASE.p+yP),c:Math.roun
 }
 function setYogurtRatio(id){state.yogurtRatio=id;save();renderMeals();}
 
+/* V24: BREAKFAST INGREDIENT CUSTOMIZATION */
+/* All values per 100g (or 100ml for milk). Formula: macro * calcG(val) / 100 */
+const BF_ING_MACROS={
+oats:{kcal:367,p:13.5,c:58,f:7},
+skyr:{kcal:50,p:9.2,c:3.3,f:0.4},
+banana:{kcal:89,p:1.1,c:23,f:0.3},
+almonds:{kcal:579,p:21,c:22,f:49},
+flaxseed:{kcal:534,p:18,c:29,f:42},
+honey:{kcal:304,p:0.3,c:82,f:0},
+cinnamon:{kcal:0,p:0,c:0,f:0},
+whey15:{kcal:400,p:80,c:10,f:3.3},
+whey30:{kcal:400,p:80,c:10,f:3.3},
+eggs:{kcal:143,p:12.6,c:0.7,f:9.9},
+bread:{kcal:247,p:8.5,c:46,f:3},
+avocado:{kcal:160,p:2,c:8.5,f:14.7},
+oliveoil:{kcal:884,p:0,c:0,f:100},
+skyrside:{kcal:50,p:9.2,c:3.3,f:0.4},
+fruit:{kcal:47,p:0.9,c:12,f:0.2},
+tomato:{kcal:18,p:0.9,c:3.9,f:0.2},
+walnuts:{kcal:654,p:15,c:14,f:65},
+berries:{kcal:57,p:1.1,c:12,f:0.5},
+chiaseeds:{kcal:486,p:17,c:42,f:31},
+milk:{kcal:45,p:0.5,c:7.5,f:1.2}
+};
+
+/* Breakfast customization configs: main=stepper, secondary=toggle */
+const BF_CUSTOM_CONFIG=[
+/* A: Power Oats */
+{main:[
+{key:'oats',label:'Oats',min:30,max:120,step:5,defVal:80,unit:'g',macro:'oats',calcG:v=>v},
+{key:'skyr',label:'Skyr',min:0,max:300,step:25,defVal:200,unit:'g',macro:'skyr',calcG:v=>v},
+{key:'banana',label:'Banana',min:0,max:1,step:1,defVal:1,unit:'',macro:'banana',calcG:v=>v*120,display:v=>v?'1':'0'}
+],secondary:[
+{key:'almonds',label:'Almonds (25g)',defOn:true,macro:'almonds',g:25},
+{key:'flaxseed',label:'Flaxseed (1 tbsp)',defOn:true,macro:'flaxseed',g:7},
+{key:'honey',label:'Honey (1 tsp)',defOn:true,macro:'honey',g:7},
+{key:'cinnamon',label:'Cinnamon',defOn:true,macro:'cinnamon',g:0},
+{key:'whey',label:'Whey scoop (15g)',defOn:false,macro:'whey15',g:15}
+]},
+/* B: Egg Breakfast */
+{main:[
+{key:'eggs',label:'Eggs',min:1,max:5,step:1,defVal:3,unit:'',macro:'eggs',calcG:v=>v*60},
+{key:'bread',label:'Bread slices',min:0,max:4,step:1,defVal:2,unit:'',macro:'bread',calcG:v=>v*40},
+{key:'avocado',label:'Avocado half',min:0,max:1,step:1,defVal:1,unit:'',macro:'avocado',calcG:v=>v*80,display:v=>v?'1/2':'0'}
+],secondary:[
+{key:'oliveoil',label:'Olive oil (1 tsp)',defOn:true,macro:'oliveoil',g:5},
+{key:'skyrside',label:'Skyr on side (100g)',defOn:true,macro:'skyrside',g:100},
+{key:'fruit',label:'Fruit (orange/kiwi)',defOn:true,macro:'fruit',g:150},
+{key:'tomato',label:'Tomato/red pepper',defOn:true,macro:'tomato',g:150}
+]},
+/* C: Yogurt Bowl — yogurt ratio selector kept, add oats/berries steppers */
+{main:[
+{key:'oats',label:'Oats',min:0,max:80,step:5,defVal:50,unit:'g',macro:'oats',calcG:v=>v},
+{key:'berries',label:'Berries',min:0,max:150,step:25,defVal:100,unit:'g',macro:'berries',calcG:v=>v}
+],secondary:[
+{key:'walnuts',label:'Walnuts (30g)',defOn:true,macro:'walnuts',g:30},
+{key:'chiaseeds',label:'Chia seeds (1 tbsp)',defOn:true,macro:'chiaseeds',g:10},
+{key:'honey',label:'Honey (1 tsp)',defOn:true,macro:'honey',g:7},
+{key:'whey',label:'Whey scoop (15g)',defOn:false,macro:'whey15',g:15}
+]},
+/* D: Protein Oats */
+{main:[
+{key:'oats',label:'Oats',min:30,max:120,step:5,defVal:110,unit:'g',macro:'oats',calcG:v=>v},
+{key:'skyr',label:'Skyr',min:0,max:300,step:25,defVal:200,unit:'g',macro:'skyr',calcG:v=>v},
+{key:'whey',label:'Whey scoop',min:0,max:1,step:1,defVal:1,unit:'',macro:'whey30',calcG:v=>v*30,display:v=>v?'1':'0'}
+],secondary:[
+{key:'honey',label:'Honey (1 tsp)',defOn:true,macro:'honey',g:7},
+{key:'cinnamon',label:'Cinnamon',defOn:true,macro:'cinnamon',g:0}
+]}
+];
+
+/* D also has 2 bananas as main — add them */
+BF_CUSTOM_CONFIG[3].main.splice(1,0,
+{key:'bananas',label:'Bananas',min:0,max:3,step:1,defVal:2,unit:'',macro:'banana',calcG:v=>v*120}
+);
+
+function getDefaultBfCustom(bfIdx){
+const cfg=BF_CUSTOM_CONFIG[bfIdx];if(!cfg)return null;
+const cust={main:{},secondary:{}};
+cfg.main.forEach(m=>{cust.main[m.key]=m.defVal;});
+cfg.secondary.forEach(s=>{cust.secondary[s.key]=s.defOn;});
+return cust;
+}
+
+function getBfCustom(bfIdx){
+if(!state.bfCustom[bfIdx])state.bfCustom[bfIdx]=getDefaultBfCustom(bfIdx);
+return state.bfCustom[bfIdx];
+}
+
+function getBreakfastCustomMacros(bfIdx){
+const cust=getBfCustom(bfIdx);if(!cust)return BREAKFASTS[bfIdx];
+const cfg=BF_CUSTOM_CONFIG[bfIdx];
+let kcal=0,p=0,c=0,f=0;
+/* For breakfast C, yogurt macros come from the yogurt ratio selector */
+if(bfIdx===2){
+const ym=getYogurtBfMacros(state.yogurtRatio);
+kcal+=ym.kcal;p+=ym.p;c+=ym.c;f+=ym.f;
+/* Subtract the base non-yogurt amounts that BFC_BASE already includes (oats 50g, walnuts 30g, berries 100g, chia 10g, honey 7g) */
+/* Then re-add from customization below */
+kcal-=BFC_BASE.kcal;p-=BFC_BASE.p;c-=BFC_BASE.c;f-=BFC_BASE.f;
+}
+cfg.main.forEach(m=>{
+const val=cust.main[m.key]!==undefined?cust.main[m.key]:m.defVal;
+const grams=m.calcG(val);
+const macro=BF_ING_MACROS[m.macro];
+kcal+=Math.round(macro.kcal*grams/100);
+p+=+(macro.p*grams/100).toFixed(1);
+c+=+(macro.c*grams/100).toFixed(1);
+f+=+(macro.f*grams/100).toFixed(1);
+});
+cfg.secondary.forEach(s=>{
+const on=cust.secondary[s.key]!==undefined?cust.secondary[s.key]:s.defOn;
+if(!on)return;
+const macro=BF_ING_MACROS[s.macro];
+const grams=s.g;
+kcal+=Math.round(macro.kcal*grams/100);
+p+=+(macro.p*grams/100).toFixed(1);
+c+=+(macro.c*grams/100).toFixed(1);
+f+=+(macro.f*grams/100).toFixed(1);
+});
+return{kcal:Math.round(kcal),p:Math.round(p),c:Math.round(c),f:Math.round(f)};
+}
+
+function adjustBfMain(bfIdx,key,delta){
+const cust=getBfCustom(bfIdx);
+const cfg=BF_CUSTOM_CONFIG[bfIdx].main.find(m=>m.key===key);if(!cfg)return;
+let val=(cust.main[key]!==undefined?cust.main[key]:cfg.defVal)+delta;
+val=Math.max(cfg.min,Math.min(cfg.max,+(val).toFixed(1)));
+cust.main[key]=val;
+save();renderMeals();
+}
+
+function toggleBfSecondary(bfIdx,key){
+const cust=getBfCustom(bfIdx);
+cust.secondary[key]=!cust.secondary[key];
+save();renderMeals();
+}
+
+function renderBfCustomControls(bfIdx){
+const cfg=BF_CUSTOM_CONFIG[bfIdx];if(!cfg)return'';
+const cust=getBfCustom(bfIdx);
+let h='<div class="bf-custom-section">';
+h+='<div class="bf-custom-title">Adjust amounts</div>';
+cfg.main.forEach(m=>{
+const val=cust.main[m.key]!==undefined?cust.main[m.key]:m.defVal;
+const displayVal=m.display?m.display(val):(m.unit?val+m.unit:val);
+h+='<div class="bf-stepper-row">';
+h+='<div class="bf-stepper-label">'+m.label+'</div>';
+h+='<div class="bf-stepper-controls">';
+h+='<button class="stepper-btn" onclick="event.stopPropagation();adjustBfMain('+bfIdx+',\''+m.key+'\',-'+m.step+')">&#8722;</button>';
+h+='<span class="stepper-value">'+displayVal+'</span>';
+h+='<button class="stepper-btn" onclick="event.stopPropagation();adjustBfMain('+bfIdx+',\''+m.key+'\','+m.step+')">+</button>';
+h+='</div></div>';
+});
+if(cfg.secondary.length>0){
+h+='<div class="bf-custom-title" style="margin-top:10px">Extras</div>';
+cfg.secondary.forEach(s=>{
+const on=cust.secondary[s.key]!==undefined?cust.secondary[s.key]:s.defOn;
+const macro=BF_ING_MACROS[s.macro];
+const grams=s.g;
+const addKcal=Math.round(macro.kcal*grams/100);
+const addP=Math.round(macro.p*grams/100);
+h+='<div class="bf-ing-toggle">';
+h+='<button class="bf-ing-toggle-btn'+(on?' on':'')+'" onclick="event.stopPropagation();toggleBfSecondary('+bfIdx+',\''+s.key+'\')">'+(on?'&#10003;':'')+'</button>';
+h+='<span class="bf-ing-label">'+s.label+'</span>';
+if(addKcal>0)h+='<span class="bf-ing-macro">+'+addKcal+' kcal / '+addP+'g P</span>';
+h+='</div>';
+});
+}
+const cm=getBreakfastCustomMacros(bfIdx);
+h+='<div class="bf-custom-macros">'+cm.kcal+' kcal &middot; '+cm.p+'g P &middot; '+cm.c+'g C &middot; '+cm.f+'g F</div>';
+h+='</div>';
+return h;
+}
+
 /* V21: HOT COCO STEPPER DATA */
 const HOTCOCO_PER100={baguette:{kcal:283,p:8.5,c:55,f:1.6},butter:{kcal:750,p:0.6,c:0.6,f:82},cowMilk:{kcal:64,p:3.2,c:4.8,f:3.5},oatMilk:{kcal:45,p:0.5,c:7.5,f:1.2},nesquik:{kcal:385,p:3.5,c:82,f:3.5}};
 function getHotCocoMacros(breadG,milkCl){
@@ -1002,41 +1226,68 @@ f:Math.round(calc(breadG,HOTCOCO_PER100.baguette.f)+calc(butterG,HOTCOCO_PER100.
 butterG};
 }
 function adjustHotCoco(type,delta){
-if(type==='bread'){state.hotCocoBread=Math.max(50,Math.min(100,state.hotCocoBread+delta));}
+if(type==='bread'){state.hotCocoBread=Math.max(0,Math.min(100,state.hotCocoBread+delta));}
 else{state.hotCocoMilk=Math.max(25,Math.min(40,+(state.hotCocoMilk+delta).toFixed(1)));}
 save();renderMeals();
 }
-function renderHotCocoSnack(i,cnt,sel){
-const s=SNACKS[i];const hc=getHotCocoMacros(state.hotCocoBread,state.hotCocoMilk);
-const cls='snack-chip yogurt'+sel;
-let h='<div class="'+cls+'" onclick="addSnack('+i+')">';
-h+='<div class="snack-yname">'+s.name+(cnt>0?'<span class="snack-count">\u00d7'+cnt+'</span>':'')+'</div>';
-if(cnt>0){
+/* V24: Per-instance hot coco rendering — each entry has independent steppers */
+function renderHotCocoSnacks(i,entries){
+const s=SNACKS[i];
+/* Always show a "tap to add" card using default values */
+const defHc=getHotCocoMacros(state.hotCocoBread,state.hotCocoMilk);
+let h='<div class="snack-chip yogurt" onclick="addSnack('+i+')">';
+h+='<div class="snack-yname">'+s.name+'</div>';
+h+='<div class="snack-ymacros">'+defHc.kcal+' kcal \u00b7 '+defHc.p+'g P \u00b7 '+defHc.c+'g C \u00b7 '+defHc.f+'g F</div>';
+h+='<div class="snack-ytag">'+s.tag+' — tap to log</div></div>';
+/* Render each logged entry with its own steppers */
+entries.forEach(entry=>{
+const c=entry.customization||{breadG:state.hotCocoBread,milkCl:state.hotCocoMilk};
+const hc=getHotCocoMacros(c.breadG,c.milkCl);
+const displayName=c.breadG===0?'Hot Coco (no bread)':s.name;
+h+='<div class="snack-chip yogurt selected">';
+h+='<div class="snack-yname">'+displayName+'</div>';
 h+='<div onclick="event.stopPropagation()">';
 h+='<div class="stepper-group"><div class="stepper-label">Baguette</div>';
-h+='<div class="stepper-row"><button class="stepper-btn" onclick="adjustHotCoco(\'bread\',-5)">\u2212</button>';
-h+='<span class="stepper-value">'+state.hotCocoBread+'g</span>';
-h+='<button class="stepper-btn" onclick="adjustHotCoco(\'bread\',5)">+</button></div></div>';
+h+='<div class="stepper-row"><button class="stepper-btn" onclick="adjustHotCocoEntry(\''+entry.id+'\',\'bread\',-5)">\u2212</button>';
+h+='<span class="stepper-value">'+c.breadG+'g</span>';
+h+='<button class="stepper-btn" onclick="adjustHotCocoEntry(\''+entry.id+'\',\'bread\',5)">+</button></div></div>';
 h+='<div class="stepper-group"><div class="stepper-label">Lait total</div>';
-h+='<div class="stepper-row"><button class="stepper-btn" onclick="adjustHotCoco(\'milk\',-2.5)">\u2212</button>';
-h+='<span class="stepper-value">'+state.hotCocoMilk+'cl</span>';
-h+='<button class="stepper-btn" onclick="adjustHotCoco(\'milk\',2.5)">+</button></div></div>';
+h+='<div class="stepper-row"><button class="stepper-btn" onclick="adjustHotCocoEntry(\''+entry.id+'\',\'milk\',-2.5)">\u2212</button>';
+h+='<span class="stepper-value">'+c.milkCl+'cl</span>';
+h+='<button class="stepper-btn" onclick="adjustHotCocoEntry(\''+entry.id+'\',\'milk\',2.5)">+</button></div></div>';
 h+='<div class="stepper-macros">'+hc.kcal+' kcal \u00b7 '+hc.p+'g P \u00b7 '+hc.c+'g C \u00b7 '+hc.f+'g F<br>';
-h+='<span style="font-size:11px;color:var(--text-muted)">'+state.hotCocoBread+'g baguette \u00b7 '+hc.butterG+'g beurre \u00b7 '+(state.hotCocoMilk/2)+'cl entier + '+(state.hotCocoMilk/2)+'cl avoine \u00b7 20g Nesquik</span></div>';
-h+='<div style="margin-top:6px"><button class="meal-remove" onclick="event.stopPropagation();removeSnack('+i+')">\u2212</button></div>';
-h+='</div>';
-}else{
-h+='<div class="snack-ymacros">'+hc.kcal+' kcal \u00b7 '+hc.p+'g P \u00b7 '+hc.c+'g C \u00b7 '+hc.f+'g F</div>';
-}
-h+='<div class="snack-ytag">'+s.tag+'</div></div>';
+if(c.breadG===0){h+='<span style="font-size:11px;color:var(--text-muted)">Hot Coco only \u00b7 '+(c.milkCl/2)+'cl entier + '+(c.milkCl/2)+'cl avoine \u00b7 20g Nesquik</span></div>';}
+else{h+='<span style="font-size:11px;color:var(--text-muted)">'+c.breadG+'g baguette \u00b7 '+hc.butterG+'g beurre \u00b7 '+(c.milkCl/2)+'cl entier + '+(c.milkCl/2)+'cl avoine \u00b7 20g Nesquik</span></div>';}
+h+='<div style="margin-top:6px"><button class="meal-remove" onclick="event.stopPropagation();removeSnackEntry(\''+entry.id+'\')">\u2212</button></div>';
+h+='</div></div>';
+});
 return h;
 }
 
-/* V22: AUDIO BEEP */
-function playBeep(){
-try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const osc=ctx.createOscillator();const gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=880;gain.gain.value=0.3;osc.start();osc.stop(ctx.currentTime+0.15);}catch(e){}
+/* V24: AUDIO — pleasant chime, iOS-compatible */
+let _audioCtx=null;
+let _audioUnlocked=false;
+function getAudioCtx(){
+if(!_audioCtx)_audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+if(_audioCtx.state==='suspended')_audioCtx.resume();
+return _audioCtx;
 }
-function playDoubleBeep(){playBeep();setTimeout(playBeep,200);}
+function unlockAudio(){
+if(_audioUnlocked)return;
+try{const ctx=getAudioCtx();const buf=ctx.createBuffer(1,1,22050);const src=ctx.createBufferSource();src.buffer=buf;src.connect(ctx.destination);src.start(0);_audioUnlocked=true;}catch(e){}
+}
+document.addEventListener('touchstart',unlockAudio,{once:true});
+document.addEventListener('click',unlockAudio,{once:true});
+/* Pleasant two-note chime: A4 (440Hz) + E5 (659Hz) major interval, soft sine with fade envelope */
+function playChime(){
+try{const ctx=getAudioCtx();const now=ctx.currentTime;
+const playNote=(freq,start,dur)=>{const osc=ctx.createOscillator();const g=ctx.createGain();osc.type='sine';osc.frequency.value=freq;
+g.gain.setValueAtTime(0,start);g.gain.linearRampToValueAtTime(0.18,start+0.02);g.gain.exponentialRampToValueAtTime(0.001,start+dur);
+osc.connect(g);g.connect(ctx.destination);osc.start(start);osc.stop(start+dur);};
+playNote(440,now,0.25);playNote(659,now+0.03,0.3);
+}catch(e){}}
+/* Double chime for HIIT work-phase end — two dings separated by a gap */
+function playDoubleChime(){playChime();setTimeout(playChime,350);}
 
 /* V21: EXERCISE TIMER FUNCTIONS */
 const HIIT_STATIONS=[{name:'Jump rope fast',sec:60},{name:'Burpees',sec:30},{name:'HGX200 stepper fast',sec:60},{name:'Mountain climbers',sec:30},{name:'Jump rope fast',sec:60}];
@@ -1064,16 +1315,16 @@ state.exTimerBtnId=btn.id;state.exTimerTarget=targetSec;state.exTimerRemaining=t
 btn.classList.add('running');btn.textContent=targetSec;
 state.exTimer=setInterval(()=>{
 state.exTimerRemaining--;
-if(state.exTimerRemaining<=0){clearInterval(state.exTimer);state.exTimer=null;playBeep();
-btn.classList.remove('running');btn.classList.add('done');btn.textContent='\u2713 Done';
-setTimeout(()=>{if(btn){btn.classList.remove('done');btn.textContent='\u23f1 '+fmtTimerLabel(targetSec);state.exTimerBtnId=null;}},2500);
+if(state.exTimerRemaining<=0){clearInterval(state.exTimer);state.exTimer=null;playChime();
+btn.classList.remove('running');btn.classList.add('done');btn.innerHTML='\u2713 Done';
+setTimeout(()=>{if(btn){btn.classList.remove('done');btn.innerHTML=ICON_TIMER+fmtTimerLabel(targetSec);state.exTimerBtnId=null;}},2500);
 }else{btn.textContent=state.exTimerRemaining;}
 },1000);
 }
 function cancelExTimer(){
 if(state.exTimer){clearInterval(state.exTimer);state.exTimer=null;}
 if(state.exTimerBtnId){const btn=document.getElementById(state.exTimerBtnId);
-if(btn){btn.classList.remove('running','done');btn.textContent='\u23f1 '+fmtTimerLabel(state.exTimerTarget);}
+if(btn){btn.classList.remove('running','done');btn.innerHTML=ICON_TIMER+fmtTimerLabel(state.exTimerTarget);}
 state.exTimerBtnId=null;}
 }
 
@@ -1103,7 +1354,7 @@ function advanceHiit(){
 const hs=state.hiitState;if(!hs)return;
 if(hs.phase==='work'){
 clearInterval(state.hiitTimer);state.hiitTimer=null;
-playDoubleBeep();
+playDoubleChime();
 if(hs.station<HIIT_STATIONS.length-1){
 hs.station++;hs.phase='ready';hs.remaining=0;
 }else if(hs.round<hs.totalRounds){
@@ -1116,7 +1367,7 @@ renderHiitTimer(hs.totalRounds);
 }else{state.hiitState=null;renderHiitTimer(hs.totalRounds);return;}
 }else{
 clearInterval(state.hiitTimer);state.hiitTimer=null;
-playBeep();
+playChime();
 hs.phase='ready';hs.round++;hs.station=0;hs.remaining=0;
 }
 renderHiitTimer(hs.totalRounds);
@@ -1129,10 +1380,10 @@ function renderHiitTimer(totalRounds){
 const el=document.getElementById('hiitTimerCard');if(!el)return;
 const hs=state.hiitState;
 if(!hs&&!state.hiitTimer){
-el.innerHTML='<div class="hiit-timer-phase">HIIT Circuit Timer</div><div class="hiit-timer-round">'+totalRounds+' rounds \u00d7 5 stations (4 min work + 90s rest)</div><div class="hiit-timer-btns"><button class="hiit-timer-btn" onclick="startHiit('+totalRounds+')">\u25b6 Start</button></div>';
+el.innerHTML='<div class="hiit-timer-phase">HIIT Circuit Timer</div><div class="hiit-timer-round">'+totalRounds+' rounds \u00d7 5 stations (4 min work + 90s rest)</div><div class="hiit-timer-btns"><button class="hiit-timer-btn" onclick="startHiit('+totalRounds+')">'+ICON_PLAY+' Start</button></div>';
 return;
 }
-if(!hs){el.innerHTML='<div class="hiit-timer-done">\u2713 Circuit Complete!</div><div class="hiit-timer-btns"><button class="hiit-timer-btn" onclick="startHiit('+totalRounds+')">\u25b6 Restart</button></div>';return;}
+if(!hs){el.innerHTML='<div class="hiit-timer-done">\u2713 Circuit Complete!</div><div class="hiit-timer-btns"><button class="hiit-timer-btn" onclick="startHiit('+totalRounds+')">'+ICON_PLAY+' Restart</button></div>';return;}
 if(hs.phase==='ready'){
 const exName=HIIT_STATIONS[hs.station].name;
 const exSec=HIIT_STATIONS[hs.station].sec;
@@ -1140,7 +1391,7 @@ el.innerHTML='<div class="hiit-timer-round">Round '+hs.round+'/'+hs.totalRounds+
 '<div class="hiit-ready-label">Next exercise:</div>'+
 '<div class="hiit-ready-exercise">'+exName+'</div>'+
 '<div class="hiit-timer-round">'+exSec+' seconds</div>'+
-'<button class="hiit-ready-btn" onclick="hiitReady()">Ready \u25b6</button>'+
+'<button class="hiit-ready-btn" onclick="hiitReady()">Ready '+ICON_PLAY+'</button>'+
 '<div class="hiit-timer-btns" style="margin-top:8px"><button class="hiit-timer-btn hiit-reset" onclick="resetHiit('+hs.totalRounds+')">Reset</button></div>';
 return;
 }
@@ -1150,10 +1401,10 @@ const pCls=hs.phase==='work'?'work':'rest-phase';
 el.innerHTML='<div class="hiit-timer-round">Round '+hs.round+'/'+hs.totalRounds+'</div>'+
 '<div class="hiit-timer-phase '+pCls+'">'+phaseLabel+'</div>'+
 '<div class="hiit-timer-display'+(hs.phase==='rest'?' resting':'')+'">'+formatTime(hs.remaining)+'</div>'+
-'<div class="hiit-timer-btns"><button class="hiit-timer-btn" onclick="startHiit('+hs.totalRounds+')">'+(isRunning?'\u23f8 Pause':'\u25b6 Resume')+'</button>'+
+'<div class="hiit-timer-btns"><button class="hiit-timer-btn" onclick="startHiit('+hs.totalRounds+')">'+(isRunning?ICON_PAUSE+' Pause':ICON_PLAY+' Resume')+'</button>'+
 '<button class="hiit-timer-btn hiit-reset" onclick="resetHiit('+hs.totalRounds+')">Reset</button></div>';
 }
-function makeExTimerBtn(id,sec){return sec>0?' <button class="ex-timer-btn" id="'+id+'" onclick="event.stopPropagation();toggleExTimer(this,'+sec+')">\u23f1 '+fmtTimerLabel(sec)+'</button>':'';}
+function makeExTimerBtn(id,sec){return sec>0?' <button class="ex-timer-btn" id="'+id+'" onclick="event.stopPropagation();toggleExTimer(this,'+sec+')">'+ICON_TIMER+fmtTimerLabel(sec)+'</button>':'';}
 
 /* ARM EXERCISE DETAILS */
 const ARM_EX={
@@ -1165,10 +1416,64 @@ const ARM_EX={
 'Spider Curl':{target:'Short head (peak contraction)',equip:'HGX200 preacher pad angled + dumbbells',tempo:'2-2-2-0',form:['Chest against angled pad, arms hanging','Curl up, squeeze HARD at top 2 seconds','Upper arms perpendicular to floor','Go lighter than expected \u2014 strict by design'],weight:'~5-7 kg/arm',muscle:'Biceps \u2014 short head (hardest at TOP)'}
 };
 
-/* WORKOUTS — v3 with arm supersets */
+/* V23: STRUCTURED CALISTHENICS WARMUP — science-backed, ~10 min
+   Sources: The Movement Athlete, White Coat Trainer, PMC (2024) on dynamic warmups.
+   Research confirms 5-10 min dynamic warmup for upper body calisthenics. */
+const CALISTHENICS_WARMUP={
+totalDur:'~10 min',
+sections:[
+{name:'General Activation',dur:'2.5 min',exercises:[
+{name:'Jumping jacks',sec:45,cue:'Arms fully overhead, land soft on balls of feet'},
+{name:'Arm circles (small \u2192 large)',sec:60,cue:'Keep core tight, progressively increase circle diameter'},
+{name:'High knees in place',sec:30,cue:'Drive knees to hip height, pump arms opposite'}
+]},
+{name:'Shoulder & Scapular Prep',dur:'2.5 min',exercises:[
+{name:'Band pull-aparts',sec:30,cue:'Squeeze shoulder blades together at end range, arms straight'},
+{name:'Scapular push-ups (plank)',sec:30,cue:'Only move shoulder blades \u2014 protract/retract, no elbow bend'},
+{name:'Wall slides',sec:30,cue:'Keep forearm and back of hand glued to wall throughout'},
+{name:'Dead hang scapular shrugs',sec:30,cue:'Depress scapulae (pull shoulders down), hold 2s each rep'}
+]},
+{name:'Wrist Prep',dur:'1.5 min',exercises:[
+{name:'Wrist circles (on floor)',sec:30,cue:'Hands flat, lean forward gently, circle both directions'},
+{name:'Flexor/extensor stretches',sec:30,cue:'Press palm down fingers-forward, then flip to fingers-back'},
+{name:'Fist rolls (on knees)',sec:30,cue:'Kneel on closed fists, slowly roll open and closed under bodyweight'}
+]},
+{name:'Dynamic Stretches',dur:'2.5 min',exercises:[
+{name:'Cat-cow',sec:30,cue:'Exhale to round (cat), inhale to arch (cow), full thoracic range'},
+{name:'Inchworms',sec:45,cue:'Walk hands to plank, walk feet to hands, keep legs straight'},
+{name:'Thread-the-needle (each side)',sec:60,cue:'Reach under and rotate through thoracic spine, not lower back'}
+]},
+{name:'Neural Activation',dur:'1 min',exercises:[
+{name:'3 explosive push-ups',sec:20,cue:'Full lockout, maximum intent on the push'},
+{name:'3 jump pull-ups or explosive hangs',sec:20,cue:'Engage lats hard, pull fast even if partial ROM'},
+{name:'Wall handstand or plank hold',sec:20,cue:'Squeeze everything \u2014 glutes, core, push floor away'}
+]}
+]};
+function renderWarmupBlock(){
+let h='<div class="warmup-block"><div class="warmup-header"><span class="warmup-title">Warm-Up Protocol</span><span class="warmup-dur">'+CALISTHENICS_WARMUP.totalDur+'</span></div>';
+let timerIdx=0;
+CALISTHENICS_WARMUP.sections.forEach(sec=>{
+h+='<div class="warmup-section"><div class="warmup-section-head"><span class="warmup-section-name">'+sec.name+'</span><span class="warmup-section-dur">'+sec.dur+'</span></div>';
+sec.exercises.forEach(ex=>{
+const btnId='wuT_'+timerIdx;
+h+='<div class="warmup-ex"><span class="warmup-ex-name">'+ex.name+'</span>';
+h+='<button class="ex-timer-btn" id="'+btnId+'" onclick="event.stopPropagation();toggleExTimer(this,'+ex.sec+')">'+ICON_TIMER+fmtTimerLabel(ex.sec)+'</button>';
+h+='</div>';
+h+='<div class="warmup-ex-cue">'+ex.cue+'</div>';
+timerIdx++;
+});
+h+='</div>';
+});
+h+='</div>';
+return h;
+}
+
+/* WORKOUTS — v3 with arm supersets
+   V23 rest timer fix: Wall Handstand + Kick-up Practice sets format changed from '2-3 sets' to '3 × 10-15 sec hold'
+   so the regex (\d+)\s*[×x] can match and generate set rows + rest timer button. Only missing timer found. */
 const WORKOUTS={
 2:{title:'Session A \u2014 Muscle-Up Skill + Upper Push + Arms',sub:'~40 min | Arms: cable curl / pushdown superset',exercises:[
-{name:'Warm-up',sets:'10 min',rest:'',notes:'Wrist circles, band dislocates, band pull-aparts, scap pull-ups, scap push-ups, arm circles, cat-cow, ramp-up set.'},
+{name:'Warm-up',type:'warmup',sets:'10 min',rest:'',notes:''},
 {name:'Wall Handstand Hold (chest-to-wall)',sets:'3 \u00d7 max hold (\u226420 sec)',rest:'45 sec',notes:'Skill preservation. Keep hollow body.'},
 {name:'Jumping Muscle-Up + Slow Negative (3-5 sec)',sets:'4 \u00d7 3 reps',rest:'2 min',notes:'Jump to top, control the negative through the transition.'},
 {name:'Straight-Bar Dips',sets:'4 \u00d7 5-8 reps',rest:'2 min',notes:'Full ROM. Alternate with parallel dips.'},
@@ -1177,8 +1482,8 @@ const WORKOUTS={
 {name:'Cool-Down: Chest + Lat Stretch',sets:'2 min',rest:'',notes:''}
 ]},
 4:{title:'Session B \u2014 Muscle-Up Skill + Pull Volume + Arms',sub:'~40 min | Arms: preacher curl / overhead ext superset',exercises:[
-{name:'Warm-up',sets:'10 min',rest:'',notes:'Full warm-up protocol including wrist prep.'},
-{name:'Wall Handstand + Kick-up Practice',sets:'2-3 sets',rest:'30 sec',notes:''},
+{name:'Warm-up',type:'warmup',sets:'10 min',rest:'',notes:''},
+{name:'Wall Handstand + Kick-up Practice',sets:'3 \u00d7 10-15 sec hold',rest:'30 sec',notes:'Mix chest-to-wall holds and freestanding kick-up attempts.'},
 {name:'Pseudo Planche Lean / Tuck Planche',sets:'4 \u00d7 max hold (5-15 sec)',rest:'60 sec',notes:'Measure lean distance weekly.'},
 {name:'Band-Assisted MU or Half MU',sets:'4 \u00d7 3-5 reps',rest:'2 min',notes:'Half MU = pull to waist, no dip.'},
 {name:'Weighted Pull-Up (or strict BW)',sets:'3 \u00d7 3-5 reps',rest:'2 min',notes:'3-6 rep range, progressive overload. (Reduced from 4 sets to fit arm work.)'},
@@ -1187,7 +1492,7 @@ const WORKOUTS={
 {name:'Cool-Down: Lat + Chest Stretch',sets:'2 min',rest:'',notes:''}
 ]},
 6:{title:'Session C \u2014 HSPU + Planche + Skill Volume + Core',sub:'~60 min | Core block relocated from Tue/Thu',exercises:[
-{name:'Full Warm-up',sets:'10 min',rest:'',notes:'Including jump rope, full rotator cuff, dislocates.'},
+{name:'Full Warm-up',type:'warmup',sets:'10 min',rest:'',notes:''},
 {name:'Chest-to-Wall Handstand Hold',sets:'6-8 \u00d7 5-15 sec',rest:'30 sec',notes:'High volume handstand practice.'},
 {name:'Elevated Pike Push-up / Wall HSPU',sets:'4 \u00d7 5-8',rest:'2 min',notes:'W1-4: pike. W5-8: back-to-wall. W9-12: chest-to-wall.'},
 {name:'Shoulder Stand or Wall HSPU Eccentric (5-sec)',sets:'3 \u00d7 3',rest:'90 sec',notes:'Bottom-phase strength.'},
@@ -1420,12 +1725,73 @@ const NOTE_CATS=[
 let noteFormOpen=false;
 let noteSelectedCat='other';
 
+/* V23: AUTO-REMINDERS SYSTEM */
+function getAutoReminders(dateObj){
+const d=dateObj.getDay();
+const dateStr=dateObj.toDateString();
+const reminders=[];
+/* Helper: get week number since epoch for biweekly/4-weekly calc */
+const weekNum=Math.floor((dateObj.getTime()-new Date(2026,0,5).getTime())/(7*24*60*60*1000));
+/* Every Wednesday */
+if(d===3){
+reminders.push({id:'auto_pillowcase_wed',text:'Change pillowcase (2\u00d7/week)',category:'care',auto:true});
+reminders.push({id:'auto_phone_screen_wed',text:'Clean phone screen',category:'care',auto:true});
+}
+/* Every Sunday */
+if(d===0){
+reminders.push({id:'auto_pillowcase_sun',text:'Change pillowcase (2\u00d7/week)',category:'care',auto:true});
+reminders.push({id:'auto_nose_hair',text:'Trim nose hair',category:'care',auto:true});
+reminders.push({id:'auto_eyebrows',text:'Eyebrow cleanup (stray hairs)',category:'care',auto:true});
+reminders.push({id:'auto_weighin',text:'Weekly weigh-in (AM, same conditions)',category:'sport',auto:true});
+reminders.push({id:'auto_hair_mask',text:'Deep conditioning hair mask',category:'care',auto:true});
+}
+/* Every other Sunday (every 2 weeks) */
+if(d===0&&weekNum%2===0){
+reminders.push({id:'auto_nails',text:'Cut nails',category:'care',auto:true});
+}
+/* Every Thursday */
+if(d===4){
+reminders.push({id:'auto_pullup_test',text:'Pull-up test (max reps, track progress)',category:'sport',auto:true});
+}
+/* Every Saturday */
+if(d===6){
+reminders.push({id:'auto_room_clean',text:'Room cleaning',category:'other',auto:true});
+reminders.push({id:'auto_phone_screen_sat',text:'Phone screen clean',category:'care',auto:true});
+}
+/* Every 4 weeks (Sunday) */
+if(d===0&&weekNum%4===0){
+reminders.push({id:'auto_arm_measure',text:'Arm measurements (relaxed + flexed, both sides)',category:'sport',auto:true});
+}
+/* Shower-based bath towel reminder */
+const showerCount=lsGet('showerCount',0);
+if(showerCount>=3){
+reminders.push({id:'auto_bath_towel',text:'Swap bath towel (3 showers reached)',category:'care',auto:true});
+}
+return reminders;
+}
+function getDismissedAutoReminders(dateStr){return lsGet('autoDismissed_'+dateStr,[]);}
+function dismissAutoReminder(reminderId,dateStr){
+const dismissed=getDismissedAutoReminders(dateStr);
+if(!dismissed.includes(reminderId)){dismissed.push(reminderId);lsSet('autoDismissed_'+dateStr,dismissed);}
+if(reminderId==='auto_bath_towel'){lsSet('showerCount',0);}
+renderNotesCard();
+}
+function logShower(){
+let count=lsGet('showerCount',0);
+count++;lsSet('showerCount',count);
+renderNotesCard();
+}
+
 /* ===== STATE ===== */
 const today=new Date().toDateString();
 const dow=new Date().getDay();
 function lsGet(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function dailyKey(k){return k+'_'+today}
+function dailyKey(k){return k+'_'+(state&&state.selectedDate?state.selectedDate:today)}
+function selectedDailyKey(k){return k+'_'+(state.selectedDate||today)}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).substr(2,5)}
+/* V24: Migrate old entries without IDs */
+function migrateEntries(arr){return arr.map(e=>{if(!e.id)e.id=uid();return e;});}
 
 let state={
 shave:lsGet(dailyKey('shave'),false),
@@ -1437,8 +1803,8 @@ breakfast:lsGet(dailyKey('breakfast'),null),
 blendMode:false,
 blendPicks:lsGet(dailyKey('blendPicks'),[]),
 blendRatio:lsGet(dailyKey('blendRatio'),[50,50]),
-loggedMeals:lsGet(dailyKey('meals17'),[]),
-loggedSnacks:lsGet(dailyKey('snacks17'),[]),
+loggedMeals:migrateEntries(lsGet(dailyKey('meals17'),[])),
+loggedSnacks:migrateEntries(lsGet(dailyKey('snacks17'),[])),
 progLevels:lsGet('progLevels',{0:0,1:0,2:0}),
 gtgSets:lsGet(dailyKey('gtg'),0),
 shopChecked:lsGet('shopChecked',{}),
@@ -1449,7 +1815,9 @@ activeScreen:'dashboard',
 restTimer:null,restRemaining:0,
 viewMode:'day',
 viewingDate:null,
+selectedDate:null,
 yogurtRatio:lsGet(dailyKey('yogurtRatio'),'2G1P'),
+bfCustom:lsGet(dailyKey('bfCustom'),{}),
 hotCocoBread:lsGet(dailyKey('hotCocoBread'),62),
 hotCocoMilk:lsGet(dailyKey('hotCocoMilk'),30),
 exTimer:null,exTimerRemaining:0,exTimerTarget:0,exTimerBtnId:null,
@@ -1466,8 +1834,59 @@ lsSet('progLevels',state.progLevels);lsSet(dailyKey('gtg'),state.gtgSets);
 lsSet('shopChecked',state.shopChecked);lsSet(dailyKey('setsDone'),state.setsDone);
 lsSet('armMeasurements',state.armMeasurements);
 lsSet(dailyKey('yogurtRatio'),state.yogurtRatio);
+lsSet(dailyKey('bfCustom'),state.bfCustom);
 lsSet(dailyKey('hotCocoBread'),state.hotCocoBread);
 lsSet(dailyKey('hotCocoMilk'),state.hotCocoMilk);
+}
+
+/* V24: Day-switching — persist selected date across screens */
+function reloadStateForDate(){
+const selDow=state.viewingDate?state.viewingDate.getDay():dow;
+const defTkd=lsGet(dailyKey('tkd'),true);
+state.shave=lsGet(dailyKey('shave'),false);
+state.tkdToday=defTkd;
+state.water=lsGet(dailyKey('water'),{total:0,log:[]});
+state.loggedMeals=migrateEntries(lsGet(dailyKey('meals17'),[]));
+state.loggedSnacks=migrateEntries(lsGet(dailyKey('snacks17'),[]));
+state.breakfast=lsGet(dailyKey('breakfast'),null);
+state.blendMode=false;state.blendPicks=lsGet(dailyKey('blendPicks'),[]);state.blendRatio=lsGet(dailyKey('blendRatio'),[50,50]);
+state.setsDone=lsGet(dailyKey('setsDone'),{});
+state.gtgSets=lsGet(dailyKey('gtg'),0);
+state.yogurtRatio=lsGet(dailyKey('yogurtRatio'),'2G1P');
+state.bfCustom=lsGet(dailyKey('bfCustom'),{});
+state.hotCocoBread=lsGet(dailyKey('hotCocoBread'),62);
+state.hotCocoMilk=lsGet(dailyKey('hotCocoMilk'),30);
+const defType=AUTO_DAY_TYPE[selDow]==='tkd'&&!defTkd?'calisthenics':AUTO_DAY_TYPE[selDow];
+state.dayType=lsGet(dailyKey('dayType'),defType);
+}
+function switchToDate(dateStr){
+save();
+state.selectedDate=dateStr===today?null:dateStr;
+state.viewingDate=dateStr===today?null:new Date(dateStr);
+reloadStateForDate();
+renderAll();
+}
+function switchToToday(){
+if(state.selectedDate)save();
+state.selectedDate=null;state.viewingDate=null;
+reloadStateForDate();
+state.viewMode='day';
+renderAll();
+}
+function renderDateBar(){
+const bar=document.getElementById('dateBar');if(!bar)return;
+if(!state.selectedDate||state.selectedDate===today){bar.style.display='none';return;}
+bar.style.display='flex';
+const d=new Date(state.selectedDate);
+document.getElementById('dateBarText').textContent='Viewing '+d.toLocaleDateString('en-GB',{weekday:'short',month:'short',day:'numeric'});
+}
+function renderAll(){
+renderDateBar();renderHeader();renderShaveToggle();renderTkdToggle();renderNotesCard();renderTimeline();
+if(state.activeScreen==='water')renderWater();
+if(state.activeScreen==='meals')renderMeals();
+if(state.activeScreen==='training')renderTraining();
+if(state.activeScreen==='extras')renderExtras();
+if(state.activeScreen==='shopping')renderShopping();
 }
 
 /* ===== RENDER ===== */
@@ -1611,7 +2030,10 @@ document.getElementById('waterTargetLabel').textContent='/ '+(target/1000).toFix
 }
 document.getElementById('waterLog').innerHTML=state.water.log.slice().reverse().map(l=>
 `<div class="water-log-item"><span class="wl-time">${l.time}</span><span>+${state.waterUnit==='cl'?Math.round(l.amount/10)+'cl':l.amount+'ml'}</span></div>`
-).join('')||'<div class="empty-state">No water logged yet today</div>';
+).join('')||'<div class="empty-state">No water logged yet</div>';
+/* V24: update water log title for selected date */
+const wTitle=document.getElementById('waterLogTitle');
+if(wTitle)wTitle.textContent=state.selectedDate&&state.selectedDate!==today?new Date(state.selectedDate).toLocaleDateString('en-GB',{weekday:'short',month:'short',day:'numeric'})+" Log":"Today's Log";
 }
 function addWater(ml){
 const now=new Date();state.water.total+=ml;
@@ -1633,7 +2055,8 @@ if(portion==='small')return meal.gS;if(portion==='large')return meal.gL;if(porti
 function getSnackMacros(entry){
 const idx=entry.idx!==undefined?entry.idx:entry;
 const s=SNACKS[idx];
-if(idx===14)return getHotCocoMacros(state.hotCocoBread,state.hotCocoMilk);
+/* V24: use per-entry customization for hot coco, not global state */
+if(idx===14){const c=entry.customization||{breadG:state.hotCocoBread,milkCl:state.hotCocoMilk};return getHotCocoMacros(c.breadG,c.milkCl);}
 if(s.portioned&&entry.portion){
 const p=s.portions[entry.portion];
 return{kcal:p.kcal,p:p.p,c:p.c||0,f:p.f||0};
@@ -1644,12 +2067,11 @@ function getTotalMacros(){
 let kcal=0,p=0,c=0,f=0;
 if(state.blendMode&&state.blendPicks.length===2){
 const r=state.blendRatio;
-const a=BREAKFASTS[state.blendPicks[0]],b=BREAKFASTS[state.blendPicks[1]];
-kcal+=Math.round(a.kcal*r[0]/100+b.kcal*r[1]/100);p+=Math.round(a.p*r[0]/100+b.p*r[1]/100);
-c+=Math.round(a.c*r[0]/100+b.c*r[1]/100);f+=Math.round(a.f*r[0]/100+b.f*r[1]/100);
+const am=getBreakfastCustomMacros(state.blendPicks[0]),bm=getBreakfastCustomMacros(state.blendPicks[1]);
+kcal+=Math.round(am.kcal*r[0]/100+bm.kcal*r[1]/100);p+=Math.round(am.p*r[0]/100+bm.p*r[1]/100);
+c+=Math.round(am.c*r[0]/100+bm.c*r[1]/100);f+=Math.round(am.f*r[0]/100+bm.f*r[1]/100);
 }else if(state.breakfast!==null){
-if(state.breakfast===2){const ym=getYogurtBfMacros(state.yogurtRatio);kcal+=ym.kcal;p+=ym.p;c+=ym.c;f+=ym.f;}
-else{const bf=BREAKFASTS[state.breakfast];kcal+=bf.kcal;p+=bf.p;c+=bf.c;f+=bf.f;}
+const bfm=getBreakfastCustomMacros(state.breakfast);kcal+=bfm.kcal;p+=bfm.p;c+=bfm.c;f+=bfm.f;
 }
 state.loggedMeals.forEach(m=>{const meal=MEALS[m.idx];const g=getMealGrams(meal,m.portion);kcal+=Math.round(meal.kcal100*g/100);p+=Math.round(meal.p100*g/100);c+=Math.round(meal.c100*g/100);f+=Math.round(meal.f100*g/100)});
 state.loggedSnacks.forEach(entry=>{const sm=getSnackMacros(entry);kcal+=sm.kcal;p+=sm.p;c+=sm.c;f+=sm.f});
@@ -1667,7 +2089,7 @@ document.getElementById('breakfastGrid').innerHTML=BREAKFASTS.map((bf,i)=>{
 let cls='bf-card';
 if(state.blendMode){if(state.blendPicks.includes(i))cls+=' blend-pick';}
 else{if(state.breakfast===i)cls+=' selected';}
-const bm=i===2?getYogurtBfMacros(state.yogurtRatio):{kcal:bf.kcal,p:bf.p,c:bf.c,f:bf.f};
+const bm=getBreakfastCustomMacros(i);
 return`<div class="${cls}" onclick="${state.blendMode?'pickBlend('+i+')':'pickBreakfast('+i+')'}">
 <div class="bf-init">${bf.id}</div>
 <div class="bf-name">${bf.name}</div>
@@ -1679,7 +2101,7 @@ if(sel!==null){
 const bf=BREAKFASTS[sel],dt=BF_DETAILS[sel];
 let h='';
 if(sel===2){
-const ym=getYogurtBfMacros(state.yogurtRatio);
+const ym=getBreakfastCustomMacros(2);
 const yr=YOGURT_RATIOS.find(x=>x.id===state.yogurtRatio)||YOGURT_RATIOS[1];
 h+='<div class="yogurt-ratio-selector">';
 YOGURT_RATIOS.forEach(r=>{h+='<button class="yogurt-ratio-pill'+(state.yogurtRatio===r.id?' active':'')+'" onclick="event.stopPropagation();setYogurtRatio(\''+r.id+'\')">'+r.label+'</button>';});
@@ -1697,6 +2119,7 @@ return'<div class="bf-ing"><div><strong>'+ig.amt+'</strong> '+ig.item+'</div><em
 h+='<h4>'+bf.name+' \u2014 Ingredients</h4>';
 h+=dt.ingredients.map(ig=>`<div class="bf-ing"><div><strong>${ig.amt}</strong> ${ig.item}</div><em>${ig.why}</em></div>`).join('');
 }
+h+=renderBfCustomControls(sel);
 h+='<h4 style="margin-top:12px">Preparation</h4>';
 h+=dt.steps.map(s=>`<div class="bf-prep-step">${s}</div>`).join('');
 h+='<div class="bf-time-label">Prep time: '+dt.time+'</div>';
@@ -1714,58 +2137,61 @@ const brEl=document.getElementById('blendResult');
 if(state.blendMode&&state.blendPicks.length===2){
 const a=BREAKFASTS[state.blendPicks[0]],b=BREAKFASTS[state.blendPicks[1]];
 const r=state.blendRatio;
-const bk=Math.round(a.kcal*r[0]/100+b.kcal*r[1]/100),bp=Math.round(a.p*r[0]/100+b.p*r[1]/100),bc=Math.round(a.c*r[0]/100+b.c*r[1]/100),bf=Math.round(a.f*r[0]/100+b.f*r[1]/100);
+const am2=getBreakfastCustomMacros(state.blendPicks[0]),bm2=getBreakfastCustomMacros(state.blendPicks[1]);
+const bk=Math.round(am2.kcal*r[0]/100+bm2.kcal*r[1]/100),bp=Math.round(am2.p*r[0]/100+bm2.p*r[1]/100),bc=Math.round(am2.c*r[0]/100+bm2.c*r[1]/100),bff=Math.round(am2.f*r[0]/100+bm2.f*r[1]/100);
 const adtl=BF_DETAILS[state.blendPicks[0]],bdtl=BF_DETAILS[state.blendPicks[1]];
 let h=`<div class="blend-result"><h4>${r[0]}% ${a.name} + ${r[1]}% ${b.name}</h4>`;
-h+=`<div class="blend-macros">${bk} kcal \u00b7 ${bp}g P \u00b7 ${bc}g C \u00b7 ${bf}g F</div>`;
+h+=`<div class="blend-macros">${bk} kcal \u00b7 ${bp}g P \u00b7 ${bc}g C \u00b7 ${bff}g F</div>`;
 h+='<div style="font-size:12px;color:var(--text-dim)"><strong>Combined ingredients:</strong></div>';
 const addIngs=(dtl,pct,label)=>{h+=`<div style="font-size:11px;color:var(--text-muted);margin-top:4px">${label} (${pct}%):</div>`;dtl.ingredients.forEach(ig=>{const calc=calcBlendAmt(ig.amt,pct);h+=`<div class="blend-ing-item">${ig.item}: <strong>${calc}</strong></div>`;});};
 addIngs(adtl,r[0],a.name);addIngs(bdtl,r[1],b.name);
 h+='</div>';brEl.innerHTML=h;
 }else{brEl.innerHTML='';}
+/* V24: Per-instance meal rendering — each entry is independent, identical entries grouped with ×N */
 document.getElementById('mealList').innerHTML=MEALS.map((ml,i)=>{
-const entries=state.loggedMeals.filter(m=>m.idx===i);const count=entries.length;
-const lastEntry=entries[entries.length-1];const portion=lastEntry?lastEntry.portion:'normal';
-const g=getMealGrams(ml,portion);
-return`<div class="meal-entry${count>0?' selected':''}">
-<div class="meal-info" onclick="addMeal(${i})">
-<div class="meal-name"><span class="meal-dot"></span>${ml.name} <span class="meal-grams">\u00b7 ${g}g</span>${count>1?'<span class="meal-count">\u00d7'+count+'</span>':''}</div>
-<div class="meal-kcal">${Math.round(ml.kcal100*g/100)} kcal \u00b7 ${Math.round(ml.p100*g/100)}g P \u00b7 ${Math.round(ml.c100*g/100)}g C \u00b7 ${Math.round(ml.f100*g/100)}g F${count>1?' (each)':''}</div>
-</div>
-${count>0?`<div class="meal-actions">
-<div class="portion-btns">
-<button class="portion-btn${portion==='small'?' active':''}" onclick="setMealPortion(${i},'small')">S</button>
-<button class="portion-btn${portion==='normal'?' active':''}" onclick="setMealPortion(${i},'normal')">M</button>
-<button class="portion-btn${portion==='large'?' active':''}" onclick="setMealPortion(${i},'large')">L</button>
-<button class="portion-btn${portion==='xl'?' active':''}" onclick="setMealPortion(${i},'xl')">XL</button>
-</div>
-<button class="meal-remove" onclick="removeMeal(${i})" title="Remove one">\u2212</button>
-</div>`:''}
-</div>`;}).join('');
+const entries=state.loggedMeals.filter(m=>m.idx===i);
+if(entries.length===0){const g=getMealGrams(ml,'normal');
+return`<div class="meal-entry"><div class="meal-info" onclick="addMeal(${i})">
+<div class="meal-name"><span class="meal-dot"></span>${ml.name} <span class="meal-grams">\u00b7 ${g}g</span></div>
+<div class="meal-kcal">${Math.round(ml.kcal100*g/100)} kcal \u00b7 ${Math.round(ml.p100*g/100)}g P \u00b7 ${Math.round(ml.c100*g/100)}g C \u00b7 ${Math.round(ml.f100*g/100)}g F</div>
+</div></div>`;}
+/* Group entries by portion for display */
+const grps=[];entries.forEach(e=>{const g=grps.find(x=>x.portion===e.portion);if(g){g.entries.push(e);g.count++;}else grps.push({portion:e.portion,entries:[e],count:1});});
+return grps.map(grp=>{const g=getMealGrams(ml,grp.portion);const ps=['small','normal','large','xl'];const pl=['S','M','L','XL'];
+return`<div class="meal-entry selected"><div class="meal-info" onclick="addMeal(${i})">
+<div class="meal-name"><span class="meal-dot"></span>${ml.name} <span class="meal-grams">\u00b7 ${g}g</span>${grp.count>1?'<span class="meal-count">\u00d7'+grp.count+'</span>':''}</div>
+<div class="meal-kcal">${Math.round(ml.kcal100*g/100)} kcal \u00b7 ${Math.round(ml.p100*g/100)}g P \u00b7 ${Math.round(ml.c100*g/100)}g C \u00b7 ${Math.round(ml.f100*g/100)}g F${grp.count>1?' (each)':''}</div>
+</div><div class="meal-actions"><div class="portion-btns">
+${ps.map((sz,si)=>'<button class="portion-btn'+(grp.portion===sz?' active':'')+'" onclick="setMealGroupPortion('+i+',\''+grp.portion+'\',\''+sz+'\')">'+pl[si]+'</button>').join('')}
+</div><button class="meal-remove" onclick="removeMealEntry('${grp.entries[grp.count-1].id}')" title="Remove one">\u2212</button>
+</div></div>`;}).join('');}).join('');
+/* V24: Per-instance snack rendering — hot coco entries have independent steppers */
 document.getElementById('snackGrid').innerHTML=SNACKS.map((s,i)=>{
-const cnt=getSnackCount(i);const sel=cnt>0?' selected':'';
-const lastEntry=state.loggedSnacks.filter(e=>e.idx===i).pop();
-if(i===14)return renderHotCocoSnack(i,cnt,sel);
+const snackEntries=state.loggedSnacks.filter(e=>e.idx===i);
+const cnt=snackEntries.length;const sel=cnt>0?' selected':'';
+/* Hot coco: render each entry individually with its own steppers */
+if(i===14){return renderHotCocoSnacks(i,snackEntries);}
+/* Portioned snacks: each entry shown individually */
 if(s.portioned){
-const curPortion=lastEntry?lastEntry.portion:(s.defaultPortion||'M');
-const pm=s.portions[curPortion];
-const cls='snack-chip yogurt'+(s.coming?' coming':'')+sel;
-return`<div class="${cls}" onclick="addSnack(${i})">
-<div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}${cnt>0?'<span class="snack-count">\u00d7'+cnt+'</span>':''}</div>
+if(cnt===0){const pm=s.portions[s.defaultPortion||'M'];const cls='snack-chip yogurt'+(s.coming?' coming':'');
+return`<div class="${cls}" onclick="addSnack(${i})"><div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}</div>
+<div class="snack-ymacros">${pm.kcal} kcal \u00b7 ${pm.p}g P \u00b7 ${pm.c}g C \u00b7 ${pm.f}g F${pm.desc?' \u00b7 '+pm.desc:''}</div>
+<div class="snack-ytag">${s.tag}</div></div>`;}
+return snackEntries.map(entry=>{const cp=entry.portion||(s.defaultPortion||'M');const pm=s.portions[cp];
+const cls='snack-chip yogurt'+(s.coming?' coming':'')+' selected';
+return`<div class="${cls}" onclick="addSnack(${i})"><div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}</div>
 <div class="snack-ymacros">${pm.kcal} kcal \u00b7 ${pm.p}g P \u00b7 ${pm.c}g C \u00b7 ${pm.f}g F${pm.desc?' \u00b7 '+pm.desc:''}</div>
 <div class="snack-ytag">${s.tag}</div>
-${cnt>0?'<div class="snack-portion-btns">'+['S','M','L','XL'].map(sz=>'<button class="snack-portion-btn'+(curPortion===sz?' active':'')+'" onclick="event.stopPropagation();setSnackPortion('+i+',\''+sz+'\')">'+sz+(s.portions[sz].g?' ('+s.portions[sz].g+'g)':'')+'</button>').join('')+'<button class="meal-remove" style="margin-left:4px" onclick="event.stopPropagation();removeSnack('+i+')">\u2212</button></div>':''}
-</div>`;
-}
-if(s.tag){
-const cls='snack-chip yogurt'+(s.coming?' coming':'')+sel;
-return`<div class="${cls}" onclick="addSnack(${i})">
-<div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}${cnt>0?'<span class="snack-count">\u00d7'+cnt+'</span>':''}</div>
+<div class="snack-portion-btns">${['S','M','L','XL'].map(sz=>'<button class="snack-portion-btn'+(cp===sz?' active':'')+'" onclick="event.stopPropagation();setSnackEntryPortion(\''+entry.id+'\',\''+sz+'\')">'+sz+(s.portions[sz].g?' ('+s.portions[sz].g+'g)':'')+'</button>').join('')}<button class="meal-remove" style="margin-left:4px" onclick="event.stopPropagation();removeSnackEntry(\''+entry.id+'\')">\u2212</button></div></div>`;}).join('');}
+/* Tagged snacks (yogurts etc): group identical entries */
+if(s.tag){const cls='snack-chip yogurt'+(s.coming?' coming':'')+sel;
+return`<div class="${cls}" onclick="addSnack(${i})"><div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}${cnt>0?'<span class="snack-count">\u00d7'+cnt+'</span>':''}</div>
 <div class="snack-ymacros">${s.kcal} kcal \u00b7 ${s.p}g P \u00b7 ${s.c||0}g C \u00b7 ${s.f||0}g F</div>
 <div class="snack-ytag">${s.tag}</div>
-${cnt>0?'<div class="snack-actions"><button onclick="event.stopPropagation();removeSnack('+i+')">\u2212</button></div>':''}
+${cnt>0?'<div class="snack-actions"><button onclick="event.stopPropagation();removeSnackEntry(\''+snackEntries[cnt-1].id+'\')">\u2212</button></div>':''}
 </div>`;}
-return`<div class="snack-chip${sel}" onclick="addSnack(${i})">${s.name} (${s.kcal})${cnt>1?' <span class="snack-count">\u00d7'+cnt+'</span>':''}${cnt>0?'<button class="meal-remove" style="margin-left:6px;display:inline-flex;width:18px;height:18px;font-size:12px" onclick="event.stopPropagation();removeSnack('+i+')">\u2212</button>':''}</div>`;
+/* Simple snacks */
+return`<div class="snack-chip${sel}" onclick="addSnack(${i})">${s.name} (${s.kcal})${cnt>1?' <span class="snack-count">\u00d7'+cnt+'</span>':''}${cnt>0?'<button class="meal-remove" style="margin-left:6px;display:inline-flex;width:18px;height:18px;font-size:12px" onclick="event.stopPropagation();removeSnackEntry(\''+snackEntries[cnt-1].id+'\')">\u2212</button>':''}</div>`;
 }).join('');
 }
 function pickBreakfast(i){if(state.blendMode)return;state.breakfast=state.breakfast===i?null:i;save();renderMeals();}
@@ -1783,13 +2209,30 @@ return(num%1===0?num:num)+(unit?' '+unit:'');
 function toggleBlend(){state.blendMode=!state.blendMode;if(!state.blendMode)state.blendPicks=[];save();renderMeals();}
 function pickBlend(i){if(!state.blendMode)return;const idx=state.blendPicks.indexOf(i);if(idx>=0)state.blendPicks.splice(idx,1);else if(state.blendPicks.length<2)state.blendPicks.push(i);else state.blendPicks=[state.blendPicks[1],i];save();renderMeals();}
 function setBlendRatio(a,b){state.blendRatio=[a,b];save();renderMeals();}
-function addMeal(i){state.loggedMeals.push({idx:i,portion:'normal'});save();renderMeals();}
-function removeMeal(i){const idx=state.loggedMeals.findLastIndex(m=>m.idx===i);if(idx>=0)state.loggedMeals.splice(idx,1);save();renderMeals();}
-function setMealPortion(i,size){state.loggedMeals.filter(m=>m.idx===i).forEach(m=>m.portion=size);save();renderMeals();}
-function addSnack(i,portion){const entry={idx:i};if(portion)entry.portion=portion;else if(SNACKS[i].portioned)entry.portion=SNACKS[i].defaultPortion||'M';state.loggedSnacks.push(entry);save();renderMeals();}
-function removeSnack(i){const idx=state.loggedSnacks.findLastIndex(e=>e.idx===i);if(idx>=0)state.loggedSnacks.splice(idx,1);save();renderMeals();}
-function setSnackPortion(i,size){state.loggedSnacks.filter(e=>e.idx===i).forEach(e=>e.portion=size);save();renderMeals();}
+/* V24: Per-instance meal/snack functions — each entry has a unique ID */
+function addMeal(i){state.loggedMeals.push({id:uid(),idx:i,portion:'normal'});save();renderMeals();}
+function removeMealEntry(entryId){const idx=state.loggedMeals.findIndex(m=>m.id===entryId);if(idx>=0)state.loggedMeals.splice(idx,1);save();renderMeals();}
+function setMealEntryPortion(entryId,size){const e=state.loggedMeals.find(m=>m.id===entryId);if(e)e.portion=size;save();renderMeals();}
+function addSnack(i,portion){
+const s=SNACKS[i];const entry={id:uid(),idx:i};
+if(portion)entry.portion=portion;else if(s.portioned)entry.portion=s.defaultPortion||'M';
+/* V24: snapshot hot coco customization at log time */
+if(i===14)entry.customization={breadG:state.hotCocoBread,milkCl:state.hotCocoMilk};
+state.loggedSnacks.push(entry);save();renderMeals();
+}
+function removeSnackEntry(entryId){const idx=state.loggedSnacks.findIndex(e=>e.id===entryId);if(idx>=0)state.loggedSnacks.splice(idx,1);save();renderMeals();}
+function setSnackEntryPortion(entryId,size){const e=state.loggedSnacks.find(x=>x.id===entryId);if(e)e.portion=size;save();renderMeals();}
+function adjustHotCocoEntry(entryId,type,delta){
+const e=state.loggedSnacks.find(x=>x.id===entryId);if(!e||!e.customization)return;
+if(type==='bread'){e.customization.breadG=Math.max(0,Math.min(100,e.customization.breadG+delta));}
+else{e.customization.milkCl=Math.max(25,Math.min(40,+(e.customization.milkCl+delta).toFixed(1)));}
+save();renderMeals();
+}
 function getSnackCount(i){return state.loggedSnacks.filter(e=>e.idx===i).length;}
+/* Keep old function names as aliases for backwards compat with inline onclick handlers */
+function removeMeal(i){const idx=state.loggedMeals.findLastIndex(m=>m.idx===i);if(idx>=0)state.loggedMeals.splice(idx,1);save();renderMeals();}
+function removeSnack(i){const idx=state.loggedSnacks.findLastIndex(e=>e.idx===i);if(idx>=0)state.loggedSnacks.splice(idx,1);save();renderMeals();}
+function setMealGroupPortion(mealIdx,oldPortion,newPortion){state.loggedMeals.filter(m=>m.idx===mealIdx&&m.portion===oldPortion).forEach(m=>m.portion=newPortion);save();renderMeals();}
 
 /* TRAINING */
 function renderArmDetail(exName){
@@ -1806,15 +2249,18 @@ ${ex.form.map(f=>`<div class="ad-row ad-form">${f}</div>`).join('')}
 }
 
 function renderTraining(){
-const w=WORKOUTS[dow];const titleEl=document.getElementById('trainingTitle');
+/* V24: use active day-of-week for training (supports viewing other days) */
+const trainDow=getActiveDow();
+const w=WORKOUTS[trainDow];const titleEl=document.getElementById('trainingTitle');
 const subEl=document.getElementById('trainingSub');const area=document.getElementById('workoutArea');
 const volArea=document.getElementById('volumeArea');
 if(w){
 titleEl.textContent=w.title;subEl.textContent=w.sub;
 area.innerHTML=w.exercises.map((ex,i)=>{
+if(ex.type==='warmup'){return renderWarmupBlock();}
 if(ex.type==='superset'||ex.type==='superset-optional'){
 const isOpt=ex.type==='superset-optional';
-const ssKey=dow+'_ss_'+i;
+const ssKey=trainDow+'_ss_'+i;
 let setsHtml=Array.from({length:ex.rounds},(_,si)=>{
 const key=ssKey+'_'+si;const done=state.setsDone[key];
 return`<div class="set-row"><div class="set-check${done?' done':''}" onclick="toggleSet('${key}',this)">${done?'\u2713':''}</div><span style="font-size:12px;color:var(--text-dim)">Round ${si+1}</span></div>`;
@@ -1840,18 +2286,18 @@ const setCount=ex.sets.match(/(\d+)\s*[\u00d7x]/);const numSets=setCount?parseIn
 let setsHtml='';
 if(numSets>0){
 setsHtml=Array.from({length:numSets},(_,si)=>{
-const key=dow+'_'+i+'_'+si;const done=state.setsDone[key];
+const key=trainDow+'_'+i+'_'+si;const done=state.setsDone[key];
 return`<div class="set-row"><div class="set-check${done?' done':''}" onclick="toggleSet('${key}',this)">${done?'\u2713':''}</div><span style="font-size:12px;color:var(--text-dim)">Set ${si+1}</span></div>`;
 }).join('');
 if(ex.rest){setsHtml+=`<button class="rest-timer-btn" onclick="startRest(${parseInt(ex.rest)||120})">Rest ${ex.rest}</button>`;}
 }
 const exTimerSec=parseTimerSeconds(ex.sets);
 return`<div class="workout-block">
-<div class="ex-name">${ex.name}${makeExTimerBtn('wT_'+dow+'_'+i,exTimerSec)}</div>
+<div class="ex-name">${ex.name}${makeExTimerBtn('wT_'+trainDow+'_'+i,exTimerSec)}</div>
 <div class="ex-detail">${ex.sets}${ex.rest?' \u00b7 Rest: '+ex.rest:''}${ex.notes?' \u00b7 '+ex.notes:''}</div>
 ${setsHtml}</div>`;}).join('');
 // Volume summary for Tue/Thu
-if(dow===2||dow===4){
+if(trainDow===2||trainDow===4){
 volArea.innerHTML=`<div class="volume-card"><h4>Weekly Arm Volume</h4>
 <div class="vol-row"><span class="vol-label">Biceps (direct isolation)</span><span class="vol-value">6 sets/wk core <span style="color:var(--text-muted);font-weight:400">/ 10 with extras</span></span></div>
 <div class="vol-row"><span class="vol-label">+ indirect from pulls</span><span class="vol-value" style="color:var(--text-dim)">~6 effective sets</span></div>
@@ -1859,13 +2305,13 @@ volArea.innerHTML=`<div class="volume-card"><h4>Weekly Arm Volume</h4>
 <div class="vol-note">Triceps near MRV (~18) with 45-min variants. If persistent elbow soreness: drop "if time" tricep sets first.</div>
 </div>`;
 }else{volArea.innerHTML='';}
-}else if([1,3,5].includes(dow)){
-if(state.tkdToday){
+}else if([1,3,5].includes(trainDow)){
+if(getActiveTkd()){
 titleEl.textContent='TKD Day \u2014 No Calisthenics';
 subEl.textContent='GTG micro-practice during work breaks. See below.';
 area.innerHTML='<div class="empty-state">Focus on TKD tonight. Recovery from yesterday\'s session.</div>';
 }else{
-const isShort=dow===3;
+const isShort=trainDow===3;
 const variant=isShort?'SHORT':'FULL';
 const dur=isShort?'60 min':'~80 min';
 titleEl.textContent='Replacement Session \u2014 '+variant;
@@ -1880,7 +2326,7 @@ volArea.innerHTML='';
 }
 area.innerHTML+='<div class="timer-display" id="timerDisplay" style="display:none"></div>';
 area.innerHTML+='<button class="rest-timer-cancel" id="timerCancel" onclick="cancelRest()">Stop Timer</button>';
-if([1,3,5].includes(dow)&&!state.tkdToday){renderHiitTimer(dow===3?2:3);}
+if([1,3,5].includes(trainDow)&&!getActiveTkd()){renderHiitTimer(trainDow===3?2:3);}
 document.getElementById('progressionArea').innerHTML=PROGRESSIONS.map((prog,pi)=>{
 const lv=state.progLevels[pi]||0;const cur=prog.levels[lv];const next=prog.levels[lv+1];
 return`<div class="prog-card">
@@ -1914,8 +2360,8 @@ amHtml+='</div>';
 amHtml+='</div>';
 amArea.innerHTML=amHtml;
 
-const gtg=GTG_DAILY[dow];
-document.getElementById('gtgTitle').textContent='GTG Practice \u2014 '+DAYS[dow].name;
+const gtg=GTG_DAILY[trainDow];
+document.getElementById('gtgTitle').textContent='GTG Practice \u2014 '+DAYS[trainDow].name;
 document.getElementById('gtgArea').innerHTML=`
 <div class="card"><div class="card-sub">${gtg.exercises}</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px">${gtg.note}</div></div>
 <div class="gtg-counter">
@@ -1946,7 +2392,7 @@ if(cancelBtn)cancelBtn.style.display='flex';
 display.scrollIntoView({behavior:'smooth',block:'center'});
 state.restTimer=setInterval(()=>{
 state.restRemaining--;
-if(state.restRemaining<=0){clearInterval(state.restTimer);state.restTimer=null;playBeep();if(cancelBtn)cancelBtn.style.display='none';display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
+if(state.restRemaining<=0){clearInterval(state.restTimer);state.restTimer=null;playChime();if(cancelBtn)cancelBtn.style.display='none';display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
 else{display.textContent=formatTime(state.restRemaining);}
 },1000);
 }
@@ -2025,12 +2471,17 @@ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 document.getElementById('screen-'+screen).classList.add('active');
 document.getElementById('screens').scrollTop=0;
 state.activeScreen=screen;
-if(screen==='dashboard'){state.viewingDate=null;state.viewMode='day';
+renderDateBar();
+if(screen==='dashboard'){
+/* V24: only reset date if no selectedDate */
+if(!state.selectedDate){state.viewingDate=null;}
+state.viewMode='day';
 document.querySelectorAll('.view-toggle-btn').forEach(b=>{b.classList.toggle('active',b.dataset.view==='day');});
 document.getElementById('dailyView').classList.remove('hidden');
 document.getElementById('weeklyView').classList.remove('active');
 noteFormOpen=false;renderHeader();renderShaveToggle();renderTkdToggle();renderNotesCard();renderTimeline();
-document.getElementById('timelineTitle').textContent="Today's Timeline";}
+const isToday=!state.selectedDate||state.selectedDate===today;
+document.getElementById('timelineTitle').textContent=isToday?"Today's Timeline":new Date(state.selectedDate).toLocaleDateString('en-GB',{weekday:'long',month:'long',day:'numeric'});}
 if(screen==='water')renderWater();
 if(screen==='meals')renderMeals();
 if(screen==='training')renderTraining();
@@ -2061,7 +2512,8 @@ const daily=document.getElementById('dailyView');
 const weekly=document.getElementById('weeklyView');
 document.querySelectorAll('.view-toggle-btn').forEach(b=>{b.classList.toggle('active',b.dataset.view===mode);});
 if(mode==='week'){
-state.viewingDate=null;
+/* V24: save then clear selected date when going to week view */
+if(state.selectedDate){save();state.selectedDate=null;state.viewingDate=null;reloadStateForDate();}
 daily.classList.add('hidden');
 weekly.classList.add('active');
 renderWeeklyView();
@@ -2085,8 +2537,9 @@ titleEl.textContent="Today's Timeline";
 }
 }
 function viewDay(dateStr){
-const d=new Date(dateStr);
-setViewMode('day',d);
+/* V24: use switchToDate so data persists across screens */
+switchToDate(dateStr);
+setViewMode('day',state.viewingDate);
 document.getElementById('screens').scrollTop=0;
 }
 function getWeekDates(){
@@ -2210,16 +2663,31 @@ function renderNotesCard(){
 const container=document.getElementById('notesCard');
 if(!container)return;
 const viewDateStr=getActiveDateStr();
+const viewDate=state.viewingDate||new Date();
 const notes=getNotesForDate(viewDateStr);
 const isToday=!state.viewingDate||state.viewingDate.toDateString()===today;
 const title=isToday?"Today's Notes":'Notes';
-if(notes.length===0&&!noteFormOpen){
-container.innerHTML='<div style="display:flex;justify-content:flex-end;margin-bottom:4px"><button class="notes-add-btn" onclick="toggleNoteForm()" title="Add a note">+</button></div>';
+/* V23: Auto-reminders */
+const autoReminders=getAutoReminders(viewDate);
+const dismissed=getDismissedAutoReminders(viewDateStr);
+const visibleAuto=autoReminders.filter(r=>!dismissed.includes(r.id));
+/* V23: Shower counter */
+const showerCount=lsGet('showerCount',0);
+const hasContent=notes.length>0||visibleAuto.length>0||noteFormOpen;
+if(!hasContent){
+let sc='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
+sc+='<div class="shower-counter-row" style="flex:1;margin-bottom:0;margin-right:8px"><span class="shower-counter-info">Showers: <span class="shower-counter-count">'+showerCount+'/3</span> until towel swap</span>';
+sc+='<button class="shower-counter-btn" onclick="logShower()">Log Shower</button></div>';
+sc+='<button class="notes-add-btn" onclick="toggleNoteForm()" title="Add a note">+</button></div>';
+container.innerHTML=sc;
 return;
 }
-const viewDate=state.viewingDate||new Date();
 const defaultDate=dateToInputVal(viewDate);
-let h='<div class="notes-card">';
+let h='';
+/* Shower counter */
+h+='<div class="shower-counter-row"><span class="shower-counter-info">Showers: <span class="shower-counter-count">'+showerCount+'/3</span> until towel swap</span>';
+h+='<button class="shower-counter-btn" onclick="logShower()">Log Shower</button></div>';
+h+='<div class="notes-card">';
 h+='<div class="notes-card-header"><span class="notes-card-title">'+title+'</span><button class="notes-add-btn" onclick="toggleNoteForm()">+</button></div>';
 h+='<div class="notes-form'+(noteFormOpen?' open':'')+'">';
 h+='<div class="notes-form-inner">';
@@ -2232,12 +2700,22 @@ h+='<div class="notes-form-actions">';
 h+='<input type="date" class="notes-date-input" id="noteDateInput" value="'+defaultDate+'">';
 h+='<button class="notes-save-btn" onclick="saveNote()">Save</button>';
 h+='</div></div></div>';
+/* V23: Render auto-reminders first */
+visibleAuto.forEach(ar=>{
+const cat=NOTE_CATS.find(c=>c.id===ar.category)||NOTE_CATS[4];
+h+='<div class="note-item">';
+h+='<div class="note-item-bar" style="background:'+cat.hex+'"></div>';
+h+='<span class="note-item-text">'+escNoteHtml(ar.text)+'<span class="note-auto-label">auto</span></span>';
+h+='<button class="note-item-del" onclick="dismissAutoReminder(\''+ar.id+'\',\''+viewDateStr+'\')" title="Dismiss">\u2713</button>';
+h+='</div>';
+});
+/* User notes */
 notes.forEach(note=>{
 const cat=NOTE_CATS.find(c=>c.id===note.category)||NOTE_CATS[4];
 h+='<div class="note-item'+(note.done?' done':'')+'">';
 h+='<div class="note-item-bar" style="background:'+cat.hex+'"></div>';
 h+='<span class="note-item-text">'+escNoteHtml(note.text)+'</span>';
-h+='<button class="note-item-del" onclick="deleteNote(\''+note.id+'\')" title="Delete">\u00d7</button>';
+h+='<button class="note-item-del" onclick="deleteNote(\''+note.id+'\')" title="Delete">'+ICON_TRASH+'</button>';
 h+='<div class="note-item-check'+(note.done?' done':'')+'" onclick="toggleNoteDone(\''+note.id+'\')">'+(note.done?'\u2713':'')+'</div>';
 h+='</div>';
 });
@@ -2286,7 +2764,7 @@ return '#6b6560';
 
 // Consistency check v20: [YSL Y EDP → Lattafa Musamam Black Intense in tips + shopping, "Skyr or fromage blanc 0%" → "Skyr" in breakfasts A+D, no "Yaourt protéiné (11g P/100g)" found, no "Lightweight curl cream" found, no "68kg"/"175cm" found, no "beard grooming" found, no DROP products in active routines]
 /* INIT */
-clearCompletedPastNotes();buildNav();renderHeader();renderShaveToggle();renderTkdToggle();renderNotesCard();renderTimeline();
+clearCompletedPastNotes();buildNav();renderDateBar();renderHeader();renderShaveToggle();renderTkdToggle();renderNotesCard();renderTimeline();
 renderWater();renderMeals();renderTraining();renderExtras();renderShopping();
 </script>
 </body>
