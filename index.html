@@ -1022,7 +1022,12 @@ portions:{S:{g:null,kcal:490,p:11,c:61,f:21,desc:'50g baguette + 15g beurre + co
 tag:'15cl lait entier + 15cl lait avoine + 20g Nesquik + Pr\u00e9sident beurre doux'},
 {name:'Velout\u00e9 de Potiron et Cr\u00e8me Fra\u00eeche',kcal:80,p:1.3,c:12,f:2.5,portioned:true,defaultPortion:'M',
 portions:{S:{g:null,kcal:48,p:0.8,c:7.2,f:1.5,desc:'150ml'},M:{g:null,kcal:80,p:1.3,c:12,f:2.5,desc:'250ml'},L:{g:null,kcal:112,p:1.8,c:16.8,f:3.5,desc:'350ml'},XL:{g:null,kcal:160,p:2.5,c:24,f:5,desc:'500ml'}},
-tag:'Light snack \u2014 low calorie, low protein. Good for warmth, not for macros.'}
+tag:'Light snack \u2014 low calorie, low protein. Good for warmth, not for macros.'},
+{name:'Chocolat Lindt (carr\u00e9)',kcal:111,p:1.1,c:10.6,f:7,portioned:true,defaultPortion:'M',
+portions:{S:{g:10,kcal:55,p:0.5,c:5.3,f:3.5,desc:'1 carr\u00e9'},M:{g:20,kcal:111,p:1.1,c:10.6,f:7,desc:'2 carr\u00e9s'},L:{g:30,kcal:166,p:1.6,c:15.9,f:10.5,desc:'3 carr\u00e9s'},XL:{g:40,kcal:222,p:2.2,c:21.2,f:14,desc:'4 carr\u00e9s'}},
+tag:'Treat \u2014 1 square after coffee is fine, don\'t go overboard'},
+{name:'Mini Pancakes',kcal:140,p:2.8,c:20,f:5.2,portioned:true,defaultPortion:'M',
+portions:{S:{g:20,kcal:70,p:1.4,c:10,f:2.6,desc:'1 pancake'},M:{g:40,kcal:140,p:2.8,c:20,f:5.2,desc:'2 pancakes'},L:{g:80,kcal:279,p:5.7,c:40,f:10.4,desc:'4 pancakes'},XL:{g:120,kcal:419,p:8.5,c:60,f:15.6,desc:'6 pancakes'}}
 ];
 
 /* V21: YOGURT RATIO DATA */
@@ -1264,22 +1269,107 @@ h+='</div></div>';
 return h;
 }
 
-/* V24: AUDIO — pleasant chime, iOS-compatible */
+/* V24: AUDIO — dual HTML5 Audio + Web Audio API for full iOS compatibility.
+   HTML5 <audio> bypasses the iOS silent/mute switch (plays through media volume).
+   Web Audio API oscillator kept as desktop fallback. */
 let _audioCtx=null;
 let _audioUnlocked=false;
+let _chimeAudioEl=null; /* reusable HTML5 Audio element with generated chime WAV */
+let _chimeBlobUrl=null;
+
 function getAudioCtx(){
 if(!_audioCtx)_audioCtx=new(window.AudioContext||window.webkitAudioContext)();
 if(_audioCtx.state==='suspended')_audioCtx.resume();
 return _audioCtx;
 }
+
+/* --- Generate a pleasant chime as a WAV blob URL on page load --- */
+(function buildChimeWav(){
+try{
+const ctx=new(window.AudioContext||window.webkitAudioContext)();
+const sampleRate=ctx.sampleRate;
+const duration=0.4;
+const length=Math.ceil(sampleRate*duration);
+const buffer=ctx.createBuffer(1,length,sampleRate);
+const data=buffer.getChannelData(0);
+const freqA=440,freqE=659.25;
+for(let i=0;i<length;i++){
+const t=i/sampleRate;
+/* fade envelope: quick attack (20ms), smooth exponential decay */
+const env=t<0.02?(t/0.02):Math.exp(-4.5*((t-0.02)/(duration-0.02)));
+/* two sine notes mixed */
+const sample=(Math.sin(2*Math.PI*freqA*t)+Math.sin(2*Math.PI*freqE*(t-0.03)))*0.18*env;
+data[i]=Math.max(-1,Math.min(1,sample));
+}
+/* encode PCM buffer into a WAV file */
+function encodeWAV(samples,sr){
+const buf=new ArrayBuffer(44+samples.length*2);
+const v=new DataView(buf);
+function writeStr(off,s){for(let i=0;i<s.length;i++)v.setUint8(off+i,s.charCodeAt(i));}
+writeStr(0,'RIFF');v.setUint32(4,36+samples.length*2,true);writeStr(8,'WAVE');
+writeStr(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);
+writeStr(36,'data');v.setUint32(40,samples.length*2,true);
+for(let i=0;i<samples.length;i++){const s=Math.max(-1,Math.min(1,samples[i]));
+v.setInt16(44+i*2,s<0?s*0x8000:s*0x7FFF,true);}
+return new Blob([buf],{type:'audio/wav'});
+}
+const blob=encodeWAV(data,sampleRate);
+_chimeBlobUrl=URL.createObjectURL(blob);
+_chimeAudioEl=new Audio(_chimeBlobUrl);
+_chimeAudioEl.preload='auto';
+ctx.close();
+}catch(e){/* Safari may restrict AudioContext here; will init on first interaction instead */}
+})();
+
+/* --- iOS audio unlock: play a tiny silent clip on first user touch --- */
+/* This hidden <audio> element playing a silent WAV unlocks HTML5 Audio on iOS Safari */
+const _silentWav='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
+const _silentAudioEl=new Audio(_silentWav);
+_silentAudioEl.setAttribute('playsinline','');
+
 function unlockAudio(){
 if(_audioUnlocked)return;
-try{const ctx=getAudioCtx();const buf=ctx.createBuffer(1,1,22050);const src=ctx.createBufferSource();src.buffer=buf;src.connect(ctx.destination);src.start(0);_audioUnlocked=true;}catch(e){}
+try{
+/* unlock HTML5 Audio path */
+_silentAudioEl.play().then(()=>{}).catch(()=>{});
+/* unlock Web Audio API */
+const ctx=getAudioCtx();
+const buf=ctx.createBuffer(1,1,22050);
+const src=ctx.createBufferSource();
+src.buffer=buf;src.connect(ctx.destination);src.start(0);
+/* if chime element wasn't built yet (restricted ctx at load), build now */
+if(!_chimeAudioEl){
+try{
+const actx=getAudioCtx();const sr=actx.sampleRate;const dur=0.4;const len=Math.ceil(sr*dur);
+const b=actx.createBuffer(1,len,sr);const d=b.getChannelData(0);
+for(let i=0;i<len;i++){const t=i/sr;const env=t<0.02?(t/0.02):Math.exp(-4.5*((t-0.02)/(dur-0.02)));
+d[i]=Math.max(-1,Math.min(1,(Math.sin(2*Math.PI*440*t)+Math.sin(2*Math.PI*659.25*(t-0.03)))*0.18*env));}
+function encW(s,r){const buf=new ArrayBuffer(44+s.length*2);const v=new DataView(buf);
+function ws(o,st){for(let i=0;i<st.length;i++)v.setUint8(o+i,st.charCodeAt(i));}
+ws(0,'RIFF');v.setUint32(4,36+s.length*2,true);ws(8,'WAVE');ws(12,'fmt ');v.setUint32(16,16,true);
+v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,r,true);v.setUint32(28,r*2,true);
+v.setUint16(32,2,true);v.setUint16(34,16,true);ws(36,'data');v.setUint32(40,s.length*2,true);
+for(let i=0;i<s.length;i++){const x=Math.max(-1,Math.min(1,s[i]));v.setInt16(44+i*2,x<0?x*0x8000:x*0x7FFF,true);}
+return new Blob([buf],{type:'audio/wav'});}
+_chimeBlobUrl=URL.createObjectURL(encW(d,sr));
+_chimeAudioEl=new Audio(_chimeBlobUrl);_chimeAudioEl.preload='auto';
+}catch(e2){}
+}
+_audioUnlocked=true;
+}catch(e){}
 }
 document.addEventListener('touchstart',unlockAudio,{once:true});
 document.addEventListener('click',unlockAudio,{once:true});
-/* Pleasant two-note chime: A4 (440Hz) + E5 (659Hz) major interval, soft sine with fade envelope */
+
+/* Pleasant two-note chime: A4 (440Hz) + E5 (659Hz) major interval, soft sine with fade envelope.
+   Dual playback: HTML5 Audio (bypasses iOS mute switch) + Web Audio API oscillator (desktop fallback). */
 function playChime(){
+/* Path 1: HTML5 Audio — works on iOS even with silent switch on */
+try{
+if(_chimeAudioEl){_chimeAudioEl.currentTime=0;_chimeAudioEl.play().catch(()=>{});}
+}catch(e){}
+/* Path 2: Web Audio API oscillator — reliable on desktop, backup on mobile */
 try{const ctx=getAudioCtx();const now=ctx.currentTime;
 const playNote=(freq,start,dur)=>{const osc=ctx.createOscillator();const g=ctx.createGain();osc.type='sine';osc.frequency.value=freq;
 g.gain.setValueAtTime(0,start);g.gain.linearRampToValueAtTime(0.18,start+0.02);g.gain.exponentialRampToValueAtTime(0.001,start+dur);
