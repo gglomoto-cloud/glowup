@@ -204,6 +204,11 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .rest-timer-cancel{display:none;align-items:center;justify-content:center;margin:8px auto;background:rgba(212,115,108,0.15);border:1px solid rgba(212,115,108,0.3);border-radius:8px;padding:6px 18px;color:#d4736c;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
 .rest-timer-cancel:active{background:rgba(212,115,108,0.3);transform:scale(0.97)}
 .timer-display{font-family:'Playfair Display',serif;font-size:48px;text-align:center;color:var(--fit);margin:20px 0}
+.timer-display.timer-done{color:var(--gold);animation:timerPulse 0.8s ease-in-out infinite alternate}
+@keyframes timerPulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.1);opacity:0.85}}
+.flash-overlay{position:fixed;inset:0;background:rgba(255,255,255,0.35);z-index:9999;pointer-events:none;opacity:0;transition:opacity .1s ease-in}
+.flash-overlay.flash-active{opacity:1}
+.keepalive-hint{position:fixed;bottom:calc(var(--nav-h) + 8px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:rgba(200,155,74,0.15);border:1px solid rgba(200,155,74,0.3);border-radius:20px;padding:6px 16px;font-size:11px;color:var(--gold);z-index:15;pointer-events:auto;cursor:pointer;opacity:0;transition:opacity .3s;white-space:nowrap;font-family:'DM Sans',sans-serif}
 /* Superset block */
 .superset-block{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:2px solid var(--fit);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
 .superset-block.optional{border-style:dashed;border-left-style:dashed;opacity:0.85}
@@ -1414,7 +1419,7 @@ _timerAudioEl.play().catch(function(){});_silentLoopActive=true;
 }
 /* Play single chime: vibrate + src-swap on looping element + Web Audio fallback */
 function playChime(){
-try{if(navigator.vibrate)navigator.vibrate([200,100,200]);}catch(e){}
+try{if(navigator.vibrate)navigator.vibrate([300,150,300]);}catch(e){}
 try{if(_timerAudioEl&&_chimeBlobUrl){
 _timerAudioEl.loop=false;_timerAudioEl.src=_chimeBlobUrl;_timerAudioEl.currentTime=0;
 _timerAudioEl.play().catch(function(){});_timerAudioEl.onended=_resumeOrStop;
@@ -1427,7 +1432,7 @@ pn(440,now,0.25);pn(659,now+0.03,0.3);
 }catch(e){}}
 /* Double chime: pre-built double WAV for single src-swap (no setTimeout needed) */
 function playDoubleChime(){
-try{if(navigator.vibrate)navigator.vibrate([200,100,200,150,200,100,200]);}catch(e){}
+try{if(navigator.vibrate)navigator.vibrate([300,150,300,150,300]);}catch(e){}
 try{if(_timerAudioEl&&_doubleChimeBlobUrl){
 _timerAudioEl.loop=false;_timerAudioEl.src=_doubleChimeBlobUrl;_timerAudioEl.currentTime=0;
 _timerAudioEl.play().catch(function(){});_timerAudioEl.onended=_resumeOrStop;
@@ -1438,6 +1443,71 @@ g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(0.18,s+0.02);g.gain.ex
 o.connect(g);g.connect(ctx.destination);o.start(s);o.stop(s+d);};
 pn(440,now,0.25);pn(659,now+0.03,0.3);pn(440,now+0.35,0.25);pn(659,now+0.38,0.3);
 }catch(e){}}
+
+/* V26: SCREEN FLASH — white overlay on timer completion */
+let _flashEl=null;
+function flashScreen(){
+if(!_flashEl){_flashEl=document.createElement('div');_flashEl.className='flash-overlay';document.body.appendChild(_flashEl);}
+_flashEl.classList.add('flash-active');
+setTimeout(function(){_flashEl.style.transition='opacity 1.4s ease-out';_flashEl.classList.remove('flash-active');
+setTimeout(function(){_flashEl.style.transition='opacity .1s ease-in';},1500);},100);
+}
+
+/* V26: WAKE LOCK — prevent screen dimming during timers */
+let _wakeLock=null;
+let _keepAliveVideo=null;
+async function acquireWakeLock(){
+try{if(navigator.wakeLock){_wakeLock=await navigator.wakeLock.request('screen');return;}}catch(e){}
+/* iOS fallback: tiny looping invisible video keeps screen awake */
+if(!_keepAliveVideo){
+_keepAliveVideo=document.createElement('video');
+_keepAliveVideo.setAttribute('playsinline','');_keepAliveVideo.setAttribute('muted','');
+_keepAliveVideo.muted=true;_keepAliveVideo.loop=true;
+_keepAliveVideo.style.cssText='position:fixed;top:-1px;left:-1px;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1';
+/* Tiny 1-frame MP4 (black, 1x1px) */
+_keepAliveVideo.src='data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAABltZGF0AAACgAYF//+c3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2NCByMzEwOCAzMWUxOWY5IC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMyAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFseXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBkZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTEgbG9va2FoZWFkX3RocmVhZHM9MSBzbGljZWRfdGhyZWFkcz0wIG5yPTAgZGVjaW1hdGU9MSBpbnRlcmxhY2VkPTAgYmx1cmF5X2NvbXBhdD0wIGNvbnN0cmFpbmVkX2ludHJhPTAgYmZyYW1lcz0zIGJfcHlyYW1pZD0yIGJfYWRhcHQ9MSBiX2JpYXM9MCBkaXJlY3Q9MSB3ZWlnaHRiPTEgb3Blbl9nb3A9MCB3ZWlnaHRwPTIga2V5aW50PTI1MCBrZXlpbnRfbWluPTEgc2NlbmVjdXQ9NDAgaW50cmFfcmVmcmVzaD0wIHJjX2xvb2thaGVhZD00MCByYz1jcmYgbWJ0cmVlPTEgY3JmPTIzLjAgcWNvbXA9MC42MCBxcG1pbj0wIHFwbWF4PTY5IHFwc3RlcD00IGlwX3JhdGlvPTEuNDAgYXE9MToxLjAwAIAAAADRZYiEAD//8m+P5OXfBeLGOfKE3xkODvFZuBflHv/+VwJIGBASgA8ID0gAGiYKAI0BABMhEKx8Q/BihQAdCYkEmUjZGCIRRQBaQAagBMOJPBCgABJIJQvJUKR5pkrNjMdVkIiCcFx/sru5WHO6JY8yJKRGUaQRqIAIHBkGBnAoGHJ8gAUAFgEJMRvASdCQUjuUhJQAjkBZiAAQCQShNjBBJgiMgpM5CQAAADAABABAAAAMA';
+document.body.appendChild(_keepAliveVideo);
+}
+try{_keepAliveVideo.play().catch(function(){});}catch(e){}
+}
+function releaseWakeLock(){
+if(_wakeLock){try{_wakeLock.release();}catch(e){}_wakeLock=null;}
+if(_keepAliveVideo){try{_keepAliveVideo.pause();}catch(e){}}
+}
+
+/* V26: KEEP-ALIVE HINT — visible during long timers (>30s) */
+let _keepAliveHintEl=null;
+let _keepAliveHintTimer=null;
+function showKeepAliveHint(){
+if(!_keepAliveHintEl){
+_keepAliveHintEl=document.createElement('div');
+_keepAliveHintEl.className='keepalive-hint';
+_keepAliveHintEl.textContent='Tap here to keep sound active';
+_keepAliveHintEl.addEventListener('touchstart',function(){unlockAudio();startSilentLoop();},{passive:true});
+_keepAliveHintEl.addEventListener('click',function(){unlockAudio();startSilentLoop();});
+document.body.appendChild(_keepAliveHintEl);
+}
+_keepAliveHintEl.style.opacity='1';
+}
+function hideKeepAliveHint(){
+if(_keepAliveHintEl)_keepAliveHintEl.style.opacity='0';
+if(_keepAliveHintTimer){clearTimeout(_keepAliveHintTimer);_keepAliveHintTimer=null;}
+}
+
+/* V26: Combined timer-start/stop helpers — wraps wake lock + hint */
+function onTimerStart(sec){
+acquireWakeLock();
+if(sec>30){_keepAliveHintTimer=setTimeout(showKeepAliveHint,5000);}
+}
+function onTimerEnd(){
+flashScreen();
+hideKeepAliveHint();
+if(!state.exTimer&&!state.hiitTimer&&!state.restTimer)releaseWakeLock();
+}
+function onTimerCancel(){
+hideKeepAliveHint();
+if(!state.exTimer&&!state.hiitTimer&&!state.restTimer)releaseWakeLock();
+}
 
 /* V21: EXERCISE TIMER FUNCTIONS */
 const HIIT_STATIONS=[{name:'Jump rope fast',sec:60},{name:'Burpees',sec:30},{name:'HGX200 stepper fast',sec:60},{name:'Mountain climbers',sec:30},{name:'Jump rope fast',sec:60}];
@@ -1464,10 +1534,10 @@ if(state.exTimerBtnId===btn.id){cancelExTimer();return;}
 if(state.exTimer)cancelExTimer();
 state.exTimerBtnId=btn.id;state.exTimerTarget=targetSec;state.exTimerRemaining=targetSec;
 btn.classList.add('running');btn.textContent=targetSec;
-startSilentLoop();
+startSilentLoop();onTimerStart(targetSec);
 state.exTimer=setInterval(()=>{
 state.exTimerRemaining--;
-if(state.exTimerRemaining<=0){clearInterval(state.exTimer);state.exTimer=null;playChime();stopSilentLoopIfIdle();
+if(state.exTimerRemaining<=0){clearInterval(state.exTimer);state.exTimer=null;playChime();stopSilentLoopIfIdle();onTimerEnd();
 btn.classList.remove('running');btn.classList.add('done');btn.innerHTML='\u2713 Done';
 setTimeout(()=>{if(btn){btn.classList.remove('done');btn.innerHTML=ICON_TIMER+fmtTimerLabel(targetSec);state.exTimerBtnId=null;}},2500);
 }else{btn.textContent=state.exTimerRemaining;}
@@ -1478,7 +1548,7 @@ if(state.exTimer){clearInterval(state.exTimer);state.exTimer=null;}
 if(state.exTimerBtnId){const btn=document.getElementById(state.exTimerBtnId);
 if(btn){btn.classList.remove('running','done');btn.innerHTML=ICON_TIMER+fmtTimerLabel(state.exTimerTarget);}
 state.exTimerBtnId=null;}
-stopSilentLoopIfIdle();
+stopSilentLoopIfIdle();onTimerCancel();
 }
 
 /* V22: HIIT ROUND TIMER — manual start per work phase */
@@ -1486,7 +1556,7 @@ function startHiit(totalRounds){
 if(state.hiitTimer&&state.hiitState){clearInterval(state.hiitTimer);state.hiitTimer=null;renderHiitTimer(totalRounds);return;}
 if(!state.hiitState){state.hiitState={round:1,station:0,phase:'ready',remaining:0,totalRounds};}
 if(state.hiitState.phase==='ready'){renderHiitTimer(totalRounds);return;}
-startSilentLoop();
+startSilentLoop();onTimerStart(state.hiitState.remaining);
 state.hiitTimer=setInterval(()=>{
 state.hiitState.remaining--;
 if(state.hiitState.remaining<=0)advanceHiit();
@@ -1497,7 +1567,7 @@ renderHiitTimer(totalRounds);
 function hiitReady(){
 const hs=state.hiitState;if(!hs||hs.phase!=='ready')return;
 hs.phase='work';hs.remaining=HIIT_STATIONS[hs.station].sec;
-startSilentLoop();
+startSilentLoop();onTimerStart(hs.remaining);
 state.hiitTimer=setInterval(()=>{
 hs.remaining--;
 if(hs.remaining<=0)advanceHiit();
@@ -1509,12 +1579,13 @@ function advanceHiit(){
 const hs=state.hiitState;if(!hs)return;
 if(hs.phase==='work'){
 clearInterval(state.hiitTimer);state.hiitTimer=null;
-playDoubleChime();
+playDoubleChime();onTimerEnd();
 if(hs.station<HIIT_STATIONS.length-1){
 hs.station++;hs.phase='ready';hs.remaining=0;
 stopSilentLoopIfIdle();
 }else if(hs.round<hs.totalRounds){
 hs.phase='rest';hs.remaining=90;
+onTimerStart(90);
 state.hiitTimer=setInterval(()=>{
 hs.remaining--;
 if(hs.remaining<=0)advanceHiit();
@@ -1523,7 +1594,7 @@ renderHiitTimer(hs.totalRounds);
 }else{state.hiitState=null;stopSilentLoopIfIdle();renderHiitTimer(hs.totalRounds);return;}
 }else{
 clearInterval(state.hiitTimer);state.hiitTimer=null;
-playChime();
+playChime();onTimerEnd();
 hs.phase='ready';hs.round++;hs.station=0;hs.remaining=0;
 stopSilentLoopIfIdle();
 }
@@ -1531,7 +1602,7 @@ renderHiitTimer(hs.totalRounds);
 }
 function resetHiit(totalRounds){
 if(state.hiitTimer){clearInterval(state.hiitTimer);state.hiitTimer=null;}
-state.hiitState=null;stopSilentLoopIfIdle();renderHiitTimer(totalRounds);
+state.hiitState=null;stopSilentLoopIfIdle();onTimerCancel();renderHiitTimer(totalRounds);
 }
 function renderHiitTimer(totalRounds){
 const el=document.getElementById('hiitTimerCard');if(!el)return;
@@ -2544,22 +2615,28 @@ function startRest(sec){
 if(state.restTimer)clearInterval(state.restTimer);
 state.restRemaining=sec;const display=document.getElementById('timerDisplay')||document.getElementById('replTimer');
 const cancelBtn=document.getElementById('timerCancel')||document.getElementById('replTimerCancel');
-display.style.display='block';display.textContent=formatTime(sec);
+display.classList.remove('timer-done');display.style.display='block';display.textContent=formatTime(sec);display.style.color='var(--fit)';
 if(cancelBtn)cancelBtn.style.display='flex';
 display.scrollIntoView({behavior:'smooth',block:'center'});
-startSilentLoop();
+startSilentLoop();onTimerStart(sec);
 state.restTimer=setInterval(()=>{
 state.restRemaining--;
-if(state.restRemaining<=0){clearInterval(state.restTimer);state.restTimer=null;playChime();stopSilentLoopIfIdle();if(cancelBtn)cancelBtn.style.display='none';display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
+if(state.restRemaining<=0){clearInterval(state.restTimer);state.restTimer=null;playChime();stopSilentLoopIfIdle();onTimerEnd();
+if(cancelBtn)cancelBtn.style.display='none';
+display.textContent='DONE';display.style.color='var(--gold)';display.classList.add('timer-done');
+function dismissDone(){display.classList.remove('timer-done');display.style.display='none';display.style.color='var(--fit)';display.removeEventListener('click',dismissDone);display.removeEventListener('touchstart',dismissDone);}
+display.addEventListener('click',dismissDone);display.addEventListener('touchstart',dismissDone,{passive:true});
+setTimeout(function(){display.classList.remove('timer-done');display.style.display='none';display.style.color='var(--fit)';},5000);
+}
 else{display.textContent=formatTime(state.restRemaining);}
 },1000);
 }
 function cancelRest(){
 if(state.restTimer){clearInterval(state.restTimer);state.restTimer=null;}
-stopSilentLoopIfIdle();
+stopSilentLoopIfIdle();onTimerCancel();
 const display=document.getElementById('timerDisplay')||document.getElementById('replTimer');
 const cancelBtn=document.getElementById('timerCancel')||document.getElementById('replTimerCancel');
-if(display){display.style.display='none';display.style.color='var(--fit)';}
+if(display){display.classList.remove('timer-done');display.style.display='none';display.style.color='var(--fit)';}
 if(cancelBtn)cancelBtn.style.display='none';
 }
 function formatTime(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
