@@ -778,11 +778,14 @@ const skCat='care';
 if(!tkd&&d===1){return[
 {t:'07:00',n:'Wake Up',c:'rest',detail:'Open curtains for sunlight exposure. Get moving.'},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'07:14',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
 {t:'07:15',n:'Breakfast',c:'food',detail:'Oats + skyr + banana + almonds + honey. ~650 kcal, ~35g protein.'},
 {t:'07:40',n:'Get Ready + Transit',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:'Stay hydrated \u2014 aim for 500ml by 10:00.'},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Chicken/jambon + whole-grain pasta + veg + olive oil. ~700 kcal, ~40g protein. Coffee after eating. Optional: coffee nap.'},
 {t:'13:30',n:'Work',c:'',detail:'Afternoon block. Drink 500ml water.'},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Home \u2014 Change for Workout',c:'',detail:'No bus ride needed. Quick snack: banana or almonds + water 500 mL.'},
@@ -792,15 +795,20 @@ if(!tkd&&d===1){return[
 {t:'20:15',n:'Optional: Pre-bed Skyr + Almonds',c:'food',detail:'200g skyr + almonds for pre-sleep protein.'},
 {t:'20:30',n:'Free Time',c:'rest',detail:'Drums, reading, studying, socializing, screen time, meal prep. This block does not exist on TKD Mondays.'},
 {t:'21:30',n:'Wind-Down + Posture',c:'care',detail:'Wall angels (2x10) + scap pulls (2x10) + chest stretch (30s/side). No screens.'},
+{t:'21:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:50',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'9h sleep \u2014 1 hour more than TKD nights.'}
 ];}
 if(!tkd&&d===3){return[
 {t:'07:15',n:'Wake Up',c:'rest',detail:''},
 {t:'07:20',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:27',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'07:29',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
 {t:'07:30',n:'Breakfast',c:'food',detail:'Oats + skyr + fruit + nuts. ~650 kcal, ~35g protein.'},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Lentils + rice + eggs + veg OR tuna pasta salad. ~700 kcal, ~40g protein.'},
 {t:'13:30',n:'Work (shortened)',c:'',detail:'Work ends at 15:40 today.'},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
 {t:'15:40',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
 {t:'16:00',n:'Transition + Snack',c:'food',detail:'Banana + tartine + skyr. Water 500ml. Deodorant refresh.'},
 {t:'17:00',n:'Music Practice (drums, 30 min)',c:'',detail:''},
@@ -812,16 +820,21 @@ if(!tkd&&d===3){return[
 {t:'20:20',n:'Optional: Pre-bed Snack',c:'food',detail:'Skyr or casein shake.'},
 {t:'20:40',n:'Free Time',c:'rest',detail:'Bonus free hour \u2014 does not exist on TKD Wednesdays.'},
 {t:'21:30',n:'Wind-Down + Posture',c:'care',detail:'Posture exercises (5 min). No screens.'},
+{t:'21:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:50',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'8h45 sleep.'}
 ];}
 if(!tkd&&d===5){return[
 {t:'07:00',n:'Wake Up',c:'rest',detail:''},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'07:14',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
 {t:'07:15',n:'Breakfast',c:'food',detail:'Oats + skyr + fruit + almonds. ~650 kcal, ~35g protein.'},
 {t:'07:45',n:'Transit to Work',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch (extra carbs!) + Coffee',c:'food',detail:'Chicken + pasta + olive oil + veg. ~800 kcal, ~45g protein. Replacement session is also demanding \u2014 fuel up.'},
 {t:'13:30',n:'Work',c:'',detail:''},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Home \u2014 Change for Workout',c:'',detail:'Quick snack: banana + water 500 mL.'},
@@ -831,17 +844,22 @@ if(!tkd&&d===5){return[
 {t:'20:15',n:'Optional: Pre-bed Skyr + Almonds',c:'food',detail:''},
 {t:'20:30',n:'Free Time',c:'rest',detail:'Friday evening \u2014 drums, reading, relaxing. No time pressure.'},
 {t:'21:30',n:'Wind-Down + Posture',c:'care',detail:'Wall angels + chest stretch (5 min). No screens.'},
+{t:'21:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:50',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'9h sleep \u2014 1 hour more than TKD Fridays.'}
 ];}
 const schedules={
 1:[
 {t:'07:00',n:'Wake Up',c:'rest',detail:'Open curtains for sunlight exposure. Get moving.'},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
-{t:'07:15',n:'Breakfast',c:'food',detail:'Oats + skyr + banana + almonds + honey. ~650 kcal, ~35g protein.'},
+{t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'07:15',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
+{t:'07:16',n:'Breakfast',c:'food',detail:'Oats + skyr + banana + almonds + honey. ~650 kcal, ~35g protein.'},
 {t:'07:40',n:'Get Ready + Transit',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:'Stay hydrated \u2014 aim for 500ml by 10:00.'},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Chicken/jambon + whole-grain pasta + veg + olive oil. ~700 kcal, ~40g protein. Coffee after eating. Optional: coffee nap (drink fast, 15-20 min nap).'},
 {t:'13:30',n:'Work',c:'',detail:'Afternoon block. Drink 500ml water.'},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Transition + Pre-TKD Snack',c:'food',detail:'Banana + tartine with peanut butter + skyr. Water 500ml. Change for TKD.'},
@@ -850,17 +868,22 @@ const schedules={
 {t:'21:30',n:'Car Home',c:'',detail:''},
 {t:'21:55',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'22:13',n:'Post-TKD Dinner',c:'food',detail:'Pre-prepped: salmon/chicken + rice + veg + olive oil. ~800 kcal, ~45g protein. Optional: 200g skyr + almonds after.'},
-{t:'22:50',n:'Wind-Down + Posture',c:'care',detail:'Wall angels (2x10) + scap pulls (2x10) + thoracic extension (2x10) + chin tucks (2x10) + chest stretch (30s/side). No screens.'},
+{t:'22:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'22:50',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
+{t:'22:55',n:'Wind-Down + Posture',c:'care',detail:'Wall angels (2x10) + scap pulls (2x10) + thoracic extension (2x10) + chin tucks (2x10) + chest stretch (30s/side). No screens.'},
 {t:'23:00',n:'Sleep Target',c:'rest',detail:'8h sleep. Dark, cool room.'}
 ],
 2:[
 {t:'07:00',n:'Wake Up',c:'rest',detail:''},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'07:14',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
 {t:'07:15',n:'Breakfast',c:'food',detail:'Oats + yogurt + fruit + nuts + eggs. ~700 kcal, ~40g protein.'},
 {t:'07:45',n:'Transit to Work',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Chicken + rice + veg + olive oil. ~750 kcal, ~45g protein. Coffee + optional coffee nap.'},
 {t:'13:30',n:'Work',c:'',detail:'Calisthenics option: split over lunch or after work.'},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Calisthenics (if not done at lunch)',c:'sport',detail:'Session A: Muscle-Up Skill + Upper Push + Arms. 40 min. See Training tab for full workout.'},
@@ -868,16 +891,21 @@ const schedules={
 {t:'20:30',n:'Transit Home',c:'',detail:''},
 {t:'21:00',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'21:45',n:'Dinner',c:'food',detail:'Eggs + whole-grain pasta + veg OR turkey + potatoes + veg. ~750 kcal, ~40g protein.'},
-{t:'22:15',n:'Wind-Down + Posture (5 min)',c:'care',detail:'Posture exercises. No screens.'},
+{t:'22:10',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'22:15',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
+{t:'22:20',n:'Wind-Down + Posture (5 min)',c:'care',detail:'Posture exercises. No screens.'},
 {t:'22:30',n:'Sleep Target',c:'rest',detail:'7.5h \u2014 tight. Push wake to 07:30 if possible.'}
 ],
 3:[
 {t:'07:15',n:'Wake Up',c:'rest',detail:'Slightly later \u2014 earlier bedtime compensates.'},
 {t:'07:20',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:27',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'07:29',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
 {t:'07:30',n:'Breakfast',c:'food',detail:'Oats + skyr + fruit + nuts. ~650 kcal, ~35g protein.'},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Lentils + rice + eggs + veg OR tuna pasta salad. ~700 kcal, ~40g protein.'},
 {t:'13:30',n:'Work (shortened)',c:'',detail:'Work ends at 15:40 today.'},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
 {t:'15:40',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
 {t:'16:00',n:'Transition + Pre-TKD Snack',c:'food',detail:'Banana + tartine + skyr. Water 500ml. Deodorant refresh.'},
 {t:'17:00',n:'Music Practice (drums, 30 min)',c:'',detail:''},
@@ -887,16 +915,21 @@ const schedules={
 {t:'20:15',n:'Car Home',c:'',detail:''},
 {t:'20:35',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'20:55',n:'Dinner',c:'food',detail:'Full post-training meal. Protein + carbs + veg. ~800 kcal, ~45g protein.'},
-{t:'21:40',n:'Wind-Down',c:'care',detail:'Optional: pre-bed skyr. Posture exercises.'},
+{t:'21:30',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:40',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
+{t:'21:45',n:'Wind-Down',c:'care',detail:'Optional: pre-bed skyr. Posture exercises.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'8h45 sleep \u2014 good catch-up from Monday.'}
 ],
 4:[
 {t:'07:15',n:'Wake Up',c:'rest',detail:''},
 {t:'07:20',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:27',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'07:29',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
 {t:'07:30',n:'Big Breakfast',c:'food',detail:"Oats + skyr + eggs + fruit + nuts + PB tartine. ~800 kcal, ~45g protein. Extra fuel for tonight's big session."},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Big Lunch + Coffee',c:'food',detail:'Chicken + rice + veg + olive oil + yogurt. ~900 kcal, ~50g protein (extra \u2014 training ahead).'},
 {t:'13:30',n:'Work',c:'',detail:''},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Pre-Workout Banana + Water',c:'food',detail:''},
@@ -904,17 +937,22 @@ const schedules={
 {t:'20:30',n:'Cool Down + Hydrate',c:'',detail:'Electrolytes.'},
 {t:'20:45',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'21:15',n:'Dinner',c:'food',detail:'Eggs + pasta + veg OR fish + potatoes + veg. ~750 kcal, ~40g protein.'},
-{t:'21:45',n:'Wind-Down + Posture',c:'care',detail:'Optional pre-bed skyr. Posture exercises.'},
+{t:'21:40',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:45',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
+{t:'21:50',n:'Wind-Down + Posture',c:'care',detail:'Optional pre-bed skyr. Posture exercises.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'8h45 \u2014 good recovery.'}
 ],
 5:[
 {t:'07:00',n:'Wake Up',c:'rest',detail:''},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'07:14',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
 {t:'07:15',n:'Breakfast',c:'food',detail:'Oats + skyr + fruit + almonds. ~650 kcal, ~35g protein.'},
 {t:'07:45',n:'Transit to Work',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch (extra carbs!) + Coffee',c:'food',detail:'Chicken + pasta + olive oil + veg. ~800 kcal, ~45g protein. Friday TKD is the hardest \u2014 fuel up.'},
 {t:'13:30',n:'Work',c:'',detail:''},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Transition + Pre-TKD Snack',c:'food',detail:'Banana + tartine + skyr. Water 500ml.'},
@@ -923,36 +961,48 @@ const schedules={
 {t:'21:30',n:'Car Home',c:'',detail:''},
 {t:'21:55',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'22:13',n:'Dinner',c:'food',detail:'Pre-prepped protein + carbs + veg. ~800 kcal, ~45g protein. Eat sitting down.'},
-{t:'22:50',n:'Quick Wind-Down',c:'care',detail:'Skip posture exercises \u2014 too tired. Saturday catches up.'},
+{t:'22:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'22:48',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
+{t:'22:55',n:'Quick Wind-Down',c:'care',detail:'Skip posture exercises \u2014 too tired. Saturday catches up.'},
 {t:'23:00',n:'Sleep Target',c:'rest',detail:'8h floor. Saturday sleep-in compensates.'}
 ],
 6:[
 {t:'08:00',n:'Wake Up \u2014 Sleep In!',c:'rest',detail:'Target 9+ hours of sleep.'},
 {t:'08:30',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'08:37',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'08:39',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
 {t:'08:40',n:'Breakfast',c:'food',detail:'Oats + eggs + skyr + fruit. ~750 kcal, ~40g protein.'},
 {t:'09:20',n:'Free Time',c:'rest',detail:'Reading, music, errands.'},
 {t:'10:30',n:'Calisthenics Session (~60 min)',c:'sport',detail:'Session C: HSPU + Planche + Skill Volume + Core. See Training tab for full workout.'},
 {t:'12:00',n:'Cool Down + Hydrate',c:'',detail:''},
 {t:'12:30',n:'Shower',c:'care',detail:'SKIN_SHOWER',expand:true},
 {t:'13:00',n:'Lunch',c:'food',detail:'Chicken + rice + veg + olive oil. ~800 kcal, ~45g protein. Coffee.'},
-{t:'14:00',n:'Free Afternoon',c:'rest',detail:'Social, errands, drum practice, rest.'},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:05',n:'Free Afternoon',c:'rest',detail:'Social, errands, drum practice, rest.'},
 {t:'17:00',n:'Snack',c:'food',detail:'Protein yogurt + fruit.'},
 {t:'19:30',n:'Dinner',c:'food',detail:'Fish or eggs + pasta + veg. ~750 kcal, ~40g protein.'},
+{t:'21:50',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
 {t:'22:00',n:'PM Skincare + Posture',c:'care',detail:'SKIN_PM_ONLY',expand:true},
+{t:'22:35',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:45',n:'Sleep Target',c:'rest',detail:'9h15+ recovery sleep.'}
 ],
 0:[
 {t:'08:00',n:'Wake Up \u2014 Sleep In!',c:'rest',detail:''},
 {t:'08:30',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
+{t:'08:37',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
+{t:'08:39',n:'Morning Pills',c:'care',detail:'Take morning supplements with water.'},
 {t:'08:40',n:'Breakfast',c:'food',detail:'Eggs + tartines + fruit. ~650 kcal, ~35g protein.'},
 {t:'09:20',n:'Laundry',c:'care',detail:'Change pillowcase (#1 of week). Wash pillowcases + face towels + gym gear at 60\u00b0C. Sheets + bath towels at 40\u00b0C. Start early so sheets dry by evening.'},
 {t:'10:00',n:'Free Morning',c:'rest',detail:'Social, reading, music, family. Light walk or cycling fine.'},
 {t:'12:00',n:'Lunch',c:'food',detail:'Sunday family meal. ~700 kcal, ~40g protein.'},
 {t:'13:00',n:'Rest / Drum Practice',c:'rest',detail:'Great drum slot \u2014 no training to worry about.'},
+{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
 {t:'17:00',n:'Snack',c:'food',detail:'Yogurt + fruit.'},
 {t:'17:30',n:'Meal Prep for the Week',c:'food',detail:'Batch-cook chicken, rice, veg. Portion into Tupperware for Mon/Wed/Fri post-TKD dinners.'},
 {t:'20:00',n:'Dinner',c:'food',detail:'~700 kcal, ~35g protein.'},
 {t:'20:45',n:'Wind-Down + Posture',c:'care',detail:'Posture exercises 5 min.'},
+{t:'21:00',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:10',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'21:15',n:'PM Skincare',c:'care',detail:'SKIN_PM_ONLY',expand:true},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'10h full recovery. Earlier bedtime to reset for Monday.'}
 ]};
@@ -1006,7 +1056,8 @@ const MEALS=[
 {name:"P\u00e2tes \u00e0 la Carbonara (+ jaune d'oeuf)",kcal100:170,p100:7.0,c100:17.0,f100:8.5,gS:250,gM:350,gL:450,gXL:550},
 {name:"Chicken Wraps (x2)",kcal100:180,p100:12.2,c100:10.4,f100:9.9,gS:400,gM:800,gL:850,gXL:900},
 {name:"P\u00e2tes au Saumon (cr\u00e8me & Boursin)",kcal100:216,p100:7.3,c100:18.2,f100:12.2,gS:150,gM:200,gL:250,gXL:350},
-{name:"Burger Maison",kcal100:200,p100:12.7,c100:9.6,f100:11.5,gS:355,gM:430,gL:710,gXL:860}
+{name:"Burger Maison",kcal100:200,p100:12.7,c100:9.6,f100:11.5,gS:355,gM:430,gL:710,gXL:860},
+{name:"Gratin de Potimarron au Comt\u00e9",kcal100:139,p100:1.8,c100:11.2,f100:8.2,gS:100,gM:150,gL:200,gXL:300}
 ];
 const SNACKS=[
 {name:'Banana + rice cakes + PB',kcal:280,p:8,c:38,f:10},{name:'Skyr 200g + honey + berries',kcal:250,p:22,c:30,f:2},{name:'Protein bar (HiPro)',kcal:180,p:18,c:15,f:6},{name:'Dates (4) + almonds',kcal:220,p:5,c:35,f:8},{name:'Tuna on bread',kcal:350,p:28,c:30,f:12},{name:'Cottage cheese + walnuts',kcal:320,p:25,c:8,f:20},{name:'2 boiled eggs + oatcake',kcal:250,p:15,c:18,f:13},{name:'Pumpkin seeds + apple',kcal:250,p:9,c:25,f:14},{name:'Pre-bed skyr + almonds',kcal:250,p:25,c:12,f:10},
@@ -1075,7 +1126,7 @@ const BF_CUSTOM_CONFIG=[
 {main:[
 {key:'oats',label:'Oats',min:30,max:120,step:5,defVal:80,unit:'g',macro:'oats',calcG:v=>v},
 {key:'skyr',label:'Skyr',min:0,max:300,step:25,defVal:200,unit:'g',macro:'skyr',calcG:v=>v},
-{key:'banana',label:'Banana',min:0,max:1,step:1,defVal:1,unit:'',macro:'banana',calcG:v=>v*120,display:v=>v?'1':'0'}
+{key:'banana',label:'Banana',min:0,max:2,step:1,defVal:1,unit:'',macro:'banana',calcG:v=>v*120}
 ],secondary:[
 {key:'almonds',label:'Almonds (25g)',defOn:true,macro:'almonds',g:25},
 {key:'flaxseed',label:'Flaxseed (1 tbsp)',defOn:true,macro:'flaxseed',g:7},
@@ -1087,7 +1138,7 @@ const BF_CUSTOM_CONFIG=[
 {main:[
 {key:'eggs',label:'Eggs',min:1,max:5,step:1,defVal:3,unit:'',macro:'eggs',calcG:v=>v*60},
 {key:'bread',label:'Bread slices',min:0,max:4,step:1,defVal:2,unit:'',macro:'bread',calcG:v=>v*40},
-{key:'avocado',label:'Avocado half',min:0,max:1,step:1,defVal:1,unit:'',macro:'avocado',calcG:v=>v*80,display:v=>v?'1/2':'0'}
+{key:'avocado',label:'Avocado',min:0,max:1,step:0.5,defVal:0.5,unit:'',macro:'avocado',calcG:v=>v*160,display:v=>v===0?'0':v===0.5?'\u00bd':'1'}
 ],secondary:[
 {key:'oliveoil',label:'Olive oil (1 tsp)',defOn:true,macro:'oliveoil',g:5},
 {key:'skyrside',label:'Skyr on side (100g)',defOn:true,macro:'skyrside',g:100},
@@ -1269,13 +1320,20 @@ h+='</div></div>';
 return h;
 }
 
-/* V24: AUDIO — dual HTML5 Audio + Web Audio API for full iOS compatibility.
-   HTML5 <audio> bypasses the iOS silent/mute switch (plays through media volume).
-   Web Audio API oscillator kept as desktop fallback. */
+/* V25: AUDIO — Silent-loop src-swap for iOS Safari + Vibration API fallback.
+   Problem: iOS blocks .play() from setInterval/setTimeout (not user gestures).
+   Fix: when any timer starts (from user tap = gesture), begin looping a silent
+   WAV on an <audio> element. This keeps the iOS audio pipeline "open". When the
+   timer ends, swap src to the chime WAV and call .play() — iOS allows this because
+   the audio session is active. After the chime, swap back to silence or stop.
+   Vibration API fires as a tactile fallback on every chime. */
 let _audioCtx=null;
 let _audioUnlocked=false;
-let _chimeAudioEl=null; /* reusable HTML5 Audio element with generated chime WAV */
 let _chimeBlobUrl=null;
+let _doubleChimeBlobUrl=null;
+let _silentBlobUrl=null;
+let _timerAudioEl=null;
+let _silentLoopActive=false;
 
 function getAudioCtx(){
 if(!_audioCtx)_audioCtx=new(window.AudioContext||window.webkitAudioContext)();
@@ -1283,101 +1341,103 @@ if(_audioCtx.state==='suspended')_audioCtx.resume();
 return _audioCtx;
 }
 
-/* --- Generate a pleasant chime as a WAV blob URL on page load --- */
-(function buildChimeWav(){
-try{
-const ctx=new(window.AudioContext||window.webkitAudioContext)();
-const sampleRate=ctx.sampleRate;
-const duration=0.4;
-const length=Math.ceil(sampleRate*duration);
-const buffer=ctx.createBuffer(1,length,sampleRate);
-const data=buffer.getChannelData(0);
-const freqA=440,freqE=659.25;
-for(let i=0;i<length;i++){
-const t=i/sampleRate;
-/* fade envelope: quick attack (20ms), smooth exponential decay */
-const env=t<0.02?(t/0.02):Math.exp(-4.5*((t-0.02)/(duration-0.02)));
-/* two sine notes mixed */
-const sample=(Math.sin(2*Math.PI*freqA*t)+Math.sin(2*Math.PI*freqE*(t-0.03)))*0.18*env;
-data[i]=Math.max(-1,Math.min(1,sample));
-}
-/* encode PCM buffer into a WAV file */
-function encodeWAV(samples,sr){
-const buf=new ArrayBuffer(44+samples.length*2);
-const v=new DataView(buf);
-function writeStr(off,s){for(let i=0;i<s.length;i++)v.setUint8(off+i,s.charCodeAt(i));}
-writeStr(0,'RIFF');v.setUint32(4,36+samples.length*2,true);writeStr(8,'WAVE');
-writeStr(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+/* Encode float32 PCM samples → WAV blob */
+function _encWav(samples,sr){
+const buf=new ArrayBuffer(44+samples.length*2);const v=new DataView(buf);
+function ws(o,s){for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));}
+ws(0,'RIFF');v.setUint32(4,36+samples.length*2,true);ws(8,'WAVE');
+ws(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
 v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);
-writeStr(36,'data');v.setUint32(40,samples.length*2,true);
+ws(36,'data');v.setUint32(40,samples.length*2,true);
 for(let i=0;i<samples.length;i++){const s=Math.max(-1,Math.min(1,samples[i]));
 v.setInt16(44+i*2,s<0?s*0x8000:s*0x7FFF,true);}
 return new Blob([buf],{type:'audio/wav'});
 }
-const blob=encodeWAV(data,sampleRate);
-_chimeBlobUrl=URL.createObjectURL(blob);
-_chimeAudioEl=new Audio(_chimeBlobUrl);
-_chimeAudioEl.preload='auto';
+/* Generate chime samples: A4 440Hz + E5 659Hz, 400ms, fade envelope */
+function _genChime(sr){
+const dur=0.4,len=Math.ceil(sr*dur),d=new Float32Array(len);
+for(let i=0;i<len;i++){const t=i/sr;
+const env=t<0.02?(t/0.02):Math.exp(-4.5*((t-0.02)/(dur-0.02)));
+d[i]=(Math.sin(2*Math.PI*440*t)+Math.sin(2*Math.PI*659.25*(t-0.03)))*0.18*env;}
+return d;
+}
+/* Build all WAV blob URLs on page load */
+(function _buildAudio(){
+try{
+const ctx=new(window.AudioContext||window.webkitAudioContext)();const sr=ctx.sampleRate;
+_silentBlobUrl=URL.createObjectURL(_encWav(new Float32Array(Math.ceil(sr*0.5)),sr));
+const ch=_genChime(sr);_chimeBlobUrl=URL.createObjectURL(_encWav(ch,sr));
+const gap=Math.ceil(sr*0.35);const dbl=new Float32Array(ch.length+gap+ch.length);
+dbl.set(ch,0);dbl.set(ch,ch.length+gap);
+_doubleChimeBlobUrl=URL.createObjectURL(_encWav(dbl,sr));
 ctx.close();
-}catch(e){/* Safari may restrict AudioContext here; will init on first interaction instead */}
+}catch(e){/* Safari may block AudioContext at load — rebuilt on first interaction */}
 })();
-
-/* --- iOS audio unlock: play a tiny silent clip on first user touch --- */
-/* This hidden <audio> element playing a silent WAV unlocks HTML5 Audio on iOS Safari */
-const _silentWav='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
-const _silentAudioEl=new Audio(_silentWav);
-_silentAudioEl.setAttribute('playsinline','');
-
+/* Single <audio> element used for all playback */
+_timerAudioEl=new Audio();_timerAudioEl.setAttribute('playsinline','');
+/* Unlock audio on first user interaction */
 function unlockAudio(){
 if(_audioUnlocked)return;
 try{
-/* unlock HTML5 Audio path */
-_silentAudioEl.play().then(()=>{}).catch(()=>{});
-/* unlock Web Audio API */
-const ctx=getAudioCtx();
-const buf=ctx.createBuffer(1,1,22050);
-const src=ctx.createBufferSource();
-src.buffer=buf;src.connect(ctx.destination);src.start(0);
-/* if chime element wasn't built yet (restricted ctx at load), build now */
-if(!_chimeAudioEl){
-try{
-const actx=getAudioCtx();const sr=actx.sampleRate;const dur=0.4;const len=Math.ceil(sr*dur);
-const b=actx.createBuffer(1,len,sr);const d=b.getChannelData(0);
-for(let i=0;i<len;i++){const t=i/sr;const env=t<0.02?(t/0.02):Math.exp(-4.5*((t-0.02)/(dur-0.02)));
-d[i]=Math.max(-1,Math.min(1,(Math.sin(2*Math.PI*440*t)+Math.sin(2*Math.PI*659.25*(t-0.03)))*0.18*env));}
-function encW(s,r){const buf=new ArrayBuffer(44+s.length*2);const v=new DataView(buf);
-function ws(o,st){for(let i=0;i<st.length;i++)v.setUint8(o+i,st.charCodeAt(i));}
-ws(0,'RIFF');v.setUint32(4,36+s.length*2,true);ws(8,'WAVE');ws(12,'fmt ');v.setUint32(16,16,true);
-v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,r,true);v.setUint32(28,r*2,true);
-v.setUint16(32,2,true);v.setUint16(34,16,true);ws(36,'data');v.setUint32(40,s.length*2,true);
-for(let i=0;i<s.length;i++){const x=Math.max(-1,Math.min(1,s[i]));v.setInt16(44+i*2,x<0?x*0x8000:x*0x7FFF,true);}
-return new Blob([buf],{type:'audio/wav'});}
-_chimeBlobUrl=URL.createObjectURL(encW(d,sr));
-_chimeAudioEl=new Audio(_chimeBlobUrl);_chimeAudioEl.preload='auto';
-}catch(e2){}
-}
+if(_silentBlobUrl){_timerAudioEl.src=_silentBlobUrl;_timerAudioEl.play().then(function(){_timerAudioEl.pause();}).catch(function(){});}
+const ctx=getAudioCtx();const b=ctx.createBuffer(1,1,22050);const s=ctx.createBufferSource();s.buffer=b;s.connect(ctx.destination);s.start(0);
+if(!_chimeBlobUrl){const sr=ctx.sampleRate;
+_silentBlobUrl=URL.createObjectURL(_encWav(new Float32Array(Math.ceil(sr*0.5)),sr));
+const ch=_genChime(sr);_chimeBlobUrl=URL.createObjectURL(_encWav(ch,sr));
+const gap=Math.ceil(sr*0.35);const dbl=new Float32Array(ch.length+gap+ch.length);
+dbl.set(ch,0);dbl.set(ch,ch.length+gap);
+_doubleChimeBlobUrl=URL.createObjectURL(_encWav(dbl,sr));}
 _audioUnlocked=true;
 }catch(e){}
 }
 document.addEventListener('touchstart',unlockAudio,{once:true});
 document.addEventListener('click',unlockAudio,{once:true});
-
-/* Pleasant two-note chime: A4 (440Hz) + E5 (659Hz) major interval, soft sine with fade envelope.
-   Dual playback: HTML5 Audio (bypasses iOS mute switch) + Web Audio API oscillator (desktop fallback). */
+/* Start silent loop — call from timer-start functions (user-gesture callstack).
+   Keeps iOS audio session alive so src-swap + .play() works from setInterval. */
+function startSilentLoop(){
+if(_silentLoopActive||!_silentBlobUrl)return;
+_timerAudioEl.src=_silentBlobUrl;_timerAudioEl.loop=true;
+_timerAudioEl.play().catch(function(){});_silentLoopActive=true;
+}
+/* Stop silent loop if no timers active — saves battery. Safe to call anytime. */
+function stopSilentLoopIfIdle(){
+if(state.exTimer||state.hiitTimer||state.restTimer)return;
+if(!_silentLoopActive)return;
+_timerAudioEl.pause();_timerAudioEl.loop=false;_silentLoopActive=false;
+}
+/* Resume silent loop after chime ends (if timers still running) */
+function _resumeOrStop(){
+if(state.exTimer||state.hiitTimer||state.restTimer){
+_timerAudioEl.src=_silentBlobUrl;_timerAudioEl.loop=true;
+_timerAudioEl.play().catch(function(){});_silentLoopActive=true;
+}else{_silentLoopActive=false;}
+}
+/* Play single chime: vibrate + src-swap on looping element + Web Audio fallback */
 function playChime(){
-/* Path 1: HTML5 Audio — works on iOS even with silent switch on */
-try{
-if(_chimeAudioEl){_chimeAudioEl.currentTime=0;_chimeAudioEl.play().catch(()=>{});}
-}catch(e){}
-/* Path 2: Web Audio API oscillator — reliable on desktop, backup on mobile */
+try{if(navigator.vibrate)navigator.vibrate([200,100,200]);}catch(e){}
+try{if(_timerAudioEl&&_chimeBlobUrl){
+_timerAudioEl.loop=false;_timerAudioEl.src=_chimeBlobUrl;_timerAudioEl.currentTime=0;
+_timerAudioEl.play().catch(function(){});_timerAudioEl.onended=_resumeOrStop;
+}}catch(e){}
 try{const ctx=getAudioCtx();const now=ctx.currentTime;
-const playNote=(freq,start,dur)=>{const osc=ctx.createOscillator();const g=ctx.createGain();osc.type='sine';osc.frequency.value=freq;
-g.gain.setValueAtTime(0,start);g.gain.linearRampToValueAtTime(0.18,start+0.02);g.gain.exponentialRampToValueAtTime(0.001,start+dur);
-osc.connect(g);g.connect(ctx.destination);osc.start(start);osc.stop(start+dur);};
-playNote(440,now,0.25);playNote(659,now+0.03,0.3);
+const pn=function(f,s,d){const o=ctx.createOscillator();const g=ctx.createGain();o.type='sine';o.frequency.value=f;
+g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(0.18,s+0.02);g.gain.exponentialRampToValueAtTime(0.001,s+d);
+o.connect(g);g.connect(ctx.destination);o.start(s);o.stop(s+d);};
+pn(440,now,0.25);pn(659,now+0.03,0.3);
 }catch(e){}}
-/* Double chime for HIIT work-phase end — two dings separated by a gap */
-function playDoubleChime(){playChime();setTimeout(playChime,350);}
+/* Double chime: pre-built double WAV for single src-swap (no setTimeout needed) */
+function playDoubleChime(){
+try{if(navigator.vibrate)navigator.vibrate([200,100,200,150,200,100,200]);}catch(e){}
+try{if(_timerAudioEl&&_doubleChimeBlobUrl){
+_timerAudioEl.loop=false;_timerAudioEl.src=_doubleChimeBlobUrl;_timerAudioEl.currentTime=0;
+_timerAudioEl.play().catch(function(){});_timerAudioEl.onended=_resumeOrStop;
+}}catch(e){}
+try{const ctx=getAudioCtx();const now=ctx.currentTime;
+const pn=function(f,s,d){const o=ctx.createOscillator();const g=ctx.createGain();o.type='sine';o.frequency.value=f;
+g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(0.18,s+0.02);g.gain.exponentialRampToValueAtTime(0.001,s+d);
+o.connect(g);g.connect(ctx.destination);o.start(s);o.stop(s+d);};
+pn(440,now,0.25);pn(659,now+0.03,0.3);pn(440,now+0.35,0.25);pn(659,now+0.38,0.3);
+}catch(e){}}
 
 /* V21: EXERCISE TIMER FUNCTIONS */
 const HIIT_STATIONS=[{name:'Jump rope fast',sec:60},{name:'Burpees',sec:30},{name:'HGX200 stepper fast',sec:60},{name:'Mountain climbers',sec:30},{name:'Jump rope fast',sec:60}];
@@ -1398,14 +1458,16 @@ if(hm&&!s.includes('|'))return parseInt(hm[1]);
 return 0;
 }
 function fmtTimerLabel(sec){if(sec<60)return sec+'s';if(sec%60===0)return(sec/60)+'m';return Math.floor(sec/60)+'m'+sec%60+'s';}
+function parseRestSec(r){if(!r)return 120;const m=r.match(/(\d+)\s*min/i);if(m)return parseInt(m[1])*60;const s=r.match(/(\d+)\s*sec/i);if(s)return parseInt(s[1]);const n=parseInt(r);return n>0?n:120;}
 function toggleExTimer(btn,targetSec){
 if(state.exTimerBtnId===btn.id){cancelExTimer();return;}
 if(state.exTimer)cancelExTimer();
 state.exTimerBtnId=btn.id;state.exTimerTarget=targetSec;state.exTimerRemaining=targetSec;
 btn.classList.add('running');btn.textContent=targetSec;
+startSilentLoop();
 state.exTimer=setInterval(()=>{
 state.exTimerRemaining--;
-if(state.exTimerRemaining<=0){clearInterval(state.exTimer);state.exTimer=null;playChime();
+if(state.exTimerRemaining<=0){clearInterval(state.exTimer);state.exTimer=null;playChime();stopSilentLoopIfIdle();
 btn.classList.remove('running');btn.classList.add('done');btn.innerHTML='\u2713 Done';
 setTimeout(()=>{if(btn){btn.classList.remove('done');btn.innerHTML=ICON_TIMER+fmtTimerLabel(targetSec);state.exTimerBtnId=null;}},2500);
 }else{btn.textContent=state.exTimerRemaining;}
@@ -1416,6 +1478,7 @@ if(state.exTimer){clearInterval(state.exTimer);state.exTimer=null;}
 if(state.exTimerBtnId){const btn=document.getElementById(state.exTimerBtnId);
 if(btn){btn.classList.remove('running','done');btn.innerHTML=ICON_TIMER+fmtTimerLabel(state.exTimerTarget);}
 state.exTimerBtnId=null;}
+stopSilentLoopIfIdle();
 }
 
 /* V22: HIIT ROUND TIMER — manual start per work phase */
@@ -1423,6 +1486,7 @@ function startHiit(totalRounds){
 if(state.hiitTimer&&state.hiitState){clearInterval(state.hiitTimer);state.hiitTimer=null;renderHiitTimer(totalRounds);return;}
 if(!state.hiitState){state.hiitState={round:1,station:0,phase:'ready',remaining:0,totalRounds};}
 if(state.hiitState.phase==='ready'){renderHiitTimer(totalRounds);return;}
+startSilentLoop();
 state.hiitTimer=setInterval(()=>{
 state.hiitState.remaining--;
 if(state.hiitState.remaining<=0)advanceHiit();
@@ -1433,6 +1497,7 @@ renderHiitTimer(totalRounds);
 function hiitReady(){
 const hs=state.hiitState;if(!hs||hs.phase!=='ready')return;
 hs.phase='work';hs.remaining=HIIT_STATIONS[hs.station].sec;
+startSilentLoop();
 state.hiitTimer=setInterval(()=>{
 hs.remaining--;
 if(hs.remaining<=0)advanceHiit();
@@ -1447,6 +1512,7 @@ clearInterval(state.hiitTimer);state.hiitTimer=null;
 playDoubleChime();
 if(hs.station<HIIT_STATIONS.length-1){
 hs.station++;hs.phase='ready';hs.remaining=0;
+stopSilentLoopIfIdle();
 }else if(hs.round<hs.totalRounds){
 hs.phase='rest';hs.remaining=90;
 state.hiitTimer=setInterval(()=>{
@@ -1454,17 +1520,18 @@ hs.remaining--;
 if(hs.remaining<=0)advanceHiit();
 renderHiitTimer(hs.totalRounds);
 },1000);
-}else{state.hiitState=null;renderHiitTimer(hs.totalRounds);return;}
+}else{state.hiitState=null;stopSilentLoopIfIdle();renderHiitTimer(hs.totalRounds);return;}
 }else{
 clearInterval(state.hiitTimer);state.hiitTimer=null;
 playChime();
 hs.phase='ready';hs.round++;hs.station=0;hs.remaining=0;
+stopSilentLoopIfIdle();
 }
 renderHiitTimer(hs.totalRounds);
 }
 function resetHiit(totalRounds){
 if(state.hiitTimer){clearInterval(state.hiitTimer);state.hiitTimer=null;}
-state.hiitState=null;renderHiitTimer(totalRounds);
+state.hiitState=null;stopSilentLoopIfIdle();renderHiitTimer(totalRounds);
 }
 function renderHiitTimer(totalRounds){
 const el=document.getElementById('hiitTimerCard');if(!el)return;
@@ -1897,6 +1964,7 @@ loggedSnacks:migrateEntries(lsGet(dailyKey('snacks17'),[])),
 progLevels:lsGet('progLevels',{0:0,1:0,2:0}),
 gtgSets:lsGet(dailyKey('gtg'),0),
 shopChecked:lsGet('shopChecked',{}),
+shopRebuy:lsGet('shopRebuy',[]),
 setsDone:lsGet(dailyKey('setsDone'),{}),
 armMeasurements:lsGet('armMeasurements',[]),
 armFormOpen:false,
@@ -1920,7 +1988,7 @@ lsSet(dailyKey('breakfast'),state.breakfast);
 lsSet(dailyKey('blendPicks'),state.blendPicks);lsSet(dailyKey('blendRatio'),state.blendRatio);
 lsSet(dailyKey('meals17'),state.loggedMeals);lsSet(dailyKey('snacks17'),state.loggedSnacks);
 lsSet('progLevels',state.progLevels);lsSet(dailyKey('gtg'),state.gtgSets);
-lsSet('shopChecked',state.shopChecked);lsSet(dailyKey('setsDone'),state.setsDone);
+lsSet('shopChecked',state.shopChecked);lsSet('shopRebuy',state.shopRebuy);lsSet(dailyKey('setsDone'),state.setsDone);
 lsSet('armMeasurements',state.armMeasurements);
 lsSet(dailyKey('yogurtRatio'),state.yogurtRatio);
 lsSet(dailyKey('bfCustom'),state.bfCustom);
@@ -2354,7 +2422,7 @@ let setsHtml=Array.from({length:ex.rounds},(_,si)=>{
 const key=ssKey+'_'+si;const done=state.setsDone[key];
 return`<div class="set-row"><div class="set-check${done?' done':''}" onclick="toggleSet('${key}',this)">${done?'\u2713':''}</div><span style="font-size:12px;color:var(--text-dim)">Round ${si+1}</span></div>`;
 }).join('');
-setsHtml+=`<button class="rest-timer-btn" onclick="startRest(60)">Rest 60 sec</button>`;
+setsHtml+=`<button class="rest-timer-btn" onclick="startRest(${parseRestSec(ex.rest)})">Rest ${ex.rest||'60 sec'}</button>`;
 const detailId='ssDetail_'+i;
 return`<div class="superset-block${isOpt?' optional':''}">
 <div class="ss-header"><span class="ss-badge${isOpt?' optional':''}">${isOpt?'IF TIME \u2014 SUPERSET':'SUPERSET'}</span><span style="font-size:11px;color:var(--text-dim)">${ex.rounds} rounds</span></div>
@@ -2378,7 +2446,7 @@ setsHtml=Array.from({length:numSets},(_,si)=>{
 const key=trainDow+'_'+i+'_'+si;const done=state.setsDone[key];
 return`<div class="set-row"><div class="set-check${done?' done':''}" onclick="toggleSet('${key}',this)">${done?'\u2713':''}</div><span style="font-size:12px;color:var(--text-dim)">Set ${si+1}</span></div>`;
 }).join('');
-if(ex.rest){setsHtml+=`<button class="rest-timer-btn" onclick="startRest(${parseInt(ex.rest)||120})">Rest ${ex.rest}</button>`;}
+if(ex.rest){setsHtml+=`<button class="rest-timer-btn" onclick="startRest(${parseRestSec(ex.rest)})">Rest ${ex.rest}</button>`;}
 }
 const exTimerSec=parseTimerSeconds(ex.sets);
 return`<div class="workout-block">
@@ -2479,14 +2547,16 @@ const cancelBtn=document.getElementById('timerCancel')||document.getElementById(
 display.style.display='block';display.textContent=formatTime(sec);
 if(cancelBtn)cancelBtn.style.display='flex';
 display.scrollIntoView({behavior:'smooth',block:'center'});
+startSilentLoop();
 state.restTimer=setInterval(()=>{
 state.restRemaining--;
-if(state.restRemaining<=0){clearInterval(state.restTimer);state.restTimer=null;playChime();if(cancelBtn)cancelBtn.style.display='none';display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
+if(state.restRemaining<=0){clearInterval(state.restTimer);state.restTimer=null;playChime();stopSilentLoopIfIdle();if(cancelBtn)cancelBtn.style.display='none';display.textContent='GO!';display.style.color='var(--skin)';setTimeout(()=>{display.style.display='none';display.style.color='var(--fit)'},2000);}
 else{display.textContent=formatTime(state.restRemaining);}
 },1000);
 }
 function cancelRest(){
 if(state.restTimer){clearInterval(state.restTimer);state.restTimer=null;}
+stopSilentLoopIfIdle();
 const display=document.getElementById('timerDisplay')||document.getElementById('replTimer');
 const cancelBtn=document.getElementById('timerCancel')||document.getElementById('replTimerCancel');
 if(display){display.style.display='none';display.style.color='var(--fit)';}
@@ -2514,7 +2584,8 @@ document.getElementById('mythsArea').innerHTML=MYTHS.map(m=>
 
 /* SHOPPING */
 function renderShopping(){
-const tabs=[{id:'stop',label:'Stop Using',color:'var(--groom)'},{id:'keep',label:'Keep',color:'var(--nutr)'},{id:'buy',label:'Buy',color:'var(--fit)'}];
+const rebuyCount=state.shopRebuy.length;
+const tabs=[{id:'stop',label:'Stop Using',color:'var(--groom)'},{id:'keep',label:'Keep',color:'var(--nutr)'},{id:'rebuy',label:'Rebuy'+(rebuyCount?' ('+rebuyCount+')':''),color:'var(--gold)'},{id:'buy',label:'Buy',color:'var(--fit)'}];
 let activeTab=lsGet('shopTab','buy');
 document.getElementById('shopTabs').innerHTML=tabs.map(t=>
 `<button class="shop-tab${activeTab===t.id?' active':''}" onclick="setShopTab('${t.id}')"><span class="tab-dot" style="background:${t.color}"></span>${t.label}</button>`
@@ -2523,7 +2594,16 @@ const area=document.getElementById('shopArea');
 if(activeTab==='stop'){
 area.innerHTML=SHOP_STOP.map(s=>`<div class="shop-item"><div class="shop-status" style="color:var(--groom)">\u2717</div><div class="shop-info"><div class="shop-name">${s.name}</div><div class="shop-reason">${s.reason}</div></div></div>`).join('');
 }else if(activeTab==='keep'){
-area.innerHTML=SHOP_KEEP.map(s=>`<div class="shop-item"><div class="shop-status" style="color:var(--nutr)">\u2713</div><div class="shop-info"><div class="shop-name">${s.name}</div><div class="shop-reason">${s.reason}</div></div></div>`).join('');
+area.innerHTML=SHOP_KEEP.map((s,i)=>{const inRebuy=state.shopRebuy.includes('keep_'+i);
+return`<div class="shop-item"><div class="shop-status" style="color:var(--nutr)">\u2713</div><div class="shop-info"><div class="shop-name">${s.name}</div><div class="shop-reason">${s.reason}</div></div>
+${!inRebuy?'<button class="rebuy-btn" style="margin-left:auto;background:var(--bg-elevated);border:1px solid var(--card-border);border-radius:8px;padding:4px 10px;font-size:11px;color:var(--gold);cursor:pointer;white-space:nowrap" onclick="moveToRebuy(\'keep_'+i+'\')">Used up</button>':
+'<span style="margin-left:auto;font-size:11px;color:var(--gold)">In rebuy list</span>'}</div>`;}).join('');
+}else if(activeTab==='rebuy'){
+if(rebuyCount===0){area.innerHTML='<div class="empty-state">No items to rebuy. When you use up a KEEP product, tap "Used up" to add it here.</div>';}
+else{area.innerHTML=state.shopRebuy.map(key=>{
+const ki=parseInt(key.split('_')[1]);const s=SHOP_KEEP[ki];if(!s)return'';
+return`<div class="shop-item"><div class="shop-status" style="color:var(--gold)">\u21bb</div><div class="shop-info"><div class="shop-name">${s.name}</div><div class="shop-reason">${s.reason}</div></div>
+<button style="margin-left:auto;background:var(--bg-elevated);border:1px solid var(--card-border);border-radius:8px;padding:4px 10px;font-size:11px;color:var(--nutr);cursor:pointer;white-space:nowrap" onclick="markBought('${key}')">Bought</button></div>`;}).join('');}
 }else{
 area.innerHTML=SHOP_BUY.map((s,i)=>{
 const key='buy_'+i;const done=state.shopChecked[key];
@@ -2534,6 +2614,8 @@ return`<div class="shop-item">
 }
 function setShopTab(t){lsSet('shopTab',t);renderShopping()}
 function toggleShop(key,el){state.shopChecked[key]=!state.shopChecked[key];el.classList.toggle('done');el.textContent=state.shopChecked[key]?'\u2713':'';save();}
+function moveToRebuy(key){if(!state.shopRebuy.includes(key))state.shopRebuy.push(key);save();renderShopping();}
+function markBought(key){state.shopRebuy=state.shopRebuy.filter(k=>k!==key);save();renderShopping();}
 
 /* NAV */
 function buildNav(){
