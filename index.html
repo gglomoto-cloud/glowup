@@ -488,6 +488,52 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .date-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 20px;background:rgba(196,101,42,0.1);border-bottom:1px solid rgba(196,101,42,0.2);font-size:12px;color:#c4652a;flex-shrink:0;z-index:10;position:relative}
 .date-bar-btn{background:rgba(91,190,183,0.15);border:1px solid rgba(91,190,183,0.25);border-radius:8px;padding:4px 12px;color:var(--skin);font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
 .date-bar-btn:active{background:var(--skin);color:#111;transform:scale(0.97)}
+/* V27: Meal tabs (Plats / Composer) */
+.meal-tabs{display:flex;gap:4px;background:rgba(255,255,255,0.05);border-radius:10px;padding:3px;margin-bottom:14px;width:fit-content}
+.meal-tab{background:none;border:none;color:var(--text-muted);font-size:13px;font-weight:500;padding:6px 18px;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.meal-tab.active{background:rgba(255,255,255,0.1);color:var(--text)}
+.meal-tab:active{transform:scale(0.97)}
+/* V27: Composer plate preview */
+.composer-plate{background:var(--bg-elevated);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--card-border);border-top:3px solid var(--cat-food);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+.composer-plate-title{font-size:14px;font-weight:600;margin-bottom:8px;color:var(--text);font-family:'Playfair Display',serif}
+.composer-plate-empty{font-size:12px;color:var(--text-muted);padding:12px 0;text-align:center}
+.plate-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.plate-item:last-child{border-bottom:none}
+.plate-item-info{flex:1;min-width:0}
+.plate-item-name{font-size:13px;font-weight:500}
+.plate-item-macros{font-size:11px;color:var(--text-dim);font-variant-numeric:tabular-nums}
+.plate-item-controls{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.plate-total{padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);margin-top:4px}
+.plate-total-macros{font-size:13px;font-weight:600;color:var(--skin);font-variant-numeric:tabular-nums}
+.log-meal-btn{width:100%;background:var(--skin);border:none;border-radius:10px;padding:12px;color:#111;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:10px;transition:all .2s}
+.log-meal-btn:active{transform:scale(0.97);opacity:0.9}
+.log-meal-btn:disabled{background:rgba(255,255,255,0.08);color:var(--text-muted);cursor:default}
+.log-meal-btn:disabled:active{transform:none;opacity:1}
+/* V27: Component categories */
+.comp-category{margin-bottom:10px}
+.comp-cat-header{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;border-radius:8px;transition:background .15s}
+.comp-cat-header:active{background:rgba(255,255,255,0.04)}
+.comp-cat-pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;letter-spacing:.3px}
+.comp-cat-pill.protein{background:rgba(212,115,108,0.15);color:var(--groom)}
+.comp-cat-pill.starch{background:rgba(212,168,83,0.15);color:var(--fit)}
+.comp-cat-pill.vegetable{background:rgba(91,190,183,0.15);color:var(--skin)}
+.comp-cat-pill.extras{background:rgba(255,255,255,0.08);color:var(--text-dim)}
+.comp-cat-arrow{color:var(--text-muted);font-size:12px;transition:transform .2s;margin-left:auto}
+.comp-category.collapsed .comp-cat-arrow{transform:rotate(-90deg)}
+.comp-cat-items{display:flex;flex-direction:column;gap:4px;padding:4px 0}
+.comp-category.collapsed .comp-cat-items{display:none}
+.comp-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg-card);border:1px solid var(--card-border);border-radius:10px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow-card)}
+.comp-item:active{background:var(--bg-card-hover);transform:scale(0.98)}
+.comp-item-name{font-size:13px;font-weight:500}
+.comp-item-kcal{font-size:11px;color:var(--text-dim);font-variant-numeric:tabular-nums}
+/* V27: Logged composed meals */
+.composed-log{margin-bottom:12px}
+.composed-entry{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-left:3px solid var(--cat-food);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;box-shadow:var(--shadow-card);animation:screenIn .2s ease}
+.composed-entry-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.composed-entry-title{font-size:13px;font-weight:600}
+.composed-entry-macros{font-size:12px;color:var(--skin);font-weight:600;font-variant-numeric:tabular-nums}
+.composed-entry-items{font-size:11px;color:var(--text-dim);line-height:1.6}
+.composed-entry-item{display:flex;justify-content:space-between;padding:2px 0}
 </style>
 </head>
 <body>
@@ -549,8 +595,9 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 <div class="blend-row" id="blendRow"></div>
 <div id="blendResult"></div>
 <div class="section-title">Lunch / Dinner</div>
-<div class="section-sub">Tap a meal to log it — adjust portion size</div>
-<div id="mealList"></div>
+<div id="mealTabBar"></div>
+<div id="composedLog"></div>
+<div id="mealTabContent"></div>
 <div class="sub-section-title">Snacks</div>
 <div class="snack-grid" id="snackGrid"></div>
 </div>
@@ -1032,31 +1079,32 @@ const BF_DETAILS=[
    Corrections applied: pates bolognaise, poisson, soupe, couscous, ratatouille, omelette, croque-monsieur,
    blanquette, saumon, poulet basquaise, boeuf bourg, tomates farcies, endives, tartiflette, pot-au-feu,
    cassoulet, salade nicoise, galette, poelee, riz cantonais, carbonara, steak hache. */
+/* V27: hidden=true on former combo meals — indices preserved for backward compat with old localStorage */
 const MEALS=[
-{name:"Poulet r\u00f4ti + riz",kcal100:155,p100:11.0,c100:16.0,f100:4.5,gS:300,gM:400,gL:500,gXL:600},
-{name:"Steak hach\u00e9 + pur\u00e9e",kcal100:150,p100:8.5,c100:12.0,f100:7.5,gS:300,gM:400,gL:500,gXL:600},
-{name:"Poisson + l\u00e9gumes",kcal100:90,p100:10.0,c100:5.5,f100:2.5,gS:250,gM:350,gL:450,gXL:550},
+{name:"Poulet r\u00f4ti + riz",kcal100:155,p100:11.0,c100:16.0,f100:4.5,gS:300,gM:400,gL:500,gXL:600,hidden:true},
+{name:"Steak hach\u00e9 + pur\u00e9e",kcal100:150,p100:8.5,c100:12.0,f100:7.5,gS:300,gM:400,gL:500,gXL:600,hidden:true},
+{name:"Poisson + l\u00e9gumes",kcal100:90,p100:10.0,c100:5.5,f100:2.5,gS:250,gM:350,gL:450,gXL:550,hidden:true},
 {name:"P\u00e2tes bolognaise",kcal100:140,p100:7.0,c100:16.0,f100:5.0,gS:250,gM:350,gL:450,gXL:550},
-{name:"Quiche lorraine + salade",kcal100:185,p100:7.5,c100:12.0,f100:12.0,gS:200,gM:300,gL:400,gXL:500},
-{name:"Soupe + pain",kcal100:90,p100:3.5,c100:13.0,f100:2.0,gS:250,gM:350,gL:450,gXL:550},
-{name:"Couscous + merguez",kcal100:165,p100:8.0,c100:17.0,f100:6.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Quiche lorraine + salade",kcal100:185,p100:7.5,c100:12.0,f100:12.0,gS:200,gM:300,gL:400,gXL:500,hidden:true},
+{name:"Soupe + pain",kcal100:90,p100:3.5,c100:13.0,f100:2.0,gS:250,gM:350,gL:450,gXL:550,hidden:true},
+{name:"Couscous + merguez",kcal100:165,p100:8.0,c100:17.0,f100:6.5,gS:300,gM:400,gL:500,gXL:600,hidden:true},
 {name:"Gratin dauphinois",kcal100:135,p100:4.0,c100:13.0,f100:7.0,gS:250,gM:350,gL:450,gXL:550},
-{name:"Ratatouille + riz",kcal100:95,p100:2.5,c100:13.0,f100:3.0,gS:300,gM:400,gL:500,gXL:600},
-{name:"Omelette + salade",kcal100:130,p100:8.5,c100:4.0,f100:8.5,gS:200,gM:300,gL:400,gXL:500},
+{name:"Ratatouille + riz",kcal100:95,p100:2.5,c100:13.0,f100:3.0,gS:300,gM:400,gL:500,gXL:600,hidden:true},
+{name:"Omelette + salade",kcal100:130,p100:8.5,c100:4.0,f100:8.5,gS:200,gM:300,gL:400,gXL:500,hidden:true},
 {name:"Croque-monsieur",kcal100:275,p100:13.0,c100:20.0,f100:15.0,gS:180,gM:250,gL:320,gXL:400},
 {name:"Blanquette de veau",kcal100:120,p100:10.0,c100:4.0,f100:6.5,gS:300,gM:400,gL:500,gXL:600},
 {name:"Hachis parmentier",kcal100:145,p100:6.5,c100:11.0,f100:8.0,gS:300,gM:400,gL:500,gXL:600},
-{name:"Saumon + riz + l\u00e9gumes",kcal100:150,p100:10.0,c100:14.0,f100:6.0,gS:300,gM:400,gL:500,gXL:600},
+{name:"Saumon + riz + l\u00e9gumes",kcal100:150,p100:10.0,c100:14.0,f100:6.0,gS:300,gM:400,gL:500,gXL:600,hidden:true},
 {name:"Poulet basquaise",kcal100:108,p100:9.5,c100:5.0,f100:5.0,gS:300,gM:400,gL:500,gXL:600},
 {name:"Boeuf bourguignon",kcal100:110,p100:9.0,c100:4.0,f100:5.5,gS:300,gM:400,gL:500,gXL:600},
-{name:"Tomates farcies + riz",kcal100:120,p100:5.5,c100:11.0,f100:5.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Tomates farcies + riz",kcal100:120,p100:5.5,c100:11.0,f100:5.5,gS:300,gM:400,gL:500,gXL:600,hidden:true},
 {name:"Endives au jambon",kcal100:105,p100:6.5,c100:4.0,f100:6.5,gS:250,gM:350,gL:450,gXL:550},
 {name:"Tartiflette",kcal100:160,p100:6.0,c100:10.0,f100:10.0,gS:250,gM:350,gL:450,gXL:550},
 {name:"Pot-au-feu",kcal100:85,p100:7.0,c100:5.5,f100:3.5,gS:350,gM:450,gL:550,gXL:650},
 {name:"Cassoulet",kcal100:170,p100:10.5,c100:10.0,f100:9.0,gS:300,gM:400,gL:500,gXL:600},
 {name:"Salade ni\u00e7oise",kcal100:105,p100:6.0,c100:7.0,f100:6.0,gS:200,gM:300,gL:400,gXL:500},
 {name:"Galette compl\u00e8te",kcal100:190,p100:10.0,c100:14.0,f100:10.0,gS:180,gM:250,gL:320,gXL:400},
-{name:"Po\u00eal\u00e9e poulet + l\u00e9gumes",kcal100:100,p100:10.0,c100:5.5,f100:3.5,gS:300,gM:400,gL:500,gXL:600},
+{name:"Po\u00eal\u00e9e poulet + l\u00e9gumes",kcal100:100,p100:10.0,c100:5.5,f100:3.5,gS:300,gM:400,gL:500,gXL:600,hidden:true},
 {name:"Riz cantonais",kcal100:157,p100:5.5,c100:22.0,f100:5.0,gS:250,gM:350,gL:450,gXL:550},
 {name:"P\u00e2tes \u00e0 la Carbonara (+ jaune d'oeuf)",kcal100:170,p100:7.0,c100:17.0,f100:8.5,gS:250,gM:350,gL:450,gXL:550},
 {name:"Chicken Wraps (x2)",kcal100:180,p100:12.2,c100:10.4,f100:9.9,gS:400,gM:800,gL:850,gXL:900},
@@ -1064,6 +1112,34 @@ const MEALS=[
 {name:"Burger Maison",kcal100:200,p100:12.7,c100:9.6,f100:11.5,gS:355,gM:430,gL:710,gXL:860},
 {name:"Gratin de Potimarron au Comt\u00e9",kcal100:139,p100:1.8,c100:11.2,f100:8.2,gS:100,gM:150,gL:200,gXL:300}
 ];
+/* V27: MEAL COMPONENTS — mix-and-match system. Per-100g verified against CIQUAL/ANSES 2025.
+   Couscous corrected to cooked values (CIQUAL: ~112 kcal cooked vs 175 dry). */
+const COMPONENTS=[
+{id:'poulet_roti',name:'Poulet r\u00f4ti',cat:'protein',kcal100:165,p100:25,c100:0,f100:7,gS:80,gM:120,gL:160,gXL:200},
+{id:'steak_hache',name:'Steak hach\u00e9 (15%)',cat:'protein',kcal100:220,p100:17,c100:0,f100:17,gS:80,gM:125,gL:180,gXL:250},
+{id:'poisson_blanc',name:'Poisson blanc',cat:'protein',kcal100:85,p100:18,c100:0,f100:1,gS:80,gM:120,gL:150,gXL:200},
+{id:'saumon',name:'Saumon',cat:'protein',kcal100:208,p100:20,c100:0,f100:13,gS:80,gM:120,gL:150,gXL:200},
+{id:'merguez',name:'Merguez',cat:'protein',kcal100:300,p100:15,c100:2,f100:26,gS:50,gM:100,gL:150,gXL:200},
+{id:'omelette',name:'Omelette',cat:'protein',kcal100:155,p100:11,c100:1,f100:12,gS:100,gM:150,gL:200,gXL:250},
+{id:'tomates_farcies',name:'Tomates farcies',cat:'protein',kcal100:110,p100:7,c100:6,f100:6,gS:150,gM:300,gL:450,gXL:600},
+{id:'riz_blanc',name:'Riz blanc (cuit)',cat:'starch',kcal100:130,p100:2.7,c100:28,f100:0.3,gS:100,gM:150,gL:200,gXL:300},
+{id:'puree',name:'Pur\u00e9e de pommes de terre',cat:'starch',kcal100:100,p100:2,c100:15,f100:3.5,gS:100,gM:150,gL:200,gXL:300},
+{id:'couscous',name:'Couscous (semoule cuit)',cat:'starch',kcal100:112,p100:3.8,c100:23,f100:0.2,gS:100,gM:150,gL:200,gXL:300},
+{id:'pain',name:'Pain / Baguette',cat:'starch',kcal100:270,p100:9,c100:56,f100:1,gS:30,gM:50,gL:80,gXL:100},
+{id:'gratin_potimarron',name:'Gratin de Potimarron au Comt\u00e9',cat:'starch',kcal100:139,p100:1.8,c100:11.2,f100:8.2,gS:100,gM:150,gL:200,gXL:300},
+{id:'ratatouille',name:'Ratatouille',cat:'vegetable',kcal100:55,p100:1.2,c100:6,f100:2.5,gS:100,gM:150,gL:200,gXL:300},
+{id:'legumes',name:'L\u00e9gumes vari\u00e9s',cat:'vegetable',kcal100:45,p100:2,c100:6,f100:1,gS:80,gM:120,gL:180,gXL:250},
+{id:'salade_verte',name:'Salade verte',cat:'vegetable',kcal100:20,p100:1.5,c100:2,f100:0.3,gS:50,gM:80,gL:120,gXL:150},
+{id:'soupe',name:'Soupe (l\u00e9gumes)',cat:'vegetable',kcal100:35,p100:1,c100:5,f100:1,gS:200,gM:300,gL:400,gXL:500},
+{id:'quiche',name:'Quiche lorraine',cat:'extras',kcal100:250,p100:10,c100:20,f100:14,gS:80,gM:120,gL:160,gXL:200}
+];
+const COMP_CATS=[
+{id:'protein',label:'Prot\u00e9ine',cls:'protein'},
+{id:'starch',label:'F\u00e9culent',cls:'starch'},
+{id:'vegetable',label:'L\u00e9gumes',cls:'vegetable'},
+{id:'extras',label:'Extras',cls:'extras'}
+];
+let composerCollapsed={};
 const SNACKS=[
 {name:'Banana + rice cakes + PB',kcal:280,p:8,c:38,f:10},{name:'Skyr 200g + honey + berries',kcal:250,p:22,c:30,f:2},{name:'Protein bar (HiPro)',kcal:180,p:18,c:15,f:6},{name:'Dates (4) + almonds',kcal:220,p:5,c:35,f:8},{name:'Tuna on bread',kcal:350,p:28,c:30,f:12},{name:'Cottage cheese + walnuts',kcal:320,p:25,c:8,f:20},{name:'2 boiled eggs + oatcake',kcal:250,p:15,c:18,f:13},{name:'Pumpkin seeds + apple',kcal:250,p:9,c:25,f:14},{name:'Pre-bed skyr + almonds',kcal:250,p:25,c:12,f:10},
 {name:'Yaourt v\u00e9g\u00e9tal coco (Andros)',kcal:75,p:1,c:7,f:5,tag:'Low protein \u2014 occasional dessert, not a protein source'},
@@ -2049,7 +2125,9 @@ bfCustom:lsGet(dailyKey('bfCustom'),{}),
 hotCocoBread:lsGet(dailyKey('hotCocoBread'),62),
 hotCocoMilk:lsGet(dailyKey('hotCocoMilk'),30),
 exTimer:null,exTimerRemaining:0,exTimerTarget:0,exTimerBtnId:null,
-hiitTimer:null,hiitState:null
+hiitTimer:null,hiitState:null,
+mealTab:'plats',
+currentPlate:lsGet(dailyKey('plate27'),[])
 };
 function save(){
 lsSet(dailyKey('shave'),state.shave);lsSet(dailyKey('tkd'),state.tkdToday);
@@ -2065,6 +2143,7 @@ lsSet(dailyKey('yogurtRatio'),state.yogurtRatio);
 lsSet(dailyKey('bfCustom'),state.bfCustom);
 lsSet(dailyKey('hotCocoBread'),state.hotCocoBread);
 lsSet(dailyKey('hotCocoMilk'),state.hotCocoMilk);
+lsSet(dailyKey('plate27'),state.currentPlate);
 }
 
 /* V24: Day-switching — persist selected date across screens */
@@ -2084,6 +2163,8 @@ state.yogurtRatio=lsGet(dailyKey('yogurtRatio'),'2G1P');
 state.bfCustom=lsGet(dailyKey('bfCustom'),{});
 state.hotCocoBread=lsGet(dailyKey('hotCocoBread'),62);
 state.hotCocoMilk=lsGet(dailyKey('hotCocoMilk'),30);
+state.currentPlate=lsGet(dailyKey('plate27'),[]);
+state.mealTab='plats';
 const defType=AUTO_DAY_TYPE[selDow]==='tkd'&&!defTkd?'calisthenics':AUTO_DAY_TYPE[selDow];
 state.dayType=lsGet(dailyKey('dayType'),defType);
 }
@@ -2301,7 +2382,7 @@ c+=Math.round(am.c*r[0]/100+bm.c*r[1]/100);f+=Math.round(am.f*r[0]/100+bm.f*r[1]
 }else if(state.breakfast!==null){
 const bfm=getBreakfastCustomMacros(state.breakfast);kcal+=bfm.kcal;p+=bfm.p;c+=bfm.c;f+=bfm.f;
 }
-state.loggedMeals.forEach(m=>{const meal=MEALS[m.idx];const g=getMealGrams(meal,m.portion);kcal+=Math.round(meal.kcal100*g/100);p+=Math.round(meal.p100*g/100);c+=Math.round(meal.c100*g/100);f+=Math.round(meal.f100*g/100)});
+state.loggedMeals.forEach(m=>{if(m.type==='composed'){kcal+=m.totalMacros.kcal;p+=m.totalMacros.p;c+=m.totalMacros.c;f+=m.totalMacros.f;}else{const meal=MEALS[m.idx];if(!meal)return;const g=getMealGrams(meal,m.portion);kcal+=Math.round(meal.kcal100*g/100);p+=Math.round(meal.p100*g/100);c+=Math.round(meal.c100*g/100);f+=Math.round(meal.f100*g/100);}});
 state.loggedSnacks.forEach(entry=>{const sm=getSnackMacros(entry);kcal+=sm.kcal;p+=sm.p;c+=sm.c;f+=sm.f});
 return{kcal,p,c,f};
 }
@@ -2375,15 +2456,40 @@ const addIngs=(dtl,pct,label)=>{h+=`<div style="font-size:11px;color:var(--text-
 addIngs(adtl,r[0],a.name);addIngs(bdtl,r[1],b.name);
 h+='</div>';brEl.innerHTML=h;
 }else{brEl.innerHTML='';}
-/* V24: Per-instance meal rendering — each entry is independent, identical entries grouped with ×N */
-document.getElementById('mealList').innerHTML=MEALS.map((ml,i)=>{
-const entries=state.loggedMeals.filter(m=>m.idx===i);
+/* V27: Meal tabs + composer + composed log */
+document.getElementById('mealTabBar').innerHTML=`<div class="meal-tabs">
+<button class="meal-tab${state.mealTab==='plats'?' active':''}" onclick="setMealTab('plats')">Plats</button>
+<button class="meal-tab${state.mealTab==='composer'?' active':''}" onclick="setMealTab('composer')">Composer</button>
+</div>`;
+const composedEntries=state.loggedMeals.filter(m=>m.type==='composed');
+let composedHtml='';
+if(composedEntries.length>0){
+composedHtml='<div class="composed-log">';
+composedEntries.forEach(ce=>{
+composedHtml+=`<div class="composed-entry"><div class="composed-entry-head">
+<span class="composed-entry-title">Composed Meal</span>
+<button class="meal-remove" onclick="removeMealEntry('${ce.id}')">\u2212</button>
+</div><div class="composed-entry-items">`;
+ce.components.forEach(c=>{
+composedHtml+=`<div class="composed-entry-item"><span>${c.name} \u2014 ${c.grams}g (${c.portion})</span><span>${c.macros.kcal} kcal \u00b7 ${Math.round(c.macros.p)}g P</span></div>`;
+});
+composedHtml+=`</div><div class="composed-entry-macros">${ce.totalMacros.kcal} kcal \u00b7 ${ce.totalMacros.p}g P \u00b7 ${ce.totalMacros.c}g C \u00b7 ${ce.totalMacros.f}g F</div></div>`;
+});
+composedHtml+='</div>';
+}
+document.getElementById('composedLog').innerHTML=composedHtml;
+if(state.mealTab==='plats'){
+const mealsToShow=MEALS.map((ml,i)=>({meal:ml,idx:i})).filter(x=>{
+if(!x.meal.hidden)return true;
+return state.loggedMeals.some(m=>m.type!=='composed'&&m.idx===x.idx);
+});
+document.getElementById('mealTabContent').innerHTML='<div class="section-sub">Tap a meal to log it \u2014 adjust portion size</div>'+mealsToShow.map(({meal:ml,idx:i})=>{
+const entries=state.loggedMeals.filter(m=>m.type!=='composed'&&m.idx===i);
 if(entries.length===0){const g=getMealGrams(ml,'normal');
 return`<div class="meal-entry"><div class="meal-info" onclick="addMeal(${i})">
 <div class="meal-name"><span class="meal-dot"></span>${ml.name} <span class="meal-grams">\u00b7 ${g}g</span></div>
 <div class="meal-kcal">${Math.round(ml.kcal100*g/100)} kcal \u00b7 ${Math.round(ml.p100*g/100)}g P \u00b7 ${Math.round(ml.c100*g/100)}g C \u00b7 ${Math.round(ml.f100*g/100)}g F</div>
 </div></div>`;}
-/* Group entries by portion for display */
 const grps=[];entries.forEach(e=>{const g=grps.find(x=>x.portion===e.portion);if(g){g.entries.push(e);g.count++;}else grps.push({portion:e.portion,entries:[e],count:1});});
 return grps.map(grp=>{const g=getMealGrams(ml,grp.portion);const ps=['small','normal','large','xl'];const pl=['S','M','L','XL'];
 return`<div class="meal-entry selected"><div class="meal-info" onclick="addMeal(${i})">
@@ -2393,6 +2499,9 @@ return`<div class="meal-entry selected"><div class="meal-info" onclick="addMeal(
 ${ps.map((sz,si)=>'<button class="portion-btn'+(grp.portion===sz?' active':'')+'" onclick="setMealGroupPortion('+i+',\''+grp.portion+'\',\''+sz+'\')">'+pl[si]+'</button>').join('')}
 </div><button class="meal-remove" onclick="removeMealEntry('${grp.entries[grp.count-1].id}')" title="Remove one">\u2212</button>
 </div></div>`;}).join('');}).join('');
+}else{
+document.getElementById('mealTabContent').innerHTML=renderComposer();
+}
 /* V24: Per-instance snack rendering — hot coco entries have independent steppers */
 document.getElementById('snackGrid').innerHTML=SNACKS.map((s,i)=>{
 const snackEntries=state.loggedSnacks.filter(e=>e.idx===i);
@@ -2461,6 +2570,90 @@ function getSnackCount(i){return state.loggedSnacks.filter(e=>e.idx===i).length;
 function removeMeal(i){const idx=state.loggedMeals.findLastIndex(m=>m.idx===i);if(idx>=0)state.loggedMeals.splice(idx,1);save();renderMeals();}
 function removeSnack(i){const idx=state.loggedSnacks.findLastIndex(e=>e.idx===i);if(idx>=0)state.loggedSnacks.splice(idx,1);save();renderMeals();}
 function setMealGroupPortion(mealIdx,oldPortion,newPortion){state.loggedMeals.filter(m=>m.idx===mealIdx&&m.portion===oldPortion).forEach(m=>m.portion=newPortion);save();renderMeals();}
+
+/* V27: COMPOSER FUNCTIONS */
+function setMealTab(tab){state.mealTab=tab;renderMeals();}
+function getCompGrams(comp,portion){
+if(portion==='S')return comp.gS;if(portion==='L')return comp.gL;if(portion==='XL')return comp.gXL;return comp.gM;
+}
+function getCompMacros(comp,portion){
+const g=getCompGrams(comp,portion);
+return{kcal:Math.round(comp.kcal100*g/100),p:+(comp.p100*g/100).toFixed(1),c:+(comp.c100*g/100).toFixed(1),f:+(comp.f100*g/100).toFixed(1)};
+}
+function addComponent(compId){
+state.currentPlate.push({componentId:compId,portion:'M'});save();renderMeals();
+}
+function removeComponent(idx){
+state.currentPlate.splice(idx,1);save();renderMeals();
+}
+function setComponentPortion(idx,portion){
+state.currentPlate[idx].portion=portion;save();renderMeals();
+}
+function toggleCompCategory(cat){
+composerCollapsed[cat]=!composerCollapsed[cat];renderMeals();
+}
+function logComposedMeal(){
+if(state.currentPlate.length===0)return;
+const components=state.currentPlate.map(p=>{
+const comp=COMPONENTS.find(c=>c.id===p.componentId);
+if(!comp)return null;
+const g=getCompGrams(comp,p.portion);
+const macros=getCompMacros(comp,p.portion);
+return{componentId:p.componentId,name:comp.name,portion:p.portion,grams:g,macros};
+}).filter(Boolean);
+if(components.length===0)return;
+let tK=0,tP=0,tC=0,tF=0;
+components.forEach(c=>{tK+=c.macros.kcal;tP+=c.macros.p;tC+=c.macros.c;tF+=c.macros.f;});
+state.loggedMeals.push({
+id:uid(),type:'composed',
+components,
+totalMacros:{kcal:Math.round(tK),p:Math.round(tP),c:Math.round(tC),f:Math.round(tF)}
+});
+state.currentPlate=[];save();renderMeals();
+}
+function renderComposer(){
+let h='<div class="section-sub">Build your plate from components</div>';
+/* Plate preview */
+h+='<div class="composer-plate"><div class="composer-plate-title">Your Plate</div>';
+if(state.currentPlate.length===0){
+h+='<div class="composer-plate-empty">Tap components below to add them</div>';
+}else{
+let tK=0,tP=0,tC=0,tF=0;
+state.currentPlate.forEach((p,i)=>{
+const comp=COMPONENTS.find(c=>c.id===p.componentId);if(!comp)return;
+const g=getCompGrams(comp,p.portion);
+const macros=getCompMacros(comp,p.portion);
+tK+=macros.kcal;tP+=macros.p;tC+=macros.c;tF+=macros.f;
+h+=`<div class="plate-item"><div class="plate-item-info">
+<div class="plate-item-name">${comp.name} \u2014 ${g}g (${p.portion})</div>
+<div class="plate-item-macros">${macros.kcal} kcal \u00b7 ${Math.round(macros.p)}g P \u00b7 ${Math.round(macros.c)}g C \u00b7 ${Math.round(macros.f)}g F</div>
+</div><div class="plate-item-controls"><div class="portion-btns">
+${['S','M','L','XL'].map(sz=>'<button class="portion-btn'+(p.portion===sz?' active':'')+'" onclick="setComponentPortion('+i+',\''+sz+'\')">'+sz+'</button>').join('')}
+</div><button class="meal-remove" onclick="removeComponent(${i})">\u2212</button></div></div>`;
+});
+h+=`<div class="plate-total"><div class="plate-total-macros">Total: ${Math.round(tK)} kcal \u00b7 ${Math.round(tP)}g P \u00b7 ${Math.round(tC)}g C \u00b7 ${Math.round(tF)}g F</div></div>`;
+h+=`<button class="log-meal-btn" onclick="logComposedMeal()">Log Meal</button>`;
+}
+h+='</div>';
+/* Category sections */
+COMP_CATS.forEach(cat=>{
+const items=COMPONENTS.filter(c=>c.cat===cat.id);
+const collapsed=composerCollapsed[cat.id];
+h+=`<div class="comp-category${collapsed?' collapsed':''}">
+<div class="comp-cat-header" onclick="toggleCompCategory('${cat.id}')">
+<span class="comp-cat-pill ${cat.cls}">${cat.label}</span>
+<span class="comp-cat-arrow">\u25be</span>
+</div><div class="comp-cat-items">`;
+items.forEach(comp=>{
+h+=`<div class="comp-item" onclick="addComponent('${comp.id}')">
+<span class="comp-item-name">${comp.name}</span>
+<span class="comp-item-kcal">${comp.kcal100} kcal/100g</span>
+</div>`;
+});
+h+='</div></div>';
+});
+return h;
+}
 
 /* TRAINING */
 function renderArmDetail(exName){
