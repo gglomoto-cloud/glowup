@@ -2568,7 +2568,7 @@ const cls='snack-chip yogurt'+(s.coming?' coming':'')+' selected';
 return`<div class="${cls}"><div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}</div>
 <div class="snack-ymacros">${pm.kcal} kcal \u00b7 ${pm.p}g P \u00b7 ${pm.c}g C \u00b7 ${pm.f}g F${pm.desc?' \u00b7 '+pm.desc:''}</div>
 ${s.tag?'<div class="snack-ytag">'+s.tag+'</div>':''}
-<div class="snack-portion-btns">${['S','M','L','XL'].map(sz=>'<button class="snack-portion-btn'+(cp===sz?' active':'')+'" onclick="setSnackEntryPortion(\''+entry.id+'\',\''+sz+'\')">'+sz+(s.portions[sz].g?' ('+s.portions[sz].g+'g)':'')+'</button>').join('')}<button class="meal-add-btn" style="margin-left:4px" onclick="addSnack(${i})">+</button><button class="meal-remove" style="margin-left:2px" onclick="removeSnackEntry(\''+entry.id+'\')">\u2212</button></div></div>`;}).join('');}
+<div class="snack-portion-btns">${['S','M','L','XL'].map(sz=>'<button class="snack-portion-btn'+(cp===sz?' active':'')+'" onclick="setSnackEntryPortion(\''+entry.id+'\',\''+sz+'\')">'+sz+(s.portions[sz].g?' ('+s.portions[sz].g+'g)':'')+'</button>').join('')}<button class="meal-add-btn" style="margin-left:4px" onclick="addSnack(${i})">+</button><button class="meal-remove" style="margin-left:2px" onclick="removeSnackEntry('${entry.id}')">\u2212</button></div></div>`;}).join('');}
 /* Tagged snacks (yogurts etc): group identical entries */
 if(s.tag){const cls='snack-chip yogurt'+(s.coming?' coming':'')+sel;
 return`<div class="${cls}" onclick="addSnack(${i})"><div class="snack-yname">${s.name}${s.coming?' <span class="coming-badge">to buy</span>':''}${cnt>0?'<span class="snack-count">\u00d7'+cnt+'</span>':''}</div>
