@@ -2239,8 +2239,10 @@ function getDismissedAutoReminders(dateStr){return lsGet('autoDismissed_'+dateSt
 function dismissAutoReminder(reminderId,dateStr){
 const dismissed=getDismissedAutoReminders(dateStr);
 if(!dismissed.includes(reminderId)){dismissed.push(reminderId);lsSet('autoDismissed_'+dateStr,dismissed);}
-if(reminderId==='auto_bath_towel'){lsSet('showerCount',0);}
+/* V32 FIX 1: only reset shower counter when TODAY's towel swap is checked off (not retroactive past dates) */
+if(reminderId==='auto_bath_towel'&&dateStr===today){lsSet('showerCount',0);}
 renderNotesCard();
+if(state.viewMode==='week')renderWeeklyOverview();
 }
 function logShower(){
 let count=lsGet('showerCount',0);
@@ -3443,11 +3445,14 @@ function saveNotesForDate(dateStr,notes){lsSet('notes_'+dateStr,notes);}
 function dateToInputVal(d){const dt=typeof d==='string'?new Date(d):d;return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');}
 function escNoteHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function clearCompletedPastNotes(){
+/* V32: keep past done notes for 30 days so they remain editable in the weekly overview
+(needed for "uncheck a past item" to survive page reloads) */
 const keys=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('notes_'))keys.push(k);}
+const cutoff=new Date(today);cutoff.setHours(0,0,0,0);cutoff.setDate(cutoff.getDate()-30);
 keys.forEach(k=>{
 const dateStr=k.replace('notes_','');if(dateStr===today)return;
-const d=new Date(dateStr);const now=new Date(today);d.setHours(0,0,0,0);now.setHours(0,0,0,0);
-if(d>=now)return;
+const d=new Date(dateStr);d.setHours(0,0,0,0);
+if(d>=cutoff)return;
 const notes=lsGet(k,[]);const remaining=notes.filter(n=>!n.done);
 if(remaining.length===0)localStorage.removeItem(k);else lsSet(k,remaining);
 });
@@ -3535,11 +3540,13 @@ noteFormOpen=false;noteSelectedCat='other';
 renderNotesCard();
 if(state.viewMode==='week')renderWeeklyView();
 }
-function toggleNoteDone(noteId){
-const viewDateStr=getActiveDateStr();
-const notes=getNotesForDate(viewDateStr);
+function toggleNoteDone(noteId,dateStr){
+/* V32 FIX 2: accept an explicit dateStr so the weekly overview can toggle notes on any day
+(without it, all toggles wrote to whichever day the dashboard was viewing) */
+const targetDateStr=dateStr||getActiveDateStr();
+const notes=getNotesForDate(targetDateStr);
 const note=notes.find(n=>n.id===noteId);
-if(note){note.done=!note.done;saveNotesForDate(viewDateStr,notes);renderNotesCard();}
+if(note){note.done=!note.done;saveNotesForDate(targetDateStr,notes);renderNotesCard();if(state.viewMode==='week')renderWeeklyOverview();}
 }
 function deleteNote(noteId){
 const viewDateStr=getActiveDateStr();
@@ -3662,6 +3669,8 @@ if(dateStr===today){pillDismissedSession.delete(itemId);renderPillBanners();}
 }else if(itemId.startsWith('auto_')){
 const dismissed=getDismissedAutoReminders(dateStr);
 if(!dismissed.includes(itemId)){dismissed.push(itemId);lsSet('autoDismissed_'+dateStr,dismissed);}
+/* V32 FIX 1: reset shower counter when TODAY's towel swap is checked from any view */
+if(itemId==='auto_bath_towel'&&dateStr===today){lsSet('showerCount',0);}
 }else{
 const checks=lsGet('dailyChecks_'+dateStr,[]);
 if(!checks.includes(itemId)){checks.push(itemId);lsSet('dailyChecks_'+dateStr,checks);}
@@ -3669,6 +3678,32 @@ if(!checks.includes(itemId)){checks.push(itemId);lsSet('dailyChecks_'+dateStr,ch
 renderWeeklyOverview();
 renderNotesCard();
 renderTimeline();
+renderPillBanners();
+}
+/* V32 FIX 2: undo a checked-off auto-reminder/pill/daily check for any date */
+function unmarkAutoItemDone(itemId,dateStr){
+if(itemId.startsWith('pills_')){
+try{localStorage.removeItem('pillTaken_'+itemId+'_'+dateStr);}catch(e){}
+if(dateStr===today)pillDismissedSession.delete(itemId);
+}else if(itemId.startsWith('auto_')){
+const dismissed=getDismissedAutoReminders(dateStr);
+const idx=dismissed.indexOf(itemId);
+if(idx>=0){dismissed.splice(idx,1);lsSet('autoDismissed_'+dateStr,dismissed);}
+/* Note: we deliberately do NOT restore the previous showerCount when unchecking the towel swap.
+The counter has already been reset; user can log a shower manually if needed. */
+}else{
+const checks=lsGet('dailyChecks_'+dateStr,[]);
+const idx=checks.indexOf(itemId);
+if(idx>=0){checks.splice(idx,1);lsSet('dailyChecks_'+dateStr,checks);}
+}
+renderWeeklyOverview();
+renderNotesCard();
+renderTimeline();
+renderPillBanners();
+}
+function toggleAutoItemDone(itemId,dateStr){
+if(isAutoItemDone(itemId,dateStr))unmarkAutoItemDone(itemId,dateStr);
+else markAutoItemDone(itemId,dateStr);
 }
 function getItemStatus(itemId,dateStr,todayStr){
 const done=isAutoItemDone(itemId,dateStr);
@@ -3760,15 +3795,15 @@ if(dd.autoItems.length>0){
 h+='<div class="wo-section-label">Auto-reminders</div>';
 dd.autoItems.forEach(item=>{
 let cls='wo-item';
-const canTap=isTodayGroup&&!isLastWeek&&item.status!=='done';
+/* V32 FIX 2: every row is now toggleable (today, past, last week, upcoming) */
 if(item.status==='done')cls+=' done';
 else if(item.status==='missed')cls+=' missed';
 else if(item.status==='upcoming')cls+=' upcoming';
 else cls+=' today-pending';
-if(canTap)cls+=' tappable';
+cls+=' tappable';
 const checkCls=item.status==='done'?'done-check':item.status==='missed'?'missed-check':'pending-check';
 const checkIcon=item.status==='done'?'\u2713':item.status==='missed'?'\u2717':'\u25cb';
-h+='<div class="'+cls+'"'+(canTap?' onclick="markAutoItemDone(\''+item.id+'\',\''+dd.dateStr+'\')"':'')+' >';
+h+='<div class="'+cls+'" onclick="toggleAutoItemDone(\''+item.id+'\',\''+dd.dateStr+'\')">';
 h+='<span class="wo-item-check '+checkCls+'">'+checkIcon+'</span>';
 h+='<span class="wo-item-text">'+escNoteHtml(item.text)+'</span>';
 h+='</div>';
@@ -3780,15 +3815,15 @@ h+='<div class="wo-section-label">Custom notes</div>';
 dd.noteItems.forEach(item=>{
 let cls='wo-item';
 const cat=NOTE_CATS.find(c=>c.id===item.category)||NOTE_CATS[4];
-const canTap=isTodayGroup&&!isLastWeek&&!item.done;
+/* V32 FIX 2: every note row toggleable; pass dateStr so we hit the correct day's localStorage key */
 if(item.status==='done'||item.done)cls+=' done';
 else if(item.status==='missed')cls+=' missed';
 else if(item.status==='upcoming')cls+=' upcoming';
 else cls+=' today-pending';
-if(canTap)cls+=' tappable';
+cls+=' tappable';
 const checkCls=(item.done||item.status==='done')?'done-check':item.status==='missed'?'missed-check':'pending-check';
 const checkIcon=(item.done||item.status==='done')?'\u2713':item.status==='missed'?'\u2717':'\u25cb';
-h+='<div class="'+cls+'"'+(canTap?' onclick="toggleNoteDone(\''+item.noteId+'\');renderWeeklyOverview()"':'')+' >';
+h+='<div class="'+cls+'" onclick="toggleNoteDone(\''+item.noteId+'\',\''+dd.dateStr+'\')">';
 h+='<span class="wo-item-check '+checkCls+'">'+checkIcon+'</span>';
 h+='<span class="wo-item-text">'+escNoteHtml(item.text)+'</span>';
 h+='<span class="wo-item-tag" style="background:'+cat.hex+'22;color:'+cat.hex+'">'+item.category.charAt(0).toUpperCase()+item.category.slice(1)+'</span>';
