@@ -518,6 +518,34 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .comp-cat-pill.starch{background:rgba(212,168,83,0.15);color:var(--fit)}
 .comp-cat-pill.vegetable{background:rgba(91,190,183,0.15);color:var(--skin)}
 .comp-cat-pill.extras{background:rgba(255,255,255,0.08);color:var(--text-dim)}
+.comp-cat-pill.apero{background:rgba(200,155,74,0.15);color:var(--fit)}
+.comp-cat-pill.sauces{background:rgba(142,207,176,0.15);color:var(--nutr)}
+.sauce-add-toggle{font-size:11px;color:var(--text-muted);cursor:pointer;padding:4px 0;margin-top:4px;transition:color .2s}
+.sauce-add-toggle:active{color:var(--text)}
+.sauce-picker{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;padding:6px 0;border-top:1px solid rgba(255,255,255,0.04)}
+.sauce-chip{background:rgba(255,255,255,0.04);border:1px solid var(--card-border);border-radius:14px;padding:3px 10px;font-size:10px;color:var(--text-dim);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.sauce-chip:active{background:var(--nutr);color:#111;transform:scale(0.95)}
+.sauce-chip.added{border-color:var(--nutr);color:var(--nutr)}
+.sauce-entry{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text-dim);margin-top:3px}
+.sauce-entry-btns{display:flex;gap:2px}
+.sauce-entry-btn{width:16px;height:16px;border-radius:4px;border:1px solid var(--card-border);background:var(--bg-card);color:var(--text-dim);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+.sauce-entry-btn:active{transform:scale(0.9)}
+.week-nav{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:4px}
+.week-nav-btn{background:var(--bg-card);border:1px solid var(--card-border);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--text-dim);cursor:pointer;font-size:14px;font-family:'DM Sans',sans-serif;transition:all .2s}
+.week-nav-btn:active{background:var(--bg-card-hover);transform:scale(0.95)}
+.week-today-btn{background:var(--skin);border:none;border-radius:8px;padding:4px 14px;color:#111;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;transition:all .2s;display:none}
+.week-today-btn.visible{display:inline-block}
+.week-today-btn:active{transform:scale(0.95);opacity:0.9}
+.snack-subsection-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin:16px 0 8px;width:100%;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04)}
+.bf-snack-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-bottom:8px}
+.bf-snack-card{background:var(--bg-card);border:1px solid var(--card-border);border-radius:var(--radius);padding:10px 12px;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-card)}
+.bf-snack-card:active{transform:scale(0.97)}
+.bf-snack-card.logged{border-color:var(--skin);box-shadow:0 0 8px rgba(91,190,183,.12)}
+.bf-snack-init{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--nutr);margin-bottom:3px}
+.bf-snack-name{font-size:11px;font-weight:500}
+.bf-snack-macros{font-size:10px;color:var(--text-dim);margin-top:2px;font-variant-numeric:tabular-nums}
+.bf-snack-detail{background:var(--bg-card);border:1px solid var(--card-border);border-radius:var(--radius);width:100%;padding:0 14px;max-height:0;overflow:hidden;transition:max-height .25s ease-out}
+.bf-snack-detail.open{max-height:2000px;padding:12px 14px;margin-bottom:8px}
 .comp-cat-arrow{color:var(--text-muted);font-size:12px;transition:transform .2s;margin-left:auto}
 .comp-category.collapsed .comp-cat-arrow{transform:rotate(-90deg)}
 .comp-cat-items{display:flex;flex-direction:column;gap:4px;padding:4px 0}
@@ -831,13 +859,14 @@ if(!tkd&&d===1){return[
 {t:'07:00',n:'Wake Up',c:'rest',detail:'Open curtains for sunlight exposure. Get moving.'},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'07:15',n:'Breakfast + Morning Pills',c:'food',detail:'Oats + skyr + banana + almonds + honey. ~650 kcal, ~35g protein. Take morning supplements with breakfast.'},
+{t:'07:15',n:'Breakfast + Morning pills',c:'food',detail:'Oats + skyr + banana + almonds + honey. ~650 kcal, ~35g protein. Take morning pills with breakfast.'},
 {t:'07:40',n:'Get Ready + Transit',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:'Stay hydrated \u2014 aim for 500ml by 10:00.'},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Chicken/jambon + whole-grain pasta + veg + olive oil. ~700 kcal, ~40g protein. Coffee after eating. Optional: coffee nap.'},
 {t:'13:30',n:'Work',c:'',detail:'Afternoon block. Drink 500ml water.'},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
+{t:'16:00',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). During snack break.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Home \u2014 Change for Workout',c:'',detail:'No bus ride needed. Quick snack: banana or almonds + water 500 mL.'},
 {t:'18:10',n:'Replacement Session \u2014 FULL (75 min)',c:'sport',detail:'Warm-up \u2192 Plyometrics \u2192 HIIT Circuit \u2192 Rotational Core \u2192 Lower Body \u2192 Flexibility. See Training tab for full workout.'},
@@ -846,7 +875,7 @@ if(!tkd&&d===1){return[
 {t:'20:15',n:'Optional: Pre-bed Skyr + Almonds',c:'food',detail:'200g skyr + almonds for pre-sleep protein.'},
 {t:'20:30',n:'Free Time',c:'rest',detail:'Drums, reading, studying, socializing, screen time, meal prep. This block does not exist on TKD Mondays.'},
 {t:'21:30',n:'Wind-Down + Posture',c:'care',detail:'Wall angels (2x10) + scap pulls (2x10) + chest stretch (30s/side). No screens.'},
-{t:'21:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:45',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'21:50',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'9h sleep \u2014 1 hour more than TKD nights.'}
 ];}
@@ -854,12 +883,13 @@ if(!tkd&&d===3){return[
 {t:'07:15',n:'Wake Up',c:'rest',detail:''},
 {t:'07:20',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'07:27',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'07:30',n:'Breakfast + Morning Pills',c:'food',detail:'Oats + skyr + fruit + nuts. ~650 kcal, ~35g protein. Take morning supplements with breakfast.'},
+{t:'07:30',n:'Breakfast + Morning pills',c:'food',detail:'Oats + skyr + fruit + nuts. ~650 kcal, ~35g protein. Take morning pills with breakfast.'},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Lentils + rice + eggs + veg OR tuna pasta salad. ~700 kcal, ~40g protein.'},
 {t:'13:30',n:'Work (shortened)',c:'',detail:'Work ends at 15:40 today.'},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
 {t:'15:40',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
+{t:'15:40',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). With snack break.'},
 {t:'16:00',n:'Transition + Snack',c:'food',detail:'Banana + tartine + skyr. Water 500ml. Deodorant refresh.'},
 {t:'17:00',n:'Music Practice (drums, 30 min)',c:'',detail:''},
 {t:'17:30',n:'Drive Home',c:'',detail:'On TKD days, Mat drives to the gym. Today, straight home.'},
@@ -870,7 +900,7 @@ if(!tkd&&d===3){return[
 {t:'20:20',n:'Optional: Pre-bed Snack',c:'food',detail:'Skyr or casein shake.'},
 {t:'20:40',n:'Free Time',c:'rest',detail:'Bonus free hour \u2014 does not exist on TKD Wednesdays.'},
 {t:'21:30',n:'Wind-Down + Posture',c:'care',detail:'Posture exercises (5 min). No screens.'},
-{t:'21:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:45',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'21:50',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'8h45 sleep.'}
 ];}
@@ -878,13 +908,14 @@ if(!tkd&&d===5){return[
 {t:'07:00',n:'Wake Up',c:'rest',detail:''},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'07:15',n:'Breakfast + Morning Pills',c:'food',detail:'Oats + skyr + fruit + almonds. ~650 kcal, ~35g protein. Take morning supplements with breakfast.'},
+{t:'07:15',n:'Breakfast + Morning pills',c:'food',detail:'Oats + skyr + fruit + almonds. ~650 kcal, ~35g protein. Take morning pills with breakfast.'},
 {t:'07:45',n:'Transit to Work',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch (extra carbs!) + Coffee',c:'food',detail:'Chicken + pasta + olive oil + veg. ~800 kcal, ~45g protein. Replacement session is also demanding \u2014 fuel up.'},
 {t:'13:30',n:'Work',c:'',detail:''},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
+{t:'16:00',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). During snack break.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Home \u2014 Change for Workout',c:'',detail:'Quick snack: banana + water 500 mL.'},
 {t:'18:10',n:'Replacement Session \u2014 FULL (75 min)',c:'sport',detail:'Warm-up \u2192 Plyometrics \u2192 HIIT Circuit \u2192 Rotational Core \u2192 Lower Body \u2192 Flexibility. See Training tab for full workout.'},
@@ -893,7 +924,7 @@ if(!tkd&&d===5){return[
 {t:'20:15',n:'Optional: Pre-bed Skyr + Almonds',c:'food',detail:''},
 {t:'20:30',n:'Free Time',c:'rest',detail:'Friday evening \u2014 drums, reading, relaxing. No time pressure.'},
 {t:'21:30',n:'Wind-Down + Posture',c:'care',detail:'Wall angels + chest stretch (5 min). No screens.'},
-{t:'21:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:45',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'21:50',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'9h sleep \u2014 1 hour more than TKD Fridays.'}
 ];}
@@ -902,13 +933,14 @@ const schedules={
 {t:'07:00',n:'Wake Up',c:'rest',detail:'Open curtains for sunlight exposure. Get moving.'},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'07:16',n:'Breakfast + Morning Pills',c:'food',detail:'Oats + skyr + banana + almonds + honey. ~650 kcal, ~35g protein. Take morning supplements with breakfast.'},
+{t:'07:16',n:'Breakfast + Morning pills',c:'food',detail:'Oats + skyr + banana + almonds + honey. ~650 kcal, ~35g protein. Take morning pills with breakfast.'},
 {t:'07:40',n:'Get Ready + Transit',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:'Stay hydrated \u2014 aim for 500ml by 10:00.'},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Chicken/jambon + whole-grain pasta + veg + olive oil. ~700 kcal, ~40g protein. Coffee after eating. Optional: coffee nap (drink fast, 15-20 min nap).'},
 {t:'13:30',n:'Work',c:'',detail:'Afternoon block. Drink 500ml water.'},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
+{t:'16:00',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). During snack break.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Transition + Pre-TKD Snack',c:'food',detail:'Banana + tartine with peanut butter + skyr. Water 500ml. Change for TKD.'},
 {t:'18:30',n:'Bus to TKD',c:'',detail:'Light stretch on arrival.'},
@@ -916,7 +948,7 @@ const schedules={
 {t:'21:30',n:'Car Home',c:'',detail:''},
 {t:'21:55',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'22:13',n:'Post-TKD Dinner',c:'food',detail:'Pre-prepped: salmon/chicken + rice + veg + olive oil. ~800 kcal, ~45g protein. Optional: 200g skyr + almonds after.'},
-{t:'22:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'22:45',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'22:50',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:55',n:'Wind-Down + Posture',c:'care',detail:'Wall angels (2x10) + scap pulls (2x10) + thoracic extension (2x10) + chin tucks (2x10) + chest stretch (30s/side). No screens.'},
 {t:'23:00',n:'Sleep Target',c:'rest',detail:'8h sleep. Dark, cool room.'}
@@ -925,20 +957,21 @@ const schedules={
 {t:'07:00',n:'Wake Up',c:'rest',detail:''},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'07:15',n:'Breakfast + Morning Pills',c:'food',detail:'Oats + yogurt + fruit + nuts + eggs. ~700 kcal, ~40g protein. Take morning supplements with breakfast.'},
+{t:'07:15',n:'Breakfast + Morning pills',c:'food',detail:'Oats + yogurt + fruit + nuts + eggs. ~700 kcal, ~40g protein. Take morning pills with breakfast.'},
 {t:'07:45',n:'Transit to Work',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Chicken + rice + veg + olive oil. ~750 kcal, ~45g protein. Coffee + optional coffee nap.'},
 {t:'13:30',n:'Work',c:'',detail:'Calisthenics option: split over lunch or after work.'},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
+{t:'16:00',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). During snack break.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Calisthenics (if not done at lunch)',c:'sport',detail:'Session A: Muscle-Up Skill + Upper Push + Arms. 40 min. See Training tab for full workout.'},
 {t:'19:00',n:'English Teaching',c:'',detail:'Paid gig. Quick refresh: wipe, deodorant, change shirt if sweaty.'},
 {t:'20:30',n:'Transit Home',c:'',detail:''},
 {t:'21:00',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'21:45',n:'Dinner',c:'food',detail:'Eggs + whole-grain pasta + veg OR turkey + potatoes + veg. ~750 kcal, ~40g protein.'},
-{t:'22:10',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'22:10',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'22:15',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:20',n:'Wind-Down + Posture (5 min)',c:'care',detail:'Posture exercises. No screens.'},
 {t:'22:30',n:'Sleep Target',c:'rest',detail:'7.5h \u2014 tight. Push wake to 07:30 if possible.'}
@@ -947,12 +980,13 @@ const schedules={
 {t:'07:15',n:'Wake Up',c:'rest',detail:'Slightly later \u2014 earlier bedtime compensates.'},
 {t:'07:20',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'07:27',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'07:30',n:'Breakfast + Morning Pills',c:'food',detail:'Oats + skyr + fruit + nuts. ~650 kcal, ~35g protein. Take morning supplements with breakfast.'},
+{t:'07:30',n:'Breakfast + Morning pills',c:'food',detail:'Oats + skyr + fruit + nuts. ~650 kcal, ~35g protein. Take morning pills with breakfast.'},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch + Coffee',c:'food',detail:'Lentils + rice + eggs + veg OR tuna pasta salad. ~700 kcal, ~40g protein.'},
 {t:'13:30',n:'Work (shortened)',c:'',detail:'Work ends at 15:40 today.'},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
 {t:'15:40',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
+{t:'15:40',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). With snack break.'},
 {t:'16:00',n:'Transition + Pre-TKD Snack',c:'food',detail:'Banana + tartine + skyr. Water 500ml. Deodorant refresh.'},
 {t:'17:00',n:'Music Practice (drums, 30 min)',c:'',detail:''},
 {t:'17:30',n:'Car to TKD',c:'',detail:'Change into dobok in the car.'},
@@ -961,7 +995,7 @@ const schedules={
 {t:'20:15',n:'Car Home',c:'',detail:''},
 {t:'20:35',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'20:55',n:'Dinner',c:'food',detail:'Full post-training meal. Protein + carbs + veg. ~800 kcal, ~45g protein.'},
-{t:'21:30',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:30',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'21:40',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'21:45',n:'Wind-Down',c:'care',detail:'Optional: pre-bed skyr. Posture exercises.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'8h45 sleep \u2014 good catch-up from Monday.'}
@@ -970,19 +1004,20 @@ const schedules={
 {t:'07:15',n:'Wake Up',c:'rest',detail:''},
 {t:'07:20',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'07:27',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'07:30',n:'Big Breakfast + Morning Pills',c:'food',detail:"Oats + skyr + eggs + fruit + nuts + PB tartine. ~800 kcal, ~45g protein. Extra fuel for tonight's big session. Take morning supplements with breakfast."},
+{t:'07:30',n:'Big Breakfast + Morning pills',c:'food',detail:"Oats + skyr + eggs + fruit + nuts + PB tartine. ~800 kcal, ~45g protein. Extra fuel for tonight's big session. Take morning pills with breakfast."},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Big Lunch + Coffee',c:'food',detail:'Chicken + rice + veg + olive oil + yogurt. ~900 kcal, ~50g protein (extra \u2014 training ahead).'},
 {t:'13:30',n:'Work',c:'',detail:''},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
+{t:'16:00',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). During snack break.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Pre-Workout Banana + Water',c:'food',detail:''},
 {t:'18:30',n:'Calisthenics \u2014 Long Session (2h)',c:'sport',detail:'Session B: Muscle-Up Skill + Pull Volume + Arms. Handstand, pull-ups, planche work. See Training tab.'},
 {t:'20:30',n:'Cool Down + Hydrate',c:'',detail:'Electrolytes.'},
 {t:'20:45',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'21:15',n:'Dinner',c:'food',detail:'Eggs + pasta + veg OR fish + potatoes + veg. ~750 kcal, ~40g protein.'},
-{t:'21:40',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:40',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'21:45',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'21:50',n:'Wind-Down + Posture',c:'care',detail:'Optional pre-bed skyr. Posture exercises.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'8h45 \u2014 good recovery.'}
@@ -991,13 +1026,14 @@ const schedules={
 {t:'07:00',n:'Wake Up',c:'rest',detail:''},
 {t:'07:05',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'07:12',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'07:15',n:'Breakfast + Morning Pills',c:'food',detail:'Oats + skyr + fruit + almonds. ~650 kcal, ~35g protein. Take morning supplements with breakfast.'},
+{t:'07:15',n:'Breakfast + Morning pills',c:'food',detail:'Oats + skyr + fruit + almonds. ~650 kcal, ~35g protein. Take morning pills with breakfast.'},
 {t:'07:45',n:'Transit to Work',c:'',detail:''},
 {t:'08:00',n:'Work',c:'',detail:''},
 {t:'12:00',n:'Lunch (extra carbs!) + Coffee',c:'food',detail:'Chicken + pasta + olive oil + veg. ~800 kcal, ~45g protein. Friday TKD is the hardest \u2014 fuel up.'},
 {t:'13:30',n:'Work',c:'',detail:''},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
 {t:'16:00',n:'Snack Break',c:'food',detail:'Quick snack from your snack options. Good time for fruit, nuts, or raisins.'},
+{t:'16:00',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). During snack break.'},
 {t:'16:20',n:'Work',c:'',detail:'Final afternoon push.'},
 {t:'18:00',n:'Transition + Pre-TKD Snack',c:'food',detail:'Banana + tartine + skyr. Water 500ml.'},
 {t:'18:30',n:'Bus to TKD',c:'',detail:''},
@@ -1005,7 +1041,7 @@ const schedules={
 {t:'21:30',n:'Car Home',c:'',detail:''},
 {t:'21:55',n:'Shower + PM Skincare',c:'care',detail:'SKIN_PM',expand:true},
 {t:'22:13',n:'Dinner',c:'food',detail:'Pre-prepped protein + carbs + veg. ~800 kcal, ~45g protein. Eat sitting down.'},
-{t:'22:45',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'22:45',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'22:48',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:55',n:'Quick Wind-Down',c:'care',detail:'Skip posture exercises \u2014 too tired. Saturday catches up.'},
 {t:'23:00',n:'Sleep Target',c:'rest',detail:'8h floor. Saturday sleep-in compensates.'}
@@ -1014,17 +1050,18 @@ const schedules={
 {t:'08:00',n:'Wake Up \u2014 Sleep In!',c:'rest',detail:'Target 9+ hours of sleep.'},
 {t:'08:30',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'08:37',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'08:40',n:'Breakfast + Morning Pills',c:'food',detail:'Oats + eggs + skyr + fruit. ~750 kcal, ~40g protein. Take morning supplements with breakfast.'},
+{t:'08:40',n:'Breakfast + Morning pills',c:'food',detail:'Oats + eggs + skyr + fruit. ~750 kcal, ~40g protein. Take morning pills with breakfast.'},
 {t:'09:20',n:'Free Time',c:'rest',detail:'Reading, music, errands.'},
 {t:'10:30',n:'Calisthenics Session (~60 min)',c:'sport',detail:'Session C: HSPU + Planche + Skill Volume + Core. See Training tab for full workout.'},
 {t:'12:00',n:'Cool Down + Hydrate',c:'',detail:''},
 {t:'12:30',n:'Shower',c:'care',detail:'SKIN_SHOWER',expand:true},
 {t:'13:00',n:'Lunch',c:'food',detail:'Chicken + rice + veg + olive oil. ~800 kcal, ~45g protein. Coffee.'},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
 {t:'14:05',n:'Free Afternoon',c:'rest',detail:'Social, errands, drum practice, rest.'},
+{t:'16:00',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). During afternoon.'},
 {t:'17:00',n:'Snack',c:'food',detail:'Protein yogurt + fruit.'},
 {t:'19:30',n:'Dinner',c:'food',detail:'Fish or eggs + pasta + veg. ~750 kcal, ~40g protein.'},
-{t:'21:50',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:50',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'22:00',n:'PM Skincare + Posture',c:'care',detail:'SKIN_PM_ONLY',expand:true},
 {t:'22:35',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:45',n:'Sleep Target',c:'rest',detail:'9h15+ recovery sleep.'}
@@ -1033,17 +1070,18 @@ const schedules={
 {t:'08:00',n:'Wake Up \u2014 Sleep In!',c:'rest',detail:''},
 {t:'08:30',n:sk,c:skCat,detail:'SKIN_AM',expand:true},
 {t:'08:37',n:'Brush Teeth (AM)',c:'care',detail:'2 min with fluoride toothpaste. Before breakfast — protects enamel from food acid.'},
-{t:'08:40',n:'Breakfast + Morning Pills',c:'food',detail:'Eggs + tartines + fruit. ~650 kcal, ~35g protein. Take morning supplements with breakfast.'},
+{t:'08:40',n:'Breakfast + Morning pills',c:'food',detail:'Eggs + tartines + fruit. ~650 kcal, ~35g protein. Take morning pills with breakfast.'},
 {t:'09:20',n:'Laundry',c:'care',detail:'Change pillowcase (#1 of week). Wash pillowcases + face towels + gym gear at 60\u00b0C. Sheets + bath towels at 40\u00b0C. Start early so sheets dry by evening.'},
 {t:'10:00',n:'Free Morning',c:'rest',detail:'Social, reading, music, family. Light walk or cycling fine.'},
 {t:'12:00',n:'Lunch',c:'food',detail:'Sunday family meal. ~700 kcal, ~40g protein.'},
 {t:'13:00',n:'Rest / Drum Practice',c:'rest',detail:'Great drum slot \u2014 no training to worry about.'},
-{t:'14:00',n:'Afternoon Pills',c:'care',detail:'Take afternoon supplements with water.'},
+{t:'14:00',n:'L-Th\u00e9anine',c:'care',detail:'Take L-Th\u00e9anine (1 capsule) with water. After lunch.'},
+{t:'16:00',n:'Fer',c:'care',detail:'Take Fer (iron, 1 capsule). During afternoon.'},
 {t:'17:00',n:'Snack',c:'food',detail:'Yogurt + fruit.'},
 {t:'17:30',n:'Meal Prep for the Week',c:'food',detail:'Batch-cook chicken, rice, veg. Portion into Tupperware for Mon/Wed/Fri post-TKD dinners.'},
 {t:'20:00',n:'Dinner',c:'food',detail:'~700 kcal, ~35g protein.'},
 {t:'20:45',n:'Wind-Down + Posture',c:'care',detail:'Posture exercises 5 min.'},
-{t:'21:00',n:'Evening Pills',c:'care',detail:'Take evening supplements.'},
+{t:'21:00',n:'Evening pills',c:'care',detail:'Take evening pills with dinner.'},
 {t:'21:10',n:'PM Skincare',c:'care',detail:'SKIN_PM_ONLY',expand:true},
 {t:'21:20',n:'Brush Teeth (PM)',c:'care',detail:'2 min with fluoride. Floss or interdental brush first.'},
 {t:'22:00',n:'Sleep Target',c:'rest',detail:'10h full recovery. Earlier bedtime to reset for Monday.'}
@@ -1098,6 +1136,7 @@ const MEALS=[
 {name:"Riz cantonais",kcal100:157,p100:5.5,c100:22.0,f100:5.0,gS:250,gM:350,gL:450,gXL:550},
 {name:"P\u00e2tes \u00e0 la Carbonara (+ jaune d'oeuf)",kcal100:170,p100:7.0,c100:17.0,f100:8.5,gS:250,gM:350,gL:450,gXL:550},
 {name:"Chicken Wraps (x2)",kcal100:180,p100:12.2,c100:10.4,f100:9.9,gS:400,gM:800,gL:850,gXL:900},
+{name:"1 Wrap XL (\u00e9pais)",kcal100:181,p100:11.4,c100:9.8,f100:11.1,gS:527,gM:527,gL:527,gXL:527},
 {name:"P\u00e2tes au Saumon (cr\u00e8me & Boursin)",kcal100:216,p100:7.3,c100:18.2,f100:12.2,gS:150,gM:200,gL:250,gXL:350},
 {name:"Burger Maison",kcal100:200,p100:12.7,c100:9.6,f100:11.5,gS:355,gM:430,gL:710,gXL:860},
 {name:"Gratin de Potimarron au Comt\u00e9",kcal100:139,p100:1.8,c100:11.2,f100:8.2,gS:100,gM:150,gL:200,gXL:300},
@@ -1122,14 +1161,37 @@ const COMPONENTS=[
 {id:'legumes',name:'L\u00e9gumes vari\u00e9s',cat:'vegetable',kcal100:45,p100:2,c100:6,f100:1,gS:80,gM:120,gL:180,gXL:250},
 {id:'salade_verte',name:'Salade verte',cat:'vegetable',kcal100:20,p100:1.5,c100:2,f100:0.3,gS:50,gM:80,gL:120,gXL:150},
 {id:'soupe',name:'Soupe (l\u00e9gumes)',cat:'vegetable',kcal100:35,p100:1,c100:5,f100:1,gS:200,gM:300,gL:400,gXL:500},
-{id:'quiche',name:'Quiche lorraine',cat:'extras',kcal100:250,p100:10,c100:20,f100:14,gS:80,gM:120,gL:160,gXL:200}
+{id:'quiche',name:'Quiche lorraine',cat:'extras',kcal100:250,p100:10,c100:20,f100:14,gS:80,gM:120,gL:160,gXL:200},
+{id:'saucisson',name:'Saucisson sec (Lidl)',cat:'apero',kcal100:420,p100:27,c100:1.4,f100:34,gS:25,gM:40,gL:60,gXL:75,
+portionLabels:{S:'5 tranches (25g)',M:'8 tranches (40g)',L:'12 tranches (60g)',XL:'15 tranches (75g)'}},
+{id:'caprices',name:'Caprices des Dieux',cat:'apero',kcal100:333,p100:15,c100:0.8,f100:30,gS:19,gM:38,gL:57,gXL:76,
+portionLabels:{S:'1 tranche (19g)',M:'2 tranches (38g)',L:'3 tranches (57g)',XL:'4 tranches (76g)'}},
+{id:'cornichons',name:'Cornichons',cat:'apero',kcal100:15,p100:1.2,c100:1,f100:0.5,gS:25,gM:40,gL:50,gXL:75,
+portionLabels:{S:'5 pi\u00e8ces (25g)',M:'8 pi\u00e8ces (40g)',L:'10 pi\u00e8ces (50g)',XL:'15 pi\u00e8ces (75g)'}},
+{id:'tuc',name:'TUC Original',cat:'apero',kcal100:478,p100:8.3,c100:67,f100:19,gS:18,gM:25,gL:36,gXL:54,
+portionLabels:{S:'5 biscuits (18g)',M:'7 biscuits (25g)',L:'10 biscuits (36g)',XL:'15 biscuits (54g)'}},
+{id:'pain_noix',name:'Pain complet aux noix',cat:'apero',kcal100:300,p100:9,c100:42,f100:11,gS:30,gM:60,gL:90,gXL:150,
+portionLabels:{S:'1 tranche (30g)',M:'2 tranches (60g)',L:'3 tranches (90g)',XL:'5 tranches (150g)'}},
+{id:'ketchup',name:'Ketchup',cat:'sauces',kcal100:112,p100:1.2,c100:26,f100:0.1,gS:15,gM:30,gL:45,gXL:45,sauce:true,
+portionLabels:{S:'1 c.s. (15g)',M:'2 c.s. (30g)',L:'3 c.s. (45g)'}},
+{id:'mayonnaise',name:'Mayonnaise',cat:'sauces',kcal100:680,p100:1,c100:1,f100:75,gS:15,gM:30,gL:45,gXL:45,sauce:true,
+portionLabels:{S:'1 c.s. (15g)',M:'2 c.s. (30g)',L:'3 c.s. (45g)'}},
+{id:'soja',name:'Sauce soja (Lidl)',cat:'sauces',kcal100:65,p100:10.3,c100:5.2,f100:0.2,gS:15,gM:30,gL:45,gXL:45,sauce:true,
+portionLabels:{S:'1 c.s. (15ml)',M:'2 c.s. (30ml)',L:'3 c.s. (45ml)'}},
+{id:'creme_fraiche',name:'Cr\u00e8me fra\u00eeche (30%)',cat:'sauces',kcal100:293,p100:2.4,c100:3.4,f100:30,gS:15,gM:30,gL:45,gXL:45,sauce:true,
+portionLabels:{S:'1 c.s. (15ml)',M:'2 c.s. (30ml)',L:'3 c.s. (45ml)'}},
+{id:'sauce_tomate',name:'Sauce tomate (coulis)',cat:'sauces',kcal100:28,p100:1.2,c100:4.5,f100:0.2,gS:30,gM:60,gL:90,gXL:90,sauce:true,
+portionLabels:{S:'2 c.s. (30g)',M:'4 c.s. (60g)',L:'6 c.s. (90g)'}}
 ];
 const COMP_CATS=[
 {id:'protein',label:'Prot\u00e9ine',cls:'protein'},
 {id:'starch',label:'F\u00e9culent',cls:'starch'},
 {id:'vegetable',label:'L\u00e9gumes',cls:'vegetable'},
-{id:'extras',label:'Extras',cls:'extras'}
+{id:'extras',label:'Extras',cls:'extras'},
+{id:'apero',label:'Ap\u00e9ro',cls:'apero'},
+{id:'sauces',label:'Sauces',cls:'sauces'}
 ];
+const SAUCE_IDS=['ketchup','mayonnaise','soja','creme_fraiche','sauce_tomate'];
 let composerCollapsed={};
 const SNACKS=[
 {name:'Banana + rice cakes + PB',kcal:280,p:8,c:38,f:10},{name:'Skyr 200g + honey + berries',kcal:250,p:22,c:30,f:2},{name:'Protein bar (HiPro)',kcal:180,p:18,c:15,f:6},{name:'Dates (4) + almonds',kcal:220,p:5,c:35,f:8},{name:'Tuna on bread',kcal:350,p:28,c:30,f:12},{name:'Cottage cheese + walnuts',kcal:320,p:25,c:8,f:20},{name:'2 boiled eggs + oatcake',kcal:250,p:15,c:18,f:13},{name:'Pumpkin seeds + apple',kcal:250,p:9,c:25,f:14},{name:'Pre-bed skyr + almonds',kcal:250,p:25,c:12,f:10},
@@ -2170,7 +2232,9 @@ exTimer:null,exTimerRemaining:0,exTimerTarget:0,exTimerBtnId:null,
 hiitTimer:null,hiitState:null,
 mealTab:'plats',
 currentPlate:lsGet(dailyKey('plate27'),[]),
-coffeeMilkCl:lsGet(dailyKey('coffeeMilkCl'),15)
+coffeeMilkCl:lsGet(dailyKey('coffeeMilkCl'),15),
+saucePanelOpen:null,
+weekOffset:0
 };
 function save(){
 lsSet(dailyKey('shave'),state.shave);lsSet(dailyKey('tkd'),state.tkdToday);
@@ -2407,6 +2471,8 @@ function getMealGrams(meal,portion){
 if(portion==='small')return meal.gS;if(portion==='large')return meal.gL;if(portion==='xl')return meal.gXL;return meal.gM;
 }
 function getSnackMacros(entry){
+/* V29: breakfast-as-snack */
+if(entry.type==='breakfast'&&entry.macros)return entry.macros;
 const idx=entry.idx!==undefined?entry.idx:entry;
 const s=SNACKS[idx];
 /* V24: use per-entry customization for hot coco, not global state */
@@ -2428,7 +2494,8 @@ c+=Math.round(am.c*r[0]/100+bm.c*r[1]/100);f+=Math.round(am.f*r[0]/100+bm.f*r[1]
 }else if(state.breakfast!==null){
 const bfm=getBreakfastCustomMacros(state.breakfast);kcal+=bfm.kcal;p+=bfm.p;c+=bfm.c;f+=bfm.f;
 }
-state.loggedMeals.forEach(m=>{if(m.type==='composed'){kcal+=m.totalMacros.kcal;p+=m.totalMacros.p;c+=m.totalMacros.c;f+=m.totalMacros.f;}else{const meal=MEALS[m.idx];if(!meal)return;const g=getMealGrams(meal,m.portion);kcal+=Math.round(meal.kcal100*g/100);p+=Math.round(meal.p100*g/100);c+=Math.round(meal.c100*g/100);f+=Math.round(meal.f100*g/100);}});
+state.loggedMeals.forEach(m=>{if(m.type==='composed'){kcal+=m.totalMacros.kcal;p+=m.totalMacros.p;c+=m.totalMacros.c;f+=m.totalMacros.f;}else{const meal=MEALS[m.idx];if(!meal)return;const g=getMealGrams(meal,m.portion);kcal+=Math.round(meal.kcal100*g/100);p+=Math.round(meal.p100*g/100);c+=Math.round(meal.c100*g/100);f+=Math.round(meal.f100*g/100);}
+const sm29=getMealSauceMacros(m);kcal+=sm29.kcal;p+=sm29.p;c+=sm29.c;f+=sm29.f;});
 state.loggedSnacks.forEach(entry=>{const sm=getSnackMacros(entry);kcal+=sm.kcal;p+=sm.p;c+=sm.c;f+=sm.f});
 return{kcal,p,c,f};
 }
@@ -2538,12 +2605,14 @@ return`<div class="meal-entry"><div class="meal-info" onclick="addMeal(${i})">
 </div></div>`;}
 const grps=[];entries.forEach(e=>{const g=grps.find(x=>x.portion===e.portion);if(g){g.entries.push(e);g.count++;}else grps.push({portion:e.portion,entries:[e],count:1});});
 return grps.map(grp=>{const g=getMealGrams(ml,grp.portion);const ps=['small','normal','large','xl'];const pl=['S','M','L','XL'];
+const lastEntry=grp.entries[grp.count-1];
 return`<div class="meal-entry selected"><div class="meal-info" onclick="addMeal(${i})">
 <div class="meal-name"><span class="meal-dot"></span>${ml.name} <span class="meal-grams">\u00b7 ${g}g</span>${grp.count>1?'<span class="meal-count">\u00d7'+grp.count+'</span>':''}</div>
 <div class="meal-kcal">${Math.round(ml.kcal100*g/100)} kcal \u00b7 ${Math.round(ml.p100*g/100)}g P \u00b7 ${Math.round(ml.c100*g/100)}g C \u00b7 ${Math.round(ml.f100*g/100)}g F${grp.count>1?' (each)':''}</div>
+${renderMealSauces(lastEntry)}
 </div><div class="meal-actions"><div class="portion-btns">
 ${ps.map((sz,si)=>'<button class="portion-btn'+(grp.portion===sz?' active':'')+'" onclick="setMealGroupPortion('+i+',\''+grp.portion+'\',\''+sz+'\')">'+pl[si]+'</button>').join('')}
-</div><button class="meal-remove" onclick="removeMealEntry('${grp.entries[grp.count-1].id}')" title="Remove one">\u2212</button>
+</div><button class="meal-remove" onclick="removeMealEntry('${lastEntry.id}')" title="Remove one">\u2212</button>
 </div></div>`;}).join('');}).join('');
 }else{
 document.getElementById('mealTabContent').innerHTML=renderComposer();
@@ -2578,7 +2647,35 @@ ${cnt>0?'<div class="snack-actions"><button onclick="event.stopPropagation();rem
 </div>`;}
 /* Simple snacks */
 return`<div class="snack-chip${sel}" onclick="addSnack(${i})">${s.name} (${s.kcal})${cnt>1?' <span class="snack-count">\u00d7'+cnt+'</span>':''}${cnt>0?'<button class="meal-remove" style="margin-left:6px;display:inline-flex;width:18px;height:18px;font-size:12px" onclick="event.stopPropagation();removeSnackEntry(\''+snackEntries[cnt-1].id+'\')">\u2212</button>':''}</div>`;
-}).join('');
+}).join('')+renderBfSnackSection();
+}
+/* V29: Breakfast-as-snack rendering */
+function renderBfSnackSection(){
+const bfSnackEntries=state.loggedSnacks.filter(e=>e.type==='breakfast');
+let h='<div class="snack-subsection-title">Petit-dej en snack</div>';
+h+='<div class="bf-snack-grid">';
+BREAKFASTS.forEach((bf,i)=>{
+const logged=bfSnackEntries.filter(e=>e.bfIdx===i);
+const bm=getBreakfastCustomMacros(i);
+h+=`<div class="bf-snack-card${logged.length>0?' logged':''}" onclick="addBfSnack(${i})">
+<div class="bf-snack-init">${bf.id}</div>
+<div class="bf-snack-name">${bf.name}${logged.length>0?'<span class="snack-count" style="margin-left:4px">\u00d7'+logged.length+'</span>':''}</div>
+<div class="bf-snack-macros">${bm.kcal} kcal \u00b7 ${bm.p}g P</div>
+</div>`;
+});
+h+='</div>';
+/* Show logged breakfast snacks with remove buttons */
+if(bfSnackEntries.length>0){
+bfSnackEntries.forEach(e=>{
+const bf=BREAKFASTS[e.bfIdx];if(!bf)return;
+h+=`<div class="snack-chip yogurt selected" style="width:100%">
+<div class="snack-yname">${bf.id}: ${bf.name} (as snack)</div>
+<div class="snack-ymacros">${e.macros.kcal} kcal \u00b7 ${e.macros.p}g P \u00b7 ${e.macros.c}g C \u00b7 ${e.macros.f}g F</div>
+<div class="snack-actions"><button onclick="event.stopPropagation();removeBfSnack('${e.id}')">\u2212</button></div>
+</div>`;
+});
+}
+return h;
 }
 function pickBreakfast(i){if(state.blendMode)return;state.breakfast=state.breakfast===i?null:i;save();renderMeals();}
 function calcBlendAmt(amt,pct){
@@ -2596,7 +2693,53 @@ function toggleBlend(){state.blendMode=!state.blendMode;if(!state.blendMode)stat
 function pickBlend(i){if(!state.blendMode)return;const idx=state.blendPicks.indexOf(i);if(idx>=0)state.blendPicks.splice(idx,1);else if(state.blendPicks.length<2)state.blendPicks.push(i);else state.blendPicks=[state.blendPicks[1],i];save();renderMeals();}
 function setBlendRatio(a,b){state.blendRatio=[a,b];save();renderMeals();}
 /* V24: Per-instance meal/snack functions — each entry has a unique ID */
-function addMeal(i){state.loggedMeals.push({id:uid(),idx:i,portion:'normal'});save();renderMeals();}
+function addMeal(i){state.loggedMeals.push({id:uid(),idx:i,portion:'normal',sauces:[]});save();renderMeals();}
+/* V29: Sauce functions for Plats tab */
+function addMealSauce(entryId,sauceId){
+const entry=state.loggedMeals.find(m=>m.id===entryId);if(!entry)return;
+if(!entry.sauces)entry.sauces=[];
+const existing=entry.sauces.find(s=>s.id===sauceId);
+if(existing){if(existing.portion==='S')existing.portion='M';else if(existing.portion==='M')existing.portion='L';}
+else{entry.sauces.push({id:sauceId,portion:'S'});}
+save();renderMeals();
+}
+function removeMealSauce(entryId,sauceId){
+const entry=state.loggedMeals.find(m=>m.id===entryId);if(!entry||!entry.sauces)return;
+entry.sauces=entry.sauces.filter(s=>s.id!==sauceId);save();renderMeals();
+}
+function toggleMealSaucePanel(entryId){
+state.saucePanelOpen=state.saucePanelOpen===entryId?null:entryId;renderMeals();
+}
+function getMealSauceMacros(entry){
+let kcal=0,p=0,c=0,f=0;
+if(!entry.sauces)return{kcal,p,c,f};
+entry.sauces.forEach(s=>{const sc=COMPONENTS.find(x=>x.id===s.id);if(!sc)return;const g=getCompGrams(sc,s.portion);
+kcal+=Math.round(sc.kcal100*g/100);p+=+(sc.p100*g/100).toFixed(1);c+=+(sc.c100*g/100).toFixed(1);f+=+(sc.f100*g/100).toFixed(1);});
+return{kcal:Math.round(kcal),p:Math.round(p),c:Math.round(c),f:Math.round(f)};
+}
+function renderMealSauces(entry){
+const sauces=entry.sauces||[];
+const isOpen=state.saucePanelOpen===entry.id;
+let h='<div class="sauce-add-toggle" onclick="event.stopPropagation();toggleMealSaucePanel(\''+entry.id+'\')">'+(isOpen?'\u25be':'\u25b8')+' Add sauce?'+(sauces.length>0?' ('+sauces.length+')':'')+'</div>';
+if(isOpen){
+h+='<div class="sauce-picker">';
+SAUCE_IDS.forEach(sid=>{const sc=COMPONENTS.find(x=>x.id===sid);if(!sc)return;const added=sauces.find(s=>s.id===sid);
+h+='<div class="sauce-chip'+(added?' added':'')+'" onclick="event.stopPropagation();addMealSauce(\''+entry.id+'\',\''+sid+'\')">'+sc.name.split('(')[0].trim()+(added?' ('+sc.portionLabels[added.portion].split('(')[0].trim()+')':'')+'</div>';});
+h+='</div>';
+}
+if(sauces.length>0){
+sauces.forEach(s=>{const sc=COMPONENTS.find(x=>x.id===s.id);if(!sc)return;const g=getCompGrams(sc,s.portion);const sm=getCompMacros(sc,s.portion);
+h+='<div class="sauce-entry"><span>+ '+sc.name.split('(')[0].trim()+' '+sc.portionLabels[s.portion]+' ('+sm.kcal+' kcal)</span><button class="sauce-entry-btn" onclick="event.stopPropagation();removeMealSauce(\''+entry.id+'\',\''+s.id+'\')">\u00d7</button></div>';});
+}
+return h;
+}
+/* V29: Breakfast-as-snack functions */
+function addBfSnack(bfIdx){
+const macros=getBreakfastCustomMacros(bfIdx);
+state.loggedSnacks.push({id:uid(),idx:-1,type:'breakfast',bfIdx,macros:{kcal:macros.kcal,p:macros.p,c:macros.c,f:macros.f}});
+save();renderMeals();
+}
+function removeBfSnack(entryId){const idx=state.loggedSnacks.findIndex(e=>e.id===entryId);if(idx>=0)state.loggedSnacks.splice(idx,1);save();renderMeals();}
 function removeMealEntry(entryId){const idx=state.loggedMeals.findIndex(m=>m.id===entryId);if(idx>=0)state.loggedMeals.splice(idx,1);save();renderMeals();}
 function setMealEntryPortion(entryId,size){const e=state.loggedMeals.find(m=>m.id===entryId);if(e)e.portion=size;save();renderMeals();}
 function addSnack(i,portion){
@@ -2674,11 +2817,13 @@ const comp=COMPONENTS.find(c=>c.id===p.componentId);if(!comp)return;
 const g=getCompGrams(comp,p.portion);
 const macros=getCompMacros(comp,p.portion);
 tK+=macros.kcal;tP+=macros.p;tC+=macros.c;tF+=macros.f;
+const pLabel=comp.portionLabels&&comp.portionLabels[p.portion]?comp.portionLabels[p.portion]:g+'g ('+p.portion+')';
+const sizes=comp.sauce?['S','M','L']:['S','M','L','XL'];
 h+=`<div class="plate-item"><div class="plate-item-info">
-<div class="plate-item-name">${comp.name} \u2014 ${g}g (${p.portion})</div>
+<div class="plate-item-name">${comp.name} \u2014 ${pLabel}</div>
 <div class="plate-item-macros">${macros.kcal} kcal \u00b7 ${Math.round(macros.p)}g P \u00b7 ${Math.round(macros.c)}g C \u00b7 ${Math.round(macros.f)}g F</div>
 </div><div class="plate-item-controls"><div class="portion-btns">
-${['S','M','L','XL'].map(sz=>'<button class="portion-btn'+(p.portion===sz?' active':'')+'" onclick="setComponentPortion('+i+',\''+sz+'\')">'+sz+'</button>').join('')}
+${sizes.map(sz=>{const btnLabel=comp.portionLabels&&comp.portionLabels[sz]?comp.portionLabels[sz].split('(')[0].trim():sz;return'<button class="portion-btn'+(p.portion===sz?' active':'')+'" onclick="setComponentPortion('+i+',\''+sz+'\')">'+btnLabel+'</button>';}).join('')}
 </div><button class="meal-remove" onclick="removeComponent(${i})">\u2212</button></div></div>`;
 });
 h+=`<div class="plate-total"><div class="plate-total-macros">Total: ${Math.round(tK)} kcal \u00b7 ${Math.round(tP)}g P \u00b7 ${Math.round(tC)}g C \u00b7 ${Math.round(tF)}g F</div></div>`;
@@ -3038,12 +3183,14 @@ const now=new Date();
 const day=now.getDay();
 const diff=day===0?-6:1-day;
 const monday=new Date(now);
-monday.setDate(now.getDate()+diff);
+monday.setDate(now.getDate()+diff+state.weekOffset*7);
 monday.setHours(0,0,0,0);
 const dates=[];
 for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);dates.push(d);}
 return dates;
 }
+function switchWeek(delta){state.weekOffset+=delta;renderWeeklyView();}
+function goToCurrentWeek(){state.weekOffset=0;renderWeeklyView();}
 const WEEK_DAY_NAMES=['SUN','MON','TUE','WED','THU','FRI','SAT'];
 const WEEK_SUMMARIES={
 1:{tkd:'Work 8\u201318h \u2192 TKD 19\u201321h30 \u2192 Late dinner',noTkd:'Work 8\u201318h \u2192 Replacement 18h10 \u2192 Dinner 19h45'},
@@ -3101,9 +3248,15 @@ if(counts.fullSession)sumParts.push(counts.fullSession+' Full Session');
 if(counts.rest)sumParts.push(counts.rest+' Rest');
 const monDate=dates[0];const sunDate=dates[6];
 const fmtShort={month:'long',day:'numeric'};
+const isCurrentWeek=state.weekOffset===0;
 document.getElementById('weekSummary').innerHTML=
-'<div class="week-summary-title">Week of '+monDate.toLocaleDateString('en-GB',fmtShort)+' \u2013 '+sunDate.toLocaleDateString('en-GB',fmtShort)+'</div>'+
-'<div class="week-summary-stats">'+sumParts.join(' \u00b7 ')+'</div>';
+'<div class="week-nav">'+
+'<button class="week-nav-btn" onclick="switchWeek(-1)">\u2039</button>'+
+'<div class="week-summary-title" style="margin:0">Week of '+monDate.toLocaleDateString('en-GB',fmtShort)+' \u2013 '+sunDate.toLocaleDateString('en-GB',fmtShort)+'</div>'+
+'<button class="week-nav-btn" onclick="switchWeek(1)">\u203a</button>'+
+'</div>'+
+'<div class="week-summary-stats">'+sumParts.join(' \u00b7 ')+'</div>'+
+(!isCurrentWeek?'<div style="text-align:center"><button class="week-today-btn visible" onclick="goToCurrentWeek()">Today</button></div>':'');
 document.getElementById('weekCards').innerHTML=cardData.map((cd,ci)=>{
 let cls='week-card week-card-anim';
 if(cd.isCurrent)cls+=' current';
