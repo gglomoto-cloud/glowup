@@ -520,8 +520,8 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .comp-cat-pill.extras{background:rgba(255,255,255,0.08);color:var(--text-dim)}
 .comp-cat-pill.apero{background:rgba(200,155,74,0.15);color:var(--fit)}
 .comp-cat-pill.sauces{background:rgba(142,207,176,0.15);color:var(--nutr)}
-.sauce-add-toggle{font-size:11px;color:var(--text-muted);cursor:pointer;padding:4px 0;margin-top:4px;transition:color .2s}
-.sauce-add-toggle:active{color:var(--text)}
+.sauce-add-toggle{font-size:12px;color:var(--nutr);cursor:pointer;padding:6px 12px;margin-top:8px;transition:all .2s;background:rgba(142,207,176,0.08);border:1px solid rgba(142,207,176,0.2);border-radius:10px;display:inline-block}
+.sauce-add-toggle:active{color:var(--text);background:rgba(142,207,176,0.18)}
 .sauce-picker{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;padding:6px 0;border-top:1px solid rgba(255,255,255,0.04)}
 .sauce-chip{background:rgba(255,255,255,0.04);border:1px solid var(--card-border);border-radius:14px;padding:3px 10px;font-size:10px;color:var(--text-dim);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
 .sauce-chip:active{background:var(--nutr);color:#111;transform:scale(0.95)}
@@ -541,6 +541,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .bf-snack-card{background:var(--bg-card);border:1px solid var(--card-border);border-radius:var(--radius);padding:10px 12px;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-card)}
 .bf-snack-card:active{transform:scale(0.97)}
 .bf-snack-card.logged{border-color:var(--skin);box-shadow:0 0 8px rgba(91,190,183,.12)}
+.bf-snack-card.editing{border-color:var(--skin);border-style:dashed;box-shadow:0 0 12px rgba(91,190,183,.15)}
 .bf-snack-init{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--nutr);margin-bottom:3px}
 .bf-snack-name{font-size:11px;font-weight:500}
 .bf-snack-macros{font-size:10px;color:var(--text-dim);margin-top:2px;font-variant-numeric:tabular-nums}
@@ -1369,20 +1370,21 @@ cust.secondary[key]=!cust.secondary[key];
 save();renderMeals();
 }
 
-function renderBfCustomControls(bfIdx){
+function renderBfCustomControls(bfIdx,snackMode){
 const cfg=BF_CUSTOM_CONFIG[bfIdx];if(!cfg)return'';
-const cust=getBfCustom(bfIdx);
+const cust=snackMode?state.bfSnackEdit.custom:getBfCustom(bfIdx);
 let h='<div class="bf-custom-section">';
 h+='<div class="bf-custom-title">Adjust amounts</div>';
 cfg.main.forEach(m=>{
 const val=cust.main[m.key]!==undefined?cust.main[m.key]:m.defVal;
 const displayVal=m.display?m.display(val):(m.unit?val+m.unit:val);
+const adjCall=snackMode?'adjustBfSnackMain(\''+m.key+'\'':'adjustBfMain('+bfIdx+',\''+m.key+'\'';
 h+='<div class="bf-stepper-row">';
 h+='<div class="bf-stepper-label">'+m.label+'</div>';
 h+='<div class="bf-stepper-controls">';
-h+='<button class="stepper-btn" onclick="event.stopPropagation();adjustBfMain('+bfIdx+',\''+m.key+'\',-'+m.step+')">&#8722;</button>';
+h+='<button class="stepper-btn" onclick="event.stopPropagation();'+adjCall+',-'+m.step+')">&#8722;</button>';
 h+='<span class="stepper-value">'+displayVal+'</span>';
-h+='<button class="stepper-btn" onclick="event.stopPropagation();adjustBfMain('+bfIdx+',\''+m.key+'\','+m.step+')">+</button>';
+h+='<button class="stepper-btn" onclick="event.stopPropagation();'+adjCall+','+m.step+')">+</button>';
 h+='</div></div>';
 });
 if(cfg.secondary.length>0){
@@ -1393,14 +1395,15 @@ const macro=BF_ING_MACROS[s.macro];
 const grams=s.g;
 const addKcal=Math.round(macro.kcal*grams/100);
 const addP=Math.round(macro.p*grams/100);
+const togCall=snackMode?'toggleBfSnackSecondary(\''+s.key+'\')':'toggleBfSecondary('+bfIdx+',\''+s.key+'\')';
 h+='<div class="bf-ing-toggle">';
-h+='<button class="bf-ing-toggle-btn'+(on?' on':'')+'" onclick="event.stopPropagation();toggleBfSecondary('+bfIdx+',\''+s.key+'\')">'+(on?'&#10003;':'')+'</button>';
+h+='<button class="bf-ing-toggle-btn'+(on?' on':'')+'" onclick="event.stopPropagation();'+togCall+'">'+(on?'&#10003;':'')+'</button>';
 h+='<span class="bf-ing-label">'+s.label+'</span>';
 if(addKcal>0)h+='<span class="bf-ing-macro">+'+addKcal+' kcal / '+addP+'g P</span>';
 h+='</div>';
 });
 }
-const cm=getBreakfastCustomMacros(bfIdx);
+const cm=snackMode?getBfSnackMacros():getBreakfastCustomMacros(bfIdx);
 h+='<div class="bf-custom-macros">'+cm.kcal+' kcal &middot; '+cm.p+'g P &middot; '+cm.c+'g C &middot; '+cm.f+'g F</div>';
 h+='</div>';
 return h;
@@ -2234,6 +2237,7 @@ mealTab:'plats',
 currentPlate:lsGet(dailyKey('plate27'),[]),
 coffeeMilkCl:lsGet(dailyKey('coffeeMilkCl'),15),
 saucePanelOpen:null,
+bfSnackEdit:null,
 weekOffset:0
 };
 function save(){
@@ -2274,6 +2278,7 @@ state.hotCocoMilk=lsGet(dailyKey('hotCocoMilk'),30);
 state.currentPlate=lsGet(dailyKey('plate27'),[]);
 state.coffeeMilkCl=lsGet(dailyKey('coffeeMilkCl'),15);
 state.mealTab='plats';
+state.bfSnackEdit=null;
 const defType=AUTO_DAY_TYPE[selDow]==='tkd'&&!defTkd?'calisthenics':AUTO_DAY_TYPE[selDow];
 state.dayType=lsGet(dailyKey('dayType'),defType);
 }
@@ -2649,21 +2654,42 @@ ${cnt>0?'<div class="snack-actions"><button onclick="event.stopPropagation();rem
 return`<div class="snack-chip${sel}" onclick="addSnack(${i})">${s.name} (${s.kcal})${cnt>1?' <span class="snack-count">\u00d7'+cnt+'</span>':''}${cnt>0?'<button class="meal-remove" style="margin-left:6px;display:inline-flex;width:18px;height:18px;font-size:12px" onclick="event.stopPropagation();removeSnackEntry(\''+snackEntries[cnt-1].id+'\')">\u2212</button>':''}</div>`;
 }).join('')+renderBfSnackSection();
 }
-/* V29: Breakfast-as-snack rendering */
+/* V30: Breakfast-as-snack rendering — with full customization panel */
 function renderBfSnackSection(){
 const bfSnackEntries=state.loggedSnacks.filter(e=>e.type==='breakfast');
 let h='<div class="snack-subsection-title">Petit-dej en snack</div>';
 h+='<div class="bf-snack-grid">';
 BREAKFASTS.forEach((bf,i)=>{
 const logged=bfSnackEntries.filter(e=>e.bfIdx===i);
-const bm=getBreakfastCustomMacros(i);
-h+=`<div class="bf-snack-card${logged.length>0?' logged':''}" onclick="addBfSnack(${i})">
+const editing=state.bfSnackEdit&&state.bfSnackEdit.bfIdx===i;
+const bm=editing?getBfSnackMacros():getBreakfastCustomMacros(i);
+h+=`<div class="bf-snack-card${logged.length>0?' logged':''}${editing?' editing':''}" onclick="startBfSnackEdit(${i})">
 <div class="bf-snack-init">${bf.id}</div>
 <div class="bf-snack-name">${bf.name}${logged.length>0?'<span class="snack-count" style="margin-left:4px">\u00d7'+logged.length+'</span>':''}</div>
 <div class="bf-snack-macros">${bm.kcal} kcal \u00b7 ${bm.p}g P</div>
 </div>`;
 });
 h+='</div>';
+/* V30: Show customization panel when editing a breakfast snack */
+if(state.bfSnackEdit){
+const bfIdx=state.bfSnackEdit.bfIdx;
+const bf=BREAKFASTS[bfIdx];
+h+='<div class="bf-snack-detail open">';
+h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+h+='<div style="font-size:14px;font-weight:600;font-family:\'Playfair Display\',serif">'+bf.name+'</div>';
+h+='<button class="meal-remove" onclick="event.stopPropagation();cancelBfSnackEdit()">\u00d7</button>';
+h+='</div>';
+if(bfIdx===2){
+h+='<div class="yogurt-ratio-selector">';
+YOGURT_RATIOS.forEach(r=>{h+='<button class="yogurt-ratio-pill'+(state.bfSnackEdit.yogurtRatio===r.id?' active':'')+'" onclick="event.stopPropagation();setBfSnackYogurtRatio(\''+r.id+'\')">'+r.label+'</button>';});
+h+='</div>';
+const ym=getBfSnackMacros();
+h+='<div class="yogurt-protein-display">'+ym.p+'g P</div>';
+}
+h+=renderBfCustomControls(bfIdx,true);
+h+='<button class="log-meal-btn" onclick="event.stopPropagation();logBfSnack()">Log as snack</button>';
+h+='</div>';
+}
 /* Show logged breakfast snacks with remove buttons */
 if(bfSnackEntries.length>0){
 bfSnackEntries.forEach(e=>{
@@ -2733,10 +2759,71 @@ h+='<div class="sauce-entry"><span>+ '+sc.name.split('(')[0].trim()+' '+sc.porti
 }
 return h;
 }
-/* V29: Breakfast-as-snack functions */
-function addBfSnack(bfIdx){
-const macros=getBreakfastCustomMacros(bfIdx);
+/* V30: Breakfast-as-snack customization functions */
+function startBfSnackEdit(bfIdx){
+if(state.bfSnackEdit&&state.bfSnackEdit.bfIdx===bfIdx){state.bfSnackEdit=null;}
+else{state.bfSnackEdit={bfIdx,custom:getDefaultBfCustom(bfIdx),yogurtRatio:state.yogurtRatio};}
+renderMeals();
+}
+function cancelBfSnackEdit(){state.bfSnackEdit=null;renderMeals();}
+function adjustBfSnackMain(key,delta){
+if(!state.bfSnackEdit)return;
+const bfIdx=state.bfSnackEdit.bfIdx;
+const cfg=BF_CUSTOM_CONFIG[bfIdx].main.find(m=>m.key===key);if(!cfg)return;
+const cust=state.bfSnackEdit.custom;
+let val=(cust.main[key]!==undefined?cust.main[key]:cfg.defVal)+delta;
+val=Math.max(cfg.min,Math.min(cfg.max,+(val).toFixed(1)));
+cust.main[key]=val;renderMeals();
+}
+function toggleBfSnackSecondary(key){
+if(!state.bfSnackEdit)return;
+state.bfSnackEdit.custom.secondary[key]=!state.bfSnackEdit.custom.secondary[key];
+renderMeals();
+}
+function setBfSnackYogurtRatio(id){
+if(!state.bfSnackEdit)return;
+state.bfSnackEdit.yogurtRatio=id;renderMeals();
+}
+function getBfSnackMacros(){
+if(!state.bfSnackEdit)return{kcal:0,p:0,c:0,f:0};
+const bfIdx=state.bfSnackEdit.bfIdx;
+const cust=state.bfSnackEdit.custom;
+const cfg=BF_CUSTOM_CONFIG[bfIdx];
+let kcal=0,p=0,c=0,f=0;
+if(bfIdx===2){
+const r=YOGURT_RATIOS.find(x=>x.id===state.bfSnackEdit.yogurtRatio)||YOGURT_RATIOS[1];
+kcal+=r.grec*YOGURT_PER_POT.grec.kcal+r.hp*YOGURT_PER_POT.hp.kcal;
+p+=r.grec*YOGURT_PER_POT.grec.p+r.hp*YOGURT_PER_POT.hp.p;
+c+=r.grec*YOGURT_PER_POT.grec.c+r.hp*YOGURT_PER_POT.hp.c;
+f+=r.grec*YOGURT_PER_POT.grec.f+r.hp*YOGURT_PER_POT.hp.f;
+}
+cfg.main.forEach(m=>{
+const val=cust.main[m.key]!==undefined?cust.main[m.key]:m.defVal;
+const grams=m.calcG(val);
+const macro=BF_ING_MACROS[m.macro];
+kcal+=Math.round(macro.kcal*grams/100);
+p+=+(macro.p*grams/100).toFixed(1);
+c+=+(macro.c*grams/100).toFixed(1);
+f+=+(macro.f*grams/100).toFixed(1);
+});
+cfg.secondary.forEach(s=>{
+const on=cust.secondary[s.key]!==undefined?cust.secondary[s.key]:s.defOn;
+if(!on)return;
+const macro=BF_ING_MACROS[s.macro];
+const grams=s.g;
+kcal+=Math.round(macro.kcal*grams/100);
+p+=+(macro.p*grams/100).toFixed(1);
+c+=+(macro.c*grams/100).toFixed(1);
+f+=+(macro.f*grams/100).toFixed(1);
+});
+return{kcal:Math.round(kcal),p:Math.round(p),c:Math.round(c),f:Math.round(f)};
+}
+function logBfSnack(){
+if(!state.bfSnackEdit)return;
+const macros=getBfSnackMacros();
+const bfIdx=state.bfSnackEdit.bfIdx;
 state.loggedSnacks.push({id:uid(),idx:-1,type:'breakfast',bfIdx,macros:{kcal:macros.kcal,p:macros.p,c:macros.c,f:macros.f}});
+state.bfSnackEdit=null;
 save();renderMeals();
 }
 function removeBfSnack(entryId){const idx=state.loggedSnacks.findIndex(e=>e.id===entryId);if(idx>=0)state.loggedSnacks.splice(idx,1);save();renderMeals();}
