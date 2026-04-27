@@ -563,6 +563,59 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 .composed-entry-macros{font-size:12px;color:var(--skin);font-weight:600;font-variant-numeric:tabular-nums}
 .composed-entry-items{font-size:11px;color:var(--text-dim);line-height:1.6}
 .composed-entry-item{display:flex;justify-content:space-between;padding:2px 0}
+/* V31: Pill Reminder Banners */
+.pill-banners{z-index:12;display:flex;flex-direction:column;gap:0;flex-shrink:0}
+.pill-banner{display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(196,155,74,0.12);border-left:3px solid var(--gold);cursor:pointer;transition:all .2s;animation:pillBannerIn .3s ease}
+.pill-banner:not(:last-child){border-bottom:1px solid rgba(196,155,74,0.1)}
+@keyframes pillBannerIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.pill-banner-icon{display:flex;align-items:center;justify-content:center;width:20px;height:20px;flex-shrink:0}
+.pill-banner-icon svg{width:16px;height:16px}
+.pill-banner-text{flex:1;min-width:0}
+.pill-banner-name{font-size:13px;font-weight:600;color:var(--gold)}
+.pill-banner-sub{font-size:10px;color:var(--text-muted)}
+.pill-banner-x{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:var(--text-muted);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-family:'DM Sans',sans-serif}
+.pill-banner-x:active{background:rgba(255,255,255,0.12);transform:scale(0.9)}
+/* V31: Pill status in timeline */
+.tl-pill-status{font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px;margin-left:6px;white-space:nowrap}
+.tl-pill-status.taken{background:rgba(91,190,183,0.15);color:var(--skin)}
+.tl-pill-status.missed{background:rgba(196,100,42,0.15);color:#c4652a}
+/* V31: Weekly Overview */
+.week-overview{margin-top:16px}
+.wo-header{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:var(--radius);cursor:pointer;transition:all .2s;box-shadow:var(--shadow-card);margin-bottom:0}
+.wo-header:active{background:var(--bg-card-hover)}
+.wo-header.open{border-radius:var(--radius) var(--radius) 0 0;border-bottom-color:transparent;margin-bottom:0}
+.wo-header-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;flex:1}
+.wo-header-arrow{color:var(--text-muted);font-size:14px;transition:transform .25s}
+.wo-header.open .wo-header-arrow{transform:rotate(90deg)}
+.wo-body{max-height:0;overflow:hidden;transition:max-height .35s ease-out;background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--card-border);border-top:none;border-radius:0 0 var(--radius) var(--radius);box-shadow:var(--shadow-card)}
+.wo-body.open{max-height:5000px;overflow-y:auto}
+.wo-body-inner{padding:0 16px 14px}
+.wo-toggle-row{display:flex;gap:4px;background:rgba(255,255,255,0.05);border-radius:8px;padding:2px;margin-bottom:12px;width:fit-content}
+.wo-toggle-btn{background:none;border:none;color:var(--text-muted);font-size:12px;font-weight:500;padding:5px 14px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.wo-toggle-btn.active{background:rgba(255,255,255,0.1);color:var(--text)}
+.wo-toggle-btn:active{transform:scale(0.97)}
+.wo-summary-bar{font-size:12px;color:var(--text-dim);padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;margin-bottom:14px;text-align:center;font-variant-numeric:tabular-nums}
+.wo-summary-bar strong{color:var(--text);font-weight:600}
+.wo-day-group{margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.wo-day-group:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.wo-day-header{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;margin-bottom:8px;cursor:pointer;transition:color .2s;display:flex;align-items:center;gap:6px}
+.wo-day-header:active{color:var(--skin)}
+.wo-day-header .wo-day-go{color:var(--text-muted);font-size:11px;opacity:0.6;margin-left:auto}
+.wo-section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);margin:6px 0 4px;padding-left:4px}
+.wo-item{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;border-left:2px solid transparent;transition:all .15s;margin-bottom:2px}
+.wo-item.done{border-left-color:rgba(91,190,183,0.4)}
+.wo-item.done .wo-item-text{text-decoration:line-through;color:var(--text-muted);opacity:0.6}
+.wo-item.missed{background:rgba(196,100,42,0.08);border-left-color:rgba(196,100,42,0.6)}
+.wo-item.upcoming{opacity:0.5}
+.wo-item.today-pending{opacity:1}
+.wo-item-check{width:16px;height:16px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700}
+.wo-item-check.done-check{color:var(--skin)}
+.wo-item-check.missed-check{color:#c4652a}
+.wo-item-check.pending-check{color:var(--text-muted)}
+.wo-item-text{font-size:12px;flex:1;line-height:1.3}
+.wo-item-tag{font-size:9px;font-weight:500;padding:1px 6px;border-radius:4px;flex-shrink:0}
+.wo-item.tappable{cursor:pointer}
+.wo-item.tappable:active{background:rgba(255,255,255,0.04)}
 </style>
 </head>
 <body>
@@ -574,6 +627,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 </div>
 <div class="header-type" id="headerType"></div>
 </header>
+<div class="pill-banners" id="pillBanners"></div>
 <div class="date-bar" id="dateBar" style="display:none"><span id="dateBarText"></span><button class="date-bar-btn" onclick="switchToToday()">Back to today</button></div>
 <main class="screens" id="screens">
 <div class="screen active" id="screen-dashboard">
@@ -599,6 +653,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 <div class="weekly-view" id="weeklyView">
 <div class="week-summary" id="weekSummary"></div>
 <div class="week-cards" id="weekCards"></div>
+<div class="week-overview" id="weekOverview"></div>
 </div>
 </div>
 <div class="screen" id="screen-water">
@@ -2305,11 +2360,13 @@ document.getElementById('dateBarText').textContent='Viewing '+d.toLocaleDateStri
 }
 function renderAll(){
 renderDateBar();renderHeader();renderShaveToggle();renderTkdToggle();renderNotesCard();renderTimeline();
+renderPillBanners();
 if(state.activeScreen==='water')renderWater();
 if(state.activeScreen==='meals')renderMeals();
 if(state.activeScreen==='training')renderTraining();
 if(state.activeScreen==='extras')renderExtras();
 if(state.activeScreen==='shopping')renderShopping();
+if(state.viewMode==='week')renderWeeklyOverview();
 }
 
 /* ===== RENDER ===== */
@@ -2393,12 +2450,16 @@ detailHtml='<div style="font-size:12.5px;color:var(--text-dim);line-height:1.5">
 }
 const hasDetail=detailHtml.length>0;
 const icon=getTlIcon(item.n,item.c);
+/* V31: Pill status badge */
+const viewDateStr=getActiveDateStr();
+const pillSt=getPillStatusForTimelineItem(item.n,viewDateStr);
+const pillBadge=pillSt==='taken'?'<span class="tl-pill-status taken">Taken</span>':pillSt==='missed'?'<span class="tl-pill-status missed">Missed</span>':'';
 return`<div class="tl-item${catClass}${nowClass}${hasDetail?'':' no-expand'}" ${hasDetail?'onclick="toggleTl(this)"':''}>
 <div class="tl-card">
 <div class="tl-head">
 <div class="tl-icon">${icon}</div>
 <span class="tl-time">${item.t}</span>
-<span class="tl-name">${item.n}</span>
+<span class="tl-name">${item.n}${pillBadge}</span>
 ${hasDetail?'<span class="tl-arrow">\u25b8</span>':''}
 </div>
 <div class="tl-details"><div class="tl-detail-inner"><div class="tl-detail-content">${detailHtml}</div></div></div>
@@ -3194,7 +3255,7 @@ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 document.getElementById('screen-'+screen).classList.add('active');
 document.getElementById('screens').scrollTop=0;
 state.activeScreen=screen;
-renderDateBar();
+renderDateBar();renderPillBanners();
 if(screen==='dashboard'){
 /* V24: only reset date if no selectedDate */
 if(!state.selectedDate){state.viewingDate=null;}
@@ -3369,6 +3430,7 @@ ${cd.shampoo||cd.noteDot?'<div class="week-card-indicators">'+(cd.shampoo?'<span
 ${toggleHtml}
 </div>`;
 }).join('');
+renderWeeklyOverview();
 }
 function toggleWeekTkd(dateStr,val){
 setTkdForDate(dateStr,val);
@@ -3494,9 +3556,258 @@ return '#6b6560';
 }
 
 // Consistency check v20: [YSL Y EDP → Lattafa Musamam Black Intense in tips + shopping, "Skyr or fromage blanc 0%" → "Skyr" in breakfasts A+D, no "Yaourt protéiné (11g P/100g)" found, no "Lightweight curl cream" found, no "68kg"/"175cm" found, no "beard grooming" found, no DROP products in active routines]
+
+/* ===== V31: PILL REMINDER BANNERS ===== */
+const PILL_WINDOWS=[
+{id:'pills_morning',name:'Morning pills',startH:7,startM:0,endH:10,endM:0},
+{id:'pills_theanine',name:'L-Th\u00e9anine',startH:13,startM:45,endH:14,endM:30},
+{id:'pills_fer',name:'Fer (iron)',startH:15,startM:45,endH:16,endM:30},
+{id:'pills_evening',name:'Evening pills',startH:19,startM:45,endH:22,endM:0}
+];
+const PILL_ICON='<svg viewBox="0 0 16 16" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round"><rect x="5" y="2" width="6" height="12" rx="3"/><line x1="5" y1="8" x2="11" y2="8"/></svg>';
+const pillDismissedSession=new Set();
+function isPillTaken(pillId,dateStr){return lsGet('pillTaken_'+pillId+'_'+dateStr,false);}
+function markPillTaken(pillId){
+const dateStr=today;
+lsSet('pillTaken_'+pillId+'_'+dateStr,true);
+pillDismissedSession.delete(pillId);
+renderPillBanners();
+if(state.viewMode==='week'){renderWeeklyOverview();}
+renderTimeline();
+}
+function dismissPillBannerTemp(pillId,e){
+if(e)e.stopPropagation();
+pillDismissedSession.add(pillId);
+renderPillBanners();
+}
+function renderPillBanners(){
+const container=document.getElementById('pillBanners');
+if(!container)return;
+/* Only show banners on today's view (not past/future dates) */
+if(state.selectedDate&&state.selectedDate!==today){container.innerHTML='';return;}
+const now=new Date();
+const nowMin=now.getHours()*60+now.getMinutes();
+const dateStr=today;
+let html='';
+PILL_WINDOWS.forEach(pw=>{
+const startMin=pw.startH*60+pw.startM;
+const endMin=pw.endH*60+pw.endM;
+if(nowMin>=startMin&&nowMin<endMin&&!isPillTaken(pw.id,dateStr)&&!pillDismissedSession.has(pw.id)){
+html+='<div class="pill-banner" onclick="markPillTaken(\''+pw.id+'\')">';
+html+='<div class="pill-banner-icon">'+PILL_ICON+'</div>';
+html+='<div class="pill-banner-text"><div class="pill-banner-name">Time for '+escNoteHtml(pw.name)+'</div><div class="pill-banner-sub">Tap to mark as taken</div></div>';
+html+='<div class="pill-banner-x" onclick="dismissPillBannerTemp(\''+pw.id+'\',event)" title="Dismiss">\u00d7</div>';
+html+='</div>';
+}
+});
+container.innerHTML=html;
+}
+
+/* ===== V31: PILL STATUS IN TIMELINE ===== */
+function getPillStatusForTimelineItem(itemName,dateStr){
+const n=itemName.toLowerCase();
+let pillId=null;
+if(n.includes('morning pills'))pillId='pills_morning';
+else if(n.includes('l-th\u00e9anine')||n.includes('l-theanine'))pillId='pills_theanine';
+else if(n==='fer'||n.startsWith('fer '))pillId='pills_fer';
+else if(n.includes('evening pills'))pillId='pills_evening';
+if(!pillId)return null;
+const taken=isPillTaken(pillId,dateStr);
+if(taken)return'taken';
+/* Check if time window has passed */
+const pw=PILL_WINDOWS.find(p=>p.id===pillId);
+if(!pw)return null;
+const isToday=dateStr===today;
+if(!isToday){
+/* Past day: always missed if not taken */
+const d=new Date(dateStr);d.setHours(0,0,0,0);
+const nowD=new Date(today);nowD.setHours(0,0,0,0);
+if(d<nowD)return'missed';
+return null;/* future */
+}
+const now=new Date();
+const nowMin=now.getHours()*60+now.getMinutes();
+const endMin=pw.endH*60+pw.endM;
+if(nowMin>=endMin)return'missed';
+return null;/* still within or before window */
+}
+
+/* ===== V31: WEEKLY OVERVIEW ===== */
+let weekOverviewOpen=false;
+let weekOverviewMode='this';/* 'this' or 'last' */
+function getDailyAutoItemsForDate(dateObj){
+const items=[];
+items.push({id:'teeth_am',text:'Brush teeth AM',category:'care'});
+items.push({id:'pills_morning',text:'Morning pills',category:'care'});
+items.push({id:'pills_theanine',text:'L-Th\u00e9anine (14h)',category:'care'});
+items.push({id:'pills_fer',text:'Fer (16h)',category:'care'});
+items.push({id:'teeth_pm',text:'Brush teeth PM',category:'care'});
+items.push({id:'pills_evening',text:'Evening pills',category:'care'});
+/* Add conditional auto-reminders */
+const autos=getAutoReminders(dateObj);
+autos.forEach(r=>{items.push({id:r.id,text:r.text,category:r.category});});
+return items;
+}
+function isAutoItemDone(itemId,dateStr){
+if(itemId.startsWith('pills_'))return isPillTaken(itemId,dateStr);
+if(itemId.startsWith('auto_'))return getDismissedAutoReminders(dateStr).includes(itemId);
+/* teeth and other daily tasks */
+const checks=lsGet('dailyChecks_'+dateStr,[]);
+return checks.includes(itemId);
+}
+function markAutoItemDone(itemId,dateStr){
+if(itemId.startsWith('pills_')){
+lsSet('pillTaken_'+itemId+'_'+dateStr,true);
+if(dateStr===today){pillDismissedSession.delete(itemId);renderPillBanners();}
+}else if(itemId.startsWith('auto_')){
+const dismissed=getDismissedAutoReminders(dateStr);
+if(!dismissed.includes(itemId)){dismissed.push(itemId);lsSet('autoDismissed_'+dateStr,dismissed);}
+}else{
+const checks=lsGet('dailyChecks_'+dateStr,[]);
+if(!checks.includes(itemId)){checks.push(itemId);lsSet('dailyChecks_'+dateStr,checks);}
+}
+renderWeeklyOverview();
+renderNotesCard();
+renderTimeline();
+}
+function getItemStatus(itemId,dateStr,todayStr){
+const done=isAutoItemDone(itemId,dateStr);
+if(done)return'done';
+const d=new Date(dateStr);d.setHours(0,0,0,0);
+const t=new Date(todayStr);t.setHours(0,0,0,0);
+if(d<t)return'missed';
+if(d.getTime()===t.getTime())return'today';
+return'upcoming';
+}
+function toggleWeekOverview(){
+weekOverviewOpen=!weekOverviewOpen;
+renderWeeklyOverview();
+}
+function setWeekOverviewMode(mode){
+weekOverviewMode=mode;
+renderWeeklyOverview();
+}
+function getOverviewWeekDates(offset){
+const now=new Date();
+const day=now.getDay();
+const diff=day===0?-6:1-day;
+const monday=new Date(now);
+monday.setDate(now.getDate()+diff+offset*7);
+monday.setHours(0,0,0,0);
+const dates=[];
+for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);dates.push(d);}
+return dates;
+}
+function renderWeeklyOverview(){
+const container=document.getElementById('weekOverview');
+if(!container)return;
+const todayStr=new Date().toDateString();
+const weekOffset=weekOverviewMode==='this'?state.weekOffset:(state.weekOffset-1);
+const dates=getOverviewWeekDates(weekOffset);
+const isLastWeek=weekOverviewMode==='last';
+const dayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+/* Compute all items and counts */
+let totalItems=0,doneCount=0,missedCount=0,upcomingCount=0;
+const dayData=dates.map(d=>{
+const dateStr=d.toDateString();
+const autoItems=getDailyAutoItemsForDate(d);
+const customNotes=getNotesForDate(dateStr);
+const items=autoItems.map(ai=>{
+const st=getItemStatus(ai.id,dateStr,todayStr);
+totalItems++;
+if(st==='done')doneCount++;
+else if(st==='missed')missedCount++;
+else if(st==='upcoming')upcomingCount++;
+return{...ai,status:st,type:'auto'};
+});
+const noteItems=customNotes.map(n=>{
+const st=n.done?'done':getItemStatus('note_'+n.id,dateStr,todayStr);
+totalItems++;
+if(n.done||st==='done')doneCount++;
+else if(st==='missed')missedCount++;
+else if(st==='upcoming')upcomingCount++;
+return{id:'note_'+n.id,noteId:n.id,text:n.text,category:n.category,status:n.done?'done':st,type:'note',done:n.done};
+});
+return{date:d,dateStr,dayName:dayNames[d.getDay()],dayNum:d.getDate(),month:monthNames[d.getMonth()],autoItems:items,noteItems};
+});
+/* Build HTML */
+let h='';
+h+='<div class="wo-header'+(weekOverviewOpen?' open':'')+'" onclick="toggleWeekOverview()">';
+h+='<span class="wo-header-title">Week Overview \u2014 Tasks & Notes</span>';
+h+='<span class="wo-header-arrow">\u25b8</span>';
+h+='</div>';
+h+='<div class="wo-body'+(weekOverviewOpen?' open':'')+'">';
+h+='<div class="wo-body-inner">';
+/* Toggle this/last week */
+h+='<div style="padding-top:12px">';
+h+='<div class="wo-toggle-row">';
+h+='<button class="wo-toggle-btn'+(weekOverviewMode==='this'?' active':'')+'" onclick="event.stopPropagation();setWeekOverviewMode(\'this\')">This Week</button>';
+h+='<button class="wo-toggle-btn'+(weekOverviewMode==='last'?' active':'')+'" onclick="event.stopPropagation();setWeekOverviewMode(\'last\')">Last Week</button>';
+h+='</div></div>';
+/* Summary bar */
+h+='<div class="wo-summary-bar">This '+(isLastWeek?'past ':'')+'week: <strong>'+doneCount+'/'+totalItems+'</strong> completed \u00b7 '+missedCount+' missed \u00b7 '+upcomingCount+' upcoming</div>';
+/* Day groups */
+dayData.forEach(dd=>{
+const isTodayGroup=dd.dateStr===todayStr;
+h+='<div class="wo-day-group">';
+h+='<div class="wo-day-header" onclick="viewDay(\''+dd.dateStr+'\')">';
+h+='<span>'+dd.dayName+' '+dd.dayNum+' '+dd.month+'</span>';
+h+='<span class="wo-day-go">\u203a</span>';
+h+='</div>';
+/* Auto-reminders */
+if(dd.autoItems.length>0){
+h+='<div class="wo-section-label">Auto-reminders</div>';
+dd.autoItems.forEach(item=>{
+let cls='wo-item';
+const canTap=isTodayGroup&&!isLastWeek&&item.status!=='done';
+if(item.status==='done')cls+=' done';
+else if(item.status==='missed')cls+=' missed';
+else if(item.status==='upcoming')cls+=' upcoming';
+else cls+=' today-pending';
+if(canTap)cls+=' tappable';
+const checkCls=item.status==='done'?'done-check':item.status==='missed'?'missed-check':'pending-check';
+const checkIcon=item.status==='done'?'\u2713':item.status==='missed'?'\u2717':'\u25cb';
+h+='<div class="'+cls+'"'+(canTap?' onclick="markAutoItemDone(\''+item.id+'\',\''+dd.dateStr+'\')"':'')+' >';
+h+='<span class="wo-item-check '+checkCls+'">'+checkIcon+'</span>';
+h+='<span class="wo-item-text">'+escNoteHtml(item.text)+'</span>';
+h+='</div>';
+});
+}
+/* Custom notes */
+if(dd.noteItems.length>0){
+h+='<div class="wo-section-label">Custom notes</div>';
+dd.noteItems.forEach(item=>{
+let cls='wo-item';
+const cat=NOTE_CATS.find(c=>c.id===item.category)||NOTE_CATS[4];
+const canTap=isTodayGroup&&!isLastWeek&&!item.done;
+if(item.status==='done'||item.done)cls+=' done';
+else if(item.status==='missed')cls+=' missed';
+else if(item.status==='upcoming')cls+=' upcoming';
+else cls+=' today-pending';
+if(canTap)cls+=' tappable';
+const checkCls=(item.done||item.status==='done')?'done-check':item.status==='missed'?'missed-check':'pending-check';
+const checkIcon=(item.done||item.status==='done')?'\u2713':item.status==='missed'?'\u2717':'\u25cb';
+h+='<div class="'+cls+'"'+(canTap?' onclick="toggleNoteDone(\''+item.noteId+'\');renderWeeklyOverview()"':'')+' >';
+h+='<span class="wo-item-check '+checkCls+'">'+checkIcon+'</span>';
+h+='<span class="wo-item-text">'+escNoteHtml(item.text)+'</span>';
+h+='<span class="wo-item-tag" style="background:'+cat.hex+'22;color:'+cat.hex+'">'+item.category.charAt(0).toUpperCase()+item.category.slice(1)+'</span>';
+h+='</div>';
+});
+}
+if(dd.autoItems.length===0&&dd.noteItems.length===0){
+h+='<div style="font-size:12px;color:var(--text-muted);padding:4px 8px">No tasks</div>';
+}
+h+='</div>';
+});
+h+='</div></div>';
+container.innerHTML=h;
+}
+
 /* INIT */
 clearCompletedPastNotes();buildNav();renderDateBar();renderHeader();renderShaveToggle();renderTkdToggle();renderNotesCard();renderTimeline();
 renderWater();renderMeals();renderTraining();renderExtras();renderShopping();
+renderPillBanners();
 </script>
 </body>
 </html>
