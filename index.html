@@ -584,6 +584,9 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}
 @keyframes pillCircleDraw{to{stroke-dashoffset:0}}
 @keyframes pillCheckDraw{to{stroke-dashoffset:0}}
 @keyframes pillLanding{0%{transform:translateY(-2px)}60%{transform:translateY(0.5px)}100%{transform:translateY(0)}}
+.pill-banner.missed{background:rgba(196,101,42,0.12);border-left-color:#c4652a}
+.pill-banner.missed .pill-banner-name{color:#c4652a}
+.pill-banner.missed .pill-banner-icon svg{stroke:#c4652a}
 /* V31: Pill status in timeline */
 .tl-pill-status{font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px;margin-left:6px;white-space:nowrap}
 .tl-pill-status.taken{background:rgba(91,190,183,0.15);color:var(--skin)}
@@ -3583,16 +3586,17 @@ return '#6b6560';
 
 /* ===== V31: PILL REMINDER BANNERS ===== */
 const PILL_WINDOWS=[
-{id:'pills_morning',name:'Morning pills',startH:7,startM:0,endH:10,endM:0},
-{id:'pills_theanine',name:'L-Th\u00e9anine',startH:13,startM:45,endH:14,endM:30},
-{id:'pills_fer',name:'Fer (iron)',startH:15,startM:45,endH:16,endM:30},
-{id:'pills_evening',name:'Evening pills',startH:19,startM:45,endH:22,endM:0}
+{id:'pills_morning',name:'Morning pills',startH:7,startM:0,endH:12,endM:0},
+{id:'pills_theanine',name:'L-Th\u00e9anine',startH:13,startM:0,endH:16,endM:0},
+{id:'pills_fer',name:'Fer (iron)',startH:15,startM:30,endH:18,endM:0,blockedBy:'pills_theanine'},
+{id:'pills_evening',name:'Evening pills',startH:19,startM:0,endH:23,endM:0}
 ];
 const PILL_ICON='<svg viewBox="0 0 16 16" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round"><rect x="5" y="2" width="6" height="12" rx="3"/><line x1="5" y1="8" x2="11" y2="8"/></svg>';
 const PILL_CHECK_SVG='<svg viewBox="0 0 28 28" width="28" height="28"><circle cx="14" cy="14" r="10"/><path d="M9 14.5l3.5 3.5 6.5-7"/></svg>';
 const pillDismissedSession=new Set();
 let _pillAnimating=false;
 function isPillTaken(pillId,dateStr){return lsGet('pillTaken_'+pillId+'_'+dateStr,false);}
+function isPillMissedAck(pillId,dateStr){return lsGet('pillMissedAck_'+pillId+'_'+dateStr,false);}
 function markPillTaken(pillId){
 const dateStr=today;
 var banner=document.querySelector('.pill-banner[data-pill="'+pillId+'"]');
@@ -3649,6 +3653,28 @@ pillDismissedSession.add(pillId);
 renderPillBanners();
 }
 }
+function ackPillMissed(pillId,e){
+if(e)e.stopPropagation();
+var banner=document.querySelector('.pill-banner[data-pill="'+pillId+'"]');
+if(banner){
+_pillAnimating=true;
+var h=banner.offsetHeight;
+banner.style.maxHeight=h+'px';
+banner.style.transition='max-height .3s cubic-bezier(0.4,0,0.2,1),padding .3s cubic-bezier(0.4,0,0.2,1),opacity .3s cubic-bezier(0.4,0,0.2,1),border-left-width .3s cubic-bezier(0.4,0,0.2,1),border-bottom-width .3s cubic-bezier(0.4,0,0.2,1)';
+requestAnimationFrame(function(){requestAnimationFrame(function(){
+banner.style.maxHeight='0';banner.style.paddingTop='0';banner.style.paddingBottom='0';
+banner.style.opacity='0';banner.style.borderLeftWidth='0';banner.style.borderBottomWidth='0';
+});});
+setTimeout(function(){
+_pillAnimating=false;
+lsSet('pillMissedAck_'+pillId+'_'+today,true);
+renderPillBanners();
+},400);
+}else{
+lsSet('pillMissedAck_'+pillId+'_'+today,true);
+renderPillBanners();
+}
+}
 function renderPillBanners(){
 if(_pillAnimating)return;
 const container=document.getElementById('pillBanners');
@@ -3658,18 +3684,40 @@ if(state.selectedDate&&state.selectedDate!==today){container.innerHTML='';return
 const now=new Date();
 const nowMin=now.getHours()*60+now.getMinutes();
 const dateStr=today;
-let html='';
+const active=[];
+const missed=[];
 PILL_WINDOWS.forEach(pw=>{
 const startMin=pw.startH*60+pw.startM;
 const endMin=pw.endH*60+pw.endM;
-if(nowMin>=startMin&&nowMin<endMin&&!isPillTaken(pw.id,dateStr)&&!pillDismissedSession.has(pw.id)){
-html+='<div class="pill-banner" data-pill="'+pw.id+'" onclick="markPillTaken(\''+pw.id+'\')">';
+if(isPillTaken(pw.id,dateStr))return;
+if(nowMin>=startMin&&nowMin<endMin){
+/* Active window — check if blocked by a prior pill */
+if(pw.blockedBy){
+const bl=PILL_WINDOWS.find(p=>p.id===pw.blockedBy);
+if(bl){const blS=bl.startH*60+bl.startM,blE=bl.endH*60+bl.endM;
+if(nowMin>=blS&&nowMin<blE&&!isPillTaken(bl.id,dateStr)&&!pillDismissedSession.has(bl.id))return;
+}}
+if(!pillDismissedSession.has(pw.id))active.push(pw);
+}else if(nowMin>=endMin){
+/* Window passed — show missed banner */
+if(!isPillMissedAck(pw.id,dateStr))missed.push(pw);
+}
+});
+/* Active banners first (most urgent), then missed, max 2 visible */
+const banners=active.concat(missed).slice(0,2);
+let html='';
+banners.forEach(b=>{
+const isMissed=missed.includes(b);
+const cls=isMissed?' missed':'';
+const title=isMissed?'MISSED \u2014 '+escNoteHtml(b.name):'Time for '+escNoteHtml(b.name);
+const sub=isMissed?'Tap to take late':'Tap to mark as taken';
+const dismissFn=isMissed?'ackPillMissed':'dismissPillBannerTemp';
+html+='<div class="pill-banner'+cls+'" data-pill="'+b.id+'" onclick="markPillTaken(\''+b.id+'\')">';
 html+='<div class="pill-banner-icon">'+PILL_ICON+'</div>';
-html+='<div class="pill-banner-text"><div class="pill-banner-name">Time for '+escNoteHtml(pw.name)+'</div><div class="pill-banner-sub">Tap to mark as taken</div></div>';
-html+='<div class="pill-banner-x" onclick="dismissPillBannerTemp(\''+pw.id+'\',event)" title="Dismiss">\u00d7</div>';
+html+='<div class="pill-banner-text"><div class="pill-banner-name">'+title+'</div><div class="pill-banner-sub">'+sub+'</div></div>';
+html+='<div class="pill-banner-x" onclick="'+dismissFn+'(\''+b.id+'\',event)" title="'+(isMissed?'Acknowledge missed':'Dismiss')+'">\u00d7</div>';
 html+='<div class="pill-dismiss-check">'+PILL_CHECK_SVG+'</div>';
 html+='</div>';
-}
 });
 container.innerHTML=html;
 }
@@ -3748,6 +3796,7 @@ renderPillBanners();
 function unmarkAutoItemDone(itemId,dateStr){
 if(itemId.startsWith('pills_')){
 try{localStorage.removeItem('pillTaken_'+itemId+'_'+dateStr);}catch(e){}
+try{localStorage.removeItem('pillMissedAck_'+itemId+'_'+dateStr);}catch(e){}
 if(dateStr===today)pillDismissedSession.delete(itemId);
 }else if(itemId.startsWith('auto_')){
 const dismissed=getDismissedAutoReminders(dateStr);
